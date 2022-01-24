@@ -5,7 +5,7 @@ When you have successfully installed all the aforementioned software and depende
 you can now clone “Microfinance” project from GitLab to look at the source code, using the following command. 
 You may open a terminal in any directory on your computer where you wish to clone the project. ::
 
-   git clone https://gitlab.com/lahiru.uno/microfinance.git
+   git clone https://gitlab.com/gmc123/microfinance.git
 
 All 3 projects were placed inside the ``microfinance`` root directory. 
 We should change our directory to ``microfinance`` directory using following command in the current terminal, ::
