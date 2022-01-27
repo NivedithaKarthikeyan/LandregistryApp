@@ -11,6 +11,7 @@ Welcome to Microfinance's documentation!
    :caption: Introduction:
 
    introduction/applicationOverview
+   introduction/functionalities
 
 .. toctree::
    :maxdepth: 2
