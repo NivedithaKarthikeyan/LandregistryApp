@@ -3,7 +3,7 @@ pragma solidity >=0.7.0 <0.9.0;
 
 contract UserIdentity{
     
-    enum Role { BROKER, BORROWER }
+    enum Role { GUEST, BROKER, BORROWER }
     
     struct User{
         uint id; 
