@@ -117,7 +117,7 @@ macOS does not include the Homebrew brew package by default.
 
  - Install brew using the official `Homebrew installation instructions. <https://brew.sh/#install>`_
 
-**Installing MongoDB 5.0 Community Edition**
+**Installing MongoDB 5.0 Community Edition on macOS**
 
 Follow these steps to install MongoDB Community Edition using Homebrew's brew package manager. 
 Be sure that you have followed the installation prerequisites above before proceeding.
@@ -132,3 +132,17 @@ If you have already done this for a previous installation of MongoDB, you can sk
 2. To install MongoDB, run the following command in your macOS Terminal application: ::
 
       brew install mongodb-community@5.0
+
+3. To run the MongoDB, run the following command in your macOS Terminal application: ::
+
+      Run MongoDB Community Edition
+
+For Linux and Windows users can follow the `Install MongoDB Community Edition <https://docs.mongodb.com/manual/administration/install-community/>`_
+page to install MongoDB on your computer.
+
+MongoDB Compass is a powerful GUI for querying, aggregating, and analyzing your MongoDB data in a visual environment.
+
+Compass is free to use and source available, and can be run on macOS, Windows, and Linux.
+
+You can refer `Download and Install Compass <https://docs.mongodb.com/compass/current/install/>`_ page to setup MongoDB Compass in your 
+computer.

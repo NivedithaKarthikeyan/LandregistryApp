@@ -69,3 +69,38 @@ After successfully installing React App dependencies you can execute the followi
 In your **Google Chrome** browser navigate to ``localhost:3005`` and you will be able to see the Bank web app running on your browser.
 When you load the Bank web App on your browser MetaMask will ask to connect to Bank wen app (localhost:3005).
 You can connect wallet accounts as mentioned in the :ref:`connect metamask reactapp target` section.
+
+Load Data
+---------
+
+You can open a new terminal on ``example-data`` directory and first run the following command. ::
+
+    npm install
+
+This will install all the node modules for the ``example-data`` project.
+Then run the following command to register users in the ``UserIdentity`` smart contract. ::
+
+    npm start
+
+This will create the users as follows. 
+
+.. list-table::
+   :header-rows: 1
+
+   * - User Role
+     - User Id
+     - Name
+     - Wallet Address
+     - Social Security No.
+   * - Broker
+     - 1
+     - Broker 1
+     - *Ganache Account 2* address
+     - 2345
+   * - Borrower
+     - 1
+     - Borrower 1
+     - *Ganache Account 3* address
+     - 3455
+
+*Ganache Account 1* address is used by Bank.
