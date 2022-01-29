@@ -7,10 +7,10 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 
 contract MicroToken is IERC20 {
-    string public constant symbol = "MICT";
+    string public constant symbol = "MFT";
     string public constant name = "Microfinance Token";
-    uint8 public constant decimals = 2;
-    uint private constant __totalSupply = 100000;
+    uint8 public constant decimals = 0;
+    uint private constant __totalSupply = 1000;
     mapping (address => uint) private __balanceOf;
     mapping (address => mapping (address => uint)) private __allowances;
     constructor() {

@@ -26,7 +26,7 @@ contract UserIdentity{
     
     constructor()
     {
-        admin = msg.sender;
+        admin = msg.sender; // Ganache Account 1, the Bank
     }
     
     modifier isAdmin()

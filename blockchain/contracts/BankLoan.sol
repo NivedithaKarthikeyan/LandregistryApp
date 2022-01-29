@@ -48,8 +48,8 @@ contract BankLoan{
     Loan[] private loans;
     
     constructor (address _identitySC) {
-            admin = msg.sender;
-            identitySC = UserIdentity(_identitySC);
+        admin = msg.sender; // Ganache Account 1, the Bank
+        identitySC = UserIdentity(_identitySC);
     }
     
     modifier isAdmin()
