@@ -1,9 +1,9 @@
-const Express = require('express')
-const mongoose = require('mongoose')
-const cors = require('cors');
+const Express = require('express') // web server is a node server - Bank server
+const mongoose = require('mongoose') // web server connects to MongoDB
+const cors = require('cors') //
 
-const swaggerUi = require('swagger-ui-express')
-const swaggerJsDoc = require('swagger-jsdoc')
+const swaggerUi = require('swagger-ui-express') // present APIs nicely on one pages
+const swaggerJsDoc = require('swagger-jsdoc') // present APIs nicely on one pages
 
 //SWAGGER
 const options = {
@@ -43,8 +43,8 @@ app.use('/loan-plans', plansRoute);
 app.use('/loan-payments', paymentsRoute);
 
 //ROUTES
-app.get('/', (req, res) => {
-    res.send('Welcome to Bank Server')
+app.get('/', (req, res) => {  // app.get is called when user enters localhost:9091 in browser
+    res.send('Welcome to Bank Server') // '/' means no futher route beyond localhost:9091
 })
 
 //Connect to DB
