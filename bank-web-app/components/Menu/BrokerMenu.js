@@ -21,7 +21,7 @@ function BrokerMenu() {
 				Apply Loan
 			</Menu.Item>
 			<Menu.Item key="/view-loans" onClick={() => router.push('/broker/view-loans')}>
-				Current Loans
+				Loans
 			</Menu.Item>
 			<Menu.Item key="/info" onClick={() => router.push('/public/info')}>
 				Info

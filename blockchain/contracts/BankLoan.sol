@@ -26,6 +26,7 @@ contract BankLoan{
         LoanState state;
         address broker;
         address borrower;
+        uint brokerFee;
         bool bankApprove;
         bool isBorrowerSigned;
     }
@@ -39,6 +40,7 @@ contract BankLoan{
         LoanState state,
         address broker,
         address borrower,
+        uint brokerFee,
         bool bankApprove,
         bool isBorrowerSigned
     );
@@ -108,16 +110,16 @@ contract BankLoan{
         _;
     }
 
-    function applyLoan(uint _amount, uint _months, uint _interest, string memory _planId, address _borrower) 
+    function applyLoan(uint _amount, uint _months, uint _interest, string memory _planId, address _borrower, uint _brokerFee) 
         public isBroker()
     {
         Loan memory l = Loan(loans.length + 1, _amount, _months, _interest, _planId, LoanState.REQUESTED, msg.sender,
-        _borrower, false, false);
+        _borrower, _brokerFee, false, false);
         
         loans.push(l);
         
         emit loanRequest(l.id, l.amount, l.months, l.interest, l.planId,
-            l.state, l.broker, l.borrower, l.bankApprove, l.isBorrowerSigned );
+            l.state, l.broker, l.borrower, l.brokerFee, l.bankApprove, l.isBorrowerSigned );
     }
     
     function signByBorrower(uint _loanId) public isLoanBorrower(_loanId) isValidLoan(_loanId) isLoanIn(_loanId, LoanState.REQUESTED)

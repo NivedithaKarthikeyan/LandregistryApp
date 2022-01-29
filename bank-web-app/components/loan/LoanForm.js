@@ -22,6 +22,7 @@ function LoanForm() {
 				values.interest,
 				values.planId,
 				values.borrower,
+				values.brokerFee,
 			).send({ from: accounts[0] });
 			// console.log(response)
 			message.success('New loan requested successfully');
@@ -85,6 +86,13 @@ function LoanForm() {
 						min="0"
 						style={{ width: '100%' }}
 						placeholder="Enter plan id"
+					/>
+				</Form.Item>
+				<Form.Item label="Broker Fee" name="brokerFee" rules={[{ required: true, message: 'Please enter Broker Fee!' }]}>
+					<InputNumber
+						min="0"
+						style={{ width: '100%' }}
+						placeholder="Enter broker fee"
 					/>
 				</Form.Item>
 				<Form.Item wrapperCol={{
