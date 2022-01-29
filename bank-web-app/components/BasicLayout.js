@@ -33,27 +33,30 @@ function BasicLayout({ children }) {
 
 	return (
 		<Layout style={{ minHeight: '100vh' }}>
-			<Header className="header" style={{ backgroundColor: 'purple' }}>
+			<Header className="header" style={{ backgroundColor: 'purple', maxHeight: 50 }}>
 				<Row>
-					<Col span={24}>
-						<div className="logo" style={{ float: 'left', marginTop: 10 }}>
-							<Title level={2} style={{ color: 'white', margin: 'auto' }}>Microfinance - Bank UI</Title>
+					<Col span={17}>
+						<div className="logo" style={{ float: 'left', marginTop: '20' }}>
+							<Title level={4} style={{ color: 'white', marginTop: 10 }}>Microfinance - Bank UI</Title>
 						</div>
+					</Col>
+					<Col span={4}>
+						<div className={styles.profile} style={{ maxHeight: 45, float: 'right' }}>
+							<Avatar style={{ backgroundColor: user.color }} size="small" icon={<UserOutlined />} />
+							<span style={{ color: 'white', margin: '0px 10px', fontSize: 20 }}>{user.name}</span>
+						</div>
+					</Col>
+					<Col span={3}>
 						<Select
-							size="large"
+							size="small"
 							defaultValue="broker"
-							style={{ width: 110, backgroundColor: 'black', float: 'right', marginTop: 13, marginLeft: 10 }}
+							style={{ width: 110, backgroundColor: 'black', float: 'left', marginTop: 12, marginLeft: 10 }}
 							onChange={login}
 						>
 							<Option value="broker">Broker</Option>
 							<Option value="bank">Bank</Option>
 							<Option value="borrower">Borrower</Option>
 						</Select>
-
-						<div className={styles.profile} style={{ float: 'right' }}>
-							<Avatar style={{ backgroundColor: user.color, margin: 'auto' }} icon={<UserOutlined />} />
-							<span style={{ color: 'white', margin: '0px 10px', fontSize: 25 }}>{user.name}</span>
-						</div>
 					</Col>
 				</Row>
 			</Header>
