@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Table, Tag, Card, Divider, message, Modal, Form, Space, Button } from 'antd';
 import AuthContext from '../../stores/authContext';
 import { getApi } from '../../util/fetchApi';
-import TransferController from '../transfer/TransferController';
 
 function LoansTable() {
 	const { user, MicroToken, BankLoan, UserIdentity } = useContext(AuthContext);
@@ -15,7 +14,7 @@ function LoansTable() {
 	const [isBrokerTransferModalVisible, setIsBrokerTransferModalVisible] = useState(false);
 	const [isBorrowerTransferModalVisible, setIsBorrowerTransferModalVisible] = useState(false);
 	const [id, setId] = useState(-1);
-	const [record, setRecord] = useState({});
+	const [loanRecord, setLoanRecord] = useState({});
 	const [current, setCurrent] = useState(0);
 
 	const [payments, setPayments] = useState([]);
@@ -86,15 +85,33 @@ function LoansTable() {
 		}
 	};
 
+	const loadData = async () => {
+		await getBrokers();
+		await getBorrowers();
+		await getPayments();
+		await getLoans();
+	};
+
+	const confirmTokenTrasferToBroker = async (loanId) => {
+		try {
+			const accounts = await window.ethereum.enable();
+			await BankLoan.methods.confirmTokenTrasferToBroker(loanId).send({ from: accounts[0] });
+			message.success(`Loan ${id} updated`);
+			loadData();
+		} catch (err) {
+			console.log(err);
+			message.error('Error occured while updating Loan');
+		}
+	};
+
 	const transferTokensToBroker = async () => {
 		try {
-			console.log(record);
 			const accounts = await window.ethereum.enable();
-			await MicroToken.methods.transfer(record.broker, record.brokerFee).send({
+			await MicroToken.methods.transfer(loanRecord.broker, loanRecord.brokerFee).send({
 				from: accounts[0] });
 			message.success('Token transferred successfully');
 			await setCurrent(1);
-			await confirmTokenTrasferToBroker(record.id);
+			await confirmTokenTrasferToBroker(loanRecord.id);
 			await setCurrent(0);
 			await setIsBrokerTransferModalVisible(false);
 		} catch (err) {
@@ -104,15 +121,26 @@ function LoansTable() {
 		}
 	};
 
+	const confirmTokenTrasferToBorrower = async (loanId) => {
+		try {
+			const accounts = await window.ethereum.enable();
+			await BankLoan.methods.confirmTokenTrasferToBorrower(loanId).send({ from: accounts[0] });
+			message.success(`Loan ${id} updated`);
+			loadData();
+		} catch (err) {
+			console.log(err);
+			message.error('Error occured while updating Loan');
+		}
+	};
+
 	const transferTokensToBorrower = async () => {
 		try {
-			console.log(record);
 			const accounts = await window.ethereum.enable();
-			await MicroToken.methods.transfer(record.borrower, record.amount).send({
+			await MicroToken.methods.transfer(loanRecord.borrower, loanRecord.amount).send({
 				from: accounts[0] });
 			message.success('Token transferred successfully');
 			await setCurrent(1);
-			await confirmTokenTrasferToBorrower(record.id);
+			await confirmTokenTrasferToBorrower(loanRecord.id);
 			await setCurrent(0);
 			await setIsBorrowerTransferModalVisible(false);
 		} catch (err) {
@@ -156,31 +184,6 @@ function LoansTable() {
 		}
 	};
 
-	const confirmTokenTrasferToBroker = async (loanId) => {
-		try {
-			console.log(loanId);
-			const accounts = await window.ethereum.enable();
-			await BankLoan.methods.confirmTokenTrasferToBroker(loanId).send({ from: accounts[0] });
-			message.success(`Loan ${id} updated`);
-			loadData();
-		} catch (err) {
-			console.log(err);
-			message.error('Error occured while updating Loan');
-		}
-	};
-
-	const confirmTokenTrasferToBorrower = async (loanId) => {
-		try {
-			const accounts = await window.ethereum.enable();
-			await BankLoan.methods.confirmTokenTrasferToBorrower(loanId).send({ from: accounts[0] });
-			message.success(`Loan ${id} updated`);
-			loadData();
-		} catch (err) {
-			console.log(err);
-			message.error('Error occured while updating Loan');
-		}
-	};
-
 	const closeLoan = async (loanId) => {
 		try {
 			const accounts = await window.ethereum.enable();
@@ -215,17 +218,17 @@ function LoansTable() {
 		setIsRejectModalVisible(true);
 	};
 
-	const showBrokerTransferModal = (record) => {
-		console.log(record);
-		setRecord(record);
+	const showBrokerTransferModal = (row) => {
+		console.log(row);
+		setLoanRecord(row);
 		setIsBrokerTransferModalVisible(true);
-	}
+	};
 
-	const showBorrowerTransferModal = (record) => {
-		console.log(record);
-		setRecord(record);
+	const showBorrowerTransferModal = (row) => {
+		console.log(row);
+		setLoanRecord(row);
 		setIsBorrowerTransferModalVisible(true);
-	}
+	};
 
 	const handleOk = () => {
 		approveLoan();
@@ -334,24 +337,7 @@ function LoansTable() {
 								Transfer Tokens to Borrower
 							</a>
 						</span>;
-				} 
-				// else if (record.status === '2') {
-				// 	actionBlock =
-				// 		<span>
-				// 			<a href="javascript:void(0);" onClick={() => confirmTokenTrasferToBroker(record.id)}>
-				// 				Confirm Broker Payment
-				// 			</a>
-				// 		</span>;
-				// } 
-				// else if (record.status === '4') {
-				// 	actionBlock =
-				// 		<span>
-				// 			<a href="javascript:void(0);" onClick={() => confirmTokenTrasferToBorrower(record.id)}>
-				// 				Token Transferred to Borrower
-				// 			</a>
-				// 		</span>;
-				// } 
-				else if (record.status === '5') {
+				} else if (record.status === '5') {
 					actionBlock =
 						<span>
 							<a href="javascript:void(0);" onClick={() => closeLoan(record.id)}>Close</a>
@@ -381,13 +367,6 @@ function LoansTable() {
 		});
 	}
 
-	const loadData = async () => {
-		await getBrokers();
-		await getBorrowers();
-		await getPayments();
-		await getLoans();
-	};
-
 	useEffect(() => {
 		loadData();
 		const emitter = BankLoan.events.loanRequest({ fromBlock: 'latest' }, (error, response) => {
@@ -406,8 +385,6 @@ function LoansTable() {
 				status: result.state,
 			};
 
-			// console.log(row)
-
 			setData((prev) => {
 				return [...prev, row];
 			});
@@ -419,8 +396,6 @@ function LoansTable() {
 	}, []);
 
 	const expandedRowRender = (record) => {
-		console.log(record);
-
 		const expandedData = [];
 
 		expandedData.push(record);
@@ -488,103 +463,103 @@ function LoansTable() {
 			<Modal title={`Reject Loan Request ${id}`} visible={isRejectModalVisible} onOk={handleReject} onCancel={handleCancel}>
 				<p>Reject loan request?</p>
 			</Modal>
-			<Modal 
-				title={`Transfer Tokens to Broker - Loan Id ${record.id}`} 
+			<Modal
+				title={`Transfer Tokens to Broker - Loan Id ${loanRecord.id}`}
 				visible={isBrokerTransferModalVisible}
 				width={700}
 				onCancel={handleCancel}
 				footer={null}
-				>
-					{
-						current == 0 && 
-						<Form
-							labelCol={{
-								lg: 4,
-								xl: 3,
-								xxl: 3,
-							}}
-							wrapperCol={{
-								lg: 20,
-								xl: 20,
-								xxl: 20,
-							}}
-							layout="horizontal"
-							initialValues={{
-								size: componentSize,
-							}}
-							size={componentSize}
-							labelAlign="left"
+			>
+				{
+					current === 0 &&
+					<Form
+						labelCol={{
+							lg: 4,
+							xl: 3,
+							xxl: 3,
+						}}
+						wrapperCol={{
+							lg: 20,
+							xl: 20,
+							xxl: 20,
+						}}
+						layout="horizontal"
+						initialValues={{
+							size: componentSize,
+						}}
+						size={componentSize}
+						labelAlign="left"
+					>
+						<Form.Item label="Broker">
+							<span> { loanRecord.broker } </span>
+						</Form.Item>
+						<Form.Item label="Amount">
+							<span> { loanRecord.brokerFee } </span>
+						</Form.Item>
+						<Form.Item wrapperCol={{
+							lg: { span: 14, offset: 4 },
+							xl: { span: 14, offset: 3 },
+							xxl: { span: 14, offset: 3 } }}
 						>
-							<Form.Item label="Broker">
-								<span> { record.broker } </span>
-							</Form.Item>
-							<Form.Item label="Amount">
-								<span> { record.brokerFee } </span>
-							</Form.Item>
-							<Form.Item wrapperCol={{
-								lg: { span: 14, offset: 4 },
-								xl: { span: 14, offset: 3 },
-								xxl: { span: 14, offset: 3 } }}
-							>
-								<Space direction="horizontal">
-									<Button type="primary" onClick={() => transferTokensToBroker()}>Confirm transfer</Button>
-								</Space>
-							</Form.Item>
-						</Form>
-					}
-					{
-						current == 1 &&
-						<span>Update the Loan</span>
-					}
+							<Space direction="horizontal">
+								<Button type="primary" onClick={() => transferTokensToBroker()}>Confirm transfer</Button>
+							</Space>
+						</Form.Item>
+					</Form>
+				}
+				{
+					current === 1 &&
+					<span>Update the Loan</span>
+				}
 			</Modal>
-			<Modal 
-				title={`Transfer Tokens to Borrower - Loan Id ${record.id}`} 
+			<Modal
+				title={`Transfer Tokens to Borrower - Loan Id ${loanRecord.id}`}
 				visible={isBorrowerTransferModalVisible}
 				width={700}
 				onCancel={handleCancel}
 				footer={null}
-				>
-					{
-						current == 0 && 
-						<Form
-							labelCol={{
-								lg: 4,
-								xl: 3,
-								xxl: 3,
-							}}
-							wrapperCol={{
-								lg: 20,
-								xl: 20,
-								xxl: 20,
-							}}
-							layout="horizontal"
-							initialValues={{
-								size: componentSize,
-							}}
-							size={componentSize}
-							labelAlign="left"
+			>
+				{
+					current === 0 &&
+					<Form
+						labelCol={{
+							lg: 4,
+							xl: 3,
+							xxl: 3,
+						}}
+						wrapperCol={{
+							lg: 20,
+							xl: 20,
+							xxl: 20,
+						}}
+						layout="horizontal"
+						initialValues={{
+							size: componentSize,
+						}}
+						size={componentSize}
+						labelAlign="left"
+					>
+						<Form.Item label="Borrower">
+							<span> { loanRecord.borrower } </span>
+						</Form.Item>
+						<Form.Item label="Amount">
+							<span> { loanRecord.amount } </span>
+						</Form.Item>
+						<Form.Item wrapperCol={{
+							lg: { span: 14, offset: 4 },
+							xl: { span: 14, offset: 3 },
+							xxl: { span: 14, offset: 3 } }}
 						>
-							<Form.Item label="Borrower">
-								<span> { record.borrower } </span>
-							</Form.Item>
-							<Form.Item label="Amount">
-								<span> { record.amount } </span>
-							</Form.Item>
-							<Form.Item wrapperCol={{
-								lg: { span: 14, offset: 4 },
-								xl: { span: 14, offset: 3 },
-								xxl: { span: 14, offset: 3 } }}
-							>
-								<Space direction="horizontal">
-									<Button type="primary" onClick={() => transferTokensToBorrower()}>Confirm transfer</Button>
-								</Space>
-							</Form.Item>
-						</Form>
-					}
-					{
-						current == 1 &&
-						<span>Update the Loan</span>
-					}
+							<Space direction="horizontal">
+								<Button type="primary" onClick={() => transferTokensToBorrower()}>Confirm transfer</Button>
+							</Space>
+						</Form.Item>
+					</Form>
+				}
+				{
+					current === 1 &&
+					<span>Update the Loan</span>
+				}
 			</Modal>
 		</>
 	);
