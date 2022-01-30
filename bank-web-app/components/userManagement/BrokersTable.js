@@ -3,13 +3,13 @@ import { Table, Card, message } from 'antd';
 import AuthContext from '../../stores/authContext';
 
 function BrokersTable() {
-	const { UserIdentity } = useContext(AuthContext);
+	const { UserIdentityContract } = useContext(AuthContext);
 
 	const [data, setData] = useState([]);
 
 	const getBrokers = async () => {
 		try {
-			const response = await UserIdentity.methods.getAllBrokers().call();
+			const response = await UserIdentityContract.methods.getAllBrokers().call();
 
 			setData([]);
 

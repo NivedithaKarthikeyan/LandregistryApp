@@ -3,12 +3,12 @@ import { Table, Card, message } from 'antd';
 import AuthContext from '../../stores/authContext';
 
 function BorrowersTable() {
-	const { UserIdentity } = useContext(AuthContext);
+	const { UserIdentityContract } = useContext(AuthContext);
 	const [data, setData] = useState([]);
 	const brokers = {};
 
 	const getBrokers = async () => {
-		const response = await UserIdentity.methods.getAllBrokers().call();
+		const response = await UserIdentityContract.methods.getAllBrokers().call();
 		for (let i = 0; i < response.length; i++) {
 			brokers[response[i].userAddress] = response[i].name;
 		}
@@ -16,7 +16,7 @@ function BorrowersTable() {
 
 	const getBorrowers = async () => {
 		try {
-			const response = await UserIdentity.methods.getAllBorrowers().call();
+			const response = await UserIdentityContract.methods.getAllBorrowers().call();
 
 			setData([]);
 

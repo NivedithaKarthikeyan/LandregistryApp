@@ -5,15 +5,13 @@ import AuthContext from '../../stores/authContext';
 function TokenInfo() {
 	const [totalSupply, setTotalSupply] = useState('0.00');
 	const [decimals, setDecimals] = useState('0.00');
-	const { MicroToken } = useContext(AuthContext);
-
-	console.log(MicroToken);
+	const { MicroTokenContract } = useContext(AuthContext);
 
 	const getTotalSupply = async () => {
 		try {
 			const accounts = await window.ethereum.enable();
 			console.log(accounts[0]);
-			const response = await MicroToken.methods.totalSupply().call();
+			const response = await MicroTokenContract.methods.totalSupply().call();
 
 			setTotalSupply(response);
 		} catch (err) {
@@ -26,7 +24,7 @@ function TokenInfo() {
 		try {
 			const accounts = await window.ethereum.enable();
 			console.log(accounts[0]);
-			const response = await MicroToken.methods.decimals().call();
+			const response = await MicroTokenContract.methods.decimals().call();
 
 			setDecimals(response);
 		} catch (err) {
@@ -48,7 +46,7 @@ function TokenInfo() {
 	const data = [
 		{
 			attribute: 'Contract address',
-			description: MicroToken._address,
+			description: MicroTokenContract._address,
 		},
 		{
 			attribute: 'Total supply',

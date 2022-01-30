@@ -6,7 +6,7 @@ function CreateBorrowerForm() {
 	const [componentSize, setComponentSize] = useState('default');
 	const [form] = Form.useForm();
 
-	const { UserIdentity } = useContext(AuthContext);
+	const { UserIdentityContract } = useContext(AuthContext);
 
 	const onFormLayoutChange = ({ size }) => {
 		setComponentSize(size);
@@ -15,7 +15,7 @@ function CreateBorrowerForm() {
 	const createBorrower = async (values) => {
 		try {
 			const accounts = await window.ethereum.enable();
-			await UserIdentity.methods.addBorrower(values.socialId, values.address, values.name).send({ from: accounts[0] });
+			await UserIdentityContract.methods.addBorrower(values.socialId, values.address, values.name).send({ from: accounts[0] });
 			message.success('Borrower is registered successfully!');
 		} catch (err) {
 			message.error('Error occured while registering Borrower!');

@@ -4,7 +4,7 @@ import AuthContext from '../../stores/authContext';
 import { getApi } from '../../util/fetchApi';
 
 function LoansTable() {
-	const { user, MicroToken, BankLoan, UserIdentity } = useContext(AuthContext);
+	const { user, MicroTokenContract, BankLoanContract, UserIdentityContract } = useContext(AuthContext);
 
 	const state = ['REQUESTED', 'BORROWER_SIGNED', 'BANK_APPROVED', 'BANK_REJECTED',
 		'PAID_TO_BROKER', 'ONGOING', 'DEFAULT', 'CLOSE'];
@@ -40,14 +40,14 @@ function LoansTable() {
 	};
 
 	const getBrokers = async () => {
-		const response = await UserIdentity.methods.getAllBrokers().call();
+		const response = await UserIdentityContract.methods.getAllBrokers().call();
 		for (let i = 0; i < response.length; i++) {
 			brokers[response[i].userAddress] = response[i].name;
 		}
 	};
 
 	const getBorrowers = async () => {
-		const response = await UserIdentity.methods.getAllBorrowers().call();
+		const response = await UserIdentityContract.methods.getAllBorrowers().call();
 		for (let i = 0; i < response.length; i++) {
 			borrowers[response[i].userAddress] = response[i].name;
 		}
@@ -55,7 +55,7 @@ function LoansTable() {
 
 	const getLoans = async () => {
 		try {
-			const response = await BankLoan.methods.getLoans().call();
+			const response = await BankLoanContract.methods.getLoans().call();
 
 			setData([]);
 
@@ -95,7 +95,7 @@ function LoansTable() {
 	const confirmTokenTrasferToBroker = async (loanId) => {
 		try {
 			const accounts = await window.ethereum.enable();
-			await BankLoan.methods.confirmTokenTrasferToBroker(loanId).send({ from: accounts[0] });
+			await BankLoanContract.methods.confirmTokenTrasferToBroker(loanId).send({ from: accounts[0] });
 			message.success(`Loan ${id} updated`);
 			loadData();
 		} catch (err) {
@@ -107,7 +107,7 @@ function LoansTable() {
 	const transferTokensToBroker = async () => {
 		try {
 			const accounts = await window.ethereum.enable();
-			await MicroToken.methods.transfer(loanRecord.broker, loanRecord.brokerFee).send({
+			await MicroTokenContract.methods.transfer(loanRecord.broker, loanRecord.brokerFee).send({
 				from: accounts[0] });
 			message.success('Token transferred successfully');
 			await setCurrent(1);
@@ -124,7 +124,7 @@ function LoansTable() {
 	const confirmTokenTrasferToBorrower = async (loanId) => {
 		try {
 			const accounts = await window.ethereum.enable();
-			await BankLoan.methods.confirmTokenTrasferToBorrower(loanId).send({ from: accounts[0] });
+			await BankLoanContract.methods.confirmTokenTrasferToBorrower(loanId).send({ from: accounts[0] });
 			message.success(`Loan ${id} updated`);
 			loadData();
 		} catch (err) {
@@ -136,7 +136,7 @@ function LoansTable() {
 	const transferTokensToBorrower = async () => {
 		try {
 			const accounts = await window.ethereum.enable();
-			await MicroToken.methods.transfer(loanRecord.borrower, loanRecord.amount).send({
+			await MicroTokenContract.methods.transfer(loanRecord.borrower, loanRecord.amount).send({
 				from: accounts[0] });
 			message.success('Token transferred successfully');
 			await setCurrent(1);
@@ -153,7 +153,7 @@ function LoansTable() {
 	const approveLoan = async () => {
 		try {
 			const accounts = await window.ethereum.enable();
-			await BankLoan.methods.approveLoan(id).send({ from: accounts[0] });
+			await BankLoanContract.methods.approveLoan(id).send({ from: accounts[0] });
 			message.success(`Loan ${id} approved`);
 			loadData();
 		} catch (err) {
@@ -164,7 +164,7 @@ function LoansTable() {
 	const rejectLoan = async () => {
 		try {
 			const accounts = await window.ethereum.enable();
-			await BankLoan.methods.rejectLoan(id).send({ from: accounts[0] });
+			await BankLoanContract.methods.rejectLoan(id).send({ from: accounts[0] });
 			message.success(`Loan ${id} rejected`);
 			loadData();
 		} catch (err) {
@@ -175,7 +175,7 @@ function LoansTable() {
 	const signLoan = async (loanId) => {
 		try {
 			const accounts = await window.ethereum.enable();
-			await BankLoan.methods.signByBorrower(loanId).send({ from: accounts[0] });
+			await BankLoanContract.methods.signByBorrower(loanId).send({ from: accounts[0] });
 			message.success(`Loan ${id} signed`);
 			loadData();
 		} catch (err) {
@@ -187,7 +187,7 @@ function LoansTable() {
 	const closeLoan = async (loanId) => {
 		try {
 			const accounts = await window.ethereum.enable();
-			await BankLoan.methods.closeLoan(loanId).send({ from: accounts[0] });
+			await BankLoanContract.methods.closeLoan(loanId).send({ from: accounts[0] });
 			message.success(`Loan ${id} updated`);
 			loadData();
 		} catch (err) {
@@ -199,7 +199,7 @@ function LoansTable() {
 	const markAsDefaulted = async (loanId) => {
 		try {
 			const accounts = await window.ethereum.enable();
-			await BankLoan.methods.markAsDefaulted(loanId).send({ from: accounts[0] });
+			await BankLoanContract.methods.markAsDefaulted(loanId).send({ from: accounts[0] });
 			message.success(`Loan ${id} updated`);
 			loadData();
 		} catch (err) {
@@ -369,7 +369,7 @@ function LoansTable() {
 
 	useEffect(() => {
 		loadData();
-		const emitter = BankLoan.events.loanRequest({ fromBlock: 'latest' }, (error, response) => {
+		const emitter = BankLoanContract.events.loanRequest({ fromBlock: 'latest' }, (error, response) => {
 			const result = response.returnValues;
 
 			const row = {

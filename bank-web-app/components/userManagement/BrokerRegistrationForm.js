@@ -7,7 +7,7 @@ function BrokerRegistrationForm() {
 	const [componentSize, setComponentSize] = useState('default');
 	const [form] = Form.useForm();
 
-	const { UserIdentity } = useContext(AuthContext);
+	const { UserIdentityContract } = useContext(AuthContext);
 
 	const onFormLayoutChange = ({ size }) => {
 		setComponentSize(size);
@@ -17,7 +17,7 @@ function BrokerRegistrationForm() {
 		try {
 			const accounts = await window.ethereum.enable();
 
-			await UserIdentity.methods.addBroker(values.socialId, values.address, values.name).send({ from: accounts[0] });
+			await UserIdentityContract.methods.addBroker(values.socialId, values.address, values.name).send({ from: accounts[0] });
 			message.success('Broker is Registered successfully');
 		} catch (err) {
 			message.error('Error registering Broker');

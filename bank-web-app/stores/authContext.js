@@ -48,11 +48,11 @@ export const AuthContextProvider = ({ children }) => {
 	const userIdentityAddress = UserIdentityArtifact.networks[5777].address;
 	const bankLoanAddress = BankLoanArtifact.networks[5777].address;
 
-	const UserIdentity = new web3.eth.Contract(UserIdentityArtifact.abi, userIdentityAddress);
-	const MicroToken = new web3.eth.Contract(MicroTokenArtifact.abi, microTokenAddress);
-	const BankLoan = new web3.eth.Contract(BankLoanArtifact.abi, bankLoanAddress);
+	const UserIdentityContract = new web3.eth.Contract(UserIdentityArtifact.abi, userIdentityAddress);
+	const MicroTokenContract = new web3.eth.Contract(MicroTokenArtifact.abi, microTokenAddress);
+	const BankLoanContract = new web3.eth.Contract(BankLoanArtifact.abi, bankLoanAddress);
 
-	const context = { user, login, web3, MicroToken, UserIdentity, BankLoan };
+	const context = { user, login, web3, MicroTokenContract, UserIdentityContract, BankLoanContract };
 
 	return (
 		<AuthContext.Provider value={context}>

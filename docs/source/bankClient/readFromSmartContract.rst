@@ -39,7 +39,7 @@ Inside the TransferController it first imports the neccessary dependencies and U
 
 Then insde the TransferController function it defines the state balance and assign initial value as 0.00 as below.::
 
-    const [balance, setBalance] = useState('0.00');
+    const [balance, setBalance] = useState('0');
 
 We access the *MicroToken* smart contract object within the *TransferController* using React Context as follows. ::
 
@@ -47,6 +47,11 @@ We access the *MicroToken* smart contract object within the *TransferController*
 
 Using this *MicroToken* smart contract we can access call the *MicroTokenContract* smart contract methods.
 Next we discuss about how to fetch the account balance from *MicroTokenContract* account using its *balanceOf* method.
+
+Sequence diagram for get token balance for a user. 
+
+.. image:: ../images/view_balance.png
+  :width: 500
 
 The *getBalance* function will fetch the account balance from *MicroTokenContract* smart contract. ::
 

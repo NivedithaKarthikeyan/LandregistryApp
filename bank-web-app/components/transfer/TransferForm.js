@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, InputNumber } from 'antd';
 
+// TransferForm functional component. setAddress and setAmount are pass as props from TransactionController Component.
 function TransferForm({ setAddress, setAmount }) {
 	const [componentSize] = useState('default');
 
+	// This method will call when submit the form
+	// values parameter contains the submitted field values from form.
+	// each field values can be captured using form item name.
 	const onFinish = async (values) => {
-		setAddress(values.address);
-		setAmount(values.amount);
+		setAddress(values.address); // update the address state by address field value
+		setAmount(values.amount); // update the amount state by amount field value.
 	};
 
 	return (
@@ -27,13 +31,15 @@ function TransferForm({ setAddress, setAmount }) {
 			}}
 			size={componentSize}
 			labelAlign="left"
-			onFinish={onFinish}
+			onFinish={onFinish} // onFinish method will executed when user submit the form.
 		>
+			{/* name property value(address) will use to capture the Input field value when submit the form */}
 			<Form.Item label="Receiver" name="address" rules={[{ required: true, message: 'Please input receiver address!' }]}>
 				<Input
 					placeholder="Enter receiver address"
 				/>
 			</Form.Item>
+			{/* name property value(amount) will use to capture the Input field value when submit the form */}
 			<Form.Item label="Amount" name="amount" rules={[{ required: true, message: 'Please input token amount!' }]}>
 				<InputNumber
 					min="0"
@@ -46,6 +52,7 @@ function TransferForm({ setAddress, setAmount }) {
 				xl: { span: 14, offset: 2 },
 				xxl: { span: 14, offset: 2 } }}
 			>
+				{/* form submit button */}
 				<Button type="primary" htmlType="submit">Transfer tokens</Button>
 			</Form.Item>
 		</Form>

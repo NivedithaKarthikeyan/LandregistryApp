@@ -5,7 +5,7 @@ import AuthContext from '../../stores/authContext';
 function LoanForm() {
 	const [componentSize, setComponentSize] = useState('default');
 
-	const { BankLoan } = useContext(AuthContext);
+	const { BankLoanContract } = useContext(AuthContext);
 
 	const onFormLayoutChange = ({ size }) => {
 		setComponentSize(size);
@@ -16,7 +16,7 @@ function LoanForm() {
 			const accounts = await window.ethereum.enable();
 			console.log(values);
 
-			await BankLoan.methods.applyLoan(
+			await BankLoanContract.methods.applyLoan(
 				values.amount,
 				values.period,
 				values.interest,
