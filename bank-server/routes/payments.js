@@ -70,7 +70,7 @@ const loanPaymentService = require('../services/loanPaymentService');
 router.get('/', async (req, res) => {
     try {
         // const plans = await Plan.find()
-		const loanPayments = await loanPaymentService.getLoanPayments(req);
+		const loanPayments = await loanPaymentService.getLoanPayments();
 		res.json(loanPayments);
     }
     catch (err) {

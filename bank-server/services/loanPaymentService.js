@@ -1,7 +1,7 @@
 const LoanPayment = require('../models/LoanPayment')
 
 const loanPaymentService = {
-	getLoanPayments: async (req) => {
+	getLoanPayments: async () => {
 		const loanPayments = await LoanPayment.find()
 		return loanPayments;
 	},
