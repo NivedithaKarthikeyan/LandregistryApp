@@ -17,7 +17,8 @@ function CreatePlanForm({ togglePlan, setTogglePlan }) {
 				maxAmount: values.maxAmount,
 				minMonths: values.minMonths,
 				maxMonths: values.maxMonths,
-				interest: values.interest,			};
+				interest: values.interest,
+			};
 
 			const requestOptions = {
 				method: 'POST',

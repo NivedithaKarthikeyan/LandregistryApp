@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Result, Typography } from 'antd';
 import { CheckCircleOutlined } from '@ant-design/icons';
 
 function TransactionSuccess({ address, amount, transactionHash, backToHome }) {
-	const [componentSize, setComponentSize] = useState('default');
 	const { Paragraph, Text } = Typography;
 
 	return (

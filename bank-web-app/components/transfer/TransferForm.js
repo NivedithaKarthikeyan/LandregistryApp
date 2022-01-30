@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, InputNumber } from 'antd';
 
-function TransferForm({ setAddress, setAmount, transferTokens }) {
+function TransferForm({ setAddress, setAmount }) {
 	const [componentSize] = useState('default');
 
 	const onFinish = async (values) => {

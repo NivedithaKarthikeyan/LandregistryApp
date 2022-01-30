@@ -10,7 +10,8 @@ function LoanPaymentForm() {
 			const body = {
 				loanId: values.loanId,
 				amount: values.amount,
-				transactionHash: values.transactionHash,			};
+				transactionHash: values.transactionHash,
+			};
 
 			const requestOptions = {
 				method: 'POST',
