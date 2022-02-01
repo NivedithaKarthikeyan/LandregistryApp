@@ -13,10 +13,10 @@ contract UserIdentity{
         Role role;
     }
     
-    address admin;
+    address private admin;
     
-    uint brokersCount = 0;
-    uint borrowersCount = 0;
+    uint private brokersCount = 0;
+    uint private borrowersCount = 0;
     
     mapping(address => User) private borrowers;
     mapping(address => User) private brokers;

@@ -49,12 +49,12 @@ function BasicLayout({ children }) {
 					<Col span={3}>
 						<Select
 							size="small"
-							defaultValue="broker"
+							defaultValue={user.role}
 							style={{ width: 110, backgroundColor: 'black', float: 'left', marginTop: 12, marginLeft: 10 }}
 							onChange={login}
 						>
-							<Option value="broker">Broker</Option>
 							<Option value="bank">Bank</Option>
+							<Option value="broker">Broker</Option>
 							<Option value="borrower">Borrower</Option>
 						</Select>
 					</Col>

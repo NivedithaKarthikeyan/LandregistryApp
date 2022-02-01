@@ -3,19 +3,29 @@ import { Card, Form, InputNumber, Input, Button, message } from 'antd';
 import AuthContext from '../../stores/authContext';
 
 function LoanForm() {
-	const [componentSize, setComponentSize] = useState('default');
+	const [componentSize, setComponentSize] = useState('default'); // This will use to set the form size.
 
-	const { BankLoanContract } = useContext(AuthContext);
+	const { BankLoanContract } = useContext(AuthContext); // Get the Bank Loan Contract instance defined in the 'stores/authContext.js'
 
-	const onFormLayoutChange = ({ size }) => {
+	const onFormLayoutChange = ({ size }) => { // Handle layout changes of the form.
 		setComponentSize(size);
 	};
 
+	// Create loan request
+	// Values parameter contains the field values submitted through the form.
 	const createLoanRequest = async (values) => {
 		try {
-			const accounts = await window.ethereum.enable();
-			console.log(values);
+			const accounts = await window.ethereum.enable(); // Get the selected account from the metamask plugin.
 
+			// Call applyLoan method of the Bank Loan Contract.
+			// Following parameters can be captured using their name property on the form item.
+			// Parameters:
+			// 		amount - loan amount
+			//		period - loan duration
+			//		interest - loan interest
+			//		planId - loan plan id
+			//		borrower - borrower of the loan
+			//		brokerFee - broker fee of the loan
 			await BankLoanContract.methods.applyLoan(
 				values.amount,
 				values.period,
@@ -23,12 +33,11 @@ function LoanForm() {
 				values.planId,
 				values.borrower,
 				values.brokerFee,
-			).send({ from: accounts[0] });
-			// console.log(response)
+			).send({ from: accounts[0] }); // Meta mask will return the selected account as an array. This array contains only one account address.
 			message.success('New loan requested successfully');
 		} catch (err) {
-			message.error('Error creating loan request');
 			console.log(err);
+			message.error('Error creating loan request');
 		}
 	};
 
@@ -53,8 +62,9 @@ function LoanForm() {
 				onValuesChange={onFormLayoutChange}
 				size={componentSize}
 				labelAlign="left"
-				onFinish={createLoanRequest}
+				onFinish={createLoanRequest} // createLoanRequest function will execute when user submit the loan form.
 			>
+				{/* Name property value(amount) will use to capture the Input field value when submit the form */}
 				<Form.Item label="Amount" name="amount" rules={[{ required: true, message: 'Please enter amount!' }]}>
 					<InputNumber
 						min="0"
@@ -100,6 +110,7 @@ function LoanForm() {
 					xl: { span: 14, offset: 2 },
 					xxl: { span: 14, offset: 2 } }}
 				>
+					{/* Form submit button */}
 					<Button type="primary" htmlType="submit">Request loan</Button>
 				</Form.Item>
 			</Form>

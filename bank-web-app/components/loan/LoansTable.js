@@ -4,13 +4,18 @@ import AuthContext from '../../stores/authContext';
 import { getApi } from '../../util/fetchApi';
 
 function LoansTable() {
+	// Following properties will captured from authContext.
+	// user - selected user role form the top right corner of the bank web app.
+	// Smart contract instances - Micro Token, Bank Loan and User Identity.
 	const { user, MicroTokenContract, BankLoanContract, UserIdentityContract } = useContext(AuthContext);
 
+	// Define Bank Loan states.
+	// These states should be in order as defined in the Bank Loan smart contract.
 	const state = ['REQUESTED', 'BORROWER_SIGNED', 'BANK_APPROVED', 'BANK_REJECTED',
 		'PAID_TO_BROKER', 'ONGOING', 'DEFAULT', 'CLOSE'];
 
-	const [isModalVisible, setIsModalVisible] = useState(false);
-	const [isRejectModalVisible, setIsRejectModalVisible] = useState(false);
+	const [isModalVisible, setIsModalVisible] = useState(false); // Loan approve confirmation modal visibility state.
+	const [isRejectModalVisible, setIsRejectModalVisible] = useState(false); // Loan remove modal visibility state.
 	const [isBrokerTransferModalVisible, setIsBrokerTransferModalVisible] = useState(false);
 	const [isBorrowerTransferModalVisible, setIsBorrowerTransferModalVisible] = useState(false);
 	const [id, setId] = useState(-1);
@@ -19,7 +24,7 @@ function LoansTable() {
 
 	const [payments, setPayments] = useState([]);
 
-	const [componentSize, setComponentSize] = useState('default');
+	const [componentSize] = useState('default');
 
 	const [data, setData] = useState([]);
 

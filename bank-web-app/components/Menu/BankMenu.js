@@ -4,6 +4,10 @@ import { Menu } from 'antd';
 
 import { useRouter } from 'next/router';
 
+// Menu for the Bank users. These menu items will be displayed on the left panel for the Bank users.
+// Routing handles through the Next.js.
+// When user clicks on a menu item it will load the component in to the browser.
+// router.push(<path to the component resides in the pages directory>)
 function BankMenu() {
 	const router = useRouter();
 	const { SubMenu } = Menu;
@@ -14,6 +18,7 @@ function BankMenu() {
 			defaultSelectedKeys={['/bank-loans']}
 			style={{ height: '100%', borderRight: 0 }}
 		>
+			{/* When clicks the Loans menu item it will load the component placed inside the 'pages/bank/loans' javascript file. */}
 			<Menu.Item key="/bank-loans" onClick={() => router.push('/bank/loans')}>
 				Loans
 			</Menu.Item>

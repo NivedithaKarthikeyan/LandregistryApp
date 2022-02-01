@@ -2,29 +2,36 @@ import React, { useState } from 'react';
 import { Card, Form, Input, Button, InputNumber, message } from 'antd';
 import { postApi } from '../../util/fetchApi';
 
+// Loan Payment Form component to submit loan payment details.
 function LoanPaymentForm() {
 	const [componentSize] = useState('default');
 
+	// Submit loan payment function
+	// This function will submit loan payment details to the bank web server.
+	// values parameter contains the field values submitted from form.
 	const submitLoanPayment = async (values) => {
 		try {
+			// Build the jsomn object for submit loan payment details.
+			// This json object send through the http request body.
+			// Field values captured by their names.
 			const body = {
 				loanId: values.loanId,
 				amount: values.amount,
 				transactionHash: values.transactionHash,
 			};
 
+			// Prepare the http request options.
+			// Post method will use to submit values to the bank web server and save in the MongoDB.
 			const requestOptions = {
 				method: 'POST',
 				body: JSON.stringify(body),
 			};
 
-			const response = await postApi({
-				url: 'loan-payments',
+			// Call the loan-payments post method to save the Loan payment information.
+			await postApi({
+				url: 'loan-payments', // URL for the api call. This will call "<Bank Server URL>/loan-payments" api.
 				options: requestOptions,
 			});
-
-			const result = await response;
-			await console.log(result);
 
 			message.success('Loan Payment added successfully');
 		} catch (err) {

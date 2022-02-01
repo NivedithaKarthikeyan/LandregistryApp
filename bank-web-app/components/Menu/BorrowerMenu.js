@@ -4,6 +4,7 @@ import { Menu } from 'antd';
 
 import { useRouter } from 'next/router';
 
+// Menu for Borrowers
 function BorrowerMenu() {
 	const router = useRouter();
 

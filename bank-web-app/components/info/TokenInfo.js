@@ -2,31 +2,32 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Card, Table, message } from 'antd';
 import AuthContext from '../../stores/authContext';
 
+// This component displays the Micro Token information
 function TokenInfo() {
-	const [totalSupply, setTotalSupply] = useState('0.00');
-	const [decimals, setDecimals] = useState('0.00');
-	const { MicroTokenContract } = useContext(AuthContext);
+	const [totalSupply, setTotalSupply] = useState('0'); // Contains the totalSupply value from the Micro Token Contract.
+	const [decimals, setDecimals] = useState('0'); // Contains the decimas value from the Micro Token Contract.
+	const { MicroTokenContract } = useContext(AuthContext); // // Get the Micro Token Contract instance defined in the 'stores/authContext.js'
 
+	// Fetches totalSupply information from Micro Token contract.
 	const getTotalSupply = async () => {
 		try {
-			const accounts = await window.ethereum.enable();
-			console.log(accounts[0]);
+			// Calls totalSupply method of the Micro Token contract.
+			// Since totalSupply is a public attribute no need to define the totalSupply method explicitly.
 			const response = await MicroTokenContract.methods.totalSupply().call();
-
-			setTotalSupply(response);
+			setTotalSupply(response); // Updates the totalSupply state with response.
 		} catch (err) {
 			console.log(err);
 			message.error('Error occured while reading totalSupply');
 		}
 	};
 
+	// Fetch decimal information from the Micro Token Contract.
 	const getDecimals = async () => {
 		try {
-			const accounts = await window.ethereum.enable();
-			console.log(accounts[0]);
+			// Calls decimals method of the Micro Token contract.
+			// Since decimals is a public attribute no need to define the decimals method explicitly.
 			const response = await MicroTokenContract.methods.decimals().call();
-
-			setDecimals(response);
+			setDecimals(response); // Updates the decimals state with response.
 		} catch (err) {
 			console.log(err);
 			message.error('Error occured while reading decimals');
@@ -36,13 +37,15 @@ function TokenInfo() {
 	useEffect(() => {
 		getTotalSupply();
 		getDecimals();
-	}, []);
+	}, []); // useEffect will execute only when page loads.
 
+	// Defined the information table columns.
 	const columns = [
 		{ title: 'Attribute', dataIndex: 'attribute', key: 'attribute', width: '20%' },
 		{ title: 'Description', dataIndex: 'description', key: 'description' },
 	];
 
+	// Defines the information table data.
 	const data = [
 		{
 			attribute: 'Contract address',
@@ -59,6 +62,7 @@ function TokenInfo() {
 	];
 
 	return (
+		// Displays the information in a table
 		<Card title="Microfinance Tokens informations">
 			<Table columns={columns} dataSource={data} pagination={false} size="small" columnWidth="30%" />
 		</Card>

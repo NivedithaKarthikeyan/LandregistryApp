@@ -30,7 +30,7 @@ export const AuthContextProvider = ({ children }) => {
 		},
 	];
 
-	const [user, setUser] = useState(users[0]);
+	const [user, setUser] = useState(users[1]);
 
 	const login = (role) => {
 		if (role === 'broker') {

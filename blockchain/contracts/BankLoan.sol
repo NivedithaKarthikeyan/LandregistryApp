@@ -46,7 +46,7 @@ contract BankLoan{
     );
     
     address private admin;
-    UserIdentity identitySC;
+    UserIdentity private identitySC;
     Loan[] private loans;
     
     constructor (address _identitySC) {
