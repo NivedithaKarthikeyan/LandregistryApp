@@ -3,20 +3,24 @@ import { Card, Form, Input, Button, message } from 'antd';
 import { AimOutlined } from '@ant-design/icons';
 import AuthContext from '../../stores/authContext';
 
+// React functional component for Broker registration form.
 function BrokerRegistrationForm() {
 	const [componentSize, setComponentSize] = useState('default');
 	const [form] = Form.useForm();
 
-	const { UserIdentityContract } = useContext(AuthContext);
+	const { UserIdentityContract } = useContext(AuthContext); // Get User Identity Contract from authContext
 
 	const onFormLayoutChange = ({ size }) => {
 		setComponentSize(size);
 	};
 
+	// register new Broker in the User Identity contract
+	// Parameter - values = field values submitted from form.
 	const createBroker = async (values) => {
 		try {
-			const accounts = await window.ethereum.enable();
-
+			const accounts = await window.ethereum.enable(); // Get the account seleceted in the metamask plugin.
+			// Call addBroker method in the User Identity smart contract using form field values captured using their name property.
+			// Method will call using selected account from the metamask.
 			await UserIdentityContract.methods.addBroker(values.socialId, values.address, values.name).send({ from: accounts[0] });
 			message.success('Broker is Registered successfully');
 		} catch (err) {
@@ -25,12 +29,12 @@ function BrokerRegistrationForm() {
 		}
 	};
 
+	// Capture the selected account from the metamask and update the address form field value.
 	const setWalletAddress = async () => {
 		const accounts = await window.ethereum.enable();
 		form.setFieldsValue({
 			address: accounts[0],
 		});
-		// setAddress(accounts[0]);
 	};
 
 	return (
@@ -54,9 +58,10 @@ function BrokerRegistrationForm() {
 				onValuesChange={onFormLayoutChange}
 				size={componentSize}
 				labelAlign="left"
-				onFinish={createBroker}
+				onFinish={createBroker} // createBroker function will execute when user submits the form. form field valus will pass as an parameter.
 				form={form}
 			>
+				{/* Form field values will captured using the name property */}
 				<Form.Item label="Id Number" name="socialId" rules={[{ required: true, message: 'Please enter social security id!' }]}>
 					<Input
 						style={{ width: '100%' }}

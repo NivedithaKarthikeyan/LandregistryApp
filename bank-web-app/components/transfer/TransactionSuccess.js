@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, Result, Typography } from 'antd';
 import { CheckCircleOutlined } from '@ant-design/icons';
 
+// React functional component to display transaction success status.
+// backToHome function and transaction details pass as properties.
 function TransactionSuccess({ address, amount, transactionHash, backToHome }) {
 	const { Paragraph, Text } = Typography;
 

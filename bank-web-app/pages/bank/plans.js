@@ -3,6 +3,7 @@ import { Row, Col } from 'antd';
 import PlansTable from '../../components/plan/PlansTable';
 import CreatePlanForm from '../../components/plan/CreatePlanForm';
 
+// React functional component display the bank loan plan submission form and the loan plans table.
 function BankPlans() {
 	const [togglePlan, setTogglePlan] = useState(true);
 	return (

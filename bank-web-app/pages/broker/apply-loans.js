@@ -3,7 +3,8 @@ import { Row, Col } from 'antd';
 import LoanForm from '../../components/loan/LoanForm';
 import PlansTable from '../../components/plan/PlansTable';
 
-function Loans() {
+// React functional component display loan application form and loan plans table
+function ApplyLoans() {
 	return (
 		<>
 			<Row gutter={[16, 16]}>
@@ -18,4 +19,4 @@ function Loans() {
 	);
 }
 
-export default Loans;
+export default ApplyLoans;

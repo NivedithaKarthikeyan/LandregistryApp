@@ -11,17 +11,19 @@ import BankMenu from './menu/BankMenu';
 import AuthContext from '../stores/authContext';
 import BorrowerMenu from './menu/BorrowerMenu';
 
+// React functional component to define the layout of the bank web app.
 function BasicLayout({ children }) {
 	const { Title } = Typography;
 	const { Option } = Select;
 
-	const { user, login } = useContext(AuthContext);
+	const { user, login } = useContext(AuthContext); // Get the user and login context values from the authContext.
 
 	const router = useRouter();
 
 	const { Header, Sider } = Layout;
 
 	useEffect(() => {
+		// Router will update according to the selected user role.
 		if (user.role === 'broker') {
 			router.push('/public/transfer');
 		} else if (user.role === 'bank') {
@@ -29,10 +31,11 @@ function BasicLayout({ children }) {
 		} else if (user.role === 'borrower') {
 			router.push('/borrower/transfer');
 		}
-	}, [user]);
+	}, [user]); // useEffect will execute when user context value changes.
 
 	return (
 		<Layout style={{ minHeight: '100vh' }}>
+			{/* Header section. Purple bar with site name and user name. */}
 			<Header className="header" style={{ backgroundColor: 'purple', maxHeight: 50 }}>
 				<Row>
 					<Col span={17}>
@@ -61,11 +64,13 @@ function BasicLayout({ children }) {
 				</Row>
 			</Header>
 			<Layout>
+				{/* Side bar to render the menu according to the selected user role. */}
 				<Sider width={200} className="site-layout-background">
 					{user.role === 'broker' && <BrokerMenu /> }
 					{user.role === 'bank' && <BankMenu /> }
 					{user.role === 'borrower' && <BorrowerMenu /> }
 				</Sider>
+				{/* Main content area. React components will render in to this area. */}
 				<Layout style={{ padding: '16px' }}>
 					{children}
 				</Layout>

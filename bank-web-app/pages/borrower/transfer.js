@@ -3,6 +3,7 @@ import { Row, Col } from 'antd';
 import TransferController from '../../components/transfer/TransferController';
 import LoanPaymentForm from '../../components/payment/LoanPaymentForm';
 
+// React functional component display to display transfer forma and loan payment form
 function Transfer() {
 	return (
 		<>
@@ -19,4 +20,3 @@ function Transfer() {
 }
 
 export default Transfer;
-

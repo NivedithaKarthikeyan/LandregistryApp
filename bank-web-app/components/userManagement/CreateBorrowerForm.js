@@ -2,19 +2,25 @@ import React, { useState, useContext } from 'react';
 import { Card, Form, Input, Button, message } from 'antd';
 import AuthContext from '../../stores/authContext';
 
+// React functional component for Borrower registration form.
 function CreateBorrowerForm() {
 	const [componentSize, setComponentSize] = useState('default');
 	const [form] = Form.useForm();
 
-	const { UserIdentityContract } = useContext(AuthContext);
+	const { UserIdentityContract } = useContext(AuthContext); // Get User Identity contract instance defined in the authContext.
 
 	const onFormLayoutChange = ({ size }) => {
 		setComponentSize(size);
 	};
 
+	// Add new borrower entry in to the User Identity smart contract.
+	// values parameter contains the submitted form field values and captured using their names later.
 	const createBorrower = async (values) => {
 		try {
-			const accounts = await window.ethereum.enable();
+			const accounts = await window.ethereum.enable(); // Get the selected account from the metamask plugin.
+			// Call the addBorrower method of the User Identity contract.
+			// SocialSecurityID, wallter address, user name will pass as parameters to the functions.
+			// Smart contract function will call using selected account from the metamask.
 			await UserIdentityContract.methods.addBorrower(values.socialId, values.address, values.name).send({ from: accounts[0] });
 			message.success('Borrower is registered successfully!');
 		} catch (err) {
@@ -45,8 +51,9 @@ function CreateBorrowerForm() {
 				onValuesChange={onFormLayoutChange}
 				size={componentSize}
 				labelAlign="left"
-				onFinish={createBorrower}
+				onFinish={createBorrower} // createBorrower function will execute when user submits the form. Form field values will pass as a parameter to the function.
 			>
+				{/* name property will use to capture the form filed values when user submits the form */}
 				<Form.Item label="Id Number" name="socialId" rules={[{ required: true, message: 'Please input Borrower\'s social security id!' }]}>
 					<Input
 						style={{ width: '100%' }}
@@ -70,6 +77,7 @@ function CreateBorrowerForm() {
 					xl: { span: 14, offset: 3 },
 					xxl: { span: 14, offset: 2 } }}
 				>
+					{/* Form submit button */}
 					<Button type="primary" htmlType="submit">Register Borrower</Button>
 				</Form.Item>
 			</Form>

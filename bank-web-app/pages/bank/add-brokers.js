@@ -2,7 +2,8 @@ import React from 'react';
 import { Row, Col } from 'antd';
 import BrokerRegistrationForm from '../../components/userManagement/BrokerRegistrationForm';
 
-function BrokersManager() {
+// React functional component to display the Broker registration form.
+function AddBroker() {
 	return (
 		<Row gutter={[16, 16]}>
 			<Col span={24}>
@@ -12,4 +13,4 @@ function BrokersManager() {
 	);
 }
 
-export default BrokersManager;
+export default AddBroker;

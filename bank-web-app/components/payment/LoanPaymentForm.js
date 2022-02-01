@@ -21,9 +21,7 @@ function LoanPaymentForm() {
 			};
 
 			// Prepare the http request options.
-			// Post method will use to submit values to the bank web server and save in the MongoDB.
 			const requestOptions = {
-				method: 'POST',
 				body: JSON.stringify(body),
 			};
 
@@ -59,8 +57,9 @@ function LoanPaymentForm() {
 				}}
 				size={componentSize}
 				labelAlign="left"
-				onFinish={submitLoanPayment}
+				onFinish={submitLoanPayment} // submitLoanPayment function will execute when use submit the form.
 			>
+				{/* Form field value will capture using name property */}
 				<Form.Item label="Loan Id" name="loanId" rules={[{ required: true, message: 'Please enter loan id!' }]}>
 					<InputNumber
 						min="1"
