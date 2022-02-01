@@ -37,7 +37,7 @@ In ``transfer.js`` it loads the ``TransferController`` from ``components/transfe
 *TransferController* will controller function for token transactions.
 Inside the TransferController it first imports the neccessary dependencies and UI components.
 
-Then insde the TransferController function it defines the state balance and assign initial value as 0.00 as below.::
+Then insde the TransferController function it defines the state balance and assign initial value as 0 as below.::
 
     const [balance, setBalance] = useState('0');
 

@@ -48,6 +48,7 @@ Welcome to Microfinance's documentation!
    bankClient/introduction
    bankClient/authContext
    bankClient/readFromSmartContract
+   bankClient/saveValuesToSmartContract
 
 .. toctree::
    :maxdepth: 2
