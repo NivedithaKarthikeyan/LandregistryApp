@@ -224,13 +224,11 @@ function LoansTable() {
 	};
 
 	const showBrokerTransferModal = (row) => {
-		console.log(row);
 		setLoanRecord(row);
 		setIsBrokerTransferModalVisible(true);
 	};
 
 	const showBorrowerTransferModal = (row) => {
-		console.log(row);
 		setLoanRecord(row);
 		setIsBorrowerTransferModalVisible(true);
 	};
