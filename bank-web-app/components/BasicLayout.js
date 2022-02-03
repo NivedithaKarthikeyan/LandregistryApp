@@ -39,7 +39,7 @@ function BasicLayout({ children }) {
 			<Header className="header" style={{ backgroundColor: 'purple', maxHeight: 50 }}>
 				<Row>
 					<Col span={17}>
-						<div className="logo" style={{ float: 'left', marginTop: '20' }}>
+						<div className="logo" style={{ float: 'left' }}>
 							<Title level={4} style={{ color: 'white', marginTop: 10 }}>Microfinance - Bank UI</Title>
 						</div>
 					</Col>
