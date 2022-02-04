@@ -43,7 +43,7 @@ Then insde the TransferController function it defines the state balance and assi
 
 We access the *MicroToken* smart contract object within the *TransferController* using React Context as follows. ::
 
-    const { MicroTokenContract } = useContext(AuthContext);
+    const { MicroTokenContract } = useContext(SmartContractContext);
 
 Using this *MicroToken* smart contract we can access call the *MicroTokenContract* smart contract methods.
 Next we discuss about how to fetch the account balance from *MicroTokenContract* account using its *balanceOf* method.

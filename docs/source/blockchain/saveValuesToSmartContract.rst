@@ -40,11 +40,11 @@ Important functions of the ``LoanForm`` component. ::
 
     import React, { useState, useContext } from 'react';
     import { Card, Form, InputNumber, Input, Button, message } from 'antd';
-    import AuthContext from '../../stores/authContext';
+    import SmartContractContext from '../../stores/smartContractContext';
 
     function LoanForm() {
         ...
-        const { BankLoan } = useContext(AuthContext);
+        const { BankLoanContract } = useContext(SmartContractContext);
         ...
         const createLoanRequest = async (values) => {
             try {
@@ -97,15 +97,15 @@ Important functions of the ``LoanForm`` component. ::
 
 In LoanForm it imports the React, useState and useContext first. 
 Then imports the neccessary Ant Design components to build the Loan Form UI.
-Finally it imports the ``AuthContext``. ::
+Finally it imports the ``SmartContractContext``. ::
 
     import React, { useState, useContext } from 'react';
     import { Card, Form, InputNumber, Input, Button, message } from 'antd';
-    import AuthContext from '../../stores/authContext';
+    import SmartContractContext from '../../stores/smartContractContext';
 
-Then it access the ``BankLoan`` smart contract object from the ``AuthContext``. ::
+Then it access the ``BankLoan`` smart contract object from the ``SmartContractContext``. ::
 
-    const { BankLoan } = useContext(AuthContext);
+    const { BankLoanContract } = useContext(SmartContractContext);
 
 In the larter part of the ``LoanForm`` component it returns a Ant Design Form component.
 In this form component it will submit the input field values in to the ``createLoanRequest`` function.

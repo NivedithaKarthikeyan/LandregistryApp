@@ -19,7 +19,7 @@ export const SmartContractContextProvider = ({ children }) => {
 	const MicroTokenContract = new web3.eth.Contract(MicroTokenArtifact.abi, microTokenAddress);
 	const BankLoanContract = new web3.eth.Contract(BankLoanArtifact.abi, bankLoanAddress);
 
-	const context = { web3, MicroTokenContract, UserIdentityContract, BankLoanContract };
+	const context = { MicroTokenContract, UserIdentityContract, BankLoanContract };
 
 	return (
 		<SmartContractContext.Provider value={context}>
