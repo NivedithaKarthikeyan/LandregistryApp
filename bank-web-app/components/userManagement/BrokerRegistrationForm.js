@@ -1,14 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Card, Form, Input, Button, message } from 'antd';
 import { AimOutlined } from '@ant-design/icons';
-import AuthContext from '../../stores/authContext';
+import SmartContractContext from '../../stores/smartContractContext';
 
 // React functional component for Broker registration form.
 function BrokerRegistrationForm() {
 	const [componentSize, setComponentSize] = useState('default');
 	const [form] = Form.useForm();
 
-	const { UserIdentityContract } = useContext(AuthContext); // Get User Identity Contract from authContext
+	const { UserIdentityContract } = useContext(SmartContractContext); // Get User Identity Contract from smartContractContext
 
 	const onFormLayoutChange = ({ size }) => {
 		setComponentSize(size);

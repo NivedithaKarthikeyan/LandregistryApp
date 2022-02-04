@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { Card, Form, Input, Button, message } from 'antd';
-import AuthContext from '../../stores/authContext';
+import SmartContractContext from '../../stores/smartContractContext';
 
 // React functional component for Borrower registration form.
 function CreateBorrowerForm() {
 	const [componentSize, setComponentSize] = useState('default');
 	const [form] = Form.useForm();
 
-	const { UserIdentityContract } = useContext(AuthContext); // Get User Identity contract instance defined in the authContext.
+	const { UserIdentityContract } = useContext(SmartContractContext); // Get User Identity contract instance defined in the smartContractContext.
 
 	const onFormLayoutChange = ({ size }) => {
 		setComponentSize(size);

@@ -70,7 +70,7 @@ After successfully installing React App dependencies you can execute the followi
 
     npm run dev
 
-No navigate to ``localhost:3005`` to in the browser to view the Bank Web Application.
+Now navigate to ``localhost:3005`` to in the browser to view the Bank Web Application.
 
 8. Connect Bank Web Application to MetaMask
 -------------------------------------------

@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { Card, Form, InputNumber, Input, Button, message } from 'antd';
-import AuthContext from '../../stores/authContext';
+import SmartContractContext from '../../stores/smartContractContext';
 
 function LoanForm() {
 	const [componentSize, setComponentSize] = useState('default'); // This will use to set the form size.
 
-	const { BankLoanContract } = useContext(AuthContext); // Get the Bank Loan Contract instance defined in the 'stores/authContext.js'
+	const { BankLoanContract } = useContext(SmartContractContext); // Get the Bank Loan Contract instance defined in the 'stores/smartContractContext.js'
 
 	const onFormLayoutChange = ({ size }) => { // Handle layout changes of the form.
 		setComponentSize(size);

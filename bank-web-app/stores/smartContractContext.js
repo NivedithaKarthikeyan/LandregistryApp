@@ -1,46 +1,13 @@
-import React, { createContext, useState } from 'react';
-
+import React, { createContext } from 'react';
 import Web3 from 'web3';
 import MicroTokenArtifact from '../../blockchain/build/contracts/MicroToken.json';
 import BankLoanArtifact from '../../blockchain/build/contracts/BankLoan.json';
 import UserIdentityArtifact from '../../blockchain/build/contracts/UserIdentity.json';
 
-const AuthContext = createContext({
-	user: null,
-	userRole: null,
-	login: () => {},
-});
+// Create context and set default values.
+const SmartContractContext = createContext({});
 
-export const AuthContextProvider = ({ children }) => {
-	const users = [
-		{
-			name: 'Leonard Hofstadter',
-			role: 'broker',
-			color: '#87d068',
-		},
-		{
-			name: 'Sheldon Cooper',
-			role: 'bank',
-			color: '#8193E7',
-		},
-		{
-			name: 'Rajesh Koothrapali',
-			role: 'borrower',
-			color: '#8193E7',
-		},
-	];
-
-	const [user, setUser] = useState(users[1]);
-
-	const login = (role) => {
-		if (role === 'broker') {
-			setUser(users[0]);
-		} else if (role === 'bank') {
-			setUser(users[1]);
-		} else if (role === 'borrower') {
-			setUser(users[2]);
-		}
-	};
+export const SmartContractContextProvider = ({ children }) => {
 	const web3 = new Web3(Web3.givenProvider || 'http://127.0.0.1:7545');
 
 	// Smart Contract Addresses
@@ -52,13 +19,13 @@ export const AuthContextProvider = ({ children }) => {
 	const MicroTokenContract = new web3.eth.Contract(MicroTokenArtifact.abi, microTokenAddress);
 	const BankLoanContract = new web3.eth.Contract(BankLoanArtifact.abi, bankLoanAddress);
 
-	const context = { user, login, web3, MicroTokenContract, UserIdentityContract, BankLoanContract };
+	const context = { web3, MicroTokenContract, UserIdentityContract, BankLoanContract };
 
 	return (
-		<AuthContext.Provider value={context}>
+		<SmartContractContext.Provider value={context}>
 			{children}
-		</AuthContext.Provider>
+		</SmartContractContext.Provider>
 	);
 };
 
-export default AuthContext;
+export default SmartContractContext;

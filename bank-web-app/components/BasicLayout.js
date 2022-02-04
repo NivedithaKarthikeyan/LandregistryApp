@@ -8,15 +8,15 @@ import { UserOutlined } from '@ant-design/icons';
 import styles from './BasicLayout.module.css';
 import BrokerMenu from './menu/BrokerMenu';
 import BankMenu from './menu/BankMenu';
-import AuthContext from '../stores/authContext';
 import BorrowerMenu from './menu/BorrowerMenu';
+import UserContext from '../stores/userContext';
 
 // React functional component to define the layout of the bank web app.
 function BasicLayout({ children }) {
 	const { Title } = Typography;
 	const { Option } = Select;
 
-	const { user, login } = useContext(AuthContext); // Get the user and login context values from the authContext.
+	const { user, login } = useContext(UserContext); // Get the user and login context values from the userContext.
 
 	const router = useRouter();
 

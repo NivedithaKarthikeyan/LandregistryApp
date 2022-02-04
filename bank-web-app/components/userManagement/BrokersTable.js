@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Table, Card, message } from 'antd';
-import AuthContext from '../../stores/authContext';
+import SmartContractContext from '../../stores/smartContractContext';
 
 // React functional component to display brokers details.
 // This will return table of brokers.
 function BrokersTable() {
-	const { UserIdentityContract } = useContext(AuthContext); // Get the User Identity contract instance from authContext.
+	const { UserIdentityContract } = useContext(SmartContractContext); // Get the User Identity contract instance from smartContractContext.
 
 	const [data, setData] = useState([]); // data state to store brokers' data.
 
