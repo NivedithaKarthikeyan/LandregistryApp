@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Form, Input, Button, InputNumber, message } from 'antd';
 import { postApi } from '../../util/fetchApi';
 
 // Loan Payment Form component to submit loan payment details.
 function LoanPaymentForm() {
-	const [componentSize] = useState('default');
-
 	// Submit loan payment function
 	// This function will submit loan payment details to the bank web server.
 	// values parameter contains the field values submitted from form.
@@ -52,10 +50,7 @@ function LoanPaymentForm() {
 					xxl: 10,
 				}}
 				layout="horizontal"
-				initialValues={{
-					size: componentSize,
-				}}
-				size={componentSize}
+				size="default"
 				labelAlign="left"
 				onFinish={submitLoanPayment} // submitLoanPayment function will execute when use submit the form.
 			>

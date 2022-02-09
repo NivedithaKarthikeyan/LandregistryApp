@@ -1,18 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Card, Form, Input, Button, message } from 'antd';
 import { AimOutlined } from '@ant-design/icons';
 import AuthContext from '../../stores/authContext';
 
 // React functional component for Broker registration form.
 function BrokerRegistrationForm() {
-	const [componentSize, setComponentSize] = useState('default');
 	const [form] = Form.useForm();
 
 	const { UserIdentityContract } = useContext(AuthContext); // Get User Identity Contract from authContext
-
-	const onFormLayoutChange = ({ size }) => {
-		setComponentSize(size);
-	};
 
 	// register new Broker in the User Identity contract
 	// Parameter - values = field values submitted from form.
@@ -52,11 +47,7 @@ function BrokerRegistrationForm() {
 					xxl: 10,
 				}}
 				layout="horizontal"
-				initialValues={{
-					size: componentSize,
-				}}
-				onValuesChange={onFormLayoutChange}
-				size={componentSize}
+				size="default"
 				labelAlign="left"
 				onFinish={createBroker} // createBroker function will execute when user submits the form. form field valus will pass as an parameter.
 				form={form}

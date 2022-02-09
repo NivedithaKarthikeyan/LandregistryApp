@@ -6,13 +6,8 @@ import { getApi, patchApi, deleteApi } from '../../util/fetchApi';
 
 function PlansTable({ togglePlan }) {
 	const { user } = useContext(AuthContext); // Access the use role selected from authContext.
-	const [componentSize, setComponentSize] = useState('default');
 	const [isModalVisible, setIsModalVisible] = useState(false); // Edit Loan Plan Modal visibility state.
 	const [data, setData] = useState([]); // Stores Loan Plan data.
-
-	const onFormLayoutChange = ({ size }) => {
-		setComponentSize(size);
-	};
 
 	const { confirm } = Modal;
 
@@ -258,11 +253,7 @@ function PlansTable({ togglePlan }) {
 						span: 18,
 					}}
 					layout="horizontal"
-					initialValues={{
-						size: componentSize,
-					}}
-					onValuesChange={onFormLayoutChange}
-					size={componentSize}
+					size="default"
 				>
 					<Form.Item label="Id">
 						<span className="ant-form-text">{id}</span>

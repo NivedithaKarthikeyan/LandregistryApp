@@ -24,8 +24,6 @@ function LoansTable() {
 
 	const [payments, setPayments] = useState([]);
 
-	const [componentSize] = useState('default');
-
 	const [data, setData] = useState([]);
 
 	const brokers = {};
@@ -428,10 +426,7 @@ function LoansTable() {
 						xxl: 16,
 					}}
 					layout="horizontal"
-					initialValues={{
-						size: componentSize,
-					}}
-					size={componentSize}
+					size="default"
 					labelAlign="left"
 				>
 					<Form.Item label="Borrower address">
@@ -489,10 +484,7 @@ function LoansTable() {
 							xxl: 20,
 						}}
 						layout="horizontal"
-						initialValues={{
-							size: componentSize,
-						}}
-						size={componentSize}
+						size="default"
 						labelAlign="left"
 					>
 						<Form.Item label="Broker">
@@ -538,10 +530,7 @@ function LoansTable() {
 							xxl: 20,
 						}}
 						layout="horizontal"
-						initialValues={{
-							size: componentSize,
-						}}
-						size={componentSize}
+						size="default"
 						labelAlign="left"
 					>
 						<Form.Item label="Borrower">

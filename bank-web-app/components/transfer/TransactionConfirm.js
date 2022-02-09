@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Button, Space } from 'antd';
-import { formatCountdown } from 'antd/lib/statistic/utils';
 
 // Token transfer confirmation functional component.
 // addressn state, amount state, confirmTokenTransfer function and prev state pass a properties.
 function TransactionConfirm({ address, amount, confirmTokenTransfer, prev }) {
-	const [componentSize] = useState('default');
-
 	return (
 		// Form displays the receiver address and the token amount in the form.
 		<Form
@@ -21,10 +18,7 @@ function TransactionConfirm({ address, amount, confirmTokenTransfer, prev }) {
 				xxl: 10,
 			}}
 			layout="horizontal"
-			initialValues={{
-				size: componentSize,
-			}}
-			size={componentSize}
+			size="default"
 			labelAlign="left"
 		>
 			<Form.Item label="Receiver">

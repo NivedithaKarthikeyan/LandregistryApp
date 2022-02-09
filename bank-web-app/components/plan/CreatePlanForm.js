@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Form, InputNumber, Button, message } from 'antd';
 import { postApi } from '../../util/fetchApi';
 
 function CreatePlanForm({ togglePlan, setTogglePlan }) {
-	const [componentSize, setComponentSize] = useState('default');
-
-	const onFormLayoutChange = ({ size }) => {
-		setComponentSize(size);
-	};
-
 	// Post new Loan Plans in to the bank server.
 	// Parameter - values = contains the field values submitted from form.
 	const addPlan = async (values) => {
@@ -56,11 +50,7 @@ function CreatePlanForm({ togglePlan, setTogglePlan }) {
 					xxl: 10,
 				}}
 				layout="horizontal"
-				initialValues={{
-					size: componentSize,
-				}}
-				onValuesChange={onFormLayoutChange}
-				size={componentSize}
+				size="default"
 				labelAlign="left"
 				onFinish={addPlan} // addPlan function will executed when user submit the form.
 			>

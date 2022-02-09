@@ -168,13 +168,7 @@ Complete LoanForm react component. ::
 	import AuthContext from '../../stores/authContext';
 
 	function LoanForm() {
-		const [componentSize, setComponentSize] = useState('default'); // This will use to set the form size.
-
 		const { BankLoanContract } = useContext(AuthContext); // Get the Bank Loan Contract instance defined in the 'stores/authContext.js'
-
-		const onFormLayoutChange = ({ size }) => { // Handle layout changes of the form.
-			setComponentSize(size);
-		};
 
 		const createLoanRequest = async (values) => {
 			try {
@@ -210,11 +204,7 @@ Complete LoanForm react component. ::
 						xxl: 10,
 					}}
 					layout="horizontal"
-					initialValues={{
-						size: componentSize,
-					}}
-					onValuesChange={onFormLayoutChange}
-					size={componentSize}
+					size="default"
 					labelAlign="left"
 					onFinish={createLoanRequest} // createLoanRequest function will execute when user submit the loan form.
 				>
