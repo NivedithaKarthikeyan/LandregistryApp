@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Card, Table, message } from 'antd';
-import AuthContext from '../../stores/authContext';
+import SmartContractContext from '../../stores/smartContractContext';
 
 // This component displays the Micro Token information
 function TokenInfo() {
 	const [totalSupply, setTotalSupply] = useState('0'); // Contains the totalSupply value from the Micro Token Contract.
 	const [decimals, setDecimals] = useState('0'); // Contains the decimas value from the Micro Token Contract.
-	const { MicroTokenContract } = useContext(AuthContext); // // Get the Micro Token Contract instance defined in the 'stores/authContext.js'
+	const { MicroTokenContract } = useContext(SmartContractContext); // // Get the Micro Token Contract instance defined in the 'stores/smartContractContext.js'
 
 	// Fetches totalSupply information from Micro Token contract.
 	const getTotalSupply = async () => {

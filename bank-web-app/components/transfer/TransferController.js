@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Typography, Card, Divider, message, Steps, Col, Row } from 'antd';
 import { FileTextOutlined, FileDoneOutlined, AuditOutlined } from '@ant-design/icons';
-import AuthContext from '../../stores/authContext';
 import TransferForm from './TransferForm';
 import TransactionSuccess from './TransactionSuccess';
 import TransactionConfirm from './TransactionConfirm';
 import TransactionFail from './TransactionFail';
+import SmartContractContext from '../../stores/smartContractContext';
 
 const { Title } = Typography;
 const { Step } = Steps;
@@ -16,7 +16,7 @@ function TransferController() {
 	const [amount, setAmount] = useState(''); // Transferring token amount state
 	const [transactionHash, setTransactionHash] = useState(''); // Blockchain transaction state
 	const [isTransactionSuccessful, setIsTransactionSuccessful] = useState(false); // Transaction successfull state
-	const { MicroTokenContract } = useContext(AuthContext); // Get the Micro Token Contract object from authContext defined in the 'stores/authContext.js'
+	const { MicroTokenContract } = useContext(SmartContractContext); // Get the Micro Token Contract object from smartContractContext defined in the 'stores/smartContractContext.js'
 
 	// Stages of token transferring process
 	// 	0. Fill token transfering formatCountdown

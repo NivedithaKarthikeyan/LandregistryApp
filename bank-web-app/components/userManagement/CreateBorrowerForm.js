@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { Card, Form, Input, Button, message } from 'antd';
-import AuthContext from '../../stores/authContext';
+import SmartContractContext from '../../stores/smartContractContext';
 
 // React functional component for Borrower registration form.
 function CreateBorrowerForm() {
 	const [form] = Form.useForm();
 
-	const { UserIdentityContract } = useContext(AuthContext); // Get User Identity contract instance defined in the authContext.
+	const { UserIdentityContract } = useContext(SmartContractContext); // Get User Identity contract instance defined in the smartContractContext.
 
 	// Add new borrower entry in to the User Identity smart contract.
 	// values parameter contains the submitted form field values and captured using their names later.

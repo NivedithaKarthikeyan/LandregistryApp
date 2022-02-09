@@ -40,6 +40,8 @@ Welcome to Microfinance's documentation!
    blockchain/smartContracts
    blockchain/migration
    blockchain/truffleConfig
+   blockchain/readFromSmartContract
+   blockchain/saveValuesToSmartContract
 
 .. toctree::
    :maxdepth: 2
@@ -47,8 +49,6 @@ Welcome to Microfinance's documentation!
 
    bankClient/introduction
    bankClient/authContext
-   bankClient/readFromSmartContract
-   bankClient/saveValuesToSmartContract
 
 .. toctree::
    :maxdepth: 2

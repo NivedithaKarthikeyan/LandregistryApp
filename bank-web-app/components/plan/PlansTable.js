@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Table, Form, InputNumber, Card, Divider, Modal, Button, message } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';
-import AuthContext from '../../stores/authContext';
 import { getApi, patchApi, deleteApi } from '../../util/fetchApi';
+import UserContext from '../../stores/userContext';
 
 function PlansTable({ togglePlan }) {
-	const { user } = useContext(AuthContext); // Access the use role selected from authContext.
+	const { user } = useContext(UserContext); // Access the use role selected from userContext.
 	const [isModalVisible, setIsModalVisible] = useState(false); // Edit Loan Plan Modal visibility state.
 	const [data, setData] = useState([]); // Stores Loan Plan data.
 

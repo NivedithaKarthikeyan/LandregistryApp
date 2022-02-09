@@ -30,10 +30,10 @@ Attributes
 
 ``MicroToken`` smart contract has token related attributes. ::
 
-    string public constant symbol = "MICT";
+    string public constant symbol = "MFT";
     string public constant name = "Microfinance Token";
-    uint8 public constant decimals = 2;
-    uint private constant __totalSupply = 100000;
+    uint8 public constant decimals = 0;
+    uint private constant __totalSupply = 1000;
     mapping (address => uint) private __balanceOf;
     mapping (address => mapping (address => uint)) private __allowances;
 
@@ -156,7 +156,7 @@ ENUM
 
 Role - This enum holds user role values of the system. There 3 user roles in the system. ::
 
-    enum Role { BROKER, BORROWER }
+    enum Role { GUEST, BROKER, BORROWER }
 
 Structs
 ~~~~~~~
@@ -173,10 +173,10 @@ User - This struct holds the user attributes. ::
     }
 
 * ``id`` - System assigned id number for the user. This is an incremental number.
-* ``socialSecurityId`` - This attribute holds the social security.
+* ``socialSecurityId`` - This attribute holds the social security number.
 * ``userAddress`` - User wallet account address. Wallet acount address from Ganache.
 * ``name`` - User name
-*  ``role`` - User role(BROKER, BORROWER, INSURER)
+* ``role`` - User role(BROKER, BORROWER)
 * ``isBankApproved`` - Bank approval.
 
 Modifiers
@@ -184,11 +184,7 @@ Modifiers
 
 The following modifiers are used in the ``UserIdentity.sol`` functions.
 
-* ``isOwner`` - Checks the function caller is the admin of the contract.
-* ``isBroker`` - Checks the function caller is a Broker.
-* ``isNewBroker(_broker)`` - Checks the ``_broker`` is a new Broker.
-* ``isNewIsnsurer(_insurer)`` - Checks the ``_insurer`` is a new Insurer.
-* ``isNewBorrower(_borrower)`` _ Checks the ``_borrower`` is a new Borrower.
+* ``isAdmin()`` - Checks the function caller is the admin of the contract.
 
 Attributes
 ~~~~~~~~~~
@@ -222,34 +218,34 @@ Functions
 addBroker
 ^^^^^^^^^
 
-This function adds the new broker account to the system. ::
+This function adds the new Broker account to the system. ::
 
-    function addBroker(string memory _socialSecurityId, address _address, string memory _name, string memory _documentsUri) public isNewBroker(_address)
+    function addBroker(string memory _socialSecurityId, address _address, string memory _name) 
+        public isAdmin()
 
 Parameters:
-    * _socialSecurityId - Social Security ID of the Broker.
-    * _address - Account address of the Broker.
-    * _name - Broker name.
-    * _documentsUri - IPFS hash value of the Broker documents.
+    * ``_socialSecurityId`` - Social Security ID of the Broker.
+    * ``_address`` - Wallet account address of the Broker.
+    * ``_name`` - Broker name.
 
-This function will create a new Broker object with role=BROKER and state=PENDING and map it to the account address.
-Before this function executes, ``isNewBroker`` modifier checks this Broker account doesn't exists in the system.
+Modifiers:
+    * ``isAdmin()`` - Checks function caller is the Admin of the smart contract.
 
 addBorrower
 ^^^^^^^^^^^
 
-This function adds the new borrower account to the system. ::
+This function adds the new Borrower account to the system. ::
 
-    function addBorrower(string memory _socialSecurityId, address _address, string memory name) public isAdmin()
+    function addBorrower(string memory _socialSecurityId, address _address, string memory _name) 
+        public isAdmin()
 
 Parameters:
-    * ``_socialSecurityId`` - Social Security ID of the Borrower.
-    * ``_address`` - Account address of the Borrower.
-    * ``_name`` - Insurer name.
+    * ``_socialSecurityId`` - Social Security ID of the Broker.
+    * ``_address`` - Wallet account address of the Borrower.
+    * ``_name`` - Borrower name.
 
-This function will create a new Borrower object with role=BORROWER and state=PENDING and map it to the account address.
-Before this function executes, ``isAdmin`` will allow only Admin user to add Borrowers into the system.
-
+Modifiers:
+    * ``isAdmin()`` - Checks function caller is the Admin of the smart contract.
 
 verifyIsBroker
 ^^^^^^^^^^^^^^
@@ -284,12 +280,18 @@ This function returns all the Brokers as an array. ::
 
     function getAllBrokers() public view returns (User[] memory)
 
+Return: 
+    * ``User []`` - Return all Brokers as an array.
+
 getAllBorrowers
 ^^^^^^^^^^^^^^^
 
 This functions returns all the Borrowers as an array. ::
 
-    function getAllBorrowers() public view returns (Borrower[] memory)
+    function getAllBorrowers() public view returns (User[] memory)
+
+Return: 
+    * ``User []`` - Return all Borrowers as an array.
 
 Bank Loan Smart Contract - BankLoan.sol
 ---------------------------------------
@@ -559,12 +561,13 @@ viewLoan(...)
 
 This function returns the Loan. ::
 
-    function viewLoan(uint _loanId) public view
-    returns(uint id, uint amount, uint months, uint interest, uint planId, address broker, address borrower, address insurance,
-            uint insurancePolicyId, bool bankApprove, bool isBorrowerSigned)
+    function viewLoan(uint _loanId) public view returns(Loan memory loan)
 
 Parameters:
     * ``_loanId`` -  Loan Id
+
+Return:
+    * ``Loan`` - Return Loan registered in ``_loanId``.
 
 
 getLoans()
@@ -573,3 +576,6 @@ getLoans()
 This function returns all the Loans. ::
 
     function getLoans() public view returns(Loan [] memory)
+
+Return:
+    * ``Loan []`` - Return all Loans as an object array.

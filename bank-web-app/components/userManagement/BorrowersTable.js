@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Table, Card, message } from 'antd';
-import AuthContext from '../../stores/authContext';
 import { array } from 'prop-types';
+import SmartContractContext from '../../stores/smartContractContext';
 
 // React functional component to display borrowers details.
 // This will return table of borrowers.
 function BorrowersTable() {
-	const { UserIdentityContract } = useContext(AuthContext); // Get User Identity smart contract instance from authContext.
+	const { UserIdentityContract } = useContext(SmartContractContext); // Get User Identity smart contract instance from smartContractContext.
 	const [data, setData] = useState([]); // Borrowers data state.
 	const brokers = {}; // Attribute to store broker address and name mapping.
 

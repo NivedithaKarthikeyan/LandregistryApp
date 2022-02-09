@@ -285,7 +285,7 @@ All React web applications configured to ``5777`` local blockchain.
 Now we are going to change the network to Ropsten and refer to the smart contract addresses in the Ropsten network.
 
 1. Refer ``bank-web-application`` to Ropsten
-open ``bank-web-app/stores/authContext.js`` navigate to ``Smart Contract Addresses``
+open ``bank-web-app/stores/smartContractContext.js`` navigate to ``Smart Contract Addresses``
 change the ``5777`` value to ``3``. ::
 
     // Smart Contract Addresses

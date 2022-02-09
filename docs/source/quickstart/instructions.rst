@@ -19,13 +19,17 @@ As described in the :ref:`checkout project target` section,
 open a terminal in your computer and execute the following commands to checkout ``microfinance`` to your computer and 
 change git branch to ``level1`` branch. ::
 
-    git clone https://gitlab.com/lahiru.uno/microfinance.git
+    git clone https://gitlab.com/gmc123/microfinance.git
     cd microfinance/
     git branch level1
 
 
 3. Deploy Smart Contract to Ganache
 ------------------------------------
+
+First install all node dependencies for ``blockchain`` peoject using following command. ::
+
+    npm install 
 
 As described in the :ref:`deploy smart contract target` section first run Ganache on your computer.
 
@@ -39,7 +43,7 @@ to deploy smart contracts into the Ganache local blockchain network. ::
 
 As described in the :ref:`metamask with ganache target` section connect MetaMask to the Ganache local blockchain.
 
-5. Run Bank Web server
+5. Run Bank Web Server
 -----------------------
 
 In your terminal change the directory to the ``bank-server`` directory and execute the following commands to 
@@ -47,6 +51,9 @@ install ``bank-server`` dependencies and run the ``bank-server``. ::
 
     npm install
     npm run start
+
+To check the Bank Server running correctly navigate to ``localhost:9091`` in the browser.
+If the browser displays the *Welcome to Bank Server* then you can start the Bank Web Application.
 
 6. Install React App Dependencies
 ---------------------------------
@@ -62,6 +69,8 @@ Then execute the following command to install ``bank-web-app`` dependencies. ::
 After successfully installing React App dependencies you can execute the following command inside the ``bank-web-app`` directory to run the React App. ::
 
     npm run dev
+
+Now navigate to ``localhost:3005`` to in the browser to view the Bank Web Application.
 
 8. Connect Bank Web Application to MetaMask
 -------------------------------------------

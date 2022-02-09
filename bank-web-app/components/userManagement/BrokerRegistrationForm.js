@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { Card, Form, Input, Button, message } from 'antd';
 import { AimOutlined } from '@ant-design/icons';
-import AuthContext from '../../stores/authContext';
+import SmartContractContext from '../../stores/smartContractContext';
 
 // React functional component for Broker registration form.
 function BrokerRegistrationForm() {
 	const [form] = Form.useForm();
 
-	const { UserIdentityContract } = useContext(AuthContext); // Get User Identity Contract from authContext
+	const { UserIdentityContract } = useContext(SmartContractContext); // Get User Identity Contract from smartContractContext
 
 	// register new Broker in the User Identity contract
 	// Parameter - values = field values submitted from form.

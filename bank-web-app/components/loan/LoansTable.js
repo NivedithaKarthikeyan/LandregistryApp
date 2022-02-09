@@ -1,13 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Table, Tag, Card, Divider, message, Modal, Form, Space, Button } from 'antd';
-import AuthContext from '../../stores/authContext';
 import { getApi } from '../../util/fetchApi';
+import UserContext from '../../stores/userContext';
+import SmartContractContext from '../../stores/smartContractContext';
 
 function LoansTable() {
-	// Following properties will captured from authContext.
+	// Following properties will captured from userContext and smartContractContext.
 	// user - selected user role form the top right corner of the bank web app.
 	// Smart contract instances - Micro Token, Bank Loan and User Identity.
-	const { user, MicroTokenContract, BankLoanContract, UserIdentityContract } = useContext(AuthContext);
+	const { user } = useContext(UserContext);
+	const { MicroTokenContract, BankLoanContract, UserIdentityContract } = useContext(SmartContractContext);
 
 	// Define Bank Loan states.
 	// These states should be in order as defined in the Bank Loan smart contract.
@@ -222,13 +224,11 @@ function LoansTable() {
 	};
 
 	const showBrokerTransferModal = (row) => {
-		console.log(row);
 		setLoanRecord(row);
 		setIsBrokerTransferModalVisible(true);
 	};
 
 	const showBorrowerTransferModal = (row) => {
-		console.log(row);
 		setLoanRecord(row);
 		setIsBorrowerTransferModalVisible(true);
 	};
