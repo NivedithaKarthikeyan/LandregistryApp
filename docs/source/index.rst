@@ -3,19 +3,19 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Microfinance's documentation!
+Welcome to Microfinance dAppDocumentation
 ========================================
 
 .. toctree::
    :maxdepth: 2
-   :caption: Introduction:
+   :caption: Introduction
 
    introduction/applicationOverview
    introduction/functionalities
 
 .. toctree::
    :maxdepth: 2
-   :caption: Installation Guide:
+   :caption: Installation Guide
 
    installation/guide
    installation/checkout
@@ -28,13 +28,13 @@ Welcome to Microfinance's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Deploy to Ropsten:
+   :caption: Deploy to Ropsten
 
    deployToRopsten/guide
 
 .. toctree::
    :maxdepth: 3
-   :caption: Smart Contracts:
+   :caption: Smart Contracts
 
    blockchain/introduction
    blockchain/smartContracts
@@ -45,13 +45,13 @@ Welcome to Microfinance's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Bank Web Application:
+   :caption: Bank Web Application
 
    bankClient/introduction
    bankClient/authContext
 
 .. toctree::
    :maxdepth: 2
-   :caption: Quickstart:
+   :caption: Quickstart
 
    quickstart/instructions
