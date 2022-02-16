@@ -3,23 +3,23 @@ Application Overview
 =====================
 
 The Microfinance project is about issuing new ERC20 tokens and using them as an alternative currency type. 
-The new token we introduce in this project is called **MFT**, MicroFinance Token.
+The new token we introduce in this project is called ``MFT``, MicroFinance Token.
 The usage scenario is for these tokens to be used by unbanked people. 
 This project has 3 main user roles:
 
-1. ``Bank``: Bank personnels responsible for ERC20 operations
-2. ``Borrower`` : The non-banking people who is getting tokens as loans from the Bank.
-3. ``Broker`` : The role who is connecting Bank and Borrowers.
+1. ``Bank``: Bank personnels responsible for ERC20 operations.
+2. ``Borrower``: Unbanked people who receive tokens as loans from the Bank.
+3. ``Broker``: People who connect Borrowers to the Bank.
 
-This project is consists of 3 main projects. 
+The project has 3 main projects: 
 
 1. Bank web application - ``bank-web-application``
 2. Bank web serve application - ``bank-server``
-3. Blockchain (Truffle project for smart contract development) - ``blockchain``
+3. Blockchain (Truffle project for smart contracts) - ``blockchain``
 
-These projects use different technologies to fullfil the different requirements.
-These applications are owned by the Bank and used by stakeholders mentioned above.
-These project are depending on each other. The following architecture diagram shows the connections between these projects.
+These projects use different software technologies to fulfill different requirements.
+The applications are owned by the Bank and used by stakeholders mentioned above.
+The projects depend on one another. The following architecture diagram shows the connection among them:
 
 Layered Architecture
 --------------------
@@ -29,8 +29,8 @@ Layered architecture diagram of the system.
 .. image:: ../images/layered-architecture.png
 
 
-In this system we use 3 smart contracts deployed in to the blockchain. 
-These smart contracts were accessed by Bank web application.
-The Bank web application communicates with both Bank web server and the blockchain.
+In this system, we use 3 smart contracts deployed in a blockchain. 
+The smart contracts are accessed by the Bank web app, which
+communicates with the Bank web server and the blockchain.
 
-In the following sections we will discuss how to run these projects, their dependencies, and functioanlities in detail.
+In the following sections, we discuss how to run these projects, their software dependencies, and functionalities.
