@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import 'antd/dist/antd.css';
-import { useRouter } from 'next/router';
 
 import { Layout, Row, Col, Typography, Avatar, Select } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
@@ -18,20 +17,7 @@ function BasicLayout({ children }) {
 
 	const { user, login } = useContext(UserContext); // Get the user and login context values from the userContext.
 
-	const router = useRouter();
-
 	const { Header, Sider } = Layout;
-
-	useEffect(() => {
-		// Router will update according to the selected user role.
-		if (user.role === 'broker') {
-			router.push('/public/transfer');
-		} else if (user.role === 'bank') {
-			router.push('/bank/loans');
-		} else if (user.role === 'borrower') {
-			router.push('/borrower/transfer');
-		}
-	}, [user]); // useEffect will execute when user context value changes.
 
 	return (
 		<Layout style={{ minHeight: '100vh' }}>

@@ -23,11 +23,10 @@ function PlansTable({ togglePlan }) {
 		try {
 
 			// Calls http get method to fetch all loan plans from the bank server.
-			const response = await getApi({
+			const plans = await getApi({
 				url: 'loan-plans', // Calls <Bank Server URL>/loan-plans api.
 			});
 
-			const plans = await response; // Get Loan Plans from the bank server response.
 			setData([]); // Initialize data array to zero elements to add all Loan Plans from the bank server response.
 			// Add all Loan Plans to the data array.
 			for (let i = 0; i < plans.length; i++) {
