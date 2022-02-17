@@ -8,12 +8,12 @@ Install Git
 --------------
 
 Git manages code versions for you. 
-Use the following command to install Homebrew in macOS. You can find more about Homebrew in
-`here <https://brew.sh/>`_ ::
+Use the following command to install Homebrew in macOS. You can find more about Homebrew
+`here. <https://brew.sh/>`_ ::
 
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-Use Homebrew to install ``git`` on Mac. ::
+Use Homebrew to install ``git`` on the Mac: ::
 
    brew install git
 
