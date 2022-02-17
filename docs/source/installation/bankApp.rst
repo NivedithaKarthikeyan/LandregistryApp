@@ -1,40 +1,40 @@
 Bank Web Application - ReactApp
 ===============================
 
-In this section, we are trying to run the ``bank-web-app`` project.
-This web application developed using Next.js. 
+In this section, we get the ``bank-web-app`` up and running.
+This web app developed using Next.js. 
 Next.js is a React Framework for application development. 
-It supports developers to build features needed for production.
+It supports developers in building features needed for production.
 You can find more about Next.js in their `official website <https://nextjs.org/>`_.
 
-To run the Bank web application, open a new terminal on ``bank-web-app`` directory and execute following code snnipets.
-First, we install all dependencies for ReactApp and then we can run it.
+To run the Bank web application, open a new terminal in the ``bank-web-app`` directory and execute following code snnipets.
+First, we install all dependencies for ReactApp.
 
 Prerequisites
 -------------
 
-As shown in the layered architecture Bank web app communicates with both the Blockchain and Bank server.
+As shown in the `layered architecture <https://microfinance-dapp.readthedocs.io/en/level1/introduction/applicationOverview.html#layered-architecture>`_, the Bank web app communicates with both the Blockchain and the Bank server.
 
-1. Blockchain - Before start the Bank web application its better to compile and deploy your smart contracts in to the Blockchain.
-Bank web application uses the smart contracts' abis, contract addresses form the ``blockchain/build/contracts`` directory.
-this ``blockchain/build`` directory will be generated when you compile the smart contracts. 
+1. Blockchain - Before starting the Bank web application, compile and deploy your smart contracts to the Blockchain.
+The Bank web application uses the smart contracts' ABIs and deployed contract addresses in the ``blockchain/build/contracts`` directory.
+This ``blockchain/build`` directory is automatically generated when you compile smart contracts. 
 Smart contracts will be compiled before deploy(migrate) into the Blockchain.
 
-2. Bank Server - Bank web application will fetch data from the Bank web server as well.
-Run the Bank web server before run the Bank web application. 
-If not there will be some unexpected errors.
+2. Bank Server - The Bank web app fetches data from the Bank web server.
+Run the Bank web server before running the Bank web app; otherwise,  
+there could be unexpected errors.
 
 Install Bank Web Application Dependencies
 -----------------------------------------
 
-Execute all following commands in the terminal you opened in the ``bank-web-app`` directory.
+Execute all following commands in the terminal you've opened in the ``bank-web-app`` directory.
 
-All the **Bank Web Application** dependencies are configured in ``package.json`` file in ``bank-web-app`` 
-directory as follows.
+All the **Bank Web Application** dependencies are configured in the ``package.json`` file in the ``bank-web-app`` 
+directory as follows:
 
 .. image:: ../images/package_json_bank.png
 
-You can use the following command to install all dependencies. ::
+You can use the following command to install all dependencies: ::
 
    npm install
 
