@@ -42,21 +42,20 @@ You can use the following command to install all dependencies: ::
 Run Bank Web Application
 ------------------------
 
-After successfully install all the dependencies run the following command to start the **Bank Web Application**. 
-You can use the same terminal in the ``bank-web-app`` directory which was used to run the above command. ::
+After successfully installing all dependencies, run the following command to start the **Bank Web Application**. 
+You can use the same terminal in the ``bank-web-app`` directory which was used to run the above command: ::
 
    npm run dev
 
+This command starts the **Bank Web Application** on network port ``3005`` in your machine. 
+Before running this command, make sure your network port 
+``3005`` is free for use. If any process already running on network port ``3005``, 
+you can kill the process and run the above command again. 
+As shown in the image above, this port was configured in the ``package.json`` file in the ``bank-web-app`` directory.
+You may replace ``3005`` with any desired port in the ``scripts.dev`` value. 
+You may try this method instead of killing the process on port ``3005`` if it is occupied.
 
-This command will start the **Bank Web Application** on network port ``3005`` in your machine. 
-Before running this command make sure your network port 
-``3005`` is free to use. If any process already running on network port ``3005`` 
-you can kill the process and run above command again. 
-As shown in the image above this port was configured on the ``package.json`` file in the ``bank-web-app`` directory.
-you can replace ``3005`` with any desired port in the ``scripts.dev`` value. 
-You can try this method instead of killing the process on prot ``3005`` if it occupied.
-
-If all commands execute successfully you can access the **Bank Web Application** from your browser.
-Open a Google Chrome browser, go to ``localhost:3005``, and you can see the following UI.
+If all commands execute successfully, you may access the **Bank Web Application** from your browser.
+Open a Google Chrome browser, go to ``localhost:3005``, and you can see the following UI:
 
 .. image:: ../images/bank_app_overview.png
