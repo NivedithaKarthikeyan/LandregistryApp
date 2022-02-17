@@ -1,9 +1,8 @@
 Smart Contracts
 ===============
 
-In this project we develop 3 smart contracts for different requirements. 
-More details about these smart contracts are discussed in following sections.
-All these smart contracts are resides in the ``contracts`` directory. ::
+This project has three smart contracts. 
+They reside in the ``contracts`` directory. ::
 
     Microfinance
         |--blockchain
@@ -21,14 +20,13 @@ Micro Token Smart Contract - MicroToken.sol
 -------------------------------------------
 
 This smart contract handles the ERC20 token in the system. All the ERC20 token related information like 
-Token name, total supply, and functionalities like transfer tokens, account balances, were handle through this
-``MicroToken`` smart contract. ``MicroToken`` smart contract implements the ``IERC20`` smart contract interface.
+Token name, total supply, and functionalities like transfer tokens, account balances, are handled through this contract. The ``MicroToken`` smart contract implements the ``IERC20`` smart contract interface.
 
 
 Attributes
 ~~~~~~~~~~
 
-``MicroToken`` smart contract has token related attributes. ::
+The ``MicroToken`` smart contract has token related attributes: ::
 
     string public constant symbol = "MFT";
     string public constant name = "Microfinance Token";
@@ -38,11 +36,11 @@ Attributes
     mapping (address => mapping (address => uint)) private __allowances;
 
 * ``symbol``: Symbol of the ERC20. This symbol will show in wallets and other places.
-* ``name``: We can set a name for the token. In this project our token name is ``Microfinance Token``
-* ``decimals``: This attribute configs the number of decimal places we use in our token. We set it to 2. All the token values use upto 2 decimal values
-* ``__totalSupply``: This attribute holds the total number of tokens planned to use in the system.
-* ``__balanceOf``: This map contains the token balance of each account.
-* ``__allowances``: Account owner can grant permission to another account to do the token transfers on behalf of them. But owner can grant permission limited token amount. This mapping holds the number of tokens allowed to transfer from one account to another by third party account.
+* ``name``: Name for the token. In this project, our token name is ``Microfinance Token (MFT)``.
+* ``decimals``: This attribute configs the number of decimal places we use in our token. We set it to 2. All  token values use upto 2 decimal values.
+* ``__totalSupply``: This attribute holds the total number of tokens for circulation in the system.
+* ``__balanceOf``: This mapping contains the token balance of each account.
+* ``__allowances``: Account owner may grant permission to another account to do the token transfers on behalf of him. But owner can grant permission limited token amount. This mapping holds the number of tokens allowed to transfer from one account to another by third party account.
 
 Constructor
 ~~~~~~~~~~~

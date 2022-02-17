@@ -1,14 +1,14 @@
 Truffle Project Overview
 ========================
 
-In this **Microfinance** system all the smart contracts were developed using Truffle.
-the ``blockchain`` directory contains the Truffle project.
-In this section we discuss about overview of the truffle project.
+In this **Microfinance** system, all smart contracts are developed using Truffle.
+The ``blockchain`` directory contains the Truffle project.
+In this section, we provide an overview of the Truffle project.
 
 Project Structure
 ------------------
 
-Here is the project structure of the Truffle project. This project helps to develop and deploy the Smart Contracts for 
+This project helps to develop and deploy the Smart Contracts for 
 Microfinance project. ::
 
     Microfinance
@@ -18,7 +18,7 @@ Microfinance project. ::
     |  |--test
     |  |--truffle-config.js
 
-* ``contracts/``: Directory for solidity smart contracts.
+* ``contracts/``: Directory for Solidity smart contracts.
 * ``migrations/``: Directory for scriptable deployment files.
 * ``test/``: Directory of test files to test contracts.
 * ``truffle-config.js``: Truffle configuration file.
