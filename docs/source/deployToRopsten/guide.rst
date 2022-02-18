@@ -78,7 +78,7 @@ Remember that yours will be different, as they depend on the mnemonic you used. 
 
 
 Step 3 - Truffle Configurations
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Since we are using public nodes, we will need to sign all our transactions locally. 
 We use ``@truffle/hdwallet-provider`` to do this, setting it up with our ``mnemonic``. 
