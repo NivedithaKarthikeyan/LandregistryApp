@@ -64,3 +64,6 @@ Swagger API Documentation
 To view the API documentation, you can navigate to ``localhost:9091/api-docs``.
 
 .. image:: ../images/swagger_bank.png
+    :width: 130%
+    :align: center
+
