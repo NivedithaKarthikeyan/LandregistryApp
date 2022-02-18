@@ -1,16 +1,16 @@
 Read Values from Smart Contract
 ===============================
 
-In this section we discuss about how to read values from smart contract.
-We use reading account balance from MicroToken smart contract as an example.
+In this section, we discuss about how to read values from a smart contract.
+We use reading account balance from the MicroToken smart contract as an example.
 
 .. image:: ../images/account_balance.png
 
-The Transfer menu item is common to all the users(Bank, Broker, Borrower). 
-Transfer menu item will direct the user to ``/public/transfer``.
-In Next.js it means the code placed inside the ``pages/public/transfer.js``
+The Transfer menu item is common to all the users (Bank, Broker, Borrower). 
+It directs the user to ``/public/transfer``.
+In Next.js, this means that the program code is placed in the ``pages/public/transfer.js`` file.
 
-In ``transfer.js`` it loads the ``TransferController`` from ``components/transfer`` directory as below. ::
+``transfer.js`` loads the ``TransferController`` from ``components/transfer`` directory as follows: ::
 
     import React from 'react';
     import { Row, Col } from 'antd';
@@ -34,10 +34,10 @@ In ``transfer.js`` it loads the ``TransferController`` from ``components/transfe
 
     export default Transfer;
 
-*TransferController* will controller function for token transactions.
-Inside the TransferController it first imports the neccessary dependencies and UI components.
+``TransferController'' is the controller function for token transactions.
+It first imports the neccessary dependencies and UI components.
 
-Then insde the TransferController function it defines the state balance and assign initial value as 0 as below.::
+Then it defines the state balance and assign the initial value as 0: ::
 
     const [balance, setBalance] = useState('0');
 
