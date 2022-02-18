@@ -81,7 +81,7 @@ We use async/await methods to deploy these contracts.
 After deploying the ``UserIdentity`` smart contract, we wait for it to complete the deployment.
 Then we deploy other three smart contracts with the ``UserIdentity`` smart contract address as a parameter.
 
-Bank is the owner of ``UserIdentity``, ``BankLoan``, and ``LoanPayment`` smart contracts.
+Bank is the owner of the ``UserIdentity``, ``BankLoan``, and ``LoanPayment`` smart contracts.
 For the ``InsurancePolicy`` smart contract, Insurance Company is the owner.
 To fulfill this requirement, we deploy the ``InsurancePolicy`` smart contract using a different account.
 We can define optional parameters as the third argument for the ``deployer.deploy`` function.

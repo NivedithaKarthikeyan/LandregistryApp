@@ -1,4 +1,4 @@
-Truffle configurations
+Truffle Configuration
 ======================
 
 Here is the ``truffle-config.js`` script for this project. ::
