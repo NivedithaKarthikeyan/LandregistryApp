@@ -11,7 +11,7 @@ Setting up Metamask
 To use Ganache with MetaMask, click the MetaMask icon in your browser:
 
 .. image:: ../images/metamask_create_password.png
-  :width: 500
+  :width: 300
 
 Click “Import with seed phrase”. In the box marked Wallet Seed, 
 enter the Mnemonic displayed in the Ganache app. 
