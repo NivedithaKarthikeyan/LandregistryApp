@@ -32,6 +32,7 @@ The following migration is provided by default when creating a new project with 
 Filename: ``migrations/1_initial_migration.js``
 
 .. image:: ../images/initial_migartion.png
+    :width: 80%
 
 You can find more details in 
 `Truffle Running Migration Page <https://www.trufflesuite.com/docs/truffle/getting-started/running-migrations>`_.
