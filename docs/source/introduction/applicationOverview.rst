@@ -27,6 +27,8 @@ Layered Architecture
 Layered architecture diagram of the system.
 
 .. image:: ../images/layered-architecture.png
+    :width: 60%
+    :align: center
 
 
 In this system, we use 3 smart contracts deployed in a blockchain. 

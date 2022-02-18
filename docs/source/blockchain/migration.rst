@@ -10,7 +10,8 @@ The following diagram shows the dependency between smart contracts.
 ``BankLoan``, ``InsurancePolicy``, ``LoanPayment`` smart contracts uses ``UserIdentity`` smart contract to verify the users.
 
 .. image:: ../images/smart_contract_dependency.png
-    :width: 50%
+    :width: 60%
+    :align: center
 
 Migration
 ----------

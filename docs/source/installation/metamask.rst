@@ -11,14 +11,14 @@ Setting up Metamask
 To use Ganache with MetaMask, click the MetaMask icon in your browser:
 
 .. image:: ../images/metamask_create_password.png
-  :width: 300
+  :width: 500
 
 Click “Import with seed phrase”. In the box marked Wallet Seed, 
 enter the Mnemonic displayed in the Ganache app. 
 Enter a password below and click "IMPORT". The password is for you to login to MetaMask in future.
 
 .. image:: ../images/metamask_seed_phrase.png
-   :width: 400
+   :width: 600
 
 Now we need to connect MetaMask to the blockchain created by Ganache. 
 Click the menu that shows "Main Network" and select Custom RPC.
