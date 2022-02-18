@@ -10,7 +10,7 @@ Dependencies
 
 You must have Metamask Extension installed. 
 
-Step 1 - Get Fake Ethers for your Account
+Step 1 - Get Fake Ethers for Your Account
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Select Ropsten network in you MetaMask plugin.
@@ -60,10 +60,10 @@ which should look like the following, but having your own values. Make sure to a
         "projectId": "305c137050..."
     }
 
-TIP: Instead of a ``secrets.json`` file, you can use whatever secret-management solution you like for your project. 
-A popular and simple option is to use dotenv for injecting secrets as environment variables.
+TIP: Instead of a ``secrets.json`` file, you can use whatever secret management solution you like for your project. 
+A popular and simple option is to use ``dotenv`` for injecting secrets as environment variables.
 
-We can now test out that this configuration is working by listing the accounts we have available for the Ropsten network. 
+We can now test that this configuration is working by listing the accounts we have available for the Ropsten network. 
 Remember that yours will be different, as they depend on the mnemonic you used. ::
 
     $ truffle console --network ropsten
@@ -76,18 +76,19 @@ Remember that yours will be different, as they depend on the mnemonic you used. 
     truffle(ropsten)> await web3.eth.getBalance('0xABFf604B340Da8612F07b0d76ef54b2d2A8B611b')
     '300000000000000000'
 
+
 Step 3 - Truffle Configurations
 -------------------------------
 
 Since we are using public nodes, we will need to sign all our transactions locally. 
-We will use ``@truffle/hdwallet-provider`` to do this, setting it up with our ``mnemonic``. 
+We use ``@truffle/hdwallet-provider`` to do this, setting it up with our ``mnemonic``. 
 We will also tell the provider how to connect to the test network by using the Infura endpoint.
 
-Let’s start by installing the provider. ::
+Let’s start by installing the provider: ::
 
     install --save-dev @truffle/hdwallet-provider
 
-``truffle-config.js`` ::
+``truffle-config.js``::
 
     const { projectId, mnemonic } = require('./secrets.json');
     const HDWalletProvider = require('@truffle/hdwallet-provider');
@@ -113,7 +114,7 @@ Let’s start by installing the provider. ::
 
 
 
-Step 4 - Deploy smart contracts to Ropsten network
+Step 4 - Deploy Smart Contracts to Ropsten Network
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 With a project configured to work on a public testnet, we can now finally deploy our contracts. 
@@ -122,26 +123,28 @@ though it will take a few seconds to run as new blocks are mined. ::
 
     truffle migrate --reset --network ropsten
 
-Step 5 - Check availability
+
+Step 5 - Check Availability
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-That’s it! Our contract instances will be stored in the testnet, and publicly accessible to anyone.
+That’s it!  Our contract instances are now in the testnet, publicly accessible to anyone.
 
 You can see your contract on a block explorer such as `Etherscan <https://etherscan.io/>`_. 
 Remember to access the explorer on the testnet where you deployed your contract, such as `ropsten.etherscan.io <https://ropsten.etherscan.io/>`_ for Ropsten.
 
-TIP: You can check out the contract we deployed in the example above, along with all transactions sent to it, `here <https://ropsten.etherscan.io/address/0xABFf604B340Da8612F07b0d76ef54b2d2A8B611b>`_.
+TIP: You can check out the contract that we've deployed in the example above, along with all transactions sent to it, `here <https://ropsten.etherscan.io/address/0xABFf604B340Da8612F07b0d76ef54b2d2A8B611b>`_.
 
-You can also interact with your instance as you regularly would, either using truffle console, or programmatically using web3. ::
+You can also interact with your instance as you regularly would, either using the Truffle console, or programmatically using web3. ::
 
     $ truffle console --network ropsten
     truffle(ropsten)> micro = await MicroToken.deployed()
     truffle(ropsten)> (await micro.totalSupply()).toString()
 
-Step 6 - Refer to Smart Contracts addreses in Ropsten network
+
+Step 6 - Refer to Smart Contracts Addresses in Ropsten Network
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This deployment information will record in the build files inside ``build\contracts\`` directory
+This deployment information is recorded in the build files in the ``build\contracts\`` directory
 
 Ex: ``MicroToken.json`` ::
 
@@ -160,19 +163,20 @@ Ex: ``MicroToken.json`` ::
         }
     },
 
-All React web applications configured to ``5777`` local blockchain. 
+All React web applications are configured to ``5777`` in the local blockchain. 
 Now we are going to change the network to Ropsten and refer to the smart contract addresses in the Ropsten network.
 
-1. Refer ``bank-web-application`` to Ropsten
-open ``bank-web-app/stores/smartContractContext.js`` navigate to ``Smart Contract Addresses``
-change the ``5777`` value to ``3``. ::
+1. Refering ``bank-web-application`` to Ropsten
+
+Open ``bank-web-app/stores/smartContractContext.js``. Navigate to ``Smart Contract Addresses``.
+Change the ``5777`` value to ``3``. ::
 
     // Smart Contract Addresses
     const microTokenAddress = MicroTokenArtifact.networks[3].address;
     const userIdentityAddress = UserIdentityArtifact.networks[3].address;
     const bankLoanAddress = BankLoanArtifact.networks[3].address;
 
-This will refer the smart contract adderesses of Ropsten network used in ``bank-web-app``
+This will refer the smart contract adderesses of Ropsten network used in ``bank-web-app``.
 
-You may need more fake ETHERS to other accounts (Wallet accounts for Broker and Borrower users) in MetaMask to use the system.
+You may need more fake ethers to other accounts (Wallet accounts for Broker and Borrower users) in MetaMask to use the system.
 
