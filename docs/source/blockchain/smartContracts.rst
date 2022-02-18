@@ -90,7 +90,7 @@ transfer
 
 This function transfers tokens from one account to another. 
 Tokens are transferred from the caller's (``msg.sender``) account. ``_to`` is the receiving account and ``_value `` is the token amount. 
-This function returns true if transfer is successfull and false otherwise. ::
+This function returns true if transfer is successful and false otherwise. ::
 
     function transfer(address _to, uint _value) public override returns (bool success) {
         if (_value > 0 && _value <= balanceOf(msg.sender)) {
@@ -104,11 +104,11 @@ This function returns true if transfer is successfull and false otherwise. ::
 transferFrom
 ^^^^^^^^^^^^
 
-This functions transfer tokens from one account to another by a third-party account. 
-Before transfer the tokens it may check some conditions. 
-Sender account address pass as the ``_from`` parameter and receiver's account address pass as the ``_to`` parameter.
-Token amount pass as the ``_value`` parameter to this functions.
-It will return ``true`` if successfull or ``false`` otherwise. ::
+This functions transfer tokens from one account to another via a third-party account. 
+Sender's account address is the ``_from`` parameter and receiver's account address is the ``_to`` parameter.
+Token amount is the ``_value`` parameter.
+Note the various conditions it checks before performing the transfer.
+It return ``true`` if successful or ``false`` otherwise. ::
 
     function transferFrom(address _from, address _to, uint _value) public override returns (bool success) {
         if (__allowances[_from][msg.sender] > 0 &&
@@ -127,9 +127,9 @@ It will return ``true`` if successfull or ``false`` otherwise. ::
 approve
 ^^^^^^^
 
-Owner can grant permission to transfer some tokens from his account by sender. 
-To grant permission owner should ``approve`` the spender's account address ``_spender`` and the token amount ``_value``.
-This function returns ``true`` if it is successfull. ::
+An owner may grant permission to a spender to transfer tokens from his account. 
+To grant permission, the owner should ``approve`` the ``_spender``'s account address  and the token ``_value``.
+This function returns ``true`` if it is successful. ::
 
     function approve(address _spender, uint _value) public override returns (bool success) {
         __allowances[msg.sender][_spender] = _value;
@@ -139,8 +139,8 @@ This function returns ``true`` if it is successfull. ::
 allowance
 ^^^^^^^^^
 
-This function returns the remaining token allowance from ``_owner`` account to ``_spender``, 
-the two account addresses pass as the parameters for this function. ::
+This function returns the remaining token allowance from ``_owner`` to ``_spender``, 
+the two account addresses passed as parameters to the function. ::
 
     function allowance(address _owner, address _spender) public view override returns (uint remaining) {
             return __allowances[_owner][_spender];
@@ -149,8 +149,7 @@ the two account addresses pass as the parameters for this function. ::
 User Identity Smart contract - UserIdentity.sol
 ------------------------------------------------
 
-This contract holds the User details of the Microfinance system. It will register all Broker, Borrower and Insurance Co. details.
-In this section we discuss about ``UserIdentity.sol`` in detail.
+This contract holds  User details of the **Microfinance** system. It  registers  Broker, Borrower and Insurance Company details.
 
 ENUM
 ~~~~
