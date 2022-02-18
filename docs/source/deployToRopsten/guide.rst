@@ -40,7 +40,7 @@ The Infura platform offers API services to quickly connect to Ethereum and other
 
 1. Sign in to `Infura <https://infura.io/>`_.
 
-2. Navigate to Ethereum from the left pannel -> CREATE NEW PEOJECT.
+2. Navigate to Ethereum from the left panel -> CREATE NEW PEOJECT.
 Insert a name for the project.
 
 .. image:: ../images/create_infura_project.png

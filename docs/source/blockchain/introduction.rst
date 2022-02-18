@@ -8,8 +8,7 @@ In this section, we provide an overview of the Truffle project.
 Project Structure
 ------------------
 
-This project helps to develop and deploy the Smart Contracts for 
-Microfinance project. ::
+::
 
     Microfinance
     |--blockchain
