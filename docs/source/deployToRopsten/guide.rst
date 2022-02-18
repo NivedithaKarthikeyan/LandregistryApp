@@ -53,7 +53,7 @@ Insert a name of the project and create one.
 4. Create a secret file
 
 Note in the first line that we are loading the project id and mnemonic from a ``secrets.json`` file, 
-which should look like the following, but having your own values. Make sure to ``.gitignore`` it! ::
+which should look like the following, but having your own values. Make sure to add this to the ``.gitignore`` file! ::
 
     {
         "mnemonic": "planet auto sign choice ...",
