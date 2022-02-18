@@ -34,26 +34,25 @@ In Next.js, this means that the program code is placed in the ``pages/public/tra
 
     export default Transfer;
 
-``TransferController'' is the controller function for token transactions.
+``TransferController`` is the controller function for token transactions.
 It first imports the neccessary dependencies and UI components.
-
 Then it defines the state balance and assign the initial value as 0: ::
 
     const [balance, setBalance] = useState('0');
 
-We access the *MicroToken* smart contract object within the *TransferController* using React Context as follows. ::
+We access the **MicroToken** smart contract object within *TransferController* using React Context as follows. ::
 
     const { MicroTokenContract } = useContext(SmartContractContext);
 
-Using this *MicroToken* smart contract we can access call the *MicroTokenContract* smart contract methods.
-Next we discuss about how to fetch the account balance from *MicroTokenContract* account using its *balanceOf* method.
+Using this **MicroToken** smart contract, we can call functions in the smart contract.
+Next we discuss about how to fetch the account balance from the **MicroTokenContract** account using its *balanceOf* method.
 
-Sequence diagram for get token balance for a user. 
+The sequence diagram for get token balance for a user. 
 
 .. image:: ../images/view_balance.png
   :width: 500
 
-The *getBalance* function will fetch the account balance from *MicroTokenContract* smart contract. ::
+The *getBalance* function fetches the account balance from *MicroTokenContract* smart contract. ::
 
     const getBalance = async () => {
 		try {
@@ -69,7 +68,7 @@ The *getBalance* function will fetch the account balance from *MicroTokenContrac
 		getBalance();
 	});
 
-This uses Async/await functionality and fetch the account balance from smart contract. 
+This uses async/await functionality and fetch the account balance from smart contract. 
 First it will identify the account which is selected in MetaMask.
 Then it will call the *balanceOf* function of *MicroToken* smart contract.
 Selected account address will pass as a patameter to this function.
