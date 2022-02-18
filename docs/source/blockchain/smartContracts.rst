@@ -62,14 +62,14 @@ Functions
 ~~~~~~~~~
 
 We discuss the various things the ``MicroToken`` smart contract should do.
-Since ``MicroToken.sol`` contract implements the ``IERC20`` interface form **OpenZeppelin** you can find more about these functions 
-form `github IERC20 repo <https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol>`_.
+Since ``MicroToken.sol`` contract implements the ``IERC20`` interface form **OpenZeppelin**, you can find more about these functions 
+from the `github IERC20 repo <https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol>`_.
 
 totalSupply
 ^^^^^^^^^^^
 
 This function returns the ``__totalSupply`` of the token. 
-This is a public function. ::
+It is a public function: ::
 
     function totalSupply() public pure override returns (uint _totalSupply) { 
         _totalSupply = __totalSupply;
@@ -78,8 +78,8 @@ This is a public function. ::
 balanceOf
 ^^^^^^^^^
 
-This function returns the token balance of given account. Account address should pass as a parameter to this function. 
-This is a public function. ::
+This function returns the token balance of given account. An account address should be passed as a parameter to this function. 
+It is a public function: ::
 
     function balanceOf(address _addr) public view override returns (uint balance) {
         return __balanceOf[_addr];
@@ -88,9 +88,9 @@ This is a public function. ::
 transfer
 ^^^^^^^^
 
-This function transfer tokens from one account to another. 
-Token will transfer caller's account. ``_to`` is the receivers account and ``_value `` is the token amount. 
-This function returns true if transfer successfull and false otherwise. ::
+This function transfers tokens from one account to another. 
+Tokens are transferred from the caller's (``msg.sender``) account. ``_to`` is the receiving account and ``_value `` is the token amount. 
+This function returns true if transfer is successfull and false otherwise. ::
 
     function transfer(address _to, uint _value) public override returns (bool success) {
         if (_value > 0 && _value <= balanceOf(msg.sender)) {
@@ -104,7 +104,7 @@ This function returns true if transfer successfull and false otherwise. ::
 transferFrom
 ^^^^^^^^^^^^
 
-This functions transfer tokens from one account to another by thirdparty account. 
+This functions transfer tokens from one account to another by a third-party account. 
 Before transfer the tokens it may check some conditions. 
 Sender account address pass as the ``_from`` parameter and receiver's account address pass as the ``_to`` parameter.
 Token amount pass as the ``_value`` parameter to this functions.
