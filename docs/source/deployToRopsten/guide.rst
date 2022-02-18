@@ -40,8 +40,8 @@ The Infura platform offers API services to quickly connect to Ethereum and other
 
 1. Sign in to `Infura <https://infura.io/>`_.
 
-2. Navigate to Etehereum from left pannel -> CREATE NEW PEOJECT.
-Insert a name of the project and create one.
+2. Navigate to Ethereum from the left pannel -> CREATE NEW PEOJECT.
+Insert a name for the project.
 
 .. image:: ../images/create_infura_project.png
   :width: 300
@@ -50,10 +50,10 @@ Insert a name of the project and create one.
 
 .. image:: ../images/infura_project.png
 
-4. Create a secret file
+4. Create a secret file.
 
-Note in the first line that we are loading the project id and mnemonic from a ``secrets.json`` file, 
-which should look like the following, but having your own values. Make sure to add this to the ``.gitignore`` file! ::
+Note that the first line loads the project id and mnemonic from a ``secrets.json`` file, 
+which should look like the following, but having your own values. Make sure to add this to the ``.gitignore`` file. ::
 
     {
         "mnemonic": "planet auto sign choice ...",
@@ -64,7 +64,7 @@ TIP: Instead of a ``secrets.json`` file, you can use whatever secret management 
 A popular and simple option is to use ``dotenv`` for injecting secrets as environment variables.
 
 We can now test that this configuration is working by listing the accounts we have available for the Ropsten network. 
-Remember that yours will be different, as they depend on the mnemonic you used. ::
+Remember that yours will be different, as they depend on the mnemonic you use. ::
 
     $ truffle console --network ropsten
     truffle(ropsten)> await web3.eth.getAccounts()
@@ -80,7 +80,7 @@ Remember that yours will be different, as they depend on the mnemonic you used. 
 Step 3 - Truffle Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Since we are using public nodes, we will need to sign all our transactions locally. 
+Since we are using public nodes, we need to sign all our transactions locally. 
 We use ``@truffle/hdwallet-provider`` to do this, setting it up with our ``mnemonic``. 
 We will also tell the provider how to connect to the test network by using the Infura endpoint.
 
@@ -117,7 +117,7 @@ Let’s start by installing the provider: ::
 Step 4 - Deploy Smart Contracts to Ropsten Network
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-With a project configured to work on a public testnet, we can now finally deploy our contracts. 
+With the project configured to work on a public testnet, we can now finally deploy our contracts. 
 The command here, other than specifying the network, is the same as if you were on your local development network, 
 though it will take a few seconds to run as new blocks are mined. ::
 
@@ -166,8 +166,6 @@ Ex: ``MicroToken.json`` ::
 All React web applications are configured to ``5777`` in the local blockchain. 
 Now we are going to change the network to Ropsten and refer to the smart contract addresses in the Ropsten network.
 
-1. Refering ``bank-web-application`` to Ropsten
-
 Open ``bank-web-app/stores/smartContractContext.js``. Navigate to ``Smart Contract Addresses``.
 Change the ``5777`` value to ``3``. ::
 
@@ -176,7 +174,7 @@ Change the ``5777`` value to ``3``. ::
     const userIdentityAddress = UserIdentityArtifact.networks[3].address;
     const bankLoanAddress = BankLoanArtifact.networks[3].address;
 
-This will refer the smart contract adderesses of Ropsten network used in ``bank-web-app``.
+This will allow us to refer to the smart contract adderesses in the Ropsten network in ``bank-web-app``.
 
 You may need more fake ethers to other accounts (Wallet accounts for Broker and Borrower users) in MetaMask to use the system.
 
