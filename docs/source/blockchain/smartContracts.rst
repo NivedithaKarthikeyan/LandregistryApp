@@ -19,14 +19,19 @@ They reside in the ``contracts`` directory. ::
 Micro Token Smart Contract - MicroToken.sol
 -------------------------------------------
 
-This smart contract handles the ERC20 token in the system. All the ERC20 token related information like 
-Token name, total supply, and functionalities like transfer tokens, account balances, are handled through this contract. The ``MicroToken`` smart contract implements the ``IERC20`` smart contract interface.
+This smart contract handles the ERC20 token in the system. 
+ERC20 is a technical standard used for smart contracts on the Ethereum blockchain for implementing tokens. It defines a common list of rules and constraints that an Ethereum token has to implement, giving developers a standard pattern to program how new tokens will function within the Ethereum ecosystem. 
+All ERC20 token-related information such as token name, total supply, and functionalities like transfer tokens, account balances, are handled through this contract. 
+More information `here <https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol>`_.
+
+
+The ``MicroToken`` smart contract implements the ``IERC20`` smart contract interface.
 
 
 Attributes
 ~~~~~~~~~~
 
-The ``MicroToken`` smart contract has token related attributes: ::
+The ``MicroToken`` smart contract has these token related attributes: ::
 
     string public constant symbol = "MFT";
     string public constant name = "Microfinance Token";
@@ -36,11 +41,11 @@ The ``MicroToken`` smart contract has token related attributes: ::
     mapping (address => mapping (address => uint)) private __allowances;
 
 * ``symbol``: Symbol of the ERC20. This symbol will show in wallets and other places.
-* ``name``: Name for the token. In this project, our token name is ``Microfinance Token (MFT)``.
-* ``decimals``: This attribute configs the number of decimal places we use in our token. We set it to 2. All  token values use upto 2 decimal values.
-* ``__totalSupply``: This attribute holds the total number of tokens for circulation in the system.
-* ``__balanceOf``: This mapping contains the token balance of each account.
-* ``__allowances``: Account owner may grant permission to another account to do the token transfers on behalf of him. But owner can grant permission limited token amount. This mapping holds the number of tokens allowed to transfer from one account to another by third party account.
+* ``name``: Name of the token. In this project, our token name is ``Microfinance Token (MFT)``.
+* ``decimals``: This attribute configures the number of decimal places we use in our token. We set it to 0 as we don't use decimal values.
+* ``__totalSupply``: This attribute holds the total number of tokens in circulation in the system.
+* ``__balanceOf``: This mapping contains the token balance of each account holder.
+* ``__allowances``: Account owner may grant permission to another account to do the token transfers on behalf of him. But owner can grant permission for limited token amount only. This mapping holds the number of tokens allowed to transfer from one account to another by third party account.
 
 Constructor
 ~~~~~~~~~~~
