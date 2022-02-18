@@ -19,7 +19,7 @@ They reside in the ``contracts`` directory. ::
 Micro Token Smart Contract - MicroToken.sol
 -------------------------------------------
 
-This smart contract handles the ERC20 token in the system. 
+This smart contract handles the **ERC20** token in the system. 
 ERC20 is a technical standard used for smart contracts on the Ethereum blockchain for implementing tokens. It defines a common list of rules and constraints that an Ethereum token has to implement, giving developers a standard pattern to program how new tokens will function within the Ethereum ecosystem. 
 All ERC20 token-related information such as token name, total supply, and functionalities like transfer tokens, account balances, are handled through this contract. 
 More information `here <https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol>`_.
@@ -50,20 +50,18 @@ The ``MicroToken`` smart contract has these token related attributes: ::
 Constructor
 ~~~~~~~~~~~
 
-The following code segment shows the ``constructor`` of the MicroToken smart contract. ::
+The following code segment is the ``constructor`` of the MicroToken smart contract: ::
 
     constructor() {
             __balanceOf[msg.sender] = __totalSupply;
     }
 
-This constructor function will assign all the tokens(``__totalSupply``) to the smart contract deployer's(``msg.sender``) account.
-In our system the Bank will get the total token amount at the begining.
-So This smart contract should deploy via Bank's account.
+It assigns all the tokens (``__totalSupply``) to the smart contract deployer's (``msg.sender``) account, which in the **Microfinance** system is the Bank.  The Bank owns all the tokens.  So the Bank account (in MetaMask/blockchain) should deploy this smart contract to assume ownership.
 
 Functions
 ~~~~~~~~~
 
-In this section we discuss about the ``MicroToken`` smart contract functionalities.
+We discuss the various things the ``MicroToken`` smart contract should do.
 Since ``MicroToken.sol`` contract implements the ``IERC20`` interface form **OpenZeppelin** you can find more about these functions 
 form `github IERC20 repo <https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol>`_.
 
