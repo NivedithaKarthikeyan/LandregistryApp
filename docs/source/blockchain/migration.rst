@@ -10,12 +10,12 @@ The following diagram shows the dependency between smart contracts.
 ``BankLoan``, ``InsurancePolicy``, ``LoanPayment`` smart contracts uses ``UserIdentity`` smart contract to verify the users.
 
 .. image:: ../images/smart_contract_dependency.png
-    :width: 200
+    :scale: 50
 
 Migration
 ----------
 
-Initial migration
+Initial Migration
 ~~~~~~~~~~~~~~~~~
 
 Truffle uses a Migrations contract in order to help manage the migration feature. 
