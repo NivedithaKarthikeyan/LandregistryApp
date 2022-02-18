@@ -5,9 +5,9 @@ Smart Contract Dependency Diagram
 ----------------------------------
 
 The following diagram shows the dependency between smart contracts.
-``MicroToken`` smart contract implements the ERC20 Token Interface(``IERC20``). 
+``MicroToken`` smart contract implements the ERC20 Token Interface (``IERC20``). 
 ``UserIdentity`` smart contract stores the stake holders' details.
-``BankLoan``, ``InsurancePolicy``, ``LoanPayment`` smart contracts uses ``UserIdentity`` smart contract to verify the users.
+``BankLoan``, ``InsurancePolicy``, ``LoanPayment`` smart contracts make use of the ``UserIdentity`` smart contract to verify users.
 
 .. image:: ../images/smart_contract_dependency.png
     :width: 60%
