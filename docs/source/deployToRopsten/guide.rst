@@ -3,6 +3,8 @@
 Deploy Smart Contracts to Ropsten
 ==================================
 
+Ropsten is an Ethereum test network that allows for blockchain development testing before deployment on Mainnet, the main Ethereum network, which is not free for use.  Ropsten is free for use in the sense that you can get free ether from the Ropsten faucet.
+
 Dependencies
 ~~~~~~~~~~~~
 
@@ -16,13 +18,12 @@ Step 1 - Get Fake Ethers for your Account
 .. image:: ../images/select_ropsten_network.png
   :width: 300
 
-2. Navigate to `Ropsten Ethereum Faucet <https://faucet.ropsten.be/>`_ and enter your metamask first account address there 
-to have ethers transferred in your account. 
+2. Navigate to `Ropsten Ethereum Faucet <https://faucet.ropsten.be/>`_ and enter your metamask first account address there to have free ethers transferred to your account. 
 
 .. image:: ../images/account_copied.png
   :width: 300
 
-You can copy your account address from metamask like this,
+You can copy your account address from MetaMask like this:
 
 .. image:: ../images/ropsten_faucet.png
 
@@ -34,6 +35,8 @@ You can copy your account address from metamask like this,
 
 Step 2 - Create Infura Project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Infura platform offers API services to quickly connect to Ethereum and other networks such as IPFS, Arbitrum, Polygon, and Optimism, making it easier for Web3 developers to build applications.
 
 1. Sign in to `Infura <https://infura.io/>`_.
 
@@ -49,15 +52,15 @@ Insert a name of the project and create one.
 
 4. Create a secret file
 
-Note in the first line that we are loading the project id and mnemonic from a secrets.json file, 
-which should look like the following, but using your own values. Make sure to .gitignore it! ::
+Note in the first line that we are loading the project id and mnemonic from a ``secrets.json`` file, 
+which should look like the following, but having your own values. Make sure to ``.gitignore`` it! ::
 
     {
         "mnemonic": "planet auto sign choice ...",
         "projectId": "305c137050..."
     }
 
-TIP: Instead of a secrets.json file, you can use whatever secret-management solution you like for your project. 
+TIP: Instead of a ``secrets.json`` file, you can use whatever secret-management solution you like for your project. 
 A popular and simple option is to use dotenv for injecting secrets as environment variables.
 
 We can now test out that this configuration is working by listing the accounts we have available for the Ropsten network. 
