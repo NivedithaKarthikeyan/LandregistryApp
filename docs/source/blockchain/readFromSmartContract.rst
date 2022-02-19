@@ -7,11 +7,11 @@ We're gonna to see how to read account balance from the MicroToken smart contrac
 .. image:: ../images/account_balance.png
     :width: 130%
 
-The Transfer menu item is common to all the users (Bank, Broker, Borrower). 
+As shown in the screenshot above, the ``Transfer`` item in the left menu is common to all users (Bank, Broker, Borrower). 
 It directs the user to ``/public/transfer``.
-In Next.js, this means that the program code is placed in the ``pages/public/transfer.js`` file.
+In Next.js, this means directing to the ``pages/public/transfer.js`` file.
 
-``transfer.js`` loads the ``TransferController`` from ``components/transfer`` directory as follows: ::
+``transfer.js`` loads the ``TransferController`` from the ``components/transfer/`` directory as follows: ::
 
     import React from 'react';
     import { Row, Col } from 'antd';
