@@ -35,9 +35,9 @@ In Next.js, this means directing to the ``pages/public/transfer.js`` file.
 
     export default Transfer;
 
-``TransferController`` is the controller function for token transactions.
-It first imports the neccessary dependencies and UI components.
-Then it defines the state balance and assign the initial value as 0: ::
+``TransferController`` is the controller function for token transactions.  In ``TransferController.js``, 
+it first imports the neccessary dependencies and UI components.
+Then it defines the ``balance`` state  and assign the initial value of 0: ::
 
     const [balance, setBalance] = useState('0');
 
