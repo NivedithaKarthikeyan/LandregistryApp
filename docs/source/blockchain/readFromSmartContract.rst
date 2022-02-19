@@ -1,10 +1,11 @@
 Read Values from Smart Contract
 ===============================
 
-In this section, we discuss about how to read values from a smart contract.
-We use reading account balance from the MicroToken smart contract as an example.
+We discuss about how to read values from a smart contract.
+We're gonna to see how to read account balance from the MicroToken smart contract as an example.
 
 .. image:: ../images/account_balance.png
+    :width: 130%
 
 The Transfer menu item is common to all the users (Bank, Broker, Borrower). 
 It directs the user to ``/public/transfer``.
