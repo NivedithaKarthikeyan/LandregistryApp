@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 // Create context and set default values.
 const UserContext = createContext({
@@ -31,6 +32,19 @@ export const UserContextProvider = ({ children }) => {
 	];
 
 	const [user, setUser] = useState(users[1]);
+
+	const router = useRouter();
+
+	useEffect(() => {
+		// Router will update according to the selected user role.
+		if (user.role === 'broker') {
+			router.push('/public/transfer');
+		} else if (user.role === 'bank') {
+			router.push('/bank/loans');
+		} else if (user.role === 'borrower') {
+			router.push('/borrower/transfer');
+		}
+	}, [user]); // useEffect will execute when user context value changes.
 
 	const login = (role) => {
 		if (role === 'broker') {

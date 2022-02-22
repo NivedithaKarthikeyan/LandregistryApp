@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, Button, InputNumber } from 'antd';
 
 // TransferForm functional component. setAddress and setAmount are pass as props from TransactionController Component.
 function TransferForm({ setAddress, setAmount }) {
-	const [componentSize] = useState('default');
-
 	// This method will call when submit the form
 	// Values parameter contains the submitted field values from form.
 	// Each field values can be captured using form item name.
@@ -26,10 +24,7 @@ function TransferForm({ setAddress, setAmount }) {
 				xxl: 10,
 			}}
 			layout="horizontal"
-			initialValues={{
-				size: componentSize,
-			}}
-			size={componentSize}
+			size="default"
 			labelAlign="left"
 			onFinish={onFinish} // onFinish method will executed when user submit the form.
 		>

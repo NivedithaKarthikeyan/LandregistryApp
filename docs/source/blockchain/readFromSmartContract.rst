@@ -1,16 +1,17 @@
 Read Values from Smart Contract
 ===============================
 
-In this section we discuss about how to read values from smart contract.
-We use reading account balance from MicroToken smart contract as an example.
+We discuss about how to read values from a smart contract.
+We're gonna to see how to read account balance from the MicroToken smart contract as an example.
 
 .. image:: ../images/account_balance.png
+    :width: 130%
 
-The Transfer menu item is common to all the users(Bank, Broker, Borrower). 
-Transfer menu item will direct the user to ``/public/transfer``.
-In Next.js it means the code placed inside the ``pages/public/transfer.js``
+As shown in the screenshot above, the ``Transfer`` item in the left menu is common to all users (Bank, Broker, Borrower). 
+It directs the user to ``/public/transfer``.
+In Next.js, this means directing to the ``pages/public/transfer.js`` file.
 
-In ``transfer.js`` it loads the ``TransferController`` from ``components/transfer`` directory as below. ::
+``transfer.js`` loads the ``TransferController`` from the ``components/transfer/`` directory as follows: ::
 
     import React from 'react';
     import { Row, Col } from 'antd';
@@ -34,26 +35,25 @@ In ``transfer.js`` it loads the ``TransferController`` from ``components/transfe
 
     export default Transfer;
 
-*TransferController* will controller function for token transactions.
-Inside the TransferController it first imports the neccessary dependencies and UI components.
-
-Then insde the TransferController function it defines the state balance and assign initial value as 0 as below.::
+``TransferController`` is the controller function for token transactions.  In ``TransferController.js``, 
+it first imports the neccessary dependencies and UI components.
+Then it defines the ``balance`` state  and assign the initial value of 0: ::
 
     const [balance, setBalance] = useState('0');
 
-We access the *MicroToken* smart contract object within the *TransferController* using React Context as follows. ::
+We access the **MicroToken** smart contract object within *TransferController* using React Context as follows. ::
 
     const { MicroTokenContract } = useContext(SmartContractContext);
 
-Using this *MicroToken* smart contract we can access call the *MicroTokenContract* smart contract methods.
-Next we discuss about how to fetch the account balance from *MicroTokenContract* account using its *balanceOf* method.
+Using this **MicroToken** smart contract, we can call functions in the smart contract.
+Next we discuss about how to fetch the account balance from the **MicroTokenContract** account using its *balanceOf* method.
 
-Sequence diagram for get token balance for a user. 
+The sequence diagram for get token balance for a user. 
 
 .. image:: ../images/view_balance.png
   :width: 500
 
-The *getBalance* function will fetch the account balance from *MicroTokenContract* smart contract. ::
+The *getBalance* function fetches the account balance from *MicroTokenContract* smart contract. ::
 
     const getBalance = async () => {
 		try {
@@ -69,7 +69,7 @@ The *getBalance* function will fetch the account balance from *MicroTokenContrac
 		getBalance();
 	});
 
-This uses Async/await functionality and fetch the account balance from smart contract. 
+This uses async/await functionality and fetch the account balance from smart contract. 
 First it will identify the account which is selected in MetaMask.
 Then it will call the *balanceOf* function of *MicroToken* smart contract.
 Selected account address will pass as a patameter to this function.

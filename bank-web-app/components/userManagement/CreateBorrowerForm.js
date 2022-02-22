@@ -1,17 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Card, Form, Input, Button, message } from 'antd';
 import SmartContractContext from '../../stores/smartContractContext';
 
 // React functional component for Borrower registration form.
 function CreateBorrowerForm() {
-	const [componentSize, setComponentSize] = useState('default');
 	const [form] = Form.useForm();
 
 	const { UserIdentityContract } = useContext(SmartContractContext); // Get User Identity contract instance defined in the smartContractContext.
-
-	const onFormLayoutChange = ({ size }) => {
-		setComponentSize(size);
-	};
 
 	// Add new borrower entry in to the User Identity smart contract.
 	// values parameter contains the submitted form field values and captured using their names later.
@@ -45,11 +40,7 @@ function CreateBorrowerForm() {
 					xxl: 10,
 				}}
 				layout="horizontal"
-				initialValues={{
-					size: componentSize,
-				}}
-				onValuesChange={onFormLayoutChange}
-				size={componentSize}
+				size="default"
 				labelAlign="left"
 				onFinish={createBorrower} // createBorrower function will execute when user submits the form. Form field values will pass as a parameter to the function.
 			>

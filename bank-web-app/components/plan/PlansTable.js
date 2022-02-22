@@ -6,13 +6,8 @@ import UserContext from '../../stores/userContext';
 
 function PlansTable({ togglePlan }) {
 	const { user } = useContext(UserContext); // Access the use role selected from userContext.
-	const [componentSize, setComponentSize] = useState('default');
 	const [isModalVisible, setIsModalVisible] = useState(false); // Edit Loan Plan Modal visibility state.
 	const [data, setData] = useState([]); // Stores Loan Plan data.
-
-	const onFormLayoutChange = ({ size }) => {
-		setComponentSize(size);
-	};
 
 	const { confirm } = Modal;
 
@@ -28,11 +23,10 @@ function PlansTable({ togglePlan }) {
 		try {
 
 			// Calls http get method to fetch all loan plans from the bank server.
-			const response = await getApi({
+			const plans = await getApi({
 				url: 'loan-plans', // Calls <Bank Server URL>/loan-plans api.
 			});
 
-			const plans = await response; // Get Loan Plans from the bank server response.
 			setData([]); // Initialize data array to zero elements to add all Loan Plans from the bank server response.
 			// Add all Loan Plans to the data array.
 			for (let i = 0; i < plans.length; i++) {
@@ -258,11 +252,7 @@ function PlansTable({ togglePlan }) {
 						span: 18,
 					}}
 					layout="horizontal"
-					initialValues={{
-						size: componentSize,
-					}}
-					onValuesChange={onFormLayoutChange}
-					size={componentSize}
+					size="default"
 				>
 					<Form.Item label="Id">
 						<span className="ant-form-text">{id}</span>

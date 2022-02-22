@@ -1,19 +1,19 @@
 Installation Guide
 ==================
 
-The following subsections will describe how to install all the tools and dependencies
-we need to set up and run this project. You can skip these subsections if you have already installed them in your machine.
+The following sections describe how to install the tools and dependencies
+we need to set up and run this project. You can skip these sections if you have already installed them in your machine.
 
 Install Git
 --------------
 
 Git manages code versions for you. 
-Use the following command to install Homebrew in macOS. You can find more about Homebrew in
-`here <https://brew.sh/>`_ ::
+Use the following command to install Homebrew in macOS. You can find more about Homebrew
+`here. <https://brew.sh/>`_ ::
 
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-Then use Homebrew to install ``git`` on Mac. ::
+Use Homebrew to install ``git`` on the Mac: ::
 
    brew install git
 
@@ -26,16 +26,16 @@ Install Node
 ---------------
 
 You need to install Node Package Manager, or NPM, which comes with Node.js.  
-You can see if you have Node already installed by going to your terminal and typing::
+You can see if you have Node.js already installed by typing this in your terminal::
 
    node -v
 
-If you don't have Node already installed you can visit the `Node.js website <https://nodejs.org/en/>`_ 
-to download it. 
-You can find both Mac and Windows versions of Node in there. 
+If you don't have Node.js already installed, you can visit the `Node.js website <https://nodejs.org/en/>`_ 
+to download. 
+Both Mac and Windows versions are there. 
 It is recommended to use the LTS version of Node. 
 
-Then install Node using the downloaded Node installer.
+Install Node using the downloaded Node installer.
 
 Install Truffle 
 ------------------
@@ -43,21 +43,21 @@ Install Truffle
 Truffle is a development environment, testing framework, 
 and asset pipeline for blockchains using the Ethereum Virtual Machine (EVM). 
 Truffle provides important features for smart contract development. In this project, 
-we use Truffle for smart contract compilation and deploying them to the blockchain. 
-You can find more on Truffle in 
+we use Truffle for smart contract compilation and blockchain deployment. 
+You can find more about Truffle in 
 `this site <https://www.trufflesuite.com/docs/truffle/overview>`_.
 
-You can install Truffle globally in your machine using the following command::
+Install Truffle globally in your machine using the following command::
 
    npm install -g truffle
 
-This command can be used to install Truffle in both Mac and Windows.
+This command installs Truffle in both Mac and Windows.
 
-Install Ganache.
+Install Ganache
 -------------------
 
 `Ganache <https://www.trufflesuite.com/ganache>`_ is a personal blockchain, which is a local 
-development blockchain that can be used to mimic the behavior of a public blockchain. 
+development blockchain that mimics the behavior of a public blockchain. 
 It can be used as your personal blockchain for Ethereum development. 
 It is available on Windows, Mac, and Linux as a desktop application and a command line tool.
 
@@ -66,7 +66,7 @@ It is available on Windows, Mac, and Linux as a desktop application and a comman
 You can find the latest release for your operating system 
 `here <https://github.com/trufflesuite/ganache/releases>`_. 
 Once you have downloaded the archived package, extract the installer and run through the setup steps. 
-Once you've installed it, you should see following screen whenever you open it choose the **Quickstart** option:
+Once you've installed it, you should see following screen when you open it. Choose the **Quickstart** option:
 
 .. image:: ../images/quickstart.png
 
@@ -88,13 +88,13 @@ or search for the Metamask Chrome plugin in the Google Chrome web store.
 Once you have installed it, be sure to pin it on the browser.
 You will see the Metamask fox icon on the top right part of your Chrome browser when it is installed.
 
-Metamask allows us to manage personal blockchain accounts once we have connected them to the blockchain, 
-as well as manage Ether funds that we will need to pay for transactions.
+Metamask allows one to manage  blockchain accounts once we have connected them to a blockchain, 
+as well as manage Ether that we will need to use as transaction fees.
 
 Install Mongo DB
 ----------------
 
-you can detailed installation in `mongoDB site <https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/>`_
+Mongo DB is a database system.  Detailed installation instructions `here. <https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/>`_
 
 **Prerequisites**
 
@@ -117,7 +117,7 @@ macOS does not include the Homebrew brew package by default.
 
  - Install brew using the official `Homebrew installation instructions. <https://brew.sh/#install>`_
 
-**Installing MongoDB 5.0 Community Edition on macOS**
+**Installing MongoDB Community Edition on macOS**
 
 Follow these steps to install MongoDB Community Edition using Homebrew's brew package manager. 
 Be sure that you have followed the installation prerequisites above before proceeding.
@@ -137,12 +137,11 @@ If you have already done this for a previous installation of MongoDB, you can sk
 
       Run MongoDB Community Edition
 
-For Linux and Windows users can follow the `Install MongoDB Community Edition <https://docs.mongodb.com/manual/administration/install-community/>`_
+Linux and Windows users may follow the `Install MongoDB Community Edition <https://docs.mongodb.com/manual/administration/install-community/>`_
 page to install MongoDB on your computer.
 
-MongoDB Compass is a powerful GUI for querying, aggregating, and analyzing your MongoDB data in a visual environment.
+MongoDB Compass is a powerful GUI console for querying, aggregating, and analyzing your MongoDB data in a visual environment.
 
-Compass is free to use and source available, and can be run on macOS, Windows, and Linux.
+Compass is free for use; its source code is available. It runs on macOS, Windows, and Linux.
 
-You can refer `Download and Install Compass <https://docs.mongodb.com/compass/current/install/>`_ page to setup MongoDB Compass in your 
-computer.
+You may refer to the `Download and Install Compass <https://docs.mongodb.com/compass/current/install/>`_ page to setup MongoDB Compass in your computer.

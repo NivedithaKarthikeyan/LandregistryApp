@@ -88,14 +88,14 @@ imports
 
 list of dependencies of userContext. ::
 
-    import React, { createContext, useState } from 'react';
+    import React, { createContext } from 'react';
 
     import Web3 from 'web3';
     import MicroTokenArtifact from '../../blockchain/build/contracts/MicroToken.json';
     import BankLoanArtifact from '../../blockchain/build/contracts/BankLoan.json';
     import UserIdentityArtifact from '../../blockchain/build/contracts/UserIdentity.json';
 
-First we import React and its createContext and useState modules.
+First we import React and its createContext hook.
 Next we import Web3 to connect app with Ethereum blockchain smart contracts and ipfs-api to interact with IPFS.
 
 Then we import 4 smart contract json files. These were directly import from ``blockchain/build/contracts`` directory for simplicity.
