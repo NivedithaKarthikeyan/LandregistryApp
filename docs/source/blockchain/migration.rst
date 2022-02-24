@@ -17,8 +17,8 @@ The ``BankLoan``, ``InsurancePolicy``, ``LoanPayment`` smart contracts make use 
 Initial Migration
 ----------------------------------
 
-Truffle uses a migration contract to help manage the migration feature. 
-This contract must contain a specific interface, but you're free to edit this contract at will. 
+Truffle uses a migration contract ``Migrations.sol`` to help manage the contract migration or deployment to a blockchain. 
+The migration contract must contain a specific interface, but you're free to edit this contract at will. 
 For most projects, this contract will be deployed initially as the first migration and won't be updated again.
 You will also receive this contract by default when creating a new project with ``truffle init``.
 
@@ -33,7 +33,7 @@ Filename: ``migrations/1_initial_migration.js``
     :width: 80%
 
 You can find more details in 
-`Truffle Running Migration Page <https://www.trufflesuite.com/docs/truffle/getting-started/running-migrations>`_.
+`Truffle Running Migration <https://www.trufflesuite.com/docs/truffle/getting-started/running-migrations>`_.
 
 Micro Token Smart Contract Migration
 ----------------------------------
@@ -57,7 +57,7 @@ Then we can use ``deployer.deploy`` method to deploy the ``MicroToken`` smart co
 User Identity and Bank Loan Smart Contract Migration
 ----------------------------------
 
-We use the following code to deploy UserIdentity and other smart contracts. ::
+We use the following code to deploy ``UserIdentity`` and other smart contracts. ::
 
     const UserIdentity = artifacts.require("UserIdentity");
     const BankLoan = artifacts.require("BankLoan");
@@ -72,11 +72,10 @@ We use the following code to deploy UserIdentity and other smart contracts. ::
 
 Filename: ``migrations/3_user_identity_migration.js``
 
-As describe in above migration, first we insert all the contracts we'd like to interact with
-(UserIdentity and BankLoan).
-As shown in the above *Smart Contract Dependency Diagram*, ``BankLoan`` smart contract needs the ``UserIdentity`` smart contract address to deploy. 
-To achieve this first, we deploy the ``UserIdentity`` smart contract. 
-We use async/await methods to deploy these contracts.
+As described in the above migration, first we insert all the contracts we'd like to interact (UserIdentity and BankLoan).
+As shown in the above *Smart Contract Dependency Diagram*, the ``BankLoan`` smart contract needs the ``UserIdentity`` smart contract address to deploy. 
+We first deploy the ``UserIdentity`` smart contract. 
+We use the async/await methods to deploy these contracts.
 After deploying the ``UserIdentity`` smart contract, we wait for it to complete the deployment.
 Then we deploy other three smart contracts with the ``UserIdentity`` smart contract address as a parameter.
 
