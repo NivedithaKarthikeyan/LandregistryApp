@@ -35,7 +35,7 @@ Here is the ``truffle-config.js`` script for this project. ::
     },
     };
 
-As described in the :ref:`deploy-to-ropsten`, first we add the ``secrets.json`` file and ``hdwallet-provider`` dependency.
+As described in the :ref:`deploy-to-ropsten` section, first we add the ``secrets.json`` file and ``hdwallet-provider`` dependency.
 Then we configure the ``networks`` to development and Ropsten test networks.
 Next we configure the compilers for the project. We use ``0.8.1`` compiler version in our project.
 
