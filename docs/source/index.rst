@@ -19,7 +19,6 @@ Welcome to Microfinance dApp Documentation
 
    installation/guide
    installation/checkout
-   installation/structure
    installation/deploySmartContract
    installation/metamask
    installation/bankServer
