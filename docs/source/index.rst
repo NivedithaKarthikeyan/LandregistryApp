@@ -44,6 +44,14 @@ Welcome to Microfinance dApp Documentation
 
 .. toctree::
    :maxdepth: 2
+   :caption: Bank Web Server
+
+   bankServer/introduction
+   bankServer/index
+   bankServer/layeredArchitecture
+   
+.. toctree::
+   :maxdepth: 2
    :caption: Bank Web Application
 
    bankClient/introduction
