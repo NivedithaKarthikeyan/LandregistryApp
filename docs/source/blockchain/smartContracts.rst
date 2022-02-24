@@ -16,7 +16,7 @@ They reside in the ``contracts`` directory. ::
         |  |--truffle-config.js
 
 
-Micro Token Smart Contract - MicroToken.sol
+1. Micro Token Smart Contract - MicroToken.sol
 -------------------------------------------
 
 This smart contract handles the **ERC20** token in the system. 
@@ -148,7 +148,7 @@ the two account addresses passed as parameters to the function. ::
 
 
 
-User Identity Smart contract - UserIdentity.sol
+2. User Identity Smart contract - UserIdentity.sol
 ------------------------------------------------
 
 This contract holds User details. It  registers  Broker, Borrower and Insurance Company details.
@@ -296,7 +296,7 @@ Return:
     * ``User []`` - Return all Borrowers as an array.
 
 
-Bank Loan Smart Contract - BankLoan.sol
+3. Bank Loan Smart Contract - BankLoan.sol
 ---------------------------------------
 
 This smart contract stores Bank Loan details. 
@@ -374,7 +374,7 @@ These events are defined in the ``BankLoan`` smart contract.
 loanRequest
 ^^^^^^^^^^^
 
-This event will be emitted when Broker creates a loan request. ::
+This event is emitted when a Broker creates a loan request. ::
 
     event loanRequest(
         uint id,
@@ -429,8 +429,8 @@ It requires the ``UserIdentity`` smart contract address to deploy the smart cont
 The ``UserIdentity`` smart contract address object instance will be set as the ``identitySC``. ::
 
     constructor (address _identitySC) {
-            admin = msg.sender;
-            identitySC = UserIdentity(_identitySC);
+        admin = msg.sender;
+        identitySC = UserIdentity(_identitySC);
     }
 
 
@@ -457,7 +457,7 @@ Modifiers:
 signByBorrower(...)
 ^^^^^^^^^^^^^^^^^^^
 
-This function is used to sign the Loan by Borrower. ::
+This function is used to sign the Loan by the Borrower. ::
 
     function signByBorrower(uint _loanId) public isLoanBorrower(_loanId) isValidLoan(_loanId) isLoanIn(_loanId, LoanState.INSURANCE_APPROVED)
     
