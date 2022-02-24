@@ -56,6 +56,7 @@ The sequence diagram for get token balance for a user.
 The *getBalance* function fetches the account balance from *MicroTokenContract* smart contract. ::
 
     const getBalance = async () => {
+
 	    try {
 			const accounts = await window.ethereum.enable();
 			const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
