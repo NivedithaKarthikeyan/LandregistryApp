@@ -1,0 +1,89 @@
+Index.js
+========
+
+As defined in the ``package.json`` when we start the ``bank-server`` app it will start running from the ``index.js`` file. ::
+
+    "scripts": {
+        "start": "nodemon index.js",
+        ...
+    }
+
+In ``index.js`` first we import the dependecies we need to run the ``bank-server`` as follows. ::
+
+    const Express = require('express')
+    const mongoose = require('mongoose') 
+    const cors = require('cors')
+    const swaggerUi = require('swagger-ui-express')
+    const swaggerJsDoc = require('swagger-jsdoc')
+
+Then we define some configurations for the Swagger API documentation. ::
+
+    const options = {
+        definition: {
+            openapi: "3.0.0",
+            info: {
+                title: "Bank API",
+                version: "1.0.0",
+                description: "Bank API for Microfinance"
+            },
+            servers: [
+                {
+                    url: "http://localhost:9091"
+                }
+            ],
+        },
+        apis: ["./routes/*.js"]
+    }
+
+    const specs = swaggerJsDoc(options)
+
+Next we define an Express web server called ``app`` as follows. ::
+    
+    const app = Express()
+
+We define our routes in separate files. We need to import them in to the ``index.js`` file to use.
+In this project we define two routes called ``/loan-plans`` and ``/loan-payments``.
+Requests come it to these URLs will handle by the scripts defined in the ``routes`` directory. ::
+
+    //Import Routes
+    const plansRoute = require('./routes/plans');
+    const paymentsRoute = require('./routes/payments');
+
+we enable some pre-defined Express middlewares to enable the CORS, handle URLEncoding payloads 
+and json payloads in our **Bank Web Server**. ::
+
+    //MIDDLEWARE
+    app.use(cors()) // Enables CORS for the app.
+    app.use(Express.urlencoded({ extended: true })); //Parses incoming requests with urlencoded payloads 
+    app.use(Express.json()) //Parses incoming requests with JSON payloads
+
+We enable Swagger API documentation in ``/api-docs`` route as follows. ::
+
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs)) // Swagger documentation.
+
+Following code line will redirect the requests coming to the ``/loan-plans`` and ``/loan-payments`` 
+to the respective scripts we defined before. ::
+
+    app.use('/loan-plans', plansRoute);
+    app.use('/loan-payments', paymentsRoute);
+
+We send ``Welcome to Bank Server`` message for all requests coming to the root route as follows. :: 
+
+    app.get('/', (req, res) => {  // app.get is called when user enters localhost:<PORT> in browser
+        res.send('Welcome to Bank Server') // '/' means no futher route beyond localhost:<PORT>
+    })
+
+The following code will connect our **Bank Web Server** to the MongoDB. ::
+    
+    //Connect to DB
+    const url = 'mongodb://127.0.0.1:27017/bank-db-level1'
+    mongoose.connect(
+        url,
+        { useNewUrlParser: true },
+        () => {
+            console.log('connected to Bank DB')
+    })
+
+**Bank Web Server** connect to the port ``9091`` using following code line. ::
+
+    app.listen(9091)

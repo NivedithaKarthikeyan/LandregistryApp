@@ -21,7 +21,7 @@ Here is the structure of the Bank Web Application. ::
 
 * ``components`` - Directory for the application components.
 * ``node_modules`` - Directory of node modules.
-* ``pages`` - Directory of pages with dynamic rotes.
+* ``pages`` - Directory of pages with dynamic routes.
 * ``public`` - Directory of static files.
 * ``stores`` - Directory of Application Context files.
 * ``styles`` - Default style files.

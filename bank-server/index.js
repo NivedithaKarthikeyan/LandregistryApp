@@ -1,9 +1,8 @@
-const Express = require('express') // web server is a node server - Bank server
-const mongoose = require('mongoose') // web server connects to MongoDB
-const cors = require('cors') //
-
-const swaggerUi = require('swagger-ui-express') // present APIs nicely on one pages
-const swaggerJsDoc = require('swagger-jsdoc') // present APIs nicely on one pages
+const Express = require('express') // Web framework for node js.
+const mongoose = require('mongoose') // MongoDB object modeling tool
+const cors = require('cors') // Express middleware that can be used to enable CORS.
+const swaggerUi = require('swagger-ui-express') // This library reads your JSDoc-annotated source code and generates an OpenAPI (Swagger) specification.
+const swaggerJsDoc = require('swagger-jsdoc') // This module allows you to serve auto-generated swagger-ui generated API docs from express.
 
 //SWAGGER
 const options = {
@@ -25,26 +24,26 @@ const options = {
 
 const specs = swaggerJsDoc(options)
 
-const app = Express()
+const app = Express() // Defines Express web server called app.
 
-//Import Routed
+//Import Routes
 const plansRoute = require('./routes/plans');
 const paymentsRoute = require('./routes/payments');
 
 //MIDDLEWARE
-app.use(cors())
+app.use(cors()) // Enables CORS for the app.
 
-app.use(Express.urlencoded({ extended: true }));
-app.use(Express.json())
+app.use(Express.urlencoded({ extended: true })); //Parses incoming requests with urlencoded payloads 
+app.use(Express.json()) //Parses incoming requests with JSON payloads
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs))
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs)) // Swagger documentation.
 
 app.use('/loan-plans', plansRoute);
 app.use('/loan-payments', paymentsRoute);
 
 //ROUTES
-app.get('/', (req, res) => {  // app.get is called when user enters localhost:9091 in browser
-    res.send('Welcome to Bank Server') // '/' means no futher route beyond localhost:9091
+app.get('/', (req, res) => {  // app.get is called when user enters localhost:<PORT> in browser
+    res.send('Welcome to Bank Server') // '/' means no futher route beyond localhost:<PORT>
 })
 
 //Connect to DB

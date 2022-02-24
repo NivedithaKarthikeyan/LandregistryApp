@@ -91,6 +91,8 @@ You will see the Metamask fox icon on the top right part of your Chrome browser 
 Metamask allows one to manage  blockchain accounts once we have connected them to a blockchain, 
 as well as manage Ether that we will need to use as transaction fees.
 
+.. _mongo db install target:
+
 Install Mongo DB
 ----------------
 
@@ -135,7 +137,7 @@ If you have already done this for a previous installation of MongoDB, you can sk
 
 3. To run the MongoDB, run the following command in your macOS Terminal application: ::
 
-      Run MongoDB Community Edition
+      brew services start mongodb-community@5.0
 
 Linux and Windows users may follow the `Install MongoDB Community Edition <https://docs.mongodb.com/manual/administration/install-community/>`_
 page to install MongoDB on your computer.

@@ -11,7 +11,6 @@ const planService = {
 	},
 	createPlan: async (req) => {
 		const plan = new Plan({
-			// _id: nanoid(8),
 			minMonths: req.body.minMonths,
 			maxMonths: req.body.maxMonths,
 			minAmount: req.body.minAmount,

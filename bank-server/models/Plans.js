@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 
 const PlanSchema = mongoose.Schema({
-	// _id: {
-	// 	type: String,
-	// 	required:true
-	// },
     minMonths: {
         type: Number,
         required: true

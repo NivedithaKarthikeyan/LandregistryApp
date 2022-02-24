@@ -1,5 +1,4 @@
 const Express = require('express')
-const Plan = require('../models/Plans')
 
 const router = Express.Router()
 
@@ -73,7 +72,6 @@ const planService = require('../services/planService');
  */
 router.get('/', async (req, res) => {
     try {
-        // const plans = await Plan.find()
 		const plans = await planService.getPlans();
 		res.json(plans);
     }
@@ -124,7 +122,6 @@ router.get('/:planId', async (req, res) => {
             message: err
         })
     }
-    
 })
 
 // SUBMIT A LOAN PLAN
@@ -161,8 +158,6 @@ router.post('/', async (req, res) => {
             message: err
         })
     }
-
-
 })
 
 //UPDATE LOAN PLAN
