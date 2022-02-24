@@ -27,7 +27,7 @@ Layered Architecture
 Layered architecture diagram of the system.
 
 .. image:: ../images/layered-architecture.png
-    :width: 80%
+    :width: 70%
     :align: center
 
 
