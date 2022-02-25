@@ -123,7 +123,7 @@ It returns ``true`` if successful or ``false`` otherwise. ::
 approve
 ^^^^^^^
 
-An owner may grant permission to a spender to transfer tokens from his account. 
+An owner may grant permission to a spender to transfer tokens from his account. The transfer is materialized by the ``transferFrom`` function above.
 To grant permission, the owner should ``approve`` the ``_spender``'s account address  and the token ``_value``.
 This function returns ``true`` if it is successful. ::
 
@@ -135,8 +135,7 @@ This function returns ``true`` if it is successful. ::
 allowance
 ^^^^^^^^^
 
-Returns the remaining token allowance from ``_owner`` to ``_spender``, 
-the two account addresses passed as parameters to the function. ::
+It informs the amount of tokens the ``_owner`` has granted the ``_spender`` to spend. ::
 
     function allowance(address _owner, address _spender) public view override returns (uint remaining) {
             return __allowances[_owner][_spender];
@@ -147,12 +146,12 @@ the two account addresses passed as parameters to the function. ::
 2. User Identity Smart contract - UserIdentity.sol
 ------------------------------------------------
 
-This contract holds User details. It  registers  Broker and Borrower details.
+This contract holds User details. It registers  Broker and Borrower details.
 
 enum
 ~~~~
 
-We capture different roles of users in the system using enum.  There are 3 user roles in the system. ::
+We capture different roles of users in the system using enum.  Currently there are 3 user roles in the system. ::
 
     enum Role { GUEST, BROKER, BORROWER }
 
@@ -170,39 +169,39 @@ User - This struct holds user attributes. ::
         bool isBankApproved;
     }
 
-* ``id`` - System assigned id  for the user. This is an incremental number.
-* ``socialSecurityId`` - This attribute holds the social security number.
-* ``userAddress`` - User wallet account address. Wallet acount address from Ganache.
+* ``id`` - System assigned id for the user. This is an incremental number.
+* ``socialSecurityId`` - Social security number.
+* ``userAddress`` - User wallet account address (from Ganache or other blockchain).
 * ``name`` - User name.
 * ``role`` - User role (BROKER, BORROWER).
-* ``isBankApproved`` - Whether Bank approves of the user.
+* ``isBankApproved`` - Whether Bank ratifies the user.
 
 Modifiers
 ~~~~~~~~~
 
 The following modifiers are used in the ``UserIdentity.sol`` functions.
 
-* ``isAdmin()`` - Check whether function caller is the admin of the contract.
+* ``isAdmin()`` - Check whether function caller is the admin (creator and deployer) of the contract.
 
 Attributes
 ~~~~~~~~~~
 
-``UserIdentity.sol`` contains the following attributes. 
+``UserIdentity.sol`` has the following attributes. 
 
 * ``admin`` - Deployer account address of the smart contract. 
-* ``brokersCount`` - Total brokers in the system. 
-* ``borrowersCount`` - Total borrowers in the system.
+* ``brokersCount`` - Total number of brokers in the system. 
+* ``borrowersCount`` - Total number of borrowers in the system.
     
-* ``borrowers`` - Borrowers in the system (address-to-Borrower mapping).
-* ``brokers`` - Brokers in the system (address-to-User mapping).
+* ``borrowers`` - List of Borrowers in the system (address-to-Borrower mapping).
+* ``brokers`` - List of Brokers in the system (address-to-User mapping).
     
-* ``brokersAddresses`` - Broker addresses (dynamic array).
-* ``borrowersAddresses`` - Borrower addresses (dynamic array).
+* ``brokersAddresses`` - List of Broker addresses (dynamic array).
+* ``borrowersAddresses`` - List of Borrower addresses (dynamic array).
 
 Constructor
 ~~~~~~~~~~~
 
-The constructor assigns the contract deployer (``msg.sender``) as the admin. ::
+The constructor designates the contract deployer (``msg.sender``) as the admin. ::
 
     constructor()
     {
@@ -222,38 +221,38 @@ Add new Broker account to the system: ::
         public isAdmin()
 
 Parameters:
-    * ``_socialSecurityId`` - Social Security ID of the Broker.
-    * ``_address`` - Wallet account address of the Broker.
-    * ``_name`` - Broker name.
+    * ``_socialSecurityId`` - Social Security ID of Broker.
+    * ``_address`` - Wallet account address of Broker.
+    * ``_name`` - Broker's name.
 
 Modifiers:
-    * ``isAdmin()`` - Check whether function caller is the Admin of the smart contract.
+    * ``isAdmin()`` - Check whether function caller is the admin of the smart contract instance.
 
 addBorrower
 ^^^^^^^^^^^
 
-Adds new Borrower account to the system: ::
+Add new Borrower account to the system: ::
 
     function addBorrower(string memory _socialSecurityId, address _address, string memory _name) 
         public isAdmin()
 
 Parameters:
-    * ``_socialSecurityId`` - Social Security ID of the Broker.
-    * ``_address`` - Wallet account address of the Borrower.
-    * ``_name`` - Borrower name.
+    * ``_socialSecurityId`` - Social Security ID of  Broker.
+    * ``_address`` - Wallet account address of  Borrower.
+    * ``_name`` - Borrower's name.
 
 Modifiers:
-    * ``isAdmin()`` - Check whether function caller is the Admin of the smart contract.
+    * ``isAdmin()`` - Check whether function caller is the sdmin of the smart contract instance.
 
 verifyIsBroker
 ^^^^^^^^^^^^^^
 
-Verifies whether the given account address is a Broker account or not. ::
+Verify whether the given account address is a Broker account or not. ::
 
     function verifyIsBroker(address _address) public view returns(bool)
 
 Parameters:
-    * ``_address`` - The account address of the user
+    * ``_address`` - Account address of user.
 
 This function is used by other smart contracts to verify a Broker account. 
 It returns ``true`` if the broker exists on the given address or ``false`` otherwise.
@@ -261,12 +260,12 @@ It returns ``true`` if the broker exists on the given address or ``false`` other
 verifyIsBorrower
 ^^^^^^^^^^^^^^^^^
 
-Verifies whether the given account address is a Borrower account or not. ::
+Verify whether the given account address is a Borrower account or not. ::
 
     function verifyIsBorrower(address _address) public view returns(bool)
 
 Parameters:
-    * ``_address`` - The account address of the user
+    * ``_address`` - Account address of user.
 
 This function is used by other smart contracts to verify a Borrower account. 
 It returns ``true`` if the Borrower exists on the given address or ``false`` otherwise.
@@ -274,29 +273,28 @@ It returns ``true`` if the Borrower exists on the given address or ``false`` oth
 getAllBrokers
 ^^^^^^^^^^^^^
 
-Returns all the Brokers as an array. ::
+Return all the Brokers as an array. ::
 
     function getAllBrokers() public view returns (User[] memory)
 
 Return: 
-    * ``User []`` - Return all Brokers as an array.
+    * ``User []`` - List of Brokers as an array.
 
 getAllBorrowers
 ^^^^^^^^^^^^^^^
 
-Returns all the Borrowers as an array. ::
+Return all the Borrowers as an array. ::
 
     function getAllBorrowers() public view returns (User[] memory)
 
 Return: 
-    * ``User []`` - Return all Borrowers as an array.
+    * ``User []`` - List of Borrowers as an array.
 
 
 3. Bank Loan Smart Contract - BankLoan.sol
 ---------------------------------------
 
-This smart contract stores Bank Loan details. 
-The Bank is the owner of this smart contract.
+This smart contract stores Bank Loan details.  The Bank is the owner of this smart contract.
 
 State Transition Diagram of The Bank Loan
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
