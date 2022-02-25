@@ -107,7 +107,7 @@ transferFrom
 Transfer tokens from one account to another via a third-party account. 
 Sender's account address is the ``_from`` parameter and receiver's account address is the ``_to`` parameter.
 Token amount is the ``_value`` parameter.
-Note the various conditions it checks before performing the transfer.
+Note the various conditions it Check whether before performing the transfer.
 It return ``true`` if successful or ``false`` otherwise. ::
 
     function transferFrom(address _from, address _to, uint _value) public override returns (bool success) {
@@ -186,7 +186,7 @@ Modifiers
 
 The following modifiers are used in the ``UserIdentity.sol`` functions.
 
-* ``isAdmin()`` - Checks that the function caller is the admin of the contract.
+* ``isAdmin()`` - Check whether that the function caller is the admin of the contract.
 
 Attributes
 ~~~~~~~~~~
@@ -197,11 +197,11 @@ Attributes
 * ``brokersCount`` - Total brokers in the system. 
 * ``borrowersCount`` - Total borrowers in the system.
     
-* ``borrowers`` - Borrowers  in the system (address to Borrower mapping).
-* ``brokers`` - Brokers  in the system (address to User mapping).
+* ``borrowers`` - Borrowers  in the system (address-to-Borrower mapping).
+* ``brokers`` - Brokers  in the system (address-to-User mapping).
     
-* ``brokersAddresses`` - Broker addresses.
-* ``borrowersAddresses`` - Borrower addresses.
+* ``brokersAddresses`` - Broker addresses (dynamic array).
+* ``borrowersAddresses`` - Borrower addresses (dynamic array).
 
 Constructor
 ~~~~~~~~~~~
@@ -220,7 +220,7 @@ Functions
 addBroker
 ^^^^^^^^^
 
-Adds new Broker account to the system: ::
+Add new Broker account to the system: ::
 
     function addBroker(string memory _socialSecurityId, address _address, string memory _name) 
         public isAdmin()
@@ -231,7 +231,7 @@ Parameters:
     * ``_name`` - Broker name.
 
 Modifiers:
-    * ``isAdmin()`` - Checks function caller is the Admin of the smart contract.
+    * ``isAdmin()`` - Check whether function caller is the Admin of the smart contract.
 
 addBorrower
 ^^^^^^^^^^^
@@ -247,7 +247,7 @@ Parameters:
     * ``_name`` - Borrower name.
 
 Modifiers:
-    * ``isAdmin()`` - Checks function caller is the Admin of the smart contract.
+    * ``isAdmin()`` - Check whether function caller is the Admin of the smart contract.
 
 verifyIsBroker
 ^^^^^^^^^^^^^^
@@ -407,11 +407,11 @@ Modifiers
 
 The following modifiers are used in the ``BankLoan.sol`` functions.
 
-* ``isAdmin()`` - Checks whether the function caller is the owner of the smart contract.
-* ``isBroker()`` - Checks whether the function caller is registered as a Broker in the system.
-* ``isLoanBorrower(uint _loanId)`` - Checks whether the function caller is the Borrower of a given Loan.
-* ``isValidLoan(uint _loanId)`` - Checks whether the Loan exist in the system.
-* ``isLoanIn(uint _loanId, LoanState _state)`` - Checks whether the given Loan is in specific Loan State.
+* ``isAdmin()`` - Check whether function caller is the owner of the smart contract.
+* ``isBroker()`` - Check whether function caller is registered as a Broker in the system.
+* ``isLoanBorrower(uint _loanId)`` - Check whether function caller is the Borrower of a given Loan.
+* ``isValidLoan(uint _loanId)`` - Check whether Loan exist in the system.
+* ``isLoanIn(uint _loanId, LoanState _state)`` - Check whether given Loan is in specific Loan State.
 
 
 Attributes
@@ -452,7 +452,7 @@ Parameters:
     * ``_borrower`` - Borrower address.
 
 Modifiers:
-    * ``isBroker`` - Checks the function caller registered as a Broker.
+    * ``isBroker`` - Check whether function caller registered as a Broker.
 
 signByBorrower(...)
 ^^^^^^^^^^^^^^^^^^^
@@ -466,8 +466,8 @@ Parameters:
 
 Modifiers:
     * ``isLoanBorrower()`` - The function caller should be the Borrower of the Loan.
-    * ``isValidLoan(_loanId)`` - Checks Loan's validity.
-    * ``isLoanIn(_loanId, LoanState.INSURANCE_APPROVED)`` - Checks whether Loan is in INSURANCE_APPLIED state.
+    * ``isValidLoan(_loanId)`` - Check whether Loan's validity.
+    * ``isLoanIn(_loanId, LoanState.INSURANCE_APPROVED)`` - Check whether Loan is in INSURANCE_APPLIED state.
 
 approveLoan(...)
 ^^^^^^^^^^^^^^^^
@@ -481,8 +481,8 @@ Parameters:
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
-    * ``isValidLoan(_loanId)`` - Checks Loan's validity.
-    * ``isLoanIn(_loanId, LoanState.BORROWER_SIGNED)`` - Checks whether Loan is in BORROWER_SIGNED state.
+    * ``isValidLoan(_loanId)`` - Check whether Loan's validity.
+    * ``isLoanIn(_loanId, LoanState.BORROWER_SIGNED)`` - Check whether Loan is in BORROWER_SIGNED state.
 
 rejectLoan(...)
 ^^^^^^^^^^^^^^^
@@ -496,8 +496,8 @@ Parameters:
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
-    * ``isValidLoan(_loanId)`` - Checks Loan's validity.
-    * ``isLoanIn(_loanId, LoanState.BORROWER_SIGNED)`` - Checks whether Loan is in BORROWER_SIGNED state.
+    * ``isValidLoan(_loanId)`` - Check whether Loan's validity.
+    * ``isLoanIn(_loanId, LoanState.BORROWER_SIGNED)`` - Check whether Loan is in BORROWER_SIGNED state.
 
 
 confirmTokenTrasferToBroker(...)
@@ -511,8 +511,8 @@ Parameters:
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
-    * ``isValidLoan(_loanId)`` - Checks Loan's validity.
-    * ``isLoanIn(_loanId, LoanState.PAID_TO_INSURANCE)`` - Checks whether Loan is in PAID_TO_INSURANCE state.
+    * ``isValidLoan(_loanId)`` - Check whether Loan's validity.
+    * ``isLoanIn(_loanId, LoanState.PAID_TO_INSURANCE)`` - Check whether Loan is in PAID_TO_INSURANCE state.
 
 confirmTokenTrasferToBorrower(...)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -526,8 +526,8 @@ Parameters:
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
-    * ``isValidLoan(_loanId)`` - Checks Loan's validity
-    * ``isLoanIn(_loanId, LoanState.PAID_TO_BROKER)`` - Checks whether Loan is in PAID_TO_BROKER state.
+    * ``isValidLoan(_loanId)`` - Check whether Loan's validity
+    * ``isLoanIn(_loanId, LoanState.PAID_TO_BROKER)`` - Check whether Loan is in PAID_TO_BROKER state.
 
 closeLoan(...)
 ^^^^^^^^^^^^^^ 
@@ -541,8 +541,8 @@ Parameters:
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
-    * ``isValidLoan(_loanId)`` - Checks Loan's validity.
-    * ``isLoanIn(_loanId, LoanState.ONGOING)`` - Checks whether Loan is in ONGOING state.
+    * ``isValidLoan(_loanId)`` - Check whether Loan's validity.
+    * ``isLoanIn(_loanId, LoanState.ONGOING)`` - Check whether Loan is in ONGOING state.
 
 markAsDefaulted(...)
 ^^^^^^^^^^^^^^^^^^^^
@@ -556,8 +556,8 @@ Parameters:
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
-    * ``isValidLoan(_loanId)`` - Checks Loan's validity
-    * ``isLoanIn(_loanId, LoanState.ONGOING)`` - Checks whether Loan is in ONGOING state.
+    * ``isValidLoan(_loanId)`` - Check whether Loan's validity
+    * ``isLoanIn(_loanId, LoanState.ONGOING)`` - Check whether Loan is in ONGOING state.
 
 viewLoan(...)
 ^^^^^^^^^^^^^
