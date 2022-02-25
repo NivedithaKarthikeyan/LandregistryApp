@@ -1,4 +1,4 @@
-Layered architecture
+Layered Architecture
 ====================
 
 **Bank Web Server** follows a layered architecture.

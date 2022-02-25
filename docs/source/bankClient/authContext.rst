@@ -1,5 +1,5 @@
-UserContext
-===========
+User Context
+============
 
 ``userContext`` is providing user details.
 It stores the current user and function to change the user.
@@ -78,7 +78,7 @@ Then it defines the login function to facilitate the user role change within the
 These ``user`` state and ``login`` function will set as the context value. 
 These values can be accessed by components in the DOM later.
 
-SmartContractContext
+Smart Contract Context
 ====================
 
 ``SmartContractContext`` provides the smart contract instances and ``web3`` instance.
@@ -129,8 +129,8 @@ When we use the Ganache local blockchain we use network ``5777``.
 It will create a network object for each network we deploy our contracts.
 If we didn't deploy the smart contracts then network object will empty and there will be an error.
 
-Contract object
----------------
+Contract Objects
+----------------
 
 Next target is to create contract objects for our smart contracts within the application to ineract with them. ::
 
