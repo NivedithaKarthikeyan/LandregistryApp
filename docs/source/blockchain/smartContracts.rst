@@ -360,10 +360,10 @@ struct
 * ``bankApprove`` - Status of the Bank approval for the Loan.
 * ``isBorrowerSigned`` - Borrower Signed status.
 
-Events
+Event
 ~~~~~~
 
-These events are defined in the ``BankLoan`` smart contract.
+This event is defined in the ``BankLoan`` smart contract.
 
 loanRequest
 ^^^^^^^^^^^
@@ -418,8 +418,8 @@ Attributes
 Constructor
 ~~~~~~~~~~~
 
-The constructor assigns the admin address as the contract deployer's (``msg.sender``) address. 
-It requires the ``UserIdentity`` smart contract address to deploy the smart contract. 
+The constructor designates the contract deployer's (``msg.sender``) address as the admin address. 
+It requires the ``UserIdentity`` smart contract address to deploy the smart contract. Hence, this must be deployed first.
 The ``UserIdentity`` smart contract address object instance will be set as the ``identitySC``. ::
 
     constructor (address _identitySC) {
@@ -434,9 +434,10 @@ Functions
 applyLoan(...)
 ^^^^^^^^^^^^^^
 
-Creates a Loan request. ::
+Create a Loan request. ::
 
-    function applyLoan(uint _amount, uint _months, uint _interest, uint _planId, address _borrower) public isBroker()
+    function applyLoan(uint _amount, uint _months, uint _interest, uint _planId, 
+        address _borrower) public isBroker()
 
 Parameters: 
     * ``_amount`` - Loan amount.
@@ -446,42 +447,44 @@ Parameters:
     * ``_borrower`` - Borrower address.
 
 Modifiers:
-    * ``isBroker`` - Check whether function caller registered as a Broker.
+    * ``isBroker`` - Check whether function caller is registered as a Broker.
 
 signByBorrower(...)
 ^^^^^^^^^^^^^^^^^^^
 
-This function is used to sign the Loan by the Borrower. ::
+Borrower signs the Loan he/she requested: ::
 
-    function signByBorrower(uint _loanId) public isLoanBorrower(_loanId) isValidLoan(_loanId) isLoanIn(_loanId, LoanState.INSURANCE_APPROVED)
+    function signByBorrower(uint _loanId) public isLoanBorrower(_loanId) 
+        isValidLoan(_loanId) isLoanIn(_loanId, LoanState.INSURANCE_APPROVED)
     
 Parameters:
     * ``_loanId`` -  Loan Id
 
 Modifiers:
     * ``isLoanBorrower()`` - The function caller should be the Borrower of the Loan.
-    * ``isValidLoan(_loanId)`` - Check whether Loan's validity.
+    * ``isValidLoan(_loanId)`` - Check Loan's validity.
     * ``isLoanIn(_loanId, LoanState.INSURANCE_APPROVED)`` - Check whether Loan is in INSURANCE_APPLIED state.
 
 approveLoan(...)
 ^^^^^^^^^^^^^^^^
 
-Changes the ``bankApprove`` value to ``True`` and changes the Loan state to ``BANK_APPROVED`` state. ::
+Change the ``bankApprove`` value to ``True`` and changes the Loan state to ``BANK_APPROVED`` state. ::
     
-    function approveLoan(uint _loanId) public isAdmin() isValidLoan(_loanId) isLoanIn(_loanId, LoanState.BORROWER_SIGNED)
+    function approveLoan(uint _loanId) public isAdmin() isValidLoan(_loanId) 
+        isLoanIn(_loanId, LoanState.BORROWER_SIGNED)
 
 Parameters:
     * ``_loanId`` -  Loan Id
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
-    * ``isValidLoan(_loanId)`` - Check whether Loan's validity.
+    * ``isValidLoan(_loanId)`` - Check Loan's validity.
     * ``isLoanIn(_loanId, LoanState.BORROWER_SIGNED)`` - Check whether Loan is in BORROWER_SIGNED state.
 
 rejectLoan(...)
 ^^^^^^^^^^^^^^^
 
-Changes the ``bankApprove`` value to ``False`` and changes the Loan state to ``BANK_REJECTED`` state. ::
+Change the ``bankApprove`` value to ``False`` and changes the Loan state to ``BANK_REJECTED`` state. ::
 
     function rejectLoan(uint _loanId) public isAdmin() isValidLoan(_loanId) isLoanIn(_loanId, LoanState.BORROWER_SIGNED)
 
@@ -490,67 +493,71 @@ Parameters:
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
-    * ``isValidLoan(_loanId)`` - Check whether Loan's validity.
+    * ``isValidLoan(_loanId)`` - Check Loan's validity.
     * ``isLoanIn(_loanId, LoanState.BORROWER_SIGNED)`` - Check whether Loan is in BORROWER_SIGNED state.
-
 
 confirmTokenTrasferToBroker(...)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changes the Loan state to PAID_TO_BROKER. ::
 
-    function confirmTokenTrasferToBroker(uint _loanId) public isAdmin() isValidLoan(_loanId) isLoanIn(_loanId, LoanState.BANK_APPROVED)
+Change the Loan state to PAID_TO_BROKER. ::
+
+    function confirmTokenTrasferToBroker(uint _loanId) public isAdmin() 
+        isValidLoan(_loanId) isLoanIn(_loanId, LoanState.BANK_APPROVED)
 
 Parameters:
     * ``_loanId`` -  Loan Id
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
-    * ``isValidLoan(_loanId)`` - Check whether Loan's validity.
+    * ``isValidLoan(_loanId)`` - Check Loan's validity.
     * ``isLoanIn(_loanId, LoanState.PAID_TO_INSURANCE)`` - Check whether Loan is in PAID_TO_INSURANCE state.
 
 confirmTokenTrasferToBorrower(...)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Changes the Loan state to ONGOING. ::
+Change the Loan state to ONGOING. ::
 
-    function confirmTokenTrasferToBorrower(uint _loanId) public isAdmin() isValidLoan(_loanId) isLoanIn(_loanId, LoanState.PAID_TO_BROKER)
+    function confirmTokenTrasferToBorrower(uint _loanId) public isAdmin() 
+        isValidLoan(_loanId) isLoanIn(_loanId, LoanState.PAID_TO_BROKER)
 
 Parameters:
     * ``_loanId`` -  Loan Id
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
-    * ``isValidLoan(_loanId)`` - Check whether Loan's validity
+    * ``isValidLoan(_loanId)`` - Check Loan's validity
     * ``isLoanIn(_loanId, LoanState.PAID_TO_BROKER)`` - Check whether Loan is in PAID_TO_BROKER state.
 
 closeLoan(...)
 ^^^^^^^^^^^^^^ 
 
-Changes the Loan state to CLOSE. ::
+Change the Loan state to CLOSE. ::
 
-    function closeLoan(uint _loanId) public isAdmin() isValidLoan(_loanId) isLoanIn(_loanId, LoanState.ONGOING)
+    function closeLoan(uint _loanId) public isAdmin() 
+        isValidLoan(_loanId) isLoanIn(_loanId, LoanState.ONGOING)
 
 Parameters:
     * ``_loanId`` -  Loan Id
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
-    * ``isValidLoan(_loanId)`` - Check whether Loan's validity.
+    * ``isValidLoan(_loanId)`` - Check Loan's validity.
     * ``isLoanIn(_loanId, LoanState.ONGOING)`` - Check whether Loan is in ONGOING state.
 
 markAsDefaulted(...)
 ^^^^^^^^^^^^^^^^^^^^
 
-Changes the Loan state to DEFAULT. ::
+Change the Loan state to DEFAULT. ::
 
-    function markAsDefaulted(uint _loanId) public isAdmin() isValidLoan(_loanId) isLoanIn(_loanId, LoanState.ONGOING)
+    function markAsDefaulted(uint _loanId) public isAdmin() 
+        isValidLoan(_loanId) isLoanIn(_loanId, LoanState.ONGOING)
 
 Parameters:
     * ``_loanId`` -  Loan Id
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
-    * ``isValidLoan(_loanId)`` - Check whether Loan's validity
+    * ``isValidLoan(_loanId)`` - Check Loan's validity
     * ``isLoanIn(_loanId, LoanState.ONGOING)`` - Check whether Loan is in ONGOING state.
 
 viewLoan(...)
@@ -564,15 +571,15 @@ Parameters:
     * ``_loanId`` -  Loan Id
 
 Return:
-    * ``Loan`` - Return Loan registered in ``_loanId``.
+    * ``Loan`` - Return Loan registered as ``_loanId``.
 
 
 getLoans()
 ^^^^^^^^^^^^^
 
-This function returns all the Loans. ::
+This function returns all the Loans as an array. ::
 
     function getLoans() public view returns(Loan [] memory)
 
 Return:
-    * ``Loan []`` - Return all Loans as an object array.
+    * ``Loan []`` - All Loans as an object array.
