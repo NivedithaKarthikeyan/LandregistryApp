@@ -36,7 +36,7 @@ In Next.js, this means directing to the ``pages/public/transfer.js`` file.
     export default Transfer;
 
 ``TransferController`` is the controller function for token transactions.  In ``TransferController.js``, 
-it first imports the neccessary dependencies and UI components.
+it first imports the necessary dependencies and UI components.
 Then it defines the ``balance`` state  and assign the initial value of 0: ::
 
     const [balance, setBalance] = useState('0');
@@ -45,8 +45,7 @@ We access the **MicroToken** smart contract object within *TransferController* u
 
     const { MicroTokenContract } = useContext(SmartContractContext);
 
-Using this **MicroToken** smart contract, we can call functions in the smart contract.
-Next we discuss about how to fetch the account balance from the **MicroTokenContract** account using its *balanceOf* method.
+Using this **MicroToken** smart contract, we may call functions in the smart contract. For illustration, we show how to fetch the account balance from the **MicroTokenContract** account using its *balanceOf* method.
 
 The sequence diagram for get token balance for a user. 
 
@@ -58,10 +57,10 @@ smart contract. ::
 
     const getBalance = async () => {
         try {
-	        const accounts = await window.ethereum.enable();
-	        const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
-	        setBalance(response);
-	    } catch (err) {
+	       const accounts = await window.ethereum.enable();
+	       const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
+	       setBalance(response);
+	 } catch (err) {
 	    message.error('Error occured while reading balance');
 	}
     };
