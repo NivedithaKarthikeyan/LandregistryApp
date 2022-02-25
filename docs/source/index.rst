@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to Microfinance dApp Documentation
-========================================
+==========================================
 
 .. toctree::
    :maxdepth: 2
@@ -55,7 +55,8 @@ Welcome to Microfinance dApp Documentation
    :caption: Bank Web Application
 
    bankClient/introduction
-   bankClient/authContext
+   bankClient/userContext
+   bankClient/smartContractContext
 
 .. toctree::
    :maxdepth: 2

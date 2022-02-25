@@ -1,14 +1,14 @@
 Overview of Bank Web Application
 ================================
 
-This section describes the important functions of the ``Bank Web Application``.
+This section describes the important functions of the **Bank Web Application**.
 **Bank Web Application** developed using ``Next.js``.
 It's resides inside the ``bank-web-app`` directory.
 
 Project Structure
 ------------------
 
-Here is the structure of the Bank Web Application. ::
+Here is the structure of the **Bank Web Application**. ::
 
     bank-web-app
     |--components
@@ -17,6 +17,7 @@ Here is the structure of the Bank Web Application. ::
     |--public
     |--stores
     |--styles
+    |--util
     |--package.json
 
 * ``components`` - Directory for the application components.
@@ -25,6 +26,7 @@ Here is the structure of the Bank Web Application. ::
 * ``public`` - Directory of static files.
 * ``stores`` - Directory of Application Context files.
 * ``styles`` - Default style files.
+* ``util`` - Utility scripts.
 * ``package.json`` - Project dependencies and configurations.
 
 Project Dependencies
@@ -33,18 +35,24 @@ Project Dependencies
 Here are the project dependencies defined inside the ``package.json`` file. ::
 
     "dependencies": {
+        "@ant-design/icons": "^4.7.0",
         "antd": "^4.16.13",
-        "next": "11.1.0",
+        "lodash": "^4.17.21",
+        "next": "11.1.2",
+        "prop-types": "^15.7.2",
         "react": "17.0.2",
         "react-dom": "17.0.2",
         "web3": "^1.5.2"
     },
 
+* ``@ant-design/icons`` - Ant design icons module
 * ``antd`` - Ant design dependency. Ant design is a enterprice-class UI design language and React UI design library.
-* ``next`` - Application framework.
+* ``lodash`` - Javascript utility library for working with objects.
+* ``next`` - React application framework.
+* ``prop-types`` - Runtime type checking for React props and similar objects.
 * ``react`` - React dependency.
 * ``react-dom`` - React DOM dependecy.
-* ``web3`` - Dependecny to interact with Ethereum blockchain smart contracts.
+* ``web3`` - Ethereum Javascrip API to interact with Ethereum blockchain smart contracts.
 
 Prerequisites
 -------------
@@ -52,10 +60,11 @@ Prerequisites
 1. Blockchain - Before run the Bank Web Application we have to deploy all the contracts to the Ethereum blockchain 
 and configure smart contract related data(contract addresses and abi) within the application.
 
-2. Bank Web Server - Bank web application connects to Bank web server. It's better to connects the Bank web apllication to active
-Bank web server. If the Bank web server running in a different host or post config them properly in the files.
+2. Bank Web Server - Bank Web Application connects to Bank Web Server.
+It's better to connects the Bank Web Apllication to active
+Bank Web Server. If the Bank Web Server running in a different host or post config them properly in the files.
 
-You can confi Bank web server host and port in ``next.config.js`` file placed inside the ``bank-web-app`` directory. ::
+You can config Bank Web Server host and port in ``next.config.js`` file placed inside the ``bank-web-app`` directory. ::
 
     module.exports = {
         reactStrictMode: true,
@@ -64,5 +73,5 @@ You can confi Bank web server host and port in ``next.config.js`` file placed in
         },
     };
 
-You can change the ``API_URL`` value to connect the Bank web application to Bank web server.
+You can change the ``API_URL`` value to connect the Bank Web Application to Bank Web Server.
 

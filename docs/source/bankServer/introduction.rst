@@ -9,7 +9,7 @@ Project Structure
 
 Here is the structure of the Bank Web Server. ::
 
-    bank-web-app
+    bank-server
     |--models
     |--node_modules
     |--routes
