@@ -57,7 +57,7 @@ The *getBalance* function fetches the account balance from *MicroTokenContract*
 smart contract. ::
 
     const getBalance = async () => {
-    try {
+        try {
 	const accounts = await window.ethereum.enable();
 	const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
 	setBalance(response);
@@ -68,7 +68,7 @@ smart contract. ::
 
     useEffect(() => {
 	getBalance();
-});
+    });
 
 This uses async/await functionality and fetch the account balance from smart contract. 
 First it will identify the account which is selected in MetaMask.
