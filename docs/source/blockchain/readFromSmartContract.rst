@@ -47,7 +47,7 @@ We access the **MicroToken** smart contract object within *TransferController* u
 
 Using this **MicroToken** smart contract, we may call functions in the smart contract. For illustration, we show how to fetch the account balance from the **MicroTokenContract** account using its *balanceOf* method.
 
-The sequence diagram for get token balance for a user. 
+The sequence diagram to get token balance of a user is: 
 
 .. image:: ../images/view_balance.png
   :width: 400
@@ -61,7 +61,7 @@ smart contract. ::
 	       const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
 	       setBalance(response);
 	 } catch (err) {
-	    message.error('Error occured while reading balance');
+	       message.error('Error occured while reading balance');
 	}
     };
 
@@ -71,7 +71,7 @@ smart contract. ::
 	getBalance();
     });
 
-This uses async/await functionality and fetch the account balance from smart contract. 
+This uses the async/await functionality to fetch the account balance from smart contract. 
 First it will identify the account which is selected in MetaMask.
 Then it will call the *balanceOf* function of *MicroToken* smart contract.
 Selected account address will pass as a patameter to this function.
