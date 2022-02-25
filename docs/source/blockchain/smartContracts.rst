@@ -68,8 +68,7 @@ from the `github IERC20 repo <https://github.com/OpenZeppelin/openzeppelin-contr
 totalSupply
 ^^^^^^^^^^^
 
-Returns the ``__totalSupply`` of the token. 
-It is a public function: ::
+Return the ``__totalSupply`` of Tokens.  It is a public function: ::
 
     function totalSupply() public pure override returns (uint _totalSupply) { 
         _totalSupply = __totalSupply;
@@ -78,8 +77,7 @@ It is a public function: ::
 balanceOf
 ^^^^^^^^^
 
-Returns the token balance of given account. An account address should be passed as a parameter to this function. 
-It is a public function: ::
+Return token balance of a given account. An account address should be passed as a parameter to this function.  It is a public function: ::
 
     function balanceOf(address _addr) public view override returns (uint balance) {
         return __balanceOf[_addr];
@@ -88,8 +86,7 @@ It is a public function: ::
 transfer
 ^^^^^^^^
 
-Transfers tokens from one account to another. 
-Tokens are transferred from the caller's (``msg.sender``) account. ``_to`` is the receiving account and ``_value `` is the token amount. 
+Transfer tokens from one account to another.  Tokens are transferred from the caller's (``msg.sender``) account. ``_to`` is the receiving account and ``_value `` is the token amount. 
 This function returns true if transfer is successful and false otherwise. ::
 
     function transfer(address _to, uint _value) public override returns (bool success) {
@@ -97,7 +94,7 @@ This function returns true if transfer is successful and false otherwise. ::
             __balanceOf[msg.sender] -= _value;
             __balanceOf[_to] += _value;
             return true;
-    }
+        }
         return false;
     }
 
@@ -105,10 +102,9 @@ transferFrom
 ^^^^^^^^^^^^
 
 Transfer tokens from one account to another via a third-party account. 
-Sender's account address is the ``_from`` parameter and receiver's account address is the ``_to`` parameter.
-Token amount is the ``_value`` parameter.
-Note the various conditions it Check whether before performing the transfer.
-It return ``true`` if successful or ``false`` otherwise. ::
+Token owner is the ``_from`` parameter; the receiver's account is ``_to`` parameter.  The function caller is the spender. Token amount is the ``_value`` parameter.
+Note the various conditions it checks before performing the transfer.
+It returns ``true`` if successful or ``false`` otherwise. ::
 
     function transferFrom(address _from, address _to, uint _value) public override returns (bool success) {
         if (__allowances[_from][msg.sender] > 0 &&
@@ -119,7 +115,7 @@ It return ``true`` if successful or ``false`` otherwise. ::
             __balanceOf[_to] += _value;
                 __allowances[_from][msg.sender] -= _value;
             return true;
-    }
+        }
         return false;
     }
 
