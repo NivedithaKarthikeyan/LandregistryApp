@@ -53,7 +53,7 @@ The sequence diagram for get token balance for a user.
 .. image:: ../images/view_balance.png
   :width: 400
 
-The *getBalance* function fetches the account balance from *MicroTokenContract* 
+The *getBalance* function fetches the account balance from the *MicroTokenContract* 
 smart contract. ::
 
     const getBalance = async () => {
@@ -62,9 +62,9 @@ smart contract. ::
 	const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
 	setBalance(response);
 	} catch (err) {
-	message.error('Error occured while reading balance');
+	    message.error('Error occured while reading balance');
 	}
-	};
+};
 
     useEffect(() => {
 	getBalance();
