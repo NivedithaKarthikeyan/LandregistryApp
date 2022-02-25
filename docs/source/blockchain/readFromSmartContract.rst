@@ -57,13 +57,13 @@ The *getBalance* function fetches the account balance from *MicroTokenContract*
 smart contract. ::
 
     const getBalance = async () => {
-        try {
-			const accounts = await window.ethereum.enable();
-			const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
-			setBalance(response);
+    try {
+		const accounts = await window.ethereum.enable();
+		const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
+		setBalance(response);
 		} catch (err) {
-			message.error('Error occured while reading balance');
-		}
+		message.error('Error occured while reading balance');
+	}
 	};
 
     useEffect(() => {
