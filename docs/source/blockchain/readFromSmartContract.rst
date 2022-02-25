@@ -58,17 +58,17 @@ smart contract. ::
 
     const getBalance = async () => {
     try {
-		const accounts = await window.ethereum.enable();
-		const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
-		setBalance(response);
-		} catch (err) {
-		message.error('Error occured while reading balance');
+	const accounts = await window.ethereum.enable();
+	const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
+	setBalance(response);
+	} catch (err) {
+	message.error('Error occured while reading balance');
 	}
 	};
 
     useEffect(() => {
-		getBalance();
-	});
+	getBalance();
+});
 
 This uses async/await functionality and fetch the account balance from smart contract. 
 First it will identify the account which is selected in MetaMask.
