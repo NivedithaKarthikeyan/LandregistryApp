@@ -12,6 +12,7 @@ const { Step } = Steps;
 
 function TransferController() {
 	const [balance, setBalance] = useState('0'); // Token balance state
+	const [symbol, setSymbol] = useState(''); // ERC20 token symbol
 	const [address, setAddress] = useState(''); // User wallet address state
 	const [amount, setAmount] = useState(''); // Transferring token amount state
 	const [transactionHash, setTransactionHash] = useState(''); // Blockchain transaction state
@@ -35,6 +36,15 @@ function TransferController() {
 		} catch (err) {
 			console.log(err);
 			message.error('Error occured while reading balance'); // Show error message if any error occured while reading the token balance
+		}
+	};
+
+	const getSymbol = async () => {
+		try {
+			const response = await MicroTokenContract.methods.symbol().call();
+			setSymbol(response);
+		} catch (err) {
+			message.error('Error occured while reading symbol');
 		}
 	};
 
@@ -76,6 +86,7 @@ function TransferController() {
 
 	useEffect(() => {
 		getBalance(); // Load the wallet token balance when load the web page.
+		getSymbol(); // Load ERC20 token symbol when load the web page.
 	}, []);
 
 	useEffect(() => {
@@ -106,7 +117,7 @@ function TransferController() {
 			extra={<a href="javascript:void(0);" onClick={() => getBalance()}>Refresh Balance</a>}
 		>
 			{/* This will show the balance state value in the web page */}
-			<Title level={4}>Account balance: {balance}</Title> 
+			<Title level={4}>Account balance: {balance} {symbol}</Title>
 			<Divider />
 
 			<Row>
