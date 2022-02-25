@@ -151,7 +151,7 @@ the two account addresses passed as parameters to the function. ::
 2. User Identity Smart contract - UserIdentity.sol
 ------------------------------------------------
 
-This contract holds User details. It  registers  Broker, Borrower and Insurance Company details.
+This contract holds User details. It  registers  Broker and Borrower details.
 
 enum
 ~~~~
@@ -186,7 +186,7 @@ Modifiers
 
 The following modifiers are used in the ``UserIdentity.sol`` functions.
 
-* ``isAdmin()`` - Check whether that the function caller is the admin of the contract.
+* ``isAdmin()`` - Check whether function caller is the admin of the contract.
 
 Attributes
 ~~~~~~~~~~
@@ -197,8 +197,8 @@ Attributes
 * ``brokersCount`` - Total brokers in the system. 
 * ``borrowersCount`` - Total borrowers in the system.
     
-* ``borrowers`` - Borrowers  in the system (address-to-Borrower mapping).
-* ``brokers`` - Brokers  in the system (address-to-User mapping).
+* ``borrowers`` - Borrowers in the system (address-to-Borrower mapping).
+* ``brokers`` - Brokers in the system (address-to-User mapping).
     
 * ``brokersAddresses`` - Broker addresses (dynamic array).
 * ``borrowersAddresses`` - Borrower addresses (dynamic array).
