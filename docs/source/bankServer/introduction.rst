@@ -1,4 +1,4 @@
-Overview of Bank Server
+Overview of Bank Web Server
 =======================
 
 This section describes important functions of the **Bank Web Server**.
@@ -52,12 +52,6 @@ Prerequisites
 Mongo DB - Run MongoDB on your machine before you start the **Bank Web Server**.
 You can refer :ref:`mongo db install target` section to install and run the MongoDB in your computer.
 
-
-
-
-
-Swagger documentation
-----------------------
 
 
 

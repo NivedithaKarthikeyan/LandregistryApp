@@ -83,8 +83,8 @@ Smart Contract Context
 
 ``SmartContractContext`` provides the smart contract instances and ``web3`` instance.
 
-imports
--------
+Import Dependencies
+-------------------
 
 list of dependencies of userContext. ::
 
