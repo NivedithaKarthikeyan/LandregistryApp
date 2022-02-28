@@ -40,8 +40,7 @@ Welcome to Microfinance dApp Documentation
    blockchain/smartContracts
    blockchain/migration
    blockchain/truffleConfig
-   blockchain/readFromSmartContract
-   blockchain/saveValuesToSmartContract
+
 
 .. toctree::
    :maxdepth: 2
@@ -58,6 +57,14 @@ Welcome to Microfinance dApp Documentation
    bankClient/introduction
    bankClient/userContext
    bankClient/smartContractContext
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Event Flows
+
+   eventFlow/introduction
+   eventFlow/readFromSmartContract
+   eventFlow/saveValuesToSmartContract
 
 .. toctree::
    :maxdepth: 2
