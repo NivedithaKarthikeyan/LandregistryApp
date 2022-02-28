@@ -1,4 +1,4 @@
-Overview of Bank Web Application
+Overview 
 ================================
 
 This section describes the important functions of the **Bank Web Application**.
