@@ -1,7 +1,8 @@
 Read Values from Smart Contract
 ===============================
 
-We discuss about how to read values from a smart contract.
+We discuss about how to read values from a smart contract.  We illustrate the flow of events from React web app (UI) to ``bank-web-app/pages/public/transfer.js`` to ``bank-web-app/components/transfer/TransferController``.
+
 We're gonna to see how to read account balance from the MicroToken smart contract as an example.
 
 .. image:: ../images/account_balance.png
@@ -83,15 +84,15 @@ The ``useEffect`` hook is invoked when the ``TransferController`` component is r
 The *useEffect* hook calls the *getBalance* method.
 It fetches the account balance when a user navigates to the *Transfer* page.
 
-In return function, we have the following line. ::
+In the ``return`` function of the ``TransferController``, we have the following line. ::
 
     <Title level={4}>Account balance: {balance}</Title>
 
-It will show the account balance as shown in the above screenshot.
-*Title* is a component from Ant design and ``{balance}`` is render the *balance* React state value.
-When it change React will automatically change the broswer as well.
+It shows the account balance as shown in the above **Microfinance** screenshot.
+*Title* is a component from Ant design and ``{balance}`` is given the *balance* React state value.
+When it changes, React will automatically and visually update the necessary portion in the broswer as well.
 
-This is how we fetch data from smart contracts and render it in the broswer using smart contract, call method and React states.
+This is how we fetch data from smart contracts and render it in a browser using smart contract, the ``call()`` method, and React states.
 
 
 
