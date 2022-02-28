@@ -42,7 +42,7 @@ Here are the project dependencies defined inside the ``package.json`` file. ::
 * ``express`` - Express.js, or simply Express, is a back end web application framework for Node.js. It is designed for building web applications and APIs. It has been called the de facto standard server framework for Node.js.
 * ``mongoose`` -  Mongoose is a JavaScript object-oriented programming library that creates a connection between MongoDB and the Express web application framework. It provides a straight-forward, schema-based solution to model your application data.
 * ``nodemon`` - Tool that helps automatically restarting the node application when file changes in the directory are detected.
-* ``swagger-jsdoc`` - This library reads your JSDoc-annotated source code and generates an OpenAPI (Swagger) specification.
+* ``swagger-jsdoc`` - Swagger is an Interface Description Language for describing RESTful APIs expressed using JSON.  This library reads your JSDoc-annotated source code and generates an OpenAPI (Swagger) specification.  With this library, you can document your express endpoints using swagger OpenAPI 3 Specification.
 * ``swagger-ui-express`` - This module allows you to serve auto-generated swagger-ui generated API docs from express.
 
 
@@ -50,7 +50,7 @@ Prerequisites
 -------------
 
 Mongo DB - Run MongoDB on your machine before you start the **Bank Web Server**.
-You can refer :ref:`mongo db install target` section to install and run the MongoDB in your computer.
+You can refer to the :ref:`mongo db install target` section to install and run the MongoDB in your computer.
 
 
 
