@@ -1,7 +1,7 @@
 index.js
 ========
 
-As defined in the ``package.json`` file, when we start the ``bank-server`` app, it will start running from the ``index.js`` file. ::
+As indicated in the ``package.json`` file, when we start the ``bank-server`` app, it will start running from the ``index.js`` file. ::
 
     "scripts": {
         "start": "nodemon index.js",
@@ -41,16 +41,15 @@ Next we define an Express web server called ``app`` as follows. ::
     
     const app = Express()
 
-We define our routes in separate files. We need to import them in to the ``index.js`` file to use.
-In this project we define two routes called ``/loan-plans`` and ``/loan-payments``.
-Requests come it to these URLs will handle by the scripts defined in the ``routes`` directory. ::
+We define routes in separate files. Each route handles a client request.  In web development, a route directs the request to the code that handles it.  We need to import them into the ``index.js`` file to use them.
+In this project, we define two routes called ``/loan-plans`` and ``/loan-payments`` to handle loan requests and payment requests from the web app.
+Requests will be handled by these two scripts in the ``routes`` directory. ::
 
     //Import Routes
     const plansRoute = require('./routes/plans');
     const paymentsRoute = require('./routes/payments');
 
-we enable some pre-defined Express middlewares to enable the CORS, handle URLEncoding payloads 
-and json payloads in our **Bank Web Server**. ::
+We enable some pre-defined Express middlewares to enable the CORS, handle URLEncoding payloads and json payloads in our **Bank Web Server**. ::
 
     //MIDDLEWARE
     app.use(cors()) // Enables CORS for the app.
