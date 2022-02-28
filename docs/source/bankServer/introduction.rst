@@ -17,8 +17,8 @@ Here is the structure of the Bank Web Server. ::
     |--index.js
     |--package.json
 
-* ``models`` - Directory for the Web Server models which are store the data in MongoDB.
-* ``node_modules`` - Directory of node modules.
+* ``models`` - Directory of Web Server models that are mapped to data in the backend MongoDB.
+* ``node_modules`` - Node modules from ``Node.js``.
 * ``routes`` - Directory of routes.
 * ``services`` - Directory of services which will perform the server side computations.
 * ``index.js`` - Starting point of the application. Handles routes.
@@ -38,9 +38,10 @@ Here are the project dependencies defined inside the ``package.json`` file. ::
         "swagger-ui-express": "^4.1.6"
     }
 
-* ``cors`` -  Middleware that can be used to enable CORS with various options. CORS: Cross-Origin Resource Sharing 
+* ``cors`` -   CORS is a mechanism that allows restricted resources on a web page to be requested from another domain outside the domain from which the first resource was served.
+A web page may freely embed cross-origin images, stylesheets, scripts, iframes, and videos.Certain *cross-domain* requests are forbidden by default by the same-origin security policy. CORS defines a way in which a browser and server can interact to determine whether it is safe to allow the cross-origin request. It allows for more freedom and functionality than purely same-origin requests, but is more secure than simply allowing all cross-origin requests.
 * ``express`` - Web framework for node.
-* ``mongoose`` -  MongoDB object modeling tool
+* ``mongoose`` -  MongoDB object modeling tool.
 * ``nodemon`` - Tool that helps automatically restarting the node application when file changes in the directory are detected.
 * ``swagger-jsdoc`` - This library reads your JSDoc-annotated source code and generates an OpenAPI (Swagger) specification.
 * ``swagger-ui-express`` - This module allows you to serve auto-generated swagger-ui generated API docs from express.
