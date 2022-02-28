@@ -19,8 +19,8 @@ Here is the structure of the Bank Web Server. ::
 
 * ``models`` - Directory of Web Server models that are mapped to data in the backend MongoDB.
 * ``node_modules`` - Node modules from ``Node.js``.
-* ``routes`` - Directory of routes.
-* ``services`` - Directory of services which will perform the server side computations.
+* ``routes`` - Directory of routes.  A route is a mechanism where HTTP requests are routed to the code that handles them.  It determines how an app responds to a client request.
+* ``services`` - Directory of services which will perform the server side computations.  Each route has a corresponding service to perform and satisfy the client/HTTP request.
 * ``index.js`` - Starting point of the application. Handles routes.
 * ``package.json`` - Project dependencies and configurations.
 

@@ -1,14 +1,14 @@
-Index.js
+index.js
 ========
 
-As defined in the ``package.json`` when we start the ``bank-server`` app it will start running from the ``index.js`` file. ::
+As defined in the ``package.json`` file, when we start the ``bank-server`` app, it will start running from the ``index.js`` file. ::
 
     "scripts": {
         "start": "nodemon index.js",
         ...
     }
 
-In ``index.js`` first we import the dependecies we need to run the ``bank-server`` as follows. ::
+In ``index.js``, first we import the dependencies that are needed to run the ``bank-server``. ::
 
     const Express = require('express')
     const mongoose = require('mongoose') 
