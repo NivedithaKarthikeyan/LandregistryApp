@@ -1,4 +1,4 @@
-Overview of Bank Web Server
+Overview 
 =======================
 
 This section describes important functions of the **Bank Web Server**.
