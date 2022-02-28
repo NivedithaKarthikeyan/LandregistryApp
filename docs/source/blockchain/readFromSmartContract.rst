@@ -72,19 +72,18 @@ smart contract. ::
     });
 
 This uses the async/await functionality to fetch the account balance from smart contract. 
-First it will identify the account which is selected in MetaMask.
-Then it will call the *balanceOf* function of *MicroToken* smart contract.
-Selected account address will pass as a patameter to this function.
-Later it uses ``call()`` method.
+First, the current in-use account in MetaMask is obtained via ``window.ethereum.enable()``.
+Then it calls the *balanceOf* function of *MicroToken* smart contract to obtain the balance of this account.
+``response`` is this account's balance and is passed into ``setBalance`` to update the state of the React app.
 This is the function we use to fetch data via ``view`` functions of smart contracts.
 It will return the account balance and we update the balance state in our application.
 
 In React we can use ``useEffect`` hook call external calls.
-It will invoke when web page is rendered to the browser.
-We configured a *useEffect* hook and call the *getBalance* method.
-It will fetch the account balance when loan the user navigate to *Transfer* page.
+The ``useEffect`` hook is invoked when the ``TransferController`` component is rendered to the browser.
+The *useEffect* hook calls the *getBalance* method.
+It fetches the account balance when a user navigates to the *Transfer* page.
 
-In return function we have the following line. ::
+In return function, we have the following line. ::
 
     <Title level={4}>Account balance: {balance}</Title>
 
