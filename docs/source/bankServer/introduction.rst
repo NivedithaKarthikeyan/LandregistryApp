@@ -2,7 +2,7 @@ Overview of Bank Web Server
 =======================
 
 This section describes important functions of the **Bank Web Server**.
-Bank Web Server refers to the project ``bank-server``which is developed using ``Node.js``.
+Bank Web Server refers to the project ``bank-server`` which is developed using ``Node.js``.
 
 Project Structure
 -----------------
