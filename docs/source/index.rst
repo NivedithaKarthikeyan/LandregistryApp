@@ -25,7 +25,8 @@ Welcome to Microfinance dApp Documentation
    installation/bankApp
    installation/connectReactMetaMask
 
-.. toctree::
+.. 
+   toctree::
    :maxdepth: 2
    :caption: Deploy to Ropsten
 
