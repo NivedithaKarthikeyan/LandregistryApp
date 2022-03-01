@@ -26,13 +26,13 @@ function BasicLayout({ children }) {
 				<Row>
 					<Col span={17}>
 						<div className="logo" style={{ float: 'left' }}>
-							<Title level={4} style={{ color: 'white', marginTop: 10 }}>Microfinance - Bank UI</Title>
+							<Title level={4} style={{ color: 'white', marginTop: 10, fontWeight: 300 }}>Microfinance - Bank UI</Title>
 						</div>
 					</Col>
 					<Col span={4}>
 						<div className={styles.profile} style={{ maxHeight: 45, float: 'right' }}>
 							<Avatar style={{ backgroundColor: user.color }} size="small" icon={<UserOutlined />} />
-							<span style={{ color: 'white', margin: '0px 10px', fontSize: 20 }}>{user.name}</span>
+							<span style={{ color: 'white', margin: '0px 10px', fontSize: 20, fontWeight: 200 }}>{user.name}</span>
 						</div>
 					</Col>
 					<Col span={3}>

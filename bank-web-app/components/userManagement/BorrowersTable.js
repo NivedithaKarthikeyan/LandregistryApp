@@ -32,7 +32,7 @@ function BorrowersTable() {
 					key: response[i].id,
 					id: response[i].id,
 					socialId: response[i].socialSecurityId,
-					address: response[i].userAddress,
+					address: response[i].walletAddress,
 					name: response[i].name,
 				};
 

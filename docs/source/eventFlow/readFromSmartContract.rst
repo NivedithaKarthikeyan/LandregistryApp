@@ -69,8 +69,9 @@ smart contract. ::
 ::
 
     useEffect(() => {
-	getBalance();
-    });
+		getBalance(); // Load the wallet token balance when load the web page.
+        ...
+	}, []);
 
 This uses the async/await functionality to fetch the account balance from smart contract. 
 First, the current in-use account in MetaMask is obtained via ``window.ethereum.enable()``.
