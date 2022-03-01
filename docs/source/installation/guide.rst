@@ -8,7 +8,7 @@ we need to set up and run this project. You can skip these sections if you have 
 
     <iframe width="356" height="200" src="https://www.youtube.com/embed/QqRAgFk5uHw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-   `https://youtu.be/QqRAgFk5uHw <https://youtu.be/QqRAgFk5uHw>`_
+`https://youtu.be/QqRAgFk5uHw <https://youtu.be/QqRAgFk5uHw>`_
 
 
 Install Git
