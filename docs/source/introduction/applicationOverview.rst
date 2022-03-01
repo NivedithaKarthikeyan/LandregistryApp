@@ -37,7 +37,7 @@ communicates with the Bank web server and the blockchain.
 
 In the following sections, we discuss how to run these projects, their software dependencies, and functionalities.
 
-Demo video
+Demo Video
 ----------
 
 .. raw:: html
