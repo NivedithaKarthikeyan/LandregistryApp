@@ -36,8 +36,7 @@ function LoanForm() {
 	};
 
 	return (
-
-		<Card title="Loan Request">
+		<Card title="Loan Request Form">
 			<Form
 				labelCol={{
 					lg: 3,
@@ -101,7 +100,7 @@ function LoanForm() {
 					xxl: { span: 14, offset: 2 } }}
 				>
 					{/* Form submit button */}
-					<Button type="primary" htmlType="submit">Request loan</Button>
+					<Button type="primary" htmlType="submit">Request Loan</Button>
 				</Form.Item>
 			</Form>
 		</Card>

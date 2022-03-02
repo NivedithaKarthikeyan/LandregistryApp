@@ -1,7 +1,8 @@
 Read Values from Smart Contract
 ===============================
 
-We discuss about how to read values from a smart contract.  We illustrate the flow of events from React web app (UI) to ``bank-web-app/pages/public/transfer.js`` to ``bank-web-app/components/transfer/TransferController``.
+We discuss about how to read values from a smart contract.  
+We illustrate the flow of events from React web app (UI) to ``bank-web-app/pages/public/transfer.js`` to ``bank-web-app/components/transfer/TransferController``.
 
 We're gonna to see how to read account balance from the MicroToken smart contract as an example.
 
