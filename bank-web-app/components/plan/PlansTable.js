@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Table, Form, InputNumber, Card, Divider, Modal, Button, message } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { getApi, patchApi, deleteApi } from '../../util/fetchApi';
+import PropTypes from 'prop-types';
 import UserContext from '../../stores/userContext';
 
 function PlansTable({ togglePlan }) {
@@ -9,14 +10,14 @@ function PlansTable({ togglePlan }) {
 	const [isModalVisible, setIsModalVisible] = useState(false); // Edit Loan Plan Modal visibility state.
 	const [data, setData] = useState([]); // Stores Loan Plan data.
 
-	const { confirm } = Modal;
-
 	const [id, setId] = useState(''); // Loan id state.
 	const [minAmount, setMinAmount] = useState(''); // Minimum amount of the loan
 	const [maxAmount, setMaxAmount] = useState(''); // Maximum amount of the loan
 	const [minMonths, setMinMonths] = useState(''); // Minimum duration of the loan in months.
 	const [maxMonths, setMaxMonths] = useState(''); // Maximum duration of the loan in months.
 	const [interest, setInterest] = useState(''); // Loan interest.
+
+	const { confirm } = Modal;
 
 	// Get all loan plans from the bank server.
 	const fetchPlans = async () => {
@@ -122,7 +123,6 @@ function PlansTable({ togglePlan }) {
 			title: 'ID',
 			dataIndex: 'id',
 			key: 'id',
-			render: text => text,
 		},
 		{
 			title: 'Min Amount',
@@ -158,7 +158,7 @@ function PlansTable({ togglePlan }) {
 		columns.push({
 			title: 'Action',
 			dataIndex: '', // Not specify the Data property. Data object will use in render method.
-			key: 'x',
+			key: 'id',
 			render: (record) => (
 				// Data object passed as record parameter.
 				<span>
@@ -211,17 +211,13 @@ function PlansTable({ togglePlan }) {
 
 	useEffect(() => {
 		fetchPlans();
-	}, []); // Execute fetchPlans function when load the PlansTable component.
-
-	useEffect(() => {
-		fetchPlans();
 	}, [togglePlan]); // Execute fetchPlans function when togglePlan state changes.
 
 	return (
 		<>
 			<Card
 				title="Loan Plans"
-				extra={<a href="javascript:void(0);" onClick={() => fetchPlans()}>Refresh</a>}
+				extra={<a href onClick={() => fetchPlans()}>Refresh</a>}
 			>
 				{/* Ant design table component. */}
 				<Table columns={columns} dataSource={data} />
@@ -307,5 +303,9 @@ function PlansTable({ togglePlan }) {
 		</>
 	);
 }
+
+PlansTable.propTypes = {
+	togglePlan: PropTypes.bool,
+};
 
 export default PlansTable;

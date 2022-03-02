@@ -1,3 +1,5 @@
+.. _create-loan-plan-target:
+
 Create Loan Plan Event Flow
 ===========================
 
