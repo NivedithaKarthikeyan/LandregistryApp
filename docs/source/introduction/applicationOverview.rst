@@ -36,3 +36,13 @@ The smart contracts are accessed by the Bank web app, which
 communicates with the Bank web server and the blockchain.
 
 In the following sections, we discuss how to run these projects, their software dependencies, and functionalities.
+
+Demo Video
+----------
+
+.. raw:: html
+
+    <iframe width="356" height="200" src="https://www.youtube.com/embed/QqRAgFk5uHw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+`https://youtu.be/QqRAgFk5uHw <https://youtu.be/QqRAgFk5uHw>`_
+
