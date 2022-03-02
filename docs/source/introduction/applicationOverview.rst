@@ -2,6 +2,10 @@
 Application Overview
 =====================
 
+.. image:: ../images/tcard_microfinance.png
+    :width: 100%
+    :align: center
+
 The Microfinance project is about issuing new ERC20 tokens and using them as an alternative currency type. 
 The new token we introduce in this project is called ``MFT``, MicroFinance Token.
 The usage scenario is for these tokens to be used by unbanked people. 
