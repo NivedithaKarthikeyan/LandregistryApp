@@ -163,9 +163,9 @@ function PlansTable({ togglePlan }) {
 				// Data object passed as record parameter.
 				<span>
 					{/* Pass loan plan id to the showModal and deletePlan methods. */}
-					<a href="javascript:void(0);" onClick={() => showModal(record.id)}>Edit</a>
+					<a href onClick={() => showModal(record.id)}>Edit</a>
 					<Divider type="vertical" />
-					<a href="javascript:void(0);" onClick={() => deletePlan(record.id)} style={{ color: 'red' }}>Delete</a>
+					<a href onClick={() => deletePlan(record.id)} style={{ color: 'red' }}>Delete</a>
 				</span>
 			),
 		});

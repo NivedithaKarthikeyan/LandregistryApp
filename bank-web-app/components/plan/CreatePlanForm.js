@@ -17,15 +17,10 @@ function CreatePlanForm({ togglePlan, setTogglePlan }) {
 				interest: values.interest,
 			};
 
-			// Defines the http request method and strigify the body object.
-			const requestOptions = {
-				body: JSON.stringify(body),
-			};
-
 			// Calls post method to submit the new Loan Plan to the bank server.
 			await postApi({
 				url: 'loan-plans', // calls <Bank Server URL>/loan-payment api.
-				options: requestOptions,
+				params: body,
 			});
 
 			message.success('Loan Plan added successfully');

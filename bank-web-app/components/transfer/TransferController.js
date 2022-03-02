@@ -114,7 +114,7 @@ function TransferController() {
 	return (
 		<Card
 			title="Transfer Micro Tokens"
-			extra={<a href="javascript:void(0);" onClick={() => getBalance()}>Refresh Balance</a>}
+			extra={<a href onClick={getBalance}>Refresh Balance</a>}
 		>
 			{/* This will show the balance state value in the web page */}
 			<Title level={4}>Account balance: {balance} {symbol}</Title>

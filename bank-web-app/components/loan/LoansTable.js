@@ -322,30 +322,30 @@ function LoansTable() {
 				if (record.status === '1') {
 					actionBlock =
 						<span>
-							<a href="javascript:void(0);" onClick={() => showModal(record.id)}>Approve</a>
+							<a href onClick={() => showModal(record.id)}>Approve</a>
 							<Divider type="vertical" />
-							<a href="javascript:;" onClick={() => showRejectModal(record.id)} style={{ color: 'red' }}>Reject</a>
+							<a href onClick={() => showRejectModal(record.id)} style={{ color: 'red' }}>Reject</a>
 						</span>;
 				} else if (record.status === '2') {
 					actionBlock =
 						<span>
-							<a href="javascript:void(0);" onClick={() => showBrokerTransferModal(record)}>
+							<a href onClick={() => showBrokerTransferModal(record)}>
 								Transfer Tokens to Broker
 							</a>
 						</span>;
 				} else if (record.status === '4') {
 					actionBlock =
 						<span>
-							<a href="javascript:void(0);" onClick={() => showBorrowerTransferModal(record)}>
+							<a href onClick={() => showBorrowerTransferModal(record)}>
 								Transfer Tokens to Borrower
 							</a>
 						</span>;
 				} else if (record.status === '5') {
 					actionBlock =
 						<span>
-							<a href="javascript:void(0);" onClick={() => closeLoan(record.id)}>Close</a>
+							<a href onClick={() => closeLoan(record.id)}>Close</a>
 							<Divider type="vertical" />
-							<a href="javascript:;" onClick={() => markAsDefaulted(record.id)} style={{ color: 'red' }}>Defaulted</a>
+							<a href onClick={() => markAsDefaulted(record.id)} style={{ color: 'red' }}>Defaulted</a>
 						</span>;
 				}
 				return actionBlock;
@@ -362,7 +362,7 @@ function LoansTable() {
 				if (record.status === '0') {
 					return (
 						<span>
-							<a href="javascript:void(0);" onClick={() => signLoan(record.id)}>Sign Loan</a>
+							<a href onClick={() => signLoan(record.id)}>Sign Loan</a>
 						</span>
 					);
 				}

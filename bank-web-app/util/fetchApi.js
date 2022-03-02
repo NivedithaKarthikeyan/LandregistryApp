@@ -1,4 +1,3 @@
-import { notification } from 'antd';
 import merge from 'lodash/merge';
 
 const mandatory = () => {
@@ -41,11 +40,6 @@ const getApi = async ({ url, options, params } = mandatory(), cb = f => f) => {
 		if (process.env.NODE_ENV !== 'production') {
 			console.error('Call API Error: ', err);
 		}
-
-		notification.error({
-			message: 'Error!',
-			description: err.message || err.toString(),
-		});
 		cb(err);
 		return Promise.reject(err);
 	}
@@ -86,11 +80,6 @@ const postApi = async ({ url, options, params } = mandatory(), cb = f => f) => {
 		if (process.env.NODE_ENV !== 'production') {
 			console.error('Call API Error: ', err);
 		}
-
-		notification.error({
-			message: 'Error!',
-			description: err.message || err.toString(),
-		});
 		cb(err);
 		return Promise.reject(err);
 	}
@@ -132,10 +121,6 @@ const patchApi = async ({ url, options, params } = mandatory(), cb = f => f) => 
 			console.error('Call API Error: ', err);
 		}
 
-		notification.error({
-			message: 'Error!',
-			description: err.message || err.toString(),
-		});
 		cb(err);
 		return Promise.reject(err);
 	}
@@ -177,10 +162,6 @@ const deleteApi = async ({ url, options, params } = mandatory(), cb = f => f) =>
 			console.error('Call API Error: ', err);
 		}
 
-		notification.error({
-			message: 'Error!',
-			description: err.message || err.toString(),
-		});
 		cb(err);
 		return Promise.reject(err);
 	}

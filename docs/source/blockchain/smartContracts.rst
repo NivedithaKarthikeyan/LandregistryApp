@@ -436,15 +436,16 @@ applyLoan(...)
 
 Create a Loan request. ::
 
-    function applyLoan(uint _amount, uint _months, uint _interest, uint _planId, 
-        address _borrower) public isBroker()
+    function applyLoan(uint _amount, uint _months, uint _interest, string memory _planId, 
+        address _borrower, uint _brokerFee) public isBroker()
 
 Parameters: 
     * ``_amount`` - Loan amount.
-    * ``_months`` - Duration of the loan.
+    * ``_months`` - Duration of the Loan.
     * ``_interest`` - Loan interest.
-    * ``_planId`` -  Loan plan Id.
+    * ``_planId`` -  Loan plan id.
     * ``_borrower`` - Borrower address.
+    * ``__brokerFee`` - Commission for the Broker.
 
 Modifiers:
     * ``isBroker`` - Check whether function caller is registered as a Broker.
@@ -452,18 +453,18 @@ Modifiers:
 signByBorrower(...)
 ^^^^^^^^^^^^^^^^^^^
 
-Borrower signs the Loan he/she requested: ::
+Borrower signs Loan requested by Broker for him/herself: ::
 
-    function signByBorrower(uint _loanId) public isLoanBorrower(_loanId) 
-        isValidLoan(_loanId) isLoanIn(_loanId, LoanState.INSURANCE_APPROVED)
+    function signByBorrower(uint _loanId) public isLoanBorrower(_loanId) isValidLoan(_loanId) 
+        isLoanIn(_loanId, LoanState.REQUESTED)
     
 Parameters:
-    * ``_loanId`` -  Loan Id
+    * ``_loanId`` -  Loan id
 
 Modifiers:
     * ``isLoanBorrower()`` - The function caller should be the Borrower of the Loan.
     * ``isValidLoan(_loanId)`` - Check Loan's validity.
-    * ``isLoanIn(_loanId, LoanState.INSURANCE_APPROVED)`` - Check whether Loan is in INSURANCE_APPLIED state.
+    * ``isLoanIn(_loanId, LoanState.REQUESTED)`` - Check whether Loan is in REQUESTED state.
 
 approveLoan(...)
 ^^^^^^^^^^^^^^^^
@@ -474,7 +475,7 @@ Change the ``bankApprove`` value to ``True`` and changes the Loan state to ``BAN
         isLoanIn(_loanId, LoanState.BORROWER_SIGNED)
 
 Parameters:
-    * ``_loanId`` -  Loan Id
+    * ``_loanId`` -  Loan id
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
@@ -486,10 +487,11 @@ rejectLoan(...)
 
 Change the ``bankApprove`` value to ``False`` and changes the Loan state to ``BANK_REJECTED`` state. ::
 
-    function rejectLoan(uint _loanId) public isAdmin() isValidLoan(_loanId) isLoanIn(_loanId, LoanState.BORROWER_SIGNED)
+    function rejectLoan(uint _loanId) public isAdmin() isValidLoan(_loanId) 
+        isLoanIn(_loanId, LoanState.BORROWER_SIGNED)
 
 Parameters:
-    * ``_loanId`` -  Loan Id
+    * ``_loanId`` -  Loan id
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
@@ -505,7 +507,7 @@ Change the Loan state to PAID_TO_BROKER. ::
         isValidLoan(_loanId) isLoanIn(_loanId, LoanState.BANK_APPROVED)
 
 Parameters:
-    * ``_loanId`` -  Loan Id
+    * ``_loanId`` -  Loan id
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
@@ -521,7 +523,7 @@ Change the Loan state to ONGOING. ::
         isValidLoan(_loanId) isLoanIn(_loanId, LoanState.PAID_TO_BROKER)
 
 Parameters:
-    * ``_loanId`` -  Loan Id
+    * ``_loanId`` -  Loan id
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
@@ -537,7 +539,7 @@ Change the Loan state to CLOSE. ::
         isValidLoan(_loanId) isLoanIn(_loanId, LoanState.ONGOING)
 
 Parameters:
-    * ``_loanId`` -  Loan Id
+    * ``_loanId`` -  Loan id
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
@@ -553,7 +555,7 @@ Change the Loan state to DEFAULT. ::
         isValidLoan(_loanId) isLoanIn(_loanId, LoanState.ONGOING)
 
 Parameters:
-    * ``_loanId`` -  Loan Id
+    * ``_loanId`` -  Loan id
 
 Modifiers:
     * ``isAdmin()`` - The function caller should be the Bank.
@@ -568,7 +570,7 @@ This function returns the Loan. ::
     function viewLoan(uint _loanId) public view returns(Loan memory loan)
 
 Parameters:
-    * ``_loanId`` -  Loan Id
+    * ``_loanId`` -  Loan id
 
 Return:
     * ``Loan`` - Return Loan registered as ``_loanId``.

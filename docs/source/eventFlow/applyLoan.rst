@@ -6,10 +6,14 @@ Brokers can click on this menu item and navigate to ``Loan Request`` page and ap
 
 .. image:: ../images/apply_loan.png
 
-We illustrate the flow of events from React web app (UI) to 
-``bank-web-app/pages//broker/apply-loans.js`` to ``bank-web-app/components/loan/LoanForm``.
-
 As you can see in the address bar of above screenshot it loads the page in ``/pages/broker/apply-loans.js``.
+
+We illustrate the flow of events from React web app (UI) to 
+``bank-web-app/pages/broker/apply-loans.js`` to ``bank-web-app/components/loan/LoanForm.js``.
+
+apply-loans.js
+--------------
+
 The script of the ``apply-loans.js``. ::
 
     import React from 'react';
@@ -43,6 +47,9 @@ As you can see in above screenshot first it diplays the ``Loan Request`` form an
 The ``LoanForm`` imported from the ``../../components//loan/LoanForm``.
 
 Next we discuss about important code snippets of the ``LoanForm.js`` script.
+
+LoanForm.js
+-----------
 
 In the top of the ``LoanForm.js`` it imports following dependencies. ::
 
