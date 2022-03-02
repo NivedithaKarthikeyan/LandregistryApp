@@ -36,7 +36,7 @@ You can find more details in
 `Truffle Running Migration <https://www.trufflesuite.com/docs/truffle/getting-started/running-migrations>`_.
 
 Micro Token Smart Contract Migration
-----------------------------------
+------------------------------------
 
 Migration code for the ``MicroToken`` smart contract: ::
 
@@ -55,7 +55,7 @@ Then we can use ``deployer.deploy`` method to deploy the ``MicroToken`` smart co
 
 
 User Identity and Bank Loan Smart Contract Migration
-----------------------------------
+----------------------------------------------------
 
 We use the following code to deploy ``UserIdentity`` and other smart contracts. ::
 

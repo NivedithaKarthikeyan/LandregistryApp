@@ -142,7 +142,7 @@ You can also interact with your instance as you regularly would, either using th
 
 
 Step 6 - Refer to Smart Contracts Addresses in Ropsten Network
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This deployment information is recorded in the build files in the ``build\contracts\`` directory
 

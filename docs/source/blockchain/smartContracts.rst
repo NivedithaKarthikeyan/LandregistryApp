@@ -17,7 +17,7 @@ They reside in the ``contracts`` directory. ::
 
 
 1. Micro Token Smart Contract - MicroToken.sol
--------------------------------------------
+----------------------------------------------
 
 This smart contract handles the **ERC20** token in the system. 
 ERC20 is a technical standard used for smart contracts on the Ethereum blockchain for implementing tokens. It defines a common list of rules and constraints that an Ethereum token has to implement, giving developers a standard pattern to program how new tokens will function within the Ethereum ecosystem. 
@@ -144,7 +144,7 @@ It informs the amount of tokens the ``_owner`` has granted the ``_spender`` to s
 
 
 2. User Identity Smart contract - UserIdentity.sol
-------------------------------------------------
+--------------------------------------------------
 
 This contract holds User details. It registers  Broker and Borrower details.
 
@@ -292,7 +292,7 @@ Return:
 
 
 3. Bank Loan Smart Contract - BankLoan.sol
----------------------------------------
+------------------------------------------
 
 This smart contract stores Bank Loan details.  The Bank is the owner of this smart contract.
 
