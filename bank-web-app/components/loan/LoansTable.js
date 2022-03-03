@@ -16,16 +16,14 @@ function LoansTable() {
 	const state = ['REQUESTED', 'BORROWER_SIGNED', 'BANK_APPROVED', 'BANK_REJECTED',
 		'PAID_TO_BROKER', 'ONGOING', 'DEFAULT', 'CLOSE'];
 
-	const [isModalVisible, setIsModalVisible] = useState(false); // Loan approve confirmation modal visibility state.
+	const [isApproveModalVisible, setIsApproveModalVisible] = useState(false); // Loan approve confirmation modal visibility state.
 	const [isRejectModalVisible, setIsRejectModalVisible] = useState(false); // Loan remove modal visibility state.
 	const [isBrokerTransferModalVisible, setIsBrokerTransferModalVisible] = useState(false);
 	const [isBorrowerTransferModalVisible, setIsBorrowerTransferModalVisible] = useState(false);
-	const [id, setId] = useState(-1);
+	const [id, setId] = useState(0);
 	const [loanRecord, setLoanRecord] = useState({});
 	const [current, setCurrent] = useState(0);
-
 	const [payments, setPayments] = useState([]);
-
 	const [data, setData] = useState([]);
 
 	const brokers = {};
@@ -215,7 +213,7 @@ function LoansTable() {
 
 	const showModal = (value) => {
 		setId(value);
-		setIsModalVisible(true);
+		setIsApproveModalVisible(true);
 	};
 
 	const showRejectModal = (value) => {
@@ -235,7 +233,7 @@ function LoansTable() {
 
 	const handleOk = () => {
 		approveLoan();
-		setIsModalVisible(false);
+		setIsApproveModalVisible(false);
 	};
 
 	const handleReject = () => {
@@ -244,7 +242,7 @@ function LoansTable() {
 	};
 
 	const handleCancel = () => {
-		setIsModalVisible(false);
+		setIsApproveModalVisible(false);
 		setIsRejectModalVisible(false);
 		setIsBrokerTransferModalVisible(false);
 		setIsBorrowerTransferModalVisible(false);
@@ -457,7 +455,7 @@ function LoansTable() {
 					}}
 				/>
 			</Card>
-			<Modal title={`Approve Loan Request ${id}`} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+			<Modal title={`Approve Loan Request ${id}`} visible={isApproveModalVisible} onOk={handleOk} onCancel={handleCancel}>
 				<p>Are you sure to approve loan?</p>
 			</Modal>
 			<Modal title={`Reject Loan Request ${id}`} visible={isRejectModalVisible} onOk={handleReject} onCancel={handleCancel}>
