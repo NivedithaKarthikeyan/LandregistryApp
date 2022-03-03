@@ -138,11 +138,14 @@ const deleteApi = async ({ url, options, params } = mandatory(), cb = f => f) =>
 
 		const opts = merge(defaultOptions, options);
 
-		const uri = API_URL + url;
+		let uri = API_URL + url;
 		console.log(API_URL);
 
 		if (params && Object.keys(params).length > 0) {
-			opts.body = JSON.stringify(params);
+			if (opts && opts.method === 'GET') {
+				uri += '?' + new URLSearchParams(params);
+				console.log(uri);
+			}
 		}
 
 		console.log(process.env.NODE_ENV);

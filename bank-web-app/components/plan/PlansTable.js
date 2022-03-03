@@ -57,7 +57,7 @@ function PlansTable({ togglePlan }) {
 	const fetchPlanById = async (planId) => {
 		try {
 			const response = await getApi({
-				// Calls the <Bank Serrver URL>/loan-plans api with planId as a parameter.
+				// Calls the <Bank Serrver URL>/loan-plans api with planId.
 				// Complete URL => <Bank Server URL>/loan-plans/planId
 				url: 'loan-plans/' + planId, 
 			});
@@ -89,6 +89,7 @@ function PlansTable({ togglePlan }) {
 		confirm({
 			icon: <CloseCircleOutlined style={{ color: 'red' }} />,
 			content: `Delete Loan Plan ${planId}`,
+			okText: 'Delete',
 			onOk: async () => {
 				try {
 					// Calls <Bank Server URL>/loan-plans DELETE HTTP method.
@@ -97,18 +98,15 @@ function PlansTable({ togglePlan }) {
 						url: 'loan-plans/' + planId,
 					});
 					if (response.status === 200) {
-						await message.success('Sucsessfully delete the loan plan');
+						await message.success('Sucsessfully delete the Loan Plan');
 						fetchPlans(); // Fetch all plans after successfully delete a Loan Plan.
 					} else {
-						message.error('Error occured while deleting loan plan');
+						message.error('Error occured while deleting Loan Plan');
 					}
 				} catch (err) {
 					console.log(err);
-					message.error('Error occured while deleting loan plan');
+					message.error('Error occured while deleting Loan Plan');
 				}
-			},
-			onCancel() {
-				console.log('Cancel');
 			},
 		});
 	};
@@ -173,8 +171,6 @@ function PlansTable({ togglePlan }) {
 
 	// Edit Loan Plan modal ok button handler.
 	const handleOk = async () => {
-		setIsModalVisible(false); // Chnange modal visibility state.
-
 		try {
 			// Define HTTP request body object
 			const body = {
@@ -185,19 +181,15 @@ function PlansTable({ togglePlan }) {
 				interest,
 			};
 
-			// Convert body object to a json object.
-			const requestOptions = {
-				body: JSON.stringify(body),
-			};
-
 			// Use HTTP PATCH method to update the Loan Plan.
 			const response = await patchApi({
 				// Send HTTP Patch request to <Bank Server URL>/loan-plans/planId api.
 				url: 'loan-plans/' + id,
-				options: requestOptions,
+				params: body,
 			});
 
 			message.success('Loan Plan updated successfully');
+			setIsModalVisible(false); // Chnange modal visibility state.
 			fetchPlans(); // Fetch all Loan Plans from the bank server when successfully update a Loan Plan.
 		} catch (err) {
 			message.error('Error while updating the Loan Plan');
@@ -257,7 +249,7 @@ function PlansTable({ togglePlan }) {
 						<InputNumber
 							min="0"
 							style={{ width: '100%' }}
-							placeholder="Enter amount"
+							placeholder="Enter minimum loan amount"
 							value={minAmount} // Field value set from the minAmount state.
 							onChange={(e) => setMinAmount(e)} // When user chnage the field value it will update the minAmount state.
 						/>
@@ -266,7 +258,7 @@ function PlansTable({ togglePlan }) {
 						<InputNumber
 							min="0"
 							style={{ width: '100%' }}
-							placeholder="Enter amount"
+							placeholder="Enter maximum loan amount"
 							value={maxAmount}
 							onChange={(e) => setMaxAmount(e)}
 						/>
@@ -275,7 +267,7 @@ function PlansTable({ togglePlan }) {
 						<InputNumber
 							min="0"
 							style={{ width: '100%' }}
-							placeholder="Enter deal period"
+							placeholder="Enter minimum loan period"
 							value={minMonths}
 							onChange={(e) => setMinMonths(e)}
 						/>
@@ -284,7 +276,7 @@ function PlansTable({ togglePlan }) {
 						<InputNumber
 							min="0"
 							style={{ width: '100%' }}
-							placeholder="Enter deal period"
+							placeholder="Enter maximum loan period"
 							value={maxMonths}
 							onChange={(e) => setMaxMonths(e)}
 						/>
@@ -293,7 +285,7 @@ function PlansTable({ togglePlan }) {
 						<InputNumber
 							min="0"
 							style={{ width: '100%' }}
-							placeholder="Enter interes rate"
+							placeholder="Enter interes rate of loan"
 							value={interest}
 							onChange={(e) => setInterest(e)}
 						/>

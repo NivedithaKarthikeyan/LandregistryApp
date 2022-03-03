@@ -160,30 +160,30 @@ This ``CreatePlanForm`` gets 2 props ``togglePlan``, ``setTogglePlan`` when init
 Then we define the ``addPlan`` function as follows. ::
 
   const addPlan = async (values) => {
-		try {
-			const body = {
-				minAmount: values.minAmount,
-				maxAmount: values.maxAmount,
-				minMonths: values.minMonths,
-				maxMonths: values.maxMonths,
-				interest: values.interest,
-			};
+    try {
+      const body = {
+        minAmount: values.minAmount,
+        maxAmount: values.maxAmount,
+        minMonths: values.minMonths,
+        maxMonths: values.maxMonths,
+        interest: values.interest,
+      };
 
-			const requestOptions = {
-				body: JSON.stringify(body),
-			};
+      const requestOptions = {
+        body: JSON.stringify(body),
+      };
 
-			await postApi({
-				url: 'loan-plans',
-				options: requestOptions,
-			});
-			message.success('Loan Plan added successfully');
-			setTogglePlan(!togglePlan); // Update state.s
-		} catch (err) {
-			message.error('Error while adding the Loan Plan');
-			console.log(err);
-		}
-	};
+      await postApi({
+        url: 'loan-plans',
+        options: requestOptions,
+      });
+      message.success('Loan Plan added successfully');
+      setTogglePlan(!togglePlan); // Update state.s
+    } catch (err) {
+      message.error('Error while adding the Loan Plan');
+      console.log(err);
+    }
+  };
 
 ``addPlan`` function will be triggered when user submit the ``Loan Plan Form``.
 It will get the ``values`` object which contains the submitted form field values of the ``Loan Plan Form``.

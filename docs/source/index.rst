@@ -67,7 +67,7 @@ Welcome to Microfinance dApp Documentation
    eventFlow/saveValuesToSmartContract
    eventFlow/applyLoan
    eventFlow/createLoanPlan
-   eventFlow/fetchLoanPlans
+   eventFlow/plansTable
 
 .. toctree::
    :maxdepth: 2
