@@ -17,10 +17,10 @@ function BorrowerMenu() {
 			<Menu.Item key="/transfer" onClick={() => router.push('/borrower/transfer')}>
 				Transfer
 			</Menu.Item>
-			<Menu.Item key="/loans" onClick={() => router.push('/borrower/loans')}>
+			<Menu.Item key="/loans" onClick={() => router.push('/common/loans')}>
 				Loans
 			</Menu.Item>
-			<Menu.Item key="/info" onClick={() => router.push('/public/info')}>
+			<Menu.Item key="/info" onClick={() => router.push('/common/info')}>
 				Info
 			</Menu.Item>
 		</Menu>

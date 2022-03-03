@@ -38,9 +38,9 @@ export const UserContextProvider = ({ children }) => {
 	useEffect(() => {
 		// Router will update according to the selected user role.
 		if (user.role === 'broker') {
-			router.push('/public/transfer');
+			router.push('/common/transfer');
 		} else if (user.role === 'bank') {
-			router.push('/bank/loans');
+			router.push('/common/loans');
 		} else if (user.role === 'borrower') {
 			router.push('/borrower/transfer');
 		}

@@ -12,7 +12,6 @@ function BrokerMenu() {
 		<Menu
 			mode="inline"
 			defaultSelectedKeys={['/transfer']}
-			// defaultOpenKeys={['sub1']}
 			style={{ height: '100%', borderRight: 0 }}
 		>
 			<Menu.Item key="/transfer" onClick={() => router.push('/public/transfer')}>
@@ -21,10 +20,10 @@ function BrokerMenu() {
 			<Menu.Item key="/apply-loans" onClick={() => router.push('/broker/apply-loans')}>
 				Apply Loan
 			</Menu.Item>
-			<Menu.Item key="/view-loans" onClick={() => router.push('/broker/loans')}>
+			<Menu.Item key="/view-loans" onClick={() => router.push('/common/loans')}>
 				Loans
 			</Menu.Item>
-			<Menu.Item key="/info" onClick={() => router.push('/public/info')}>
+			<Menu.Item key="/info" onClick={() => router.push('/common/info')}>
 				Info
 			</Menu.Item>
 		</Menu>

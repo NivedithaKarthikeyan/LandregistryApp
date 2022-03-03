@@ -18,8 +18,8 @@ function BankMenu() {
 			defaultSelectedKeys={['/bank-loans']}
 			style={{ height: '100%', borderRight: 0 }}
 		>
-			{/* When clicks the Loans menu item it will load the component placed inside the 'pages/bank/loans' javascript file. */}
-			<Menu.Item key="/bank-loans" onClick={() => router.push('/bank/loans')}>
+			{/* When clicks the Loans menu item it will load the component placed inside the 'pages/common/loans' javascript file. */}
+			<Menu.Item key="/bank-loans" onClick={() => router.push('/common/loans')}>
 				Loans
 			</Menu.Item>
 			<Menu.Item key="/plans" onClick={() => router.push('/bank/plans')}>
@@ -33,10 +33,10 @@ function BankMenu() {
 				<Menu.Item key="/add-borrowers" onClick={() => router.push('/bank/add-borrowers')}>Add Borrower</Menu.Item>
 				<Menu.Item key="/view-borrowers" onClick={() => router.push('/bank/view-borrowers')}>View Borrowers</Menu.Item>
 			</SubMenu>
-			<Menu.Item key="/transfer" onClick={() => router.push('/public/transfer')}>
+			<Menu.Item key="/transfer" onClick={() => router.push('/common/transfer')}>
 				Transfer
 			</Menu.Item>
-			<Menu.Item key="/info" onClick={() => router.push('/public/info')}>
+			<Menu.Item key="/info" onClick={() => router.push('/common/info')}>
 				Info
 			</Menu.Item>
 		</Menu>
