@@ -32,7 +32,7 @@ Here is the structure of the **Bank Web Application**: ::
 Project Dependencies
 --------------------
 
-Here are the project dependencies defined inside the ``package.json`` file. ::
+Here are the project dependencies defined in the ``package.json`` file. ::
 
     "dependencies": {
         "@ant-design/icons": "^4.7.0",
@@ -45,26 +45,23 @@ Here are the project dependencies defined inside the ``package.json`` file. ::
         "web3": "^1.5.2"
     },
 
-* ``@ant-design/icons`` - Ant design icons module
-* ``antd`` - Ant design dependency. Ant design is a enterprice-class UI design language and React UI design library.
+* ``@ant-design/icons`` - Ant design icon modules.
+* ``antd`` - Ant design dependency. Ant design is an enterprice-class UI design language and React UI design library.
 * ``lodash`` - Javascript utility library for working with objects.
 * ``next`` - React application framework.
 * ``prop-types`` - Runtime type checking for React props and similar objects.
 * ``react`` - React dependency.
 * ``react-dom`` - React DOM dependecy.
-* ``web3`` - Ethereum Javascrip API to interact with Ethereum blockchain smart contracts.
+* ``web3`` - Ethereum Javascript API to interact with Ethereum blockchain smart contracts.
 
 Prerequisites
 -------------
 
-1. Blockchain - Before run the Bank Web Application we have to deploy all the contracts to the Ethereum blockchain 
-and configure smart contract related data(contract addresses and abi) within the application.
+1. Blockchain - Before we can run the Bank Web Application, we have to deploy all the contracts to the Ethereum blockchain 
+and configure smart contract related data (contract addresses and ABIs) within the application.
 
-2. Bank Web Server - Bank Web Application connects to Bank Web Server.
-It's better to connects the Bank Web Apllication to active
-Bank Web Server. If the Bank Web Server running in a different host or post config them properly in the files.
-
-You can config Bank Web Server host and port in ``next.config.js`` file placed inside the ``bank-web-app`` directory. ::
+2. Bank Web Server - The Bank Web Application accepts requests from users and passes them to the Bank Web Server to be handled.  It must be connected to an active
+Bank Web Server. If the Bank Web Server is running in a different host or port, we need to configure properly in ``next.config.js`` file in the ``bank-web-app`` directory. ::
 
     module.exports = {
         reactStrictMode: true,
@@ -73,5 +70,5 @@ You can config Bank Web Server host and port in ``next.config.js`` file placed i
         },
     };
 
-You can change the ``API_URL`` value to connect the Bank Web Application to Bank Web Server.
+You can change the ``API_URL`` value so that the Bank Web Application knows where to pass request to (the Bank Web Server).
 
