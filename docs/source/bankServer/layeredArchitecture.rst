@@ -16,8 +16,10 @@ API Layer
 ---------
 
 The **Bank Web Server** servers two routes (incoming requests): ``/loan-plans`` and ``/loan-payments``.
-As mentioned in the index.js section, requests comming to these routes will redirect to
+As mentioned in the :ref:`index` section, requests coming to these routes will redirect to
 the ``routes/plans`` and ``routes/payments`` scripts.
+
+ 
 
 Both the routes will work in same manner. 
 We will take Plan route as an example to describe following sections.
