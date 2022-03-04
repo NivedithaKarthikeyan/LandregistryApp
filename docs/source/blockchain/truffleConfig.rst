@@ -21,7 +21,13 @@ Here is the ``truffle-config.js`` script for this project. ::
         },
     };
 
-As described in the :ref:`deploy-to-ropsten` section, first we add the ``secrets.json`` file and ``hdwallet-provider`` dependency.
-Then we configure the ``networks`` to development and Ropsten test networks.
+We can configure blockchain networks under ``networks`` in ``truffle-config.js`` file.  
+This ``development`` network contains our ``Ganache`` local blockchain network configurations.
+We can specify the ``network`` we need to deploy our smart contracts using network keyword at the deployment time as follows. ::
+
+    truffle migrate --reset --network development
+
+This command deploys our smart contracts in to the ``development`` network.
+
 Next we configure the compilers for the project. We use ``0.8.1`` compiler version in our project.
 
