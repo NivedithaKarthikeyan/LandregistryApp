@@ -32,9 +32,8 @@ The ``plans`` router serves 4 HTTP request methods **GET**, **POST**, **PATCH**,
 
 **Get All Loan Plans**
 
-The following function return all loan plans from the MongoDB.
-When user sends a GET request to the ``/loan-plans`` url in **Bank Web Server** 
-it will call ``planService.getPlans()`` function and returns loan plans to the user. ::
+This function return all loan plans from the bank, stored in MongoDB.
+When a user sends a GET request to the ``/loan-plans`` url in **Bank Web Server** via the web app, the function is invoked and calls ``planService.getPlans()``, returns loan plans to the user. ::
 
     router.get('/', async (req, res) => {
         try {
@@ -48,12 +47,12 @@ it will call ``planService.getPlans()`` function and returns loan plans to the u
         }
     })
 
-These requests contains no parameters in the url and no json objects in the request body.
+This request has no parameter in the url and no json objects in the request body.
 
 **Get Loan Plan By Loan Plan Id**
 
-The following function return a loan plan for the given plan id.
-This function will pass the GET request to the ``planService.getPlanById()`` function and returns loan plan. ::
+This function return a loan plan corresponding to the given plan id.
+It passes the GET request to the ``planService.getPlanById()`` function and returns the loan plan. ::
 
     router.get('/:planId', async (req, res) => {
         try{
@@ -67,7 +66,7 @@ This function will pass the GET request to the ``planService.getPlanById()`` fun
         }
     })
 
-These requests contains Loan Plan Id in the url. No json objects in the request body.
+This request has Loan Plan Id as a parameter in the url, but no json object in the request body.
 
 **Save Loan Plan**
 
