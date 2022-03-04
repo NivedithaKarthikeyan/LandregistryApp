@@ -10,7 +10,7 @@ Welcome to Microfinance dApp Documentation
 ==========================================
 
 
-.. image:: ../images/tcard_microfinance.png
+.. image:: images/tcard_microfinance.png
 
 ..
 
