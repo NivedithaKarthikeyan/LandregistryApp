@@ -3,9 +3,6 @@ Truffle Configuration
 
 Here is the ``truffle-config.js`` script for this project. ::
 
-    const { projectId, mnemonic } = require('./secrets.json');
-    const HDWalletProvider = require('@truffle/hdwallet-provider');
-
     module.exports = {
         networks: {
             development: {
