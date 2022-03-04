@@ -15,8 +15,8 @@ This diagram shows the layered architecture of the **Bank Web Server**.
 API Layer
 ---------
 
-**Bank Web Server** servers two rotes; ``/loan-plans`` and ``/loan-payments``.
-As mentioned in the Indes.js section, requests comming to these routes will redirect to
+The **Bank Web Server** servers two routes (incoming requests): ``/loan-plans`` and ``/loan-payments``.
+As mentioned in the index.js section, requests comming to these routes will redirect to
 the ``routes/plans`` and ``routes/payments`` scripts.
 
 Both the routes will work in same manner. 
