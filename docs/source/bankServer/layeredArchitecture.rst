@@ -1,40 +1,40 @@
 Layered Architecture
 ====================
 
-**Bank Web Server** follows a layered architecture.
-It consists of theree layers.
+The **Bank Web Server** follows a layered architecture.
+It consists of three layers.
 
-* API Layer - API of the Bank Web Server.
-* Service Layer - Implemets the server side logics.
-* Data Layer - Implements database logics.
+* API Layer - APIs for the Bank Web Server.
+* Service Layer - Implemet server side logic.
+* Data Layer - Implement database logic.
 
-Following diagram shows the layered architecture of the **Bank Web Server**.
+In the commonly used Model-View-Controller (MVC) context, the Service Layer is the Controller, the Data Layer is the Model.
+This diagram shows the layered architecture of the **Bank Web Server**.
 
 .. image:: ../images/bank-server-architecture.png 
 
 API Layer
 ---------
 
-**Bank Web Server** servers two rotes; ``/loan-plans`` and ``/loan-payments``.
-As mentioned in the Indes.js section, requests comming to these routes will redirect to
+The **Bank Web Server** serves two routes (incoming requests): ``/loan-plans`` and ``/loan-payments``.
+As mentioned in the :ref:`bank-indexjs` section, requests coming to these routes directed to
 the ``routes/plans`` and ``routes/payments`` scripts.
 
-Both the routes will work in same manner. 
-We will take Plan route as an example to describe following sections.
+Both routes work in the same manner. 
+We use the Plan route as an example to illustrate how it is handled.
 
-In ``routes/plans`` script first we import required dependencies as follows. ::
+The ``routes/plans`` script first import required dependencies: ::
 
     const Express = require('express') // Define Express web framework
     const router = Express.Router() // Import router module from Express.
     const planService = require('../services/planService'); // Import plan service script.
 
-``plans`` router serves 4 HTTP request methods (GET, POST, PATCH, and DELETE).
+The ``plans`` router serves 4 HTTP request methods **GET**, **POST**, **PATCH**, and **DELETE**.
 
 **Get All Loan Plans**
 
-The following function return all loan plans from the MongoDB.
-When user sends a GET request to the ``/loan-plans`` url in **Bank Web Server** 
-it will call ``planService.getPlans()`` function and returns loan plans to the user. ::
+This function return all loan plans from the bank, stored in MongoDB.
+When a user sends a GET request to the ``/loan-plans`` url in **Bank Web Server** via the web app, the function is invoked and calls ``planService.getPlans()``, returns loan plans to the user. ::
 
     router.get('/', async (req, res) => {
         try {
@@ -48,12 +48,12 @@ it will call ``planService.getPlans()`` function and returns loan plans to the u
         }
     })
 
-These requests contains no parameters in the url and no json objects in the request body.
+This request has no parameter in the url and no json objects in the request body.
 
 **Get Loan Plan By Loan Plan Id**
 
-The following function return a loan plan for the given plan id.
-This function will pass the GET request to the ``planService.getPlanById()`` function and returns loan plan. ::
+This function return a loan plan corresponding to the given plan id.
+It passes the GET request to the ``planService.getPlanById()`` function and returns the loan plan. ::
 
     router.get('/:planId', async (req, res) => {
         try{
@@ -67,12 +67,11 @@ This function will pass the GET request to the ``planService.getPlanById()`` fun
         }
     })
 
-These requests contains Loan Plan Id in the url. No json objects in the request body.
+This request has the Loan Plan Id as a parameter in the url, but no json object in the request body.
 
 **Save Loan Plan**
 
-When user sends a POST request to the ``/loan-plans`` it will pass the request to the ``planService.createPlan()`` 
-function and returns the saved loan plan. ::
+When a user sends a POST request to the ``/loan-plans`` via the web app, this function passes the request to ``planService.createPlan()`` which returns the saved loan plan. ::
 
     router.post('/', async (req, res) => {
         try {
@@ -86,12 +85,11 @@ function and returns the saved loan plan. ::
         }
     })
 
-These requests contains no parameters in the url but json object in the request body.
+This request has no parameter in the url but has a json object in the request body.
 
 **Update Loan Plan**
 
-When user sends PATCH request to the ``/loan-plans`` it will update the existing Loan Plan in the MongoDB 
-specified by the Loan Plan Id. It will call the ``planService.updatePlan()`` function with the request and return the 
+When a user sends a PATCH request to the ``/loan-plans`` via the web app, the function updates the existing Loan Plan corresponding to Loan Plan Id stored in MongoDB.  It calls the ``planService.updatePlan()`` function, which returns the 
 updated Loan Plan. ::
 
     router.patch('/:planId', async (req, res) => {
@@ -106,7 +104,7 @@ updated Loan Plan. ::
         }
     })
 
-These requests contain Loan Plan Id in the url and Loan Plan json object in the request body.
+This request has the Loan Plan Id as a parameter in the url and the Loan Plan json object in the request body.
 
 **Delete Loan Plan**
 
@@ -130,24 +128,24 @@ and returns the deleted Loan Plan. ::
         }
     })
 
-These requests contains the Loan Plan Id in request url and no json objects in the request body.
+This request has the Loan Plan Id as a parameter in the url, but no json object in the request body.
 
-After run your **Bank Web Server** you can navigate to ``localhost:9091/api-docs`` to see the
-full Swagger API documentation for all APIs server by **Bank Web Server**.
+With **Bank Web Server** up and running, we can navigate to ``localhost:9091/api-docs`` to see the
+full Swagger API documentation for all APIs served by **Bank Web Server**.  This is not an essential feature but nice to have; it facilitates communication and understanding among sofware developers.
 
 Service Layer
 -------------
 
-We use service layer to implement business logic in the server.
-The requests coming to the route will sends to the respective service layer methods.
-As we mentioned before we will discuss about Loan Plans Service Layer implementation in this section.
+We use the Service Layer to implement business logic in the server.
+Requests generated by the web app are sent to the respective service layer methods to be handled.
+To illustrate, we discuss the Loan Plans Service Layer in this section.
 
-First we import the model defined in the ``models/Plans`` script.
-It defines the Mongoose Schema to interact MongoDB. ::
+First, we import the data model defined in the ``models/Plans`` script.
+It defines the Mongoose Schema to interact with MongoDB. ::
 
     const Plan = require('../models/Plans')
 
-Then we define the planService as follows. ::
+Then we define the planService as follows: ::
     
     const planService = {
         getPlans: async () => {
@@ -188,44 +186,43 @@ Then we define the planService as follows. ::
         },
     }
 
-``planService`` functions will use Mongoose Schema Queries to interact with the MongoDB.
-You can learn more about these queries in `Mongoose Queries page <https://mongoosejs.com/docs/queries.html>`_
+The ``planService`` function uses the Mongoose Schema Queries to interact with the MongoDB.
+You can learn more about these queries in the `Mongoose Queries page <https://mongoosejs.com/docs/queries.html>`_
 
 **getPlans()**
 
-This method will find and return all Loan Plans from the MongoDB using Plan schema. 
-It will use ``find`` Mongoose Query to get all loan plans from the MongoDB.
+Find and return all Loan Plans from the MongoDB using the Plan schema. 
+It uses the ``find`` Mongoose Query to get all loan plans from the MongoDB.
 
 **getPlanById()**
 
-This function will get the Loan Plan Id from the request url, find and return the Loan Plan using Plan schema.
-It will use ``findById`` Mongoose Query to get the Loan Plan by Id from the MongoDB.
+This function gets the Loan Plan Id from the request url, finds and returns the Loan Plan using the Plan schema.
+It uses the ``findById`` Mongoose Query to get the Loan Plan by Id from the MongoDB.
 
 **createPlan()**
 
-In this function it will create new Loan Plan in the MongoDB.
-First it will create a Plan object using json object received from the request body.
-Then it will use ``save`` Mongoos Query to save the new Loan Plan in the MongoDB.
+Create new Loan Plan in the MongoDB. It creates a new Plan object using a json object received from the request body.
+Then it uses the ``save`` Mongoos Query to save the new Loan Plan in the MongoDB.
 
 **updatePlan()**
 
-In this function it will update the existing Loan Plan specified by the Loan Plan Id.
-It will get the Loan Plan Id from the request url and updated fields from the request body.
-It will use the ``updateOne``Mongoose Query to update the object in the MongoDB.
+Update the existing Loan Plan specified by the Loan Plan Id.
+This function gets the Loan Plan Id from the request url and updated fields from the request body.
+It uses the ``updateOne``Mongoose Query to update the object in the MongoDB.
 
 **deletePlan()**
 
-This function will delete the Loan Plan in the MongoDB using ``deleteOne`` Mongoose Query.
-The Loan Plan Id will send as a request url parameter.
+Delete the Loan Plan in MongoDB using the ``deleteOne`` Mongoose Query.
+The Loan Plan Id is sent as a request url parameter.
 
 Data Layer
 -----------
 
-Data Layer represent the MongoDB.
+The Data Layer corresponds to the schema and tables in MongoDB.
 This node server uses Mongoose to interact with the MongoDB.
 It defines the schemas in the ``models`` directory.
 
-We defined the Plans Schema as follows. ::
+The Plans Schema is defined as follows. ::
 
     const mongoose = require('mongoose')
 
@@ -255,7 +252,7 @@ We defined the Plans Schema as follows. ::
     module.exports = mongoose.model('Plans', PlanSchema)
 
 We use the auto generated ``_id`` field for the Loan Plans.
-Other than that Loan Plan has 5 fields. 
+Other than that, the Loan Plan has 5 fields. 
 
 * ``minMonths`` - Minimum duration of a Loan.
 * ``maxMonth`` - Maximum duration of a Loan.
@@ -263,5 +260,5 @@ Other than that Loan Plan has 5 fields.
 * ``maxAmount`` - Maximum tokens amount of the Loan.
 * ``interest`` - Interest rate of a Loan.
 
-Each field was defined with it's type and required status.
-These Schemas were used in the ``planService`` to query the MongoDB.
+Each field is defined with its type and required status.
+These Schemas are used in the ``planService`` to query the MongoDB.

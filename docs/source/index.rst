@@ -3,8 +3,16 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. warning::
+   The Microfinance project source code and documentation is shared with you for learning purposes only. It should not be commercialized or used for profit purposes.
+   
 Welcome to Microfinance dApp Documentation
 ==========================================
+
+
+.. image:: images/tcard_microfinance.png
+
+..
 
 .. toctree::
    :maxdepth: 2
