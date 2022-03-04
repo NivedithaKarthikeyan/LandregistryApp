@@ -2,12 +2,12 @@ Overview
 =======================
 
 This section describes important functions of the **Bank Web Server**.
-Bank Web Server refers to the project ``bank-server`` which is developed using ``Node.js``.
+The Bank Web Server refers to the project and folder ``bank-server``, developed using ``Node.js``.
 
 Project Structure
 -----------------
 
-Here is the structure of the Bank Web Server. ::
+Here is the structure of the Bank Web Server: ::
 
     bank-server
     |--models
@@ -27,7 +27,7 @@ Here is the structure of the Bank Web Server. ::
 Project Dependencies
 --------------------
 
-Here are the project dependencies defined inside the ``package.json`` file. ::
+Here are the project dependencies defined in the ``package.json`` file. ::
 
     "dependencies": {
         "cors": "^2.8.5",
