@@ -1,50 +1,48 @@
 User Context
 ============
 
-``userContext`` is providing user details.
+There are a number of user roles in the Microfinance project: bank, broker, borrow, public, etc.
+``stores/userContext`` contains these details.
 It stores the current user and provide functionality to change the user.
-This follows the React Context concepts. Find more about `Context <https://reactjs.org/docs/context.html>`_.
+This follows the React Context concepts.  More information about this `here <https://reactjs.org/docs/context.html>`_.
 
 Import Dependencies
 -------------------
 
-First it imports following dependencies. ::
+First, it imports dependencies: ::
 
     import React, { createContext, useState, useEffect } from 'react';
     import { useRouter } from 'next/router';
 
 ``UserContext`` uses the ``createContext`` and ``useState`` hooks.
-It will use router mechanism from the ``Next.js`` framework.
-You can learn more about Next.js routing in 
-`Next Js Routing page <https://nextjs.org/docs/routing/introduction>`_ and 
+It uses the router mechanism from the ``Next.js`` framework.
+You can learn more about this in the 
+`Next Js Routing page <https://nextjs.org/docs/routing/introduction>`_ and the
 `next/router page <https://nextjs.org/docs/api-reference/next/router>`_.
 
 UserContext
 -----------
 
-Then define the UserContext with the default values as follows. ::
+We define ``UserContext`` with the default values as follows: ::
 
 	const UserContext = createContext({
 		user: null,
 		login: () => {},
 	});
 
-Then it defines the ``UserContextProvider`` function.
+Then we define the ``UserContextProvider`` function.
 
 UserContextProvider
 -------------------
 
-First we define next router as follows. ::
+First, we define a router variable to update the router according to user roles and page navigation as follows: ::
 
 	const router = useRouter();
 
-This router variable helps to update the router according to the user roles and page navigation.
 
-Then we define the ``users`` of the system.
-``users`` array contains 4 users from each user role in the system.
-These users are used to testing purposes only. 
-If not we have to implement a login mechanism to the system.
-``user`` objects in the ``users`` contains ``user`` name and some meta data about ``user`` as follows. ::
+Then we define the ``users`` of the system as an array with 4 users, one for each user role in the system.
+These users are used for testing purposes only; otherwise, we have to implement a login mechanism in the system.
+The ``user`` objects in ``users`` contains ``user`` name and metadata about ``user`` as follows: ::
 
 	const users = [
 		{
@@ -69,12 +67,11 @@ If not we have to implement a login mechanism to the system.
 		},
 	];
 
-We set update the ``user`` state from the ``users`` array. ::
+We set the ``user`` state from the ``users`` array, where ``user[1]`` is the user when the system loads: ::
 
 	const [user, setUser] = useState(users[1]);
 
-We set the ``user[1]`` as the user of the system when it loads.
-Next we use ``useEffect`` function to update the router according to the user change. ::
+Next we use the ``useEffect`` hook to update the router whenever the ``user`` state  changes: ::
 
 	useEffect(() => {
 		if (user.role === 'broker') {
@@ -86,9 +83,8 @@ Next we use ``useEffect`` function to update the router according to the user ch
 		}
 	}, [user]);
 
-This ``useEffect`` hook will triggered every time it updates the ``user`` state and update the router.
 
-We define ``login`` function to update the ``user`` state. ::
+We define a ``login`` function to update the ``user`` state. ::
 
 	const login = (role) => {
 		if (role === 'broker') {
@@ -102,9 +98,9 @@ We define ``login`` function to update the ``user`` state. ::
 		}
 	};
 
-It updates the ``user`` state according to the user role we pass in to this function.
+It updates the ``user`` state according to the user role we pass to this function.
 
-Then we define the context value and pass the ``user`` state and ``login`` function. ::
+We define the context value and pass the ``user`` state and ``login`` function. ::
 
 	const context = { user, login };
 
