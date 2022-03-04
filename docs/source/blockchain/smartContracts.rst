@@ -296,6 +296,8 @@ Return:
 
 This smart contract stores Bank Loan details.  The Bank is the owner of this smart contract.
 
+.. _loan state diagram target:
+
 State Transition Diagram of The Bank Loan
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

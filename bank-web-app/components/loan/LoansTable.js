@@ -99,7 +99,7 @@ function LoansTable() {
 		try {
 			const accounts = await window.ethereum.enable();
 			await BankLoanContract.methods.confirmTokenTrasferToBroker(loanId).send({ from: accounts[0] });
-			message.success(`Loan ${id} updated`);
+			message.success(`Loan ${loanId} updated`);
 			loadData();
 		} catch (err) {
 			console.log(err);
@@ -128,7 +128,7 @@ function LoansTable() {
 		try {
 			const accounts = await window.ethereum.enable();
 			await BankLoanContract.methods.confirmTokenTrasferToBorrower(loanId).send({ from: accounts[0] });
-			message.success(`Loan ${id} updated`);
+			message.success(`Loan ${loanId} updated`);
 			loadData();
 		} catch (err) {
 			console.log(err);
@@ -179,7 +179,7 @@ function LoansTable() {
 		try {
 			const accounts = await window.ethereum.enable();
 			await BankLoanContract.methods.signByBorrower(loanId).send({ from: accounts[0] });
-			message.success(`Loan ${id} signed`);
+			message.success(`Loan ${loanId} signed`);
 			loadData();
 		} catch (err) {
 			console.log(err);
@@ -191,7 +191,7 @@ function LoansTable() {
 		try {
 			const accounts = await window.ethereum.enable();
 			await BankLoanContract.methods.closeLoan(loanId).send({ from: accounts[0] });
-			message.success(`Loan ${id} updated`);
+			message.success(`Loan ${loanId} updated`);
 			loadData();
 		} catch (err) {
 			console.log(err);
@@ -203,7 +203,7 @@ function LoansTable() {
 		try {
 			const accounts = await window.ethereum.enable();
 			await BankLoanContract.methods.markAsDefaulted(loanId).send({ from: accounts[0] });
-			message.success(`Loan ${id} updated`);
+			message.success(`Loan ${loanId} updated`);
 			loadData();
 		} catch (err) {
 			console.log(err);
@@ -211,7 +211,7 @@ function LoansTable() {
 		}
 	};
 
-	const showModal = (value) => {
+	const showApproveModal = (value) => {
 		setId(value);
 		setIsApproveModalVisible(true);
 	};
@@ -231,8 +231,8 @@ function LoansTable() {
 		setIsBorrowerTransferModalVisible(true);
 	};
 
-	const handleOk = () => {
-		approveLoan();
+	const handleApprove = async () => {
+		await approveLoan();
 		setIsApproveModalVisible(false);
 	};
 
@@ -309,6 +309,23 @@ function LoansTable() {
 		},
 	];
 
+	if (user.role === 'borrower') {
+		columns.push({
+			title: 'Action',
+			dataIndex: '',
+			key: 'x',
+			render: (record) => {
+				if (record.status === '0') {
+					return (
+						<span>
+							<a href onClick={() => signLoan(record.id)}>Sign Loan</a>
+						</span>
+					);
+				}
+			},
+		});
+	}
+
 	if (user.role === 'bank') {
 		columns.push({
 			title: 'Action',
@@ -319,7 +336,7 @@ function LoansTable() {
 				if (record.status === '1') {
 					actionBlock =
 						<span>
-							<a href onClick={() => showModal(record.id)}>Approve</a>
+							<a href onClick={() => showApproveModal(record.id)}>Approve</a>
 							<Divider type="vertical" />
 							<a href onClick={() => showRejectModal(record.id)} style={{ color: 'red' }}>Reject</a>
 						</span>;
@@ -346,23 +363,6 @@ function LoansTable() {
 						</span>;
 				}
 				return actionBlock;
-			},
-		});
-	}
-
-	if (user.role === 'borrower') {
-		columns.push({
-			title: 'Action',
-			dataIndex: '',
-			key: 'x',
-			render: (record) => {
-				if (record.status === '0') {
-					return (
-						<span>
-							<a href onClick={() => signLoan(record.id)}>Sign Loan</a>
-						</span>
-					);
-				}
 			},
 		});
 	}
@@ -396,16 +396,11 @@ function LoansTable() {
 	}, []);
 
 	const expandedRowRender = (record) => {
-		const expandedData = [];
-
-		expandedData.push(record);
-
 		const expandedPayments = payments.filter(item => item.loanId == record.id);
 
 		const expandedPaymentColumns = [
 			{ title: 'Payment ID', dataIndex: '_id', key: 'id' },
 			{ title: 'Amount', dataIndex: 'amount', key: 'amount' },
-			{ title: 'Loan ID', dataIndex: 'loanId', key: 'loanId' },
 			{ title: 'Transaction Hash', dataIndex: 'transactionHash', key: 'transactionHash' },
 		];
 
@@ -426,10 +421,10 @@ function LoansTable() {
 					size="default"
 					labelAlign="left"
 				>
-					<Form.Item label="Borrower address" style={{ marginBottom: '0px' }}>
+					<Form.Item label="Borrower Address" style={{ marginBottom: '0px' }}>
 						<span>{record.borrower}</span>
 					</Form.Item>
-					<Form.Item label="Broker address">
+					<Form.Item label="Broker Address">
 						<span>{record.broker}</span>
 					</Form.Item>
 				</Form>
@@ -454,7 +449,7 @@ function LoansTable() {
 					}}
 				/>
 			</Card>
-			<Modal title={`Approve Loan Request ${id}`} visible={isApproveModalVisible} onOk={handleOk} onCancel={handleCancel}>
+			<Modal title={`Approve Loan Request ${id}`} visible={isApproveModalVisible} onOk={handleApprove} onCancel={handleCancel}>
 				<p>Are you sure to approve loan?</p>
 			</Modal>
 			<Modal title={`Reject Loan Request ${id}`} visible={isRejectModalVisible} onOk={handleReject} onCancel={handleCancel}>

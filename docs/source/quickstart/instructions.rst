@@ -103,12 +103,12 @@ This will create the users as follows.
      - Social Security No.
    * - Broker
      - 1
-     - Broker 1
+     - Leonard Hofstadter
      - *Ganache Account 2* address
      - 2345
    * - Borrower
      - 1
-     - Borrower 1
+     - Rajesh Koothrapali
      - *Ganache Account 3* address
      - 3455
 

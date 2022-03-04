@@ -227,6 +227,8 @@ It uses the spread operator ``...prev`` in the ``setData`` method below. ::
     }
   };
 
+.. _initial loan data target:
+
 Load Initial Data
 ~~~~~~~~~~~~~~~~~
 
@@ -429,3 +431,317 @@ Initial Loan Table view for ``Bank``.
 Initial Loan Table view for ``Broker``.
 
 .. figure:: ../images/broker_loan_row.png
+
+In the above screenshots you may see ``Action`` column only enbled for ``Bank`` and ``Borrower`` users only.
+No actions enabled for ``Bank`` user for the current ``Loan`` listed in the Loan Table.
+``Sign Loan`` action enbled for the current Loan in the Loans Table for ``Broker``.
+
+These conditional redering is done using following 2 ``if`` conditions. ::
+
+  if (user.role === 'borrower') {
+    columns.push({
+      title: 'Action',
+      dataIndex: '',
+      key: 'x',
+      render: (record) => {
+        if (record.status === '0') {
+          return (
+            <span>
+              <a href onClick={() => signLoan(record.id)}>Sign Loan</a>
+            </span>
+          );
+        }
+      },
+    });
+  }
+
+  if (user.role === 'bank') {
+    columns.push({
+      title: 'Action',
+      dataIndex: '',
+      key: 'x',
+      render: (record) => {
+        let actionBlock = '';
+        if (record.status === '1') {
+          actionBlock =
+            <span>
+              <a href onClick={() => showModal(record.id)}>Approve</a>
+              <Divider type="vertical" />
+              <a href onClick={() => showRejectModal(record.id)} style={{ color: 'red' }}>Reject</a>
+            </span>;
+        } else if (record.status === '2') {
+          actionBlock =
+            <span>
+              <a href onClick={() => showBrokerTransferModal(record)}>
+                Transfer Tokens to Broker
+              </a>
+            </span>;
+        } else if (record.status === '4') {
+          actionBlock =
+            <span>
+              <a href onClick={() => showBorrowerTransferModal(record)}>
+                Transfer Tokens to Borrower
+              </a>
+            </span>;
+        } else if (record.status === '5') {
+          actionBlock =
+            <span>
+              <a href onClick={() => closeLoan(record.id)}>Close</a>
+              <Divider type="vertical" />
+              <a href onClick={() => markAsDefaulted(record.id)} style={{ color: 'red' }}>Defaulted</a>
+            </span>;
+        }
+        return actionBlock;
+      },
+    });
+  }
+
+These 2 ``if`` condition statements add ``Action`` column to the Loan Table depending on user roles ``Bank`` and ``Borrower``.
+Before adding the action to the ``Action`` colunm they check the Loan ``status``.
+
+Below table describes ``Actions`` enabled for ``User Roles`` depending on the current Loan State.
+``Next Loan State`` column contains the ``Loan State`` values which is held by Loan after user taking the action.
+
+.. list-table::
+   :header-rows: 1
+
+   * - Current Loan State
+     - ENUM
+     - Action
+     - User Role
+     - Next Loan State
+   * - REQUESTED
+     - 0
+     - Sign Loan
+     - Borrower
+     - BORROWER_SIGNED
+   * - BORROWER_SIGNED
+     - 1
+     - Approve / Reject
+     - Bank
+     - BANK_APPROVED / BANK_REJECTED
+   * - BANK_APPROVED
+     - 2
+     - Transfer Tokens to Broker
+     - Bank
+     - PAID_TO_BROKER
+   * - PAID_TO_BROKER
+     - 4
+     - Transfer Tokens to Borrower
+     - Bank
+     - ONGOING
+   * - ONGOING
+     - 5
+     - Cloase / Defaulted
+     - Bank
+     - CLOSE / DEFAULT
+
+For more information you can refer :ref:`loan state diagram target`
+
+``LoansTable`` component displays the Loan Table in a ``Card`` Ant design component.
+Following code snippet resides inside the ``return`` section of ``LoansTable`` component. ::
+
+  <Card title="Current Loans">
+    <Table
+      pagination="true"
+      columns={columns}
+      dataSource={data}
+      expandable={{
+        expandedRowRender,
+      }}
+    />
+  </Card>
+
+It passes the ``columns`` array and ``data`` state to a Ant desing ``Table`` component.
+This component will display table including the columns and Loan data we passed as props.
+
+Expand Loan Table Rows.
+~~~~~~~~~~~~~~~~~~~~~~~
+
+In addition above mentioned props there is another prop ``expandable``.
+Using this prop we can expand the rows and display more information related to the data row.
+You can learn more about this in `Ant Design Table Component page <https://ant.design/components/table/>`_
+
+We can set object to this ``expandable`` including ``expandedRowRender`` key.
+
+Following code snnipet is equal to the ``expandable`` prop code snippet. ::
+
+  expandable={{
+    expandedRowRender: expandedRowRender,
+  }}
+
+We used property shorthand mechanism in our project code.
+
+We can set any method to this object key which will be executed when user clicks on the ``+`` button 
+at the begining of the table row.
+
+.. figure:: ../images/bank_loan_expand.png
+
+``expandedRowRender`` funcion gets selected row record as a parameter. ::
+
+  const expandedRowRender = (record) => {
+    const expandedPayments = payments.filter(item => item.loanId == record.id);
+
+    const expandedPaymentColumns = [
+      { title: 'Payment ID', dataIndex: '_id', key: 'id' },
+      { title: 'Amount', dataIndex: 'amount', key: 'amount' },
+      { title: 'Loan ID', dataIndex: 'loanId', key: 'loanId' },
+      { title: 'Transaction Hash', dataIndex: 'transactionHash', key: 'transactionHash' },
+    ];
+
+    return (
+      <>
+        <Form ... >
+          <Form.Item label="Borrower address" style={{ marginBottom: '0px' }}>
+            <span>{record.borrower}</span>
+          </Form.Item>
+          <Form.Item label="Broker address">
+            <span>{record.broker}</span>
+          </Form.Item>
+        </Form>
+        <Table
+          columns={expandedPaymentColumns}
+          dataSource={expandedPayments}
+          pagination={false}
+        />
+      </>
+    );
+  };
+
+In ``expandedRowRender``, first it filter out the Loan Payment data from the ``payment`` state.
+The defines columns of the Loan Payments Table.
+
+``expandedRowRender`` function returns the html to be displayed in the expanded area.
+In return section it defines a ``Form`` component to display ``Borrower Address`` and ``Broker Address``.
+The adds the Loan Payment Table.
+If there is no Payment data related to this Loan, Loan Payments Table displays ``No Data`` message in the table.
+
+When ``Borrower`` pays loan amount back, He/She may submit the Loan Payment details including blockchain transaction hash value
+using ``Update Loan Payment`` in the ``Transfer`` page. Those payment data will list down in the Payment Table in the expanded view.
+
+.. figure:: ../images/loan_payments.png
+
+.. note::
+   Following event flows refer to the actions defined in the ``Action`` column.
+   status integer values refer to the ENUM values returened from the ``BankLoan`` smart contract.
+   
+   ``await window.ethereum.enable();`` line in the functions describe in the following sections 
+   returns the selected account address from the ``MetaMask``. 
+   
+   This selected account address is returned as an array and it contains only the selected account address. 
+   ``accounts[0]`` returns the account address.
+
+   ``send`` methos is used to call smart contract methods which are adding or changing existing data in the blockchain.
+   
+   This ``send`` method contains object parameter. It passes the function caller address as ``from`` property.
+
+   ``BankLoanContract`` is the smart contract object defined in the ``SmartContractContext``. 
+   We use this smart contract object to send Loan updates to the ``BankLoan`` smart contract.
+   
+   ``BankLoan`` smart contract's methods can be accessed through ``BankLoanContract.methods``.
+   
+   ``loadData()`` method is used to load data from the smart contracts as mentioned in  :ref:`initial loan data target`
+
+Borrower Sign Loan Event Flows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If Loan is in ``0`` (``REQUESTED``) state, ``Action`` column displays ``Sing Loan`` action to the ``Borrower``. ::
+
+  if (user.role === 'borrower') {
+    columns.push({
+      title: 'Action',
+      dataIndex: '',
+      key: 'x',
+      render: (record) => {
+        if (record.status === '0') {
+          return (
+            <span>
+              <a href onClick={() => signLoan(record.id)}>Sign Loan</a>
+            </span>
+          );
+        }
+      },
+    });
+  }
+
+When ``Borrower`` clicks the ``Sign Loan`` action it triggers the ``signLoan`` function and passes
+Loan Id ``record,id`` as a parameter. ::
+
+  const signLoan = async (loanId) => {
+    try {
+      const accounts = await window.ethereum.enable();
+      await BankLoanContract.methods.signByBorrower(loanId).send({ from: accounts[0] });
+      message.success(`Loan ${loanId} signed`);
+      loadData();
+    } catch (err) {
+      console.log(err);
+      message.error('Error occured while signing Loan');
+    }
+  };
+
+In ``signLoan`` function it calls the ``signByBorrower`` smart contract method and passes the ``loanId``.
+If this transaction successful it display the success message and load data.
+If not it displays the error message.
+
+Bank Approve Loan Event Flows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If Loan is in ``1`` (``BORROWER_SIGNED``) state ``Action`` column enables ``Approve`` and ``Reject`` actions to the ``Bank`` user. ::
+
+  if (record.status === '1') {
+    actionBlock =
+      <span>
+        <a href onClick={() => showApproveModal(record.id)}>Approve</a>
+        <Divider type="vertical" />
+        <a href onClick={() => showRejectModal(record.id)} style={{ color: 'red' }}>Reject</a>
+      </span>;
+  }
+
+When ``Bank`` user clicks the ``Approve`` action it triggers the ``showApproveModal`` function and passes the 
+Loan Id ``record.id`` value as a parameter. ::
+
+  const showApproveModal = (value) => {
+    setId(value);
+    setIsApproveModalVisible(true);
+  };
+
+``showApproveModal`` function first sets the Loan Id as the ``id`` state.
+Then Chnages the ``isApproveModalVisible`` state to ``true``.
+
+This may display the Ant Design Modal component defined in the ``return`` section. ::
+
+  <Modal title={`Approve Loan Request ${id}`} visible={isApproveModalVisible} onOk={handleApprove} onCancel={handleCancel}>
+    <p>Are you sure to approve loan?</p>
+  </Modal>
+
+This modal displays the Loan Id in its title using ``id`` state.
+It displays the confirmation messsage in the Modal body.
+When user clicks the ``Ok`` button of this modal it triggers the ``handleApprove`` function. ::
+
+  const handleApprove = async () => {
+    await approveLoan();
+    setIsApproveModalVisible(false);
+  };
+
+In ``handleApprove`` function first it triggers the ``approveLoan`` function.
+Then it removes the current Modal for the UI by changing the ``isApproveModalVisible`` to false. ::
+
+  const approveLoan = async () => {
+    try {
+      const accounts = await window.ethereum.enable();
+      await BankLoanContract.methods.approveLoan(id).send({ from: accounts[0] });
+      message.success(`Loan ${id} approved`);
+      loadData();
+    } catch (err) {
+      message.error('Error occured while approving the Loan');
+    }
+  };
+
+In ``approveLoan`` function it calls the ``approveLoan`` method of the ``BankLoan`` smart contract 
+using selected wallet address in the ``MetaMask``.
+
+
+
+
+
+
