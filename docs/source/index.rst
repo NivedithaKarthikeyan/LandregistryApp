@@ -9,6 +9,11 @@
 Welcome to Microfinance dApp Documentation
 ==========================================
 
+
+.. image:: ../images/tcard_microfinance.png
+
+..
+
 .. toctree::
    :maxdepth: 2
    :caption: Introduction
