@@ -51,16 +51,16 @@ If we didn't deploy any smart contract, the network object is empty and this res
 Smart Contract Objects
 ----------------------
 
-Next target is to create contract objects for our smart contracts within the application to ineract with them. ::
+We need to create contract objects for smart contracts within the application to order to interact with them. ::
 
 	const UserIdentityContract = new web3.eth.Contract(UserIdentityArtifact.abi, userIdentityAddress);
 	const MicroTokenContract = new web3.eth.Contract(MicroTokenArtifact.abi, microTokenAddress);
 	const BankLoanContract = new web3.eth.Contract(BankLoanArtifact.abi, bankLoanAddress);
 
-we can use ``web3.eth.Contract(..)`` method to create contract intances and we pass contract abi and its address.
-We use the above smart contract imports and pass their ``abi`` and smart contract addresses we capture in previos code snippet.
+We use the ``web3.eth.Contract(..)`` method to create contract intances and we pass contract ABI and its address.
+We use the above smart contract imports and pass their ``abi`` and smart contract addresses we captured in the previous code snippet.
 
-Finally we create a ``context`` with all the objects we defined which is usefull throughout the application. ::
+Finally, we create a ``context`` with all the objects we defined for use throughout the application. ::
 
 	const context = { MicroTokenContract, UserIdentityContract, BankLoanContract };
 
@@ -75,7 +75,7 @@ We return SmartContractContext as follows. ::
 Complete smartContractContext Script
 ------------------------------------
 
-Complete ``userContext`` script. ::
+::
 
 	import React, { createContext } from 'react';
 	import Web3 from 'web3';
