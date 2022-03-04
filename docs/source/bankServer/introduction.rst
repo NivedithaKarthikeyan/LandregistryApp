@@ -49,8 +49,8 @@ Here are the project dependencies defined in the ``package.json`` file. ::
 Prerequisites
 -------------
 
-Mongo DB - Run MongoDB on your machine before you start the **Bank Web Server**.
-You can refer to the :ref:`mongo db install target` section to install and run the MongoDB in your computer.
+Run MongoDB on your machine before you start the **Bank Web Server**. 
+You can refer to the :ref:`mongo db install target` section on how to install and run MongoDB in your computer.
 
 
 
