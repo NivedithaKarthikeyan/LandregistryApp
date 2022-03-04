@@ -7,22 +7,21 @@ Here is the ``truffle-config.js`` script for this project. ::
     const HDWalletProvider = require('@truffle/hdwallet-provider');
 
     module.exports = {
-
-    networks: {
-        development: {
-        host: "127.0.0.1",     // Localhost (default: none)
-        port: 7545,            // Standard Ethereum port (default: none)
-        network_id: "*",       // Any network (default: none)
+        networks: {
+            development: {
+                host: "127.0.0.1",     // Localhost (default: none)
+                port: 7545,            // Standard Ethereum port (default: none)
+                network_id: "*",       // Any network (default: none)
+            },
         },
-    },
 
-    // Configure your compilers
-    compilers: {
-        solc: {
-        version: "0.8.1",    // Fetch exact version from solc-bin (default: truffle's version)
-        ...
-        }
-    },
+        // Configure your compilers
+        compilers: {
+            solc: {
+                version: "0.8.1",    // Fetch exact version from solc-bin (default: truffle's version)
+                ...
+            }
+        },
     };
 
 As described in the :ref:`deploy-to-ropsten` section, first we add the ``secrets.json`` file and ``hdwallet-provider`` dependency.
