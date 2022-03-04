@@ -16,21 +16,19 @@ API Layer
 ---------
 
 The **Bank Web Server** servers two routes (incoming requests): ``/loan-plans`` and ``/loan-payments``.
-As mentioned in the :ref:`bank-indexjs` section, requests coming to these routes will redirect to
+As mentioned in the :ref:`bank-indexjs` section, requests coming to these routes directed to
 the ``routes/plans`` and ``routes/payments`` scripts.
 
- 
+Both routes work in the same manner. 
+We use the Plan route as an example to illustrate how it is handled.
 
-Both the routes will work in same manner. 
-We will take Plan route as an example to describe following sections.
-
-In ``routes/plans`` script first we import required dependencies as follows. ::
+The ``routes/plans`` script first import required dependencies: ::
 
     const Express = require('express') // Define Express web framework
     const router = Express.Router() // Import router module from Express.
     const planService = require('../services/planService'); // Import plan service script.
 
-``plans`` router serves 4 HTTP request methods (GET, POST, PATCH, and DELETE).
+The ``plans`` router serves 4 HTTP request methods **GET**, **POST**, **PATCH**, and **DELETE**.
 
 **Get All Loan Plans**
 
