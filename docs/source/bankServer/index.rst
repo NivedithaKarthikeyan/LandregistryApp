@@ -10,7 +10,11 @@ As indicated in the ``package.json`` file, when we start the ``bank-server`` app
         ...
     }
 
-In ``index.js``, first we import the dependencies that are needed to run the ``bank-server``. ::
+
+
+In ``index.js``, we define the three kinds of incoming requests that the bank server will handle.
+
+First, we import the dependencies that are needed to run the ``bank-server``. ::
 
     const Express = require('express')
     const mongoose = require('mongoose') 
@@ -43,9 +47,7 @@ Next we define an Express web server called ``app`` as follows. ::
     
     const app = Express()
 
-We define routes in separate files. Each route handles a client request.  In web development, a route directs the request to the code that handles it.  We need to import them into the ``index.js`` file to use them.
-In this project, we define two routes ``/loan-plans`` and ``/loan-payments`` to handle loan requests and payment requests from the web app.
-Requests will be handled by the two scripts in the ``routes`` directory: ::
+We define two routes ``/loan-plans`` and ``/loan-payments`` to handle loan and payment requests respectively from the web app.  In web application development, a route directs the request to the code that handles it.  These two requests are handled by the two scripts in the ``routes`` directory: ::
 
     //Import Routes
     const plansRoute = require('./routes/plans');
@@ -62,7 +64,9 @@ We enable Swagger API documentation in ``/api-docs`` route as follows. ::
 
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs)) // Swagger documentation.
 
-The following two lines redirect any request to the ``/loan-plans`` and ``/loan-payments`` 
+This is the third request handled by the bank server.
+
+The following two lines redirect any incoming request to the ``/loan-plans`` and ``/loan-payments`` 
 to the respective scripts: ::
 
     app.use('/loan-plans', plansRoute);
@@ -85,6 +89,6 @@ The following code connects the **Bank Web Server** to the MongoDB. ::
             console.log('connected to Bank DB')
     })
 
-The **Bank Web Server** connects to port ``9091``: ::
+The **Bank Web Server** connects to port ``9091`` to wait for incoming requests: ::
 
     app.listen(9091)
