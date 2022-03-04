@@ -1,3 +1,5 @@
+.. _bank-indexjs:
+
 index.js
 ========
 
