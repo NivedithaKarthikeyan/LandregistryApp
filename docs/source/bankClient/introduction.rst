@@ -1,14 +1,14 @@
 Overview 
 ================================
 
-This section describes the important functions of the **Bank Web Application**.
-**Bank Web Application** developed using ``Next.js``.
-It's resides inside the ``bank-web-app`` directory.
+This section describes important functions of the **Bank Web Application**.
+This app is developed using ``Next.js``.
+It resides in the ``bank-web-app`` directory.
 
 Project Structure
 ------------------
 
-Here is the structure of the **Bank Web Application**. ::
+Here is the structure of the **Bank Web Application**: ::
 
     bank-web-app
     |--components
@@ -20,11 +20,11 @@ Here is the structure of the **Bank Web Application**. ::
     |--util
     |--package.json
 
-* ``components`` - Directory for the application components.
-* ``node_modules`` - Directory of node modules.
-* ``pages`` - Directory of pages with dynamic routes.
-* ``public`` - Directory of static files.
-* ``stores`` - Directory of Application Context files.
+* ``components`` - Application components.
+* ``node_modules`` - Node modules.
+* ``pages`` - Pages with dynamic routes.
+* ``public`` - Static files.
+* ``stores`` - Application context files.
 * ``styles`` - Default style files.
 * ``util`` - Utility scripts.
 * ``package.json`` - Project dependencies and configurations.
