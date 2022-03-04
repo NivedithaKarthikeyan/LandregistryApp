@@ -1,12 +1,12 @@
 Smart Contract Context
 ======================
 
-``SmartContractContext`` provides the smart contract instances and ``web3`` instance.
+``SmartContractContext`` enables the system to connect to smart contract instances and the ``web3`` instance.
 
 Import Dependencies
 -------------------
 
-list of dependencies of userContext. ::
+Dependencies of userContractContext. ::
 
 	import React, { createContext } from 'react';
 	import Web3 from 'web3';
@@ -14,39 +14,39 @@ list of dependencies of userContext. ::
 	import BankLoanArtifact from '../../blockchain/build/contracts/BankLoan.json';
 	import UserIdentityArtifact from '../../blockchain/build/contracts/UserIdentity.json';
 
-First we import React and its ``createContext`` hook.
-Next we import Web3 to interact with Ethereum blockchain smart contracts.
+We import React and its ``createContext`` hook.
+We import Web3 to allow the system to interact with Ethereum blockchain smart contracts.
 
-Then we import 3 smart contract json files. These were directly import from ``blockchain/build/contracts`` directory for simplicity.
-Any changes will be made in the smart contracts will reflect in the app as well.
+Then we import 3 smart contract json files. These were directly imported from the ``blockchain/build/contracts`` directory for simplicity.
+Any changes made to the smart contracts will be reflected in the app.
 
 Web3 Provider
 -------------
 
-The following code line will setup initialize the web3. ::
+The following code line initializes web3. ::
 
     const web3 = new Web3(Web3.givenProvider || 'http://127.0.0.1:7545');
 
-If this application run on a Ethereum compatible browser then  it will set with the current native provider by that browser.
-It will return the given provider by the (browser) environment. We already config the MetaMask in our browser.
-If not it will connects to `http://127.0.0.1:7545` (Ganache). 
+If this application runs on an Ethereum compatible browser, it will be set as the current native provider by the browser.
+It returns the current given provider of the (browser) environment, assuming MetaMask has been configured in the browser.
+Otherwise, it will connect to the local blockchain at `http://127.0.0.1:7545` (Ganache). 
 
-Smart Contract Addresses
+Smart Contract Address
 ------------------------
 
-The following code snippet config the smart contract addresses. ::
+The following code configures the three smart contract addresses. ::
 
 	// Smart Contract Addresses
 	const microTokenAddress = MicroTokenArtifact.networks[5777].address;
 	const userIdentityAddress = UserIdentityArtifact.networks[5777].address;
 	const bankLoanAddress = BankLoanArtifact.networks[5777].address;
 
-We refer to all the ``.json`` imports of the smart contracts and refere their network configurations.
-``5777`` is Ganache blockchain id. 
-When we use the Ganache local blockchain we use network ``5777``.
+We refer to all the ``.json`` imports of the smart contracts and refer to their network configurations.
+``5777`` is the Ganache blockchain id. 
+When we use Ganache local blockchain, we use network ``5777``.
 
-It will create a network object for each network we deploy our contracts.
-If we didn't deploy the smart contracts then network object will empty and there will be an error.
+This creates a network object for each network that we deployed our contracts.
+If we didn't deploy any smart contract, the network object is empty and this results in error.
 
 Smart Contract Objects
 ----------------------
