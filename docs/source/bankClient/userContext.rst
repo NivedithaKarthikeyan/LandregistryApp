@@ -104,7 +104,7 @@ We define the context value and pass the ``user`` state and ``login`` function. 
 
 	const context = { user, login };
 
-This object will pass as the Context Provide value parameter as follows. ::
+This object will pass as the Context Provider value parameter as follows. ::
 
 	return (
 		<UserContext.Provider value={context}>
@@ -117,7 +117,7 @@ This ``user`` state and ``login`` function can be accessed by any script in the 
 Complete userContext Script
 ---------------------------
 
-Complete ``userContext`` script. ::
+::
 
     import React, { createContext, useState, useEffect } from 'react';
 	import { useRouter } from 'next/router';
