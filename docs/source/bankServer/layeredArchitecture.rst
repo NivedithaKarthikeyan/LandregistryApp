@@ -206,23 +206,23 @@ Then it uses the ``save`` Mongoos Query to save the new Loan Plan in the MongoDB
 
 **updatePlan()**
 
-In this function it will update the existing Loan Plan specified by the Loan Plan Id.
-It will get the Loan Plan Id from the request url and updated fields from the request body.
-It will use the ``updateOne``Mongoose Query to update the object in the MongoDB.
+Update the existing Loan Plan specified by the Loan Plan Id.
+This function gets the Loan Plan Id from the request url and updated fields from the request body.
+It uses the ``updateOne``Mongoose Query to update the object in the MongoDB.
 
 **deletePlan()**
 
-This function will delete the Loan Plan in the MongoDB using ``deleteOne`` Mongoose Query.
-The Loan Plan Id will send as a request url parameter.
+Delete the Loan Plan in MongoDB using the ``deleteOne`` Mongoose Query.
+The Loan Plan Id is sent as a request url parameter.
 
 Data Layer
 -----------
 
-Data Layer represent the MongoDB.
+The Data Layer corresponds to the schema and tables in MongoDB.
 This node server uses Mongoose to interact with the MongoDB.
 It defines the schemas in the ``models`` directory.
 
-We defined the Plans Schema as follows. ::
+The Plans Schema is defined as follows. ::
 
     const mongoose = require('mongoose')
 
@@ -252,7 +252,7 @@ We defined the Plans Schema as follows. ::
     module.exports = mongoose.model('Plans', PlanSchema)
 
 We use the auto generated ``_id`` field for the Loan Plans.
-Other than that Loan Plan has 5 fields. 
+Other than that, the Loan Plan has 5 fields. 
 
 * ``minMonths`` - Minimum duration of a Loan.
 * ``maxMonth`` - Maximum duration of a Loan.
@@ -260,5 +260,5 @@ Other than that Loan Plan has 5 fields.
 * ``maxAmount`` - Maximum tokens amount of the Loan.
 * ``interest`` - Interest rate of a Loan.
 
-Each field was defined with it's type and required status.
-These Schemas were used in the ``planService`` to query the MongoDB.
+Each field is defined with its type and required status.
+These Schemas are used in the ``planService`` to query the MongoDB.
