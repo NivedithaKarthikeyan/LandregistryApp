@@ -15,7 +15,7 @@ const addBorrower = async () => {
     const signer = await provider.getSigner()
     console.log(await signer.getAddress());
     const contractSigner = await contract.connect(signer);
-    contractSigner.addBorrower("3455", accounts[2], 'Borrower 1');
+    contractSigner.addBorrower("3455", accounts[2], 'Rajesh Koothrapali');
 }
 
 const addBroker = async () => {
@@ -23,7 +23,7 @@ const addBroker = async () => {
     const signer = await provider.getSigner()
     const contract = new ethers.Contract(UserIdentityBuild.networks[5777].address, UserIdentityBuild.abi, provider);
     const contractSigner = await contract.connect(signer);
-    await contractSigner.addBroker("2345", accounts[1], 'Broker 1');
+    await contractSigner.addBroker("2345", accounts[1], 'Leonard Hofstadter');
 }
 
 const run = async () => {

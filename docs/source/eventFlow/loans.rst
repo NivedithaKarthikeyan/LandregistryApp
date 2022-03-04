@@ -138,7 +138,7 @@ follows. ::
   const getBrokers = async () => {
     const response = await UserIdentityContract.methods.getAllBrokers().call();
     for (let i = 0; i < response.length; i++) {
-      brokers[response[i].userAddress] = response[i].name;
+      brokers[response[i].walletAddress] = response[i].name;
     }
   };
 
@@ -153,7 +153,7 @@ This function will update the ``borrowers`` object by mapping the ``Borrowers`` 
   const getBorrowers = async () => {
     const response = await UserIdentityContract.methods.getAllBorrowers().call();
     for (let i = 0; i < response.length; i++) {
-      borrowers[response[i].userAddress] = response[i].name;
+      borrowers[response[i].walletAddress] = response[i].name;
     }
   };
 
@@ -227,7 +227,7 @@ It uses the spread operator ``...prev`` in the ``setData`` method below. ::
     }
   };
 
-Loan Initial Data
+Load Initial Data
 ~~~~~~~~~~~~~~~~~
 
 Above 4 functions will load the essential data to be displayed in the ``Loans Table``.
@@ -325,3 +325,107 @@ Complete ``useEffect`` hook script. ::
       emitter.unsubscribe();
     };
   }, []);
+
+Initial Loan Table Columns
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As we mentioned above Loans Table is displayed for all 3 user roles.
+``LoansTable`` component defines the ``columns`` array which contains the Loans Table columns. ::
+
+  const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+    },
+    {
+      title: 'Borrower Name',
+      dataIndex: 'borrowerName',
+      key: 'borrowerName',
+    },
+    {
+      title: 'Broker Name',
+      dataIndex: 'brokerName',
+      key: 'brokerName',
+    },
+    {
+      title: 'Amount',
+      dataIndex: 'amount',
+      key: 'amount',
+    },
+    {
+      title: 'Period',
+      dataIndex: 'period',
+      key: 'period',
+    },
+    {
+      title: 'Interest %',
+      key: 'interest',
+      dataIndex: 'interest',
+    },
+    {
+      title: 'Broker Fee',
+      key: 'brokerFee',
+      dataIndex: 'brokerFee',
+    },
+    {
+      title: 'Plan ID',
+      key: 'planId',
+      dataIndex: 'planId',
+    },
+    {
+      title: 'Status',
+      key: 'status',
+      dataIndex: 'status',
+      render: tag => {
+        let color = 'geekblue';
+        if (tag === '3' || tag === '6') {
+          color = 'red';
+        } else if (tag === '2' || tag === '5') {
+          color = 'green';
+        }
+        return (
+          <Tag color={color} key={tag}>
+            {state[tag]}
+          </Tag>
+        );
+      },
+    },
+  ];
+
+All columns objects have following properties.
+
+* ``title`` - Column name.
+* ``dataIndex`` - Loan object property to disply in the column.
+* ``key`` - Unique identifier for the column.
+
+``Status`` column has ``render`` property to do a conditional rendering. ::
+
+  render: tag => {
+    let color = 'geekblue';
+    if (tag === '3' || tag === '6') {
+      color = 'red';
+    } else if (tag === '2' || tag === '5') {
+      color = 'green';
+    }
+    return (
+      <Tag color={color} key={tag}>
+        {state[tag]}
+      </Tag>
+    );
+  },
+
+This ``Status`` column displays the Loan state using ``Tag`` Ant design component and change the color of the ``Tag`` according to 
+the ``loanState`` value. 
+
+Initial Loan Table view for ``Borrower``. 
+
+.. figure:: ../images/borrower_loan_row.png
+
+Initial Loan Table view for ``Bank``.
+
+.. figure:: ../images/bank_loan_row.png
+
+Initial Loan Table view for ``Broker``.
+
+.. figure:: ../images/broker_loan_row.png

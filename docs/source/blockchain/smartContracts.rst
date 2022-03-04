@@ -163,7 +163,7 @@ User - This struct holds user attributes. ::
     struct User{
         uint id; 
         string socialSecurityId; // each property has an unique social security id
-        address userAddress;
+        address walletAddress;
         string name;
         Role role;
         bool isBankApproved;
@@ -171,7 +171,7 @@ User - This struct holds user attributes. ::
 
 * ``id`` - System assigned id for the user. This is an incremental number.
 * ``socialSecurityId`` - Social security number.
-* ``userAddress`` - User wallet account address (from Ganache or other blockchain).
+* ``walletAddress`` - User wallet account address (from Ganache or other blockchain).
 * ``name`` - User name.
 * ``role`` - User role (BROKER, BORROWER).
 * ``isBankApproved`` - Whether Bank ratifies the user.

@@ -8,7 +8,7 @@ contract UserIdentity{
     struct User{
         uint id; 
         string socialSecurityId; // each property has an unique social security id
-        address userAddress;
+        address walletAddress;
         string name;
         Role role;
     }

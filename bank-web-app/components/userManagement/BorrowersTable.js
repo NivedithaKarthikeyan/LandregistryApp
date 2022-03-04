@@ -15,7 +15,7 @@ function BorrowersTable() {
 		const response = await UserIdentityContract.methods.getAllBrokers().call();
 		// Update the broker address -> name mapping using response
 		for (let i = 0; i < response.length; i++) {
-			brokers[response[i].userAddress] = response[i].name;
+			brokers[response[i].walletAddress] = response[i].name;
 		}
 	};
 

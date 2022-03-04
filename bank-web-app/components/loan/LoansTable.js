@@ -45,14 +45,14 @@ function LoansTable() {
 	const getBrokers = async () => {
 		const response = await UserIdentityContract.methods.getAllBrokers().call();
 		for (let i = 0; i < response.length; i++) {
-			brokers[response[i].userAddress] = response[i].name;
+			brokers[response[i].walletAddress] = response[i].name;
 		}
 	};
 
 	const getBorrowers = async () => {
 		const response = await UserIdentityContract.methods.getAllBorrowers().call();
 		for (let i = 0; i < response.length; i++) {
-			borrowers[response[i].userAddress] = response[i].name;
+			borrowers[response[i].walletAddress] = response[i].name;
 		}
 	};
 
@@ -253,7 +253,6 @@ function LoansTable() {
 			title: 'ID',
 			dataIndex: 'id',
 			key: 'id',
-			render: text => text,
 		},
 		{
 			title: 'Borrower Name',
@@ -427,7 +426,7 @@ function LoansTable() {
 					size="default"
 					labelAlign="left"
 				>
-					<Form.Item label="Borrower address">
+					<Form.Item label="Borrower address" style={{ marginBottom: '0px' }}>
 						<span>{record.borrower}</span>
 					</Form.Item>
 					<Form.Item label="Broker address">

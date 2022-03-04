@@ -66,6 +66,12 @@ contract BankLoan{
         _;
     }
 
+    modifier isBorrower(address _address)
+    {
+        require(identitySC.verifyIsBorrower(_address), 'Borrower Only');
+        _;
+    }
+
     modifier isLoanBorrower(uint _loanId){
         bool isValid = false;
         for(uint i=0; i< loans.length; i++)
@@ -111,7 +117,7 @@ contract BankLoan{
     }
 
     function applyLoan(uint _amount, uint _months, uint _interest, string memory _planId, address _borrower, uint _brokerFee) 
-        public isBroker()
+        public isBroker() isBorrower(_borrower)
     {
         Loan memory l = Loan(loans.length + 1, _amount, _months, _interest, _planId, LoanState.REQUESTED, msg.sender,
         _borrower, _brokerFee, false, false);
