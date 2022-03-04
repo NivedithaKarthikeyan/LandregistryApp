@@ -66,12 +66,11 @@ It passes the GET request to the ``planService.getPlanById()`` function and retu
         }
     })
 
-This request has Loan Plan Id as a parameter in the url, but no json object in the request body.
+This request has the Loan Plan Id as a parameter in the url, but no json object in the request body.
 
 **Save Loan Plan**
 
-When user sends a POST request to the ``/loan-plans`` it will pass the request to the ``planService.createPlan()`` 
-function and returns the saved loan plan. ::
+When a user sends a POST request to the ``/loan-plans`` via the web app, this function passes the request to ``planService.createPlan()`` which returns the saved loan plan. ::
 
     router.post('/', async (req, res) => {
         try {
@@ -85,12 +84,11 @@ function and returns the saved loan plan. ::
         }
     })
 
-These requests contains no parameters in the url but json object in the request body.
+This request has no parameter in the url but has a json object in the request body.
 
 **Update Loan Plan**
 
-When user sends PATCH request to the ``/loan-plans`` it will update the existing Loan Plan in the MongoDB 
-specified by the Loan Plan Id. It will call the ``planService.updatePlan()`` function with the request and return the 
+When a user sends a PATCH request to the ``/loan-plans`` via the web app, the function updates the existing Loan Plan corresponding to Loan Plan Id stored in MongoDB.  It calls the ``planService.updatePlan()`` function, which returns the 
 updated Loan Plan. ::
 
     router.patch('/:planId', async (req, res) => {
@@ -105,7 +103,7 @@ updated Loan Plan. ::
         }
     })
 
-These requests contain Loan Plan Id in the url and Loan Plan json object in the request body.
+This request has the Loan Plan Id as a parameter in the url and the Loan Plan json object in the request body.
 
 **Delete Loan Plan**
 
@@ -129,10 +127,10 @@ and returns the deleted Loan Plan. ::
         }
     })
 
-These requests contains the Loan Plan Id in request url and no json objects in the request body.
+This request has the Loan Plan Id as a parameter in the url, but no json object in the request body.
 
-After run your **Bank Web Server** you can navigate to ``localhost:9091/api-docs`` to see the
-full Swagger API documentation for all APIs server by **Bank Web Server**.
+With **Bank Web Server** up and running, we can navigate to ``localhost:9091/api-docs`` to see the
+full Swagger API documentation for all APIs served by **Bank Web Server**.  This is not an essential feature but nice to have it.
 
 Service Layer
 -------------
