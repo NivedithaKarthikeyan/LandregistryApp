@@ -1,14 +1,14 @@
 Layered Architecture
 ====================
 
-**Bank Web Server** follows a layered architecture.
-It consists of theree layers.
+The **Bank Web Server** follows a layered architecture.
+It consists of three layers.
 
-* API Layer - API of the Bank Web Server.
-* Service Layer - Implemets the server side logics.
-* Data Layer - Implements database logics.
+* API Layer - APIs for the Bank Web Server.
+* Service Layer - Implemet server side logic.
+* Data Layer - Implement database logic.
 
-Following diagram shows the layered architecture of the **Bank Web Server**.
+This diagram shows the layered architecture of the **Bank Web Server**.
 
 .. image:: ../images/bank-server-architecture.png 
 
