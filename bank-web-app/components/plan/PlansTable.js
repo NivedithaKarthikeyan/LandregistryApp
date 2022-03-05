@@ -90,6 +90,7 @@ function PlansTable({ togglePlan }) {
 			icon: <CloseCircleOutlined style={{ color: 'red' }} />,
 			content: `Delete Loan Plan ${planId}`,
 			okText: 'Delete',
+			okType: 'primary-danger',
 			onOk: async () => {
 				try {
 					// Calls <Bank Server URL>/loan-plans DELETE HTTP method.

@@ -716,7 +716,7 @@ This may display the Ant Design Modal component defined in the ``return`` sectio
 
 This modal displays the Loan Id in its title using ``id`` state.
 It displays the confirmation messsage in the Modal body.
-When user clicks the ``Ok`` button of this modal it triggers the ``handleApprove`` function. ::
+When user clicks the ``OK`` button of this modal it triggers the ``handleApprove`` function. ::
 
   const handleApprove = async () => {
     await approveLoan();
@@ -740,8 +740,59 @@ Then it removes the current Modal for the UI by changing the ``isApproveModalVis
 In ``approveLoan`` function it calls the ``approveLoan`` method of the ``BankLoan`` smart contract 
 using selected wallet address in the ``MetaMask``.
 
+Bank Reject Loan Event Flows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Second action enabled for the loan state ``1`` (``BORROWER_SIGNED``) is ``Reject`` action for the ``Bank`` users. ::
 
+  if (record.status === '1') {
+    actionBlock =
+      <span>
+        <a href onClick={() => showApproveModal(record.id)}>Approve</a>
+        <Divider type="vertical" />
+        <a href onClick={() => showRejectModal(record.id)} style={{ color: 'red' }}>Reject</a>
+      </span>;
+  }
 
+When ``Bank`` user clicks the ``Reject`` action it triggers the ``showRejectModal`` function and passes the 
+Loan Id ``record.id`` value as a parameter. ::
 
+  const showRejectModal = (value) => {
+    setId(value);
+    setIsRejectModalVisible(true);
+  };
 
+``showRejectModal`` function first sets the Loan Id as the ``id`` state.
+Then Chnages the ``isRejectModalVisible`` state to ``true``.
+
+This may display the Ant Design Modal component defined in the ``return`` section. ::
+
+  <Modal title={`Reject Loan Request ${id}`} visible={isRejectModalVisible} onOk={handleReject} onCancel={handleCancel}>
+    <p>Reject loan request?</p>
+  </Modal>
+
+This modal displays the Loan Id in its title using ``id`` state.
+It displays the confirmation messsage in the Modal body.
+When user clicks the ``OK`` button of this modal it triggers the ``handleReject`` function. ::
+
+  const handleReject = async () => {
+    await rejectLoan();
+    setIsRejectModalVisible(false);
+  };
+
+In ``handleReject`` function first it triggers the ``rejectLoan`` function.
+Then it removes the current Modal for the UI by changing the ``isRejectModalVisible`` to false. ::
+
+  const rejectLoan = async () => {
+    try {
+      const accounts = await window.ethereum.enable();
+      await BankLoanContract.methods.rejectLoan(id).send({ from: accounts[0] });
+      message.success(`Loan ${id} rejected`);
+      loadData();
+    } catch (err) {
+      message.error('Error occured while rejecting the Loan');
+    }
+  };
+
+In ``rejectLoan`` function it calls the ``rejectLoan`` method of the ``BankLoan`` smart contract 
+using selected wallet address in the ``MetaMask``.

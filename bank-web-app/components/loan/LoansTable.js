@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Table, Tag, Card, Divider, message, Modal, Form, Space, Button } from 'antd';
+import { CloseCircleOutlined } from '@ant-design/icons';
 import { getApi } from '../../util/fetchApi';
 import UserContext from '../../stores/userContext';
 import SmartContractContext from '../../stores/smartContractContext';
@@ -11,16 +12,15 @@ function LoansTable() {
 	const { user } = useContext(UserContext);
 	const { MicroTokenContract, BankLoanContract, UserIdentityContract } = useContext(SmartContractContext);
 
+	const { confirm } = Modal;
+
 	// Define Bank Loan states.
 	// These states should be in order as defined in the Bank Loan smart contract.
 	const state = ['REQUESTED', 'BORROWER_SIGNED', 'BANK_APPROVED', 'BANK_REJECTED',
 		'PAID_TO_BROKER', 'ONGOING', 'DEFAULT', 'CLOSE'];
 
-	const [isApproveModalVisible, setIsApproveModalVisible] = useState(false); // Loan approve confirmation modal visibility state.
-	const [isRejectModalVisible, setIsRejectModalVisible] = useState(false); // Loan remove modal visibility state.
 	const [isBrokerTransferModalVisible, setIsBrokerTransferModalVisible] = useState(false);
 	const [isBorrowerTransferModalVisible, setIsBorrowerTransferModalVisible] = useState(false);
-	const [id, setId] = useState(0);
 	const [loanRecord, setLoanRecord] = useState({});
 	const [current, setCurrent] = useState(0);
 	const [payments, setPayments] = useState([]);
@@ -153,26 +153,44 @@ function LoansTable() {
 		}
 	};
 
-	const approveLoan = async () => {
+	const approveLoan = async (loanId) => {
 		try {
 			const accounts = await window.ethereum.enable();
-			await BankLoanContract.methods.approveLoan(id).send({ from: accounts[0] });
-			message.success(`Loan ${id} approved`);
+			await BankLoanContract.methods.approveLoan(loanId).send({ from: accounts[0] });
+			message.success(`Loan ${loanId} approved`);
 			loadData();
 		} catch (err) {
 			message.error('Error occured while approving the Loan');
 		}
 	};
 
-	const rejectLoan = async () => {
+	const confirmLoanApprove = (loanId) => {
+		confirm({
+			content: `Approve Loan ${loanId} ?`,
+			okText: 'Approve Loan',
+			onOk: () => approveLoan(loanId),
+		});
+	};
+
+	const rejectLoan = async (loanId) => {
 		try {
 			const accounts = await window.ethereum.enable();
-			await BankLoanContract.methods.rejectLoan(id).send({ from: accounts[0] });
-			message.success(`Loan ${id} rejected`);
+			await BankLoanContract.methods.rejectLoan(loanId).send({ from: accounts[0] });
+			message.success(`Loan ${loanId} rejected`);
 			loadData();
 		} catch (err) {
 			message.error('Error occured while rejecting the Loan');
 		}
+	};
+
+	const confirmLoanReject = (loanId) => {
+		confirm({
+			icon: <CloseCircleOutlined style={{ color: 'red' }} />,
+			content: `Reject Loan ${loanId} ?`,
+			okText: 'Reject Loan',
+			okType: 'danger',
+			onOk: () => rejectLoan(loanId),
+		});
 	};
 
 	const signLoan = async (loanId) => {
@@ -211,16 +229,6 @@ function LoansTable() {
 		}
 	};
 
-	const showApproveModal = (value) => {
-		setId(value);
-		setIsApproveModalVisible(true);
-	};
-
-	const showRejectModal = (value) => {
-		setId(value);
-		setIsRejectModalVisible(true);
-	};
-
 	const showBrokerTransferModal = (row) => {
 		setLoanRecord(row);
 		setIsBrokerTransferModalVisible(true);
@@ -231,19 +239,7 @@ function LoansTable() {
 		setIsBorrowerTransferModalVisible(true);
 	};
 
-	const handleApprove = async () => {
-		await approveLoan();
-		setIsApproveModalVisible(false);
-	};
-
-	const handleReject = () => {
-		rejectLoan();
-		setIsRejectModalVisible(false);
-	};
-
 	const handleCancel = () => {
-		setIsApproveModalVisible(false);
-		setIsRejectModalVisible(false);
 		setIsBrokerTransferModalVisible(false);
 		setIsBorrowerTransferModalVisible(false);
 	};
@@ -336,9 +332,9 @@ function LoansTable() {
 				if (record.status === '1') {
 					actionBlock =
 						<span>
-							<a href onClick={() => showApproveModal(record.id)}>Approve</a>
+							<a href onClick={() => confirmLoanApprove(record.id)}>Approve</a>
 							<Divider type="vertical" />
-							<a href onClick={() => showRejectModal(record.id)} style={{ color: 'red' }}>Reject</a>
+							<a href onClick={() => confirmLoanReject(record.id)} style={{ color: 'red' }}>Reject</a>
 						</span>;
 				} else if (record.status === '2') {
 					actionBlock =
@@ -449,12 +445,6 @@ function LoansTable() {
 					}}
 				/>
 			</Card>
-			<Modal title={`Approve Loan Request ${id}`} visible={isApproveModalVisible} onOk={handleApprove} onCancel={handleCancel}>
-				<p>Are you sure to approve loan?</p>
-			</Modal>
-			<Modal title={`Reject Loan Request ${id}`} visible={isRejectModalVisible} onOk={handleReject} onCancel={handleCancel}>
-				<p>Reject loan request?</p>
-			</Modal>
 			<Modal
 				title={`Transfer Tokens to Broker - Loan Id ${loanRecord.id}`}
 				visible={isBrokerTransferModalVisible}
