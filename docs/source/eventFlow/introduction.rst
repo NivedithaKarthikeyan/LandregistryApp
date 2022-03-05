@@ -44,5 +44,4 @@ There are three main areas in the app layout; Header, Left Panel and Main Conten
 
 We will discuss more about 
  - How to persist the layout across the UI.
- - How to load pages according to routes displayed in the browser's address bar.
-using Next.js ``_app`` component and ``BasicLayout`` component in ``level2`` documentation.
+ - How to load pages according to routes displayed in the browser's address bar using Next.js ``_app`` component and ``BasicLayout`` component in ``level2`` documentation.
