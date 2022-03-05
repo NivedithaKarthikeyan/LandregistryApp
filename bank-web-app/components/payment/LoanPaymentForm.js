@@ -37,7 +37,7 @@ function LoanPaymentForm() {
 	};
 
 	return (
-		<Card title="Update Loan Payment">
+		<Card title="Loan Payment Update Form">
 			<Form
 				labelCol={{
 					lg: 5,

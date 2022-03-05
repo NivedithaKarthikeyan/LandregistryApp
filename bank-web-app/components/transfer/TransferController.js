@@ -113,7 +113,7 @@ function TransferController() {
 
 	return (
 		<Card
-			title="Transfer Micro Tokens"
+			title="Microfinance Token Transfer Form"
 			extra={<a href onClick={getBalance}>Refresh Balance</a>}
 		>
 			{/* This will show the balance state value in the web page */}
