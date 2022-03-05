@@ -1,12 +1,12 @@
 Smart Contract Context
 ======================
 
-``SmartContractContext`` enables the system to connect to smart contract instances and the ``web3`` instance.
+``SmartContractContext`` enables the system to connect to deployed smart contract instances.  It also defines a ``web3`` instance for interaction with a running blockchain.
 
 Import Dependencies
 -------------------
 
-Dependencies of userContractContext. ::
+Dependencies of userContractContext: ::
 
 	import React, { createContext } from 'react';
 	import Web3 from 'web3';
@@ -17,35 +17,34 @@ Dependencies of userContractContext. ::
 We import React and its ``createContext`` hook.
 We import Web3 to allow the system to interact with Ethereum blockchain smart contracts.
 
-Then we import 3 smart contract json files. These were directly imported from the ``blockchain/build/contracts`` directory for simplicity.
-Any changes made to the smart contracts will be reflected in the app.
+Then we import 3 smart contract json files from the ``blockchain/build/contracts`` directory into objects, to be used below.
+Each json file contains the latest information (e.g., ABI) of the corresponding compiled smart contract.  Any changes made to the smart contract is reflected in the json file, and once imported, made available to the web app to use.
 
 Web3 Provider
 -------------
 
-The following code line initializes web3. ::
+The following code line initializes the ``web3`` instance from one of two sources: ::
 
     const web3 = new Web3(Web3.givenProvider || 'http://127.0.0.1:7545');
 
-If this application runs on an Ethereum compatible browser, it will be set as the current native provider by the browser.
-It returns the current given provider of the (browser) environment, assuming MetaMask has been configured in the browser.
-Otherwise, it will connect to the local blockchain at `http://127.0.0.1:7545` (Ganache). 
+If the web application runs on an Ethereum compatible browser, the current given provider of the (browser) environment is used, assuming MetaMask has been configured in the browser.
+Otherwise, ``web3`` connects to the local blockchain running at `http://127.0.0.1:7545` (Ganache). 
 
 Smart Contract Address
 ------------------------
 
-The following code configures the three smart contract addresses. ::
+The following code obtains three smart contract addresses and assigns them to objects for use: ::
 
 	// Smart Contract Addresses
 	const microTokenAddress = MicroTokenArtifact.networks[5777].address;
 	const userIdentityAddress = UserIdentityArtifact.networks[5777].address;
 	const bankLoanAddress = BankLoanArtifact.networks[5777].address;
 
-We refer to all the ``.json`` imports of the smart contracts and refer to their network configurations.
+Using the artifact objects initialized earlier, we refer to to the network configurations where
 ``5777`` is the Ganache blockchain id. 
 When we use Ganache local blockchain, we use network ``5777``.
 
-This creates a network object for each network that we deployed our contracts.
+This creates a network object for the system to refer to the deployed smart contract instances, to be used below.
 If we didn't deploy any smart contract, the network object is empty and this results in error.
 
 Smart Contract Objects
@@ -58,13 +57,13 @@ We need to create contract objects for smart contracts within the application to
 	const BankLoanContract = new web3.eth.Contract(BankLoanArtifact.abi, bankLoanAddress);
 
 We use the ``web3.eth.Contract(..)`` method to create contract intances and we pass contract ABI and its address.
-We use the above smart contract imports and pass their ``abi`` and smart contract addresses we captured in the previous code snippet.
+As you can see, we are have ``abi`` and address of the deployed smart contract instance, the two key information to interact with the smart contracts in the blockchain.
 
-Finally, we create a ``context`` with all the objects we defined for use throughout the application. ::
+Finally, we create a ``context`` with all the objects for use throughout the application. ::
 
 	const context = { MicroTokenContract, UserIdentityContract, BankLoanContract };
 
-We return SmartContractContext as follows. ::
+We return SmartContractContext as the output of the smart contract provider: ::
 
     return (
 		<SmartContractContext.Provider value={context}>
