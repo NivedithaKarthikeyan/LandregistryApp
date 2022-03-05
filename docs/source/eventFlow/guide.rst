@@ -9,10 +9,10 @@ To further understand the files and code in the Microfinance dApp system, we ill
    :maxdepth: 2
    :caption: Overview
 
-   eventFlow/introduction
-   eventFlow/readFromSmartContract
-   eventFlow/saveValuesToSmartContract
-   eventFlow/applyLoan
-   eventFlow/createLoanPlan
-   eventFlow/plansTable
-   eventFlow/loans
+   ./introduction
+   ./readFromSmartContract
+   ./saveValuesToSmartContract
+   ./applyLoan
+   ./createLoanPlan
+   ./plansTable
+   ./loans
