@@ -34,15 +34,15 @@ The address bar shows ``localhost:3005/common/loans``.
 This loads the script in ``pages/common/loans.js`` in the browser.
 This script displays the ``Current Loans`` table in the browser.
 
-As shown in the above screenshots **Microfinance - Bank UI** layout common for all users.
-There are three main areas in the **Microfinance - Bank UI** layout; Header, Left Panel and Main Content Area. 
+As shown in the above screenshots, the UI layout is common for all user roles.
+There are three main areas in the app layout; Header, Left Panel and Main Content Area. 
 
 .. figure:: ../images/layout_components.png
 
-``Left Panle`` loads the menu according to the selected user role.
+``Left Panel`` loads a menu according to the selected user role.
 ``Main Content Area`` loads the scripts according to the selected menu item.
 
 We will discuss more about 
- - How to persist the layout across the **Microfinance - Bank UI** 
- - How to load pages according to route displyed in the browser address bar.
+ - How to persist the layout across the UI.
+ - How to load pages according to routes displayed in the browser's address bar.
 using Next.js ``_app`` component and ``BasicLayout`` component in ``level2`` documentation.
