@@ -70,6 +70,7 @@ Welcome to Microfinance dApp Documentation
    :maxdepth: 2
    :caption: Event Flows
 
+   eventFlow/guide
    eventFlow/introduction
    eventFlow/readFromSmartContract
    eventFlow/saveValuesToSmartContract

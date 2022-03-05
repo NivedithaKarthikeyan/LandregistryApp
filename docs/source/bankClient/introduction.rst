@@ -1,7 +1,7 @@
 Overview 
 ================================
 
-This section describes important functions of the **Bank Web Application**.
+We introduce the **Bank Web Application** in this and other sections.
 This app is developed using ``Next.js``.
 It resides in the ``bank-web-app`` directory.
 
@@ -32,7 +32,7 @@ Here is the structure of the **Bank Web Application**: ::
 Project Dependencies
 --------------------
 
-Here are the project dependencies defined in the ``package.json`` file. ::
+The project dependencies as defined in the ``package.json`` file: ::
 
     "dependencies": {
         "@ant-design/icons": "^4.7.0",
@@ -57,11 +57,11 @@ Here are the project dependencies defined in the ``package.json`` file. ::
 Prerequisites
 -------------
 
-1. Blockchain - Before we can run the Bank Web Application, we have to deploy all the contracts to the Ethereum blockchain 
-and configure smart contract related data (contract addresses and ABIs) within the application.
+1. Blockchain - Before we run the Bank Web Application, we must first deploy all the smart contracts in an Ethereum blockchain 
+and configure smart contract related data (contract instance addresses and ABIs) in the application so that deployed smart contracts can be used.
 
-2. Bank Web Server - The Bank Web Application accepts requests from users and passes them to the Bank Web Server to be handled.  It must be connected to an active
-Bank Web Server. If the Bank Web Server is running in a different host or port, we need to configure properly in ``next.config.js`` file in the ``bank-web-app`` directory. ::
+2. Bank Web Server - The Bank Web Application accepts requests from users and passes them to the Bank Web Server to be handled.  As such, it must be connected to an active
+Bank Web Server. If the Bank Web Server is running in a different host or port, we need to configure in the ``next.config.js`` file in the ``bank-web-app`` directory: ::
 
     module.exports = {
         reactStrictMode: true,
@@ -72,3 +72,4 @@ Bank Web Server. If the Bank Web Server is running in a different host or port, 
 
 You can change the ``API_URL`` value so that the Bank Web Application knows where to pass request to (the Bank Web Server).
 
+The next two sections set up the contexts for the bank web app.  We have a user role context and a smart contract context to be set up.  
