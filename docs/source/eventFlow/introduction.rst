@@ -19,13 +19,13 @@ There are three main areas in the app layout; Header, Left Panel and Main Conten
 
 Each menu loads ``pages`` from the ``bank-web-page/pages`` directory.
 You can tell which menu is loaded by looking at the address bar.
-Refer to the following screenshot of the ``Microfinance - Bank UI``.
+Refer to the following screenshot of the app.
 
 .. image:: ../images/broker_first_page.png
 
 As you can see, the selected user role is ``Broker``. The left panel has four menu items. The ``Transfer`` menu item has been selected.
 The browser's address bar shows ``localhost:3005/public/transfer``. 
-This means the ``Transfer`` menu item has loaded the script in ``pages/public/transfer.js``.
+This means the ``Transfer`` menu item has loaded the script in ``pages/public/transfer.js`` and the page on the right content area is rendered.
 
 .. image:: ../images/borrower_first_page.png
 
