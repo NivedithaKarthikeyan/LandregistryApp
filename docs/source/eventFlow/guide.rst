@@ -7,7 +7,6 @@ To further understand the files and code in the Microfinance dApp system, we ill
 
 .. toctree::
    :maxdepth: 2
-   :caption: Overview
 
    ./introduction
    ./readFromSmartContract
