@@ -8,6 +8,15 @@ These menus are defined in the ``bank-web-app/components/menu`` directory:
 * ``BorrowerMenu.js`` - Menu for Borrowers.
 * ``BrokerMenu.js`` - Menu for Brokers.
 
+The UI layout is common for all user roles.
+There are three main areas in the app layout; Header, Left Panel and Main Content Area. 
+
+.. figure:: ../images/layout_components.png
+
+``Header`` shows which user role is currently used.
+``Left Panel`` loads a menu according to the selected user role.
+``Main Content Area`` loads the scripts according to the selected menu item.
+
 Each menu loads ``pages`` from the ``bank-web-page/pages`` directory.
 You can tell which menu is loaded by looking at the address bar.
 Refer to the following screenshot of the ``Microfinance - Bank UI``.
@@ -34,14 +43,6 @@ The address bar shows ``localhost:3005/common/loans``.
 This loads the script in ``pages/common/loans.js`` in the browser.
 This script displays the ``Current Loans`` table in the browser.
 
-As shown in the above screenshots, the UI layout is common for all user roles.
-There are three main areas in the app layout; Header, Left Panel and Main Content Area. 
-
-.. figure:: ../images/layout_components.png
-
-``Left Panel`` loads a menu according to the selected user role.
-``Main Content Area`` loads the scripts according to the selected menu item.
-
-We will discuss more about 
+We will discuss more about:
  - How to persist the layout across the UI and
  - How to load pages according to routes displayed in the browser's address bar using Next.js ``_app`` component and ``BasicLayout`` component in ``level2`` documentation.
