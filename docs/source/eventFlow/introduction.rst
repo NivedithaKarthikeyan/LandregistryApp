@@ -43,5 +43,5 @@ There are three main areas in the app layout; Header, Left Panel and Main Conten
 ``Main Content Area`` loads the scripts according to the selected menu item.
 
 We will discuss more about 
- - How to persist the layout across the UI.
+ - How to persist the layout across the UI and
  - How to load pages according to routes displayed in the browser's address bar using Next.js ``_app`` component and ``BasicLayout`` component in ``level2`` documentation.
