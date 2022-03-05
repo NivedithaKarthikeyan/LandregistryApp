@@ -1,4 +1,4 @@
-.. _deploy-to-ropsten:
+.. _eventflow:
 
 Event Flows
 ==================================

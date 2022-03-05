@@ -72,4 +72,4 @@ Bank Web Server. If the Bank Web Server is running in a different host or port, 
 
 You can change the ``API_URL`` value so that the Bank Web Application knows where to pass request to (the Bank Web Server).
 
-The next two sections set up the contexts for the bank web app.  We have a user role context and a smart contract context to be set up.  
+The next two sections set up the contexts for the bank web app.  We have a user role context and a smart contract context to be set up when the web app starts up.  In the :ref:`eventflow` section, we illustrate how various parts of the web app and web server are linked up.
