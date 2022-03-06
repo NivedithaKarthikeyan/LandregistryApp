@@ -202,7 +202,7 @@ It will return the account balance and we update the balance state in our applic
 In React, we use the ``useEffect`` hook so that the current component is notified whenever external changes take place, such as when the web page loads. ::
 
     useEffect(() => {
-		getBalance(); // Load the wallet token balance when load the web page.
+	    getBalance(); // Load the wallet token balance when load the web page.
         ...
 	}, []);
 
@@ -210,7 +210,7 @@ The ``useEffect`` hook is invoked when the ``TransferController`` component is r
 The *useEffect* hook calls the *getBalance* method.
 Effectively, this means that the account balance is fetched from the smart contraxt whenever a user navigates to the *Transfer* page.
 
-In the ``return`` function of the ``TransferController``, we have the following line. ::
+In the ``return`` function of the ``TransferController``, we have the following line: ::
 
     <Title level={4}>Account balance: {balance}</Title>
 
