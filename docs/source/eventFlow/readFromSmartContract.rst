@@ -119,18 +119,18 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
     
     	// Three steps of token transferring process
     	const steps = [
-    		{
-    			title: 'Transfer details',
-    			icon: <FileTextOutlined />,
-    		},
-    		{
-    			title: 'Transfer confirm',
-    			icon: <FileDoneOutlined />,
-    		},
-    		{
-    			title: 'Transfer results',
-    			icon: <AuditOutlined />,
-    		},
+    	{
+    		title: 'Transfer details',
+    		icon: <FileTextOutlined />,
+    	},
+    	{
+    		title: 'Transfer confirm',
+    		icon: <FileDoneOutlined />,
+    	},
+    	{
+    		title: 'Transfer results',
+    		icon: <AuditOutlined />,
+    	},
     	];
 
 ::
