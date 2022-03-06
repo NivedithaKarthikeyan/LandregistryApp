@@ -271,19 +271,19 @@ smart contract. ::
 	}
     };
 
-::
-
-    useEffect(() => {
-		getBalance(); // Load the wallet token balance when load the web page.
-        ...
-	}, []);
-
 This uses the *async/await* functionality to fetch the account balance from smart contract. 
 First, the current in-use account in MetaMask is obtained via ``window.ethereum.enable()``.
 Then it calls the *balanceOf* function of *MicroToken* smart contract to obtain the balance of this account.
 ``response`` is this account's balance and is passed into ``setBalance`` to update the state of the React app.
 This is the function we use to fetch data via ``view`` functions of smart contracts.
 It will return the account balance and we update the balance state in our application.
+
+::
+
+    useEffect(() => {
+		getBalance(); // Load the wallet token balance when load the web page.
+        ...
+	}, []);
 
 In React, we use the ``useEffect`` hook so that the current component is notified whenever external changes take place, such as when the web page loads.
 The ``useEffect`` hook is invoked when the ``TransferController`` component is rendered to the browser.
