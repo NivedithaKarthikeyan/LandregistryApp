@@ -52,20 +52,19 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
     const { Step } = Steps;
     
 ::
-
     function TransferController() {
-    	const [balance, setBalance] = useState('0'); // Token balance state
-    	const [symbol, setSymbol] = useState(''); // ERC20 token symbol
-    	const [address, setAddress] = useState(''); // User wallet address state
-    	const [amount, setAmount] = useState(''); // Transferring token amount state
-    	const [transactionHash, setTransactionHash] = useState(''); // Blockchain transaction state
-    	const [isTransactionSuccessful, setIsTransactionSuccessful] = useState(false); // Transaction successfull state
-    	const { MicroTokenContract } = useContext(SmartContractContext); // Get the Micro Token Contract object from smartContractContext defined in the 'stores/smartContractContext.js'
+    	const [balance, setBalance] = useState('0'); 
+    	const [symbol, setSymbol] = useState(''); 
+    	const [address, setAddress] = useState(''); 
+    	const [amount, setAmount] = useState(''); 
+    	const [transactionHash, setTransactionHash] = useState(''); 
+    	const [isTransactionSuccessful, setIsTransactionSuccessful] = useState(false); 
+    	const { MicroTokenContract } = useContext(SmartContractContext); 
     
     	// Stages of token transferring process
-    	// 	0. Fill token transfering formatCountdown
-    	// 	1. Confirm receiver address and amount
-    	// 	2. Transaction result (successful or not)
+    	// 0. Fill token transfering formatCountdown
+    	// 1. Confirm receiver address and amount
+    	// 2. Transaction result (successful or not)
     	const [current, setCurrent] = useState(0); // Current stage of token transferring process
     
     	// Read the user token balance from the Micro Token Contract
