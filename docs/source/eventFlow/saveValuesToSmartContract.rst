@@ -6,10 +6,10 @@ As an example, we show how to save a loan request in the blockchain.
 
 .. image:: ../images/loan_request.png
 
-The **Apply Loan** menu item is listed under the **Loan** menu. Loan can be requested by a Broker.
-**Apply Loan** will direct the user to ``/broker/apply-loans`` page.
-This means component for the ``apply-loan`` page will resides inside the ``/pages/broker/apply-loan`` javascript file.
-Code of the ``apply-loan`` page. ::
+As shown in the screenshot above, the **Apply Loan** menu subitem is chosen under the **Loan** menu item.  This means the Broker is requesting a new Loan.
+**Apply Loan** directs the user to the ``/broker/apply-loans`` page.
+That is, React component for the ``apply-loan`` page reside in the ``/pages/broker/apply-loan`` javascript file.
+The code of the ``apply-loan`` page is shown here: ::
 
     import React from 'react';
     import { Row, Col } from 'antd';
@@ -33,8 +33,7 @@ Code of the ``apply-loan`` page. ::
 
     export default Loans;
 
-As shown in the above code segment ``Loans`` component will load the ``LoanForm`` 
-component from the ``/components/loan/LoanForm/``.
+As shown, the ``Loans`` component loads the ``LoanForm`` component from ``/components/loan/LoanForm.js``.
 
 Important functions of the ``LoanForm`` component. ::
 
