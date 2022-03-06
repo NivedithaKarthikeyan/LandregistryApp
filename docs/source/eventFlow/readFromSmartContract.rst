@@ -13,7 +13,7 @@ As shown in the screenshot above, the ``Transfer`` item in the left menu is comm
 It directs the user to ``/common/transfer``.
 In Next.js, this means directing to the ``pages/common/transfer.js`` file.
 
-``transfer.js`` loads the ``TransferController`` from the ``components/transfer/`` directory as follows: ::
+``transfer.js`` loads the ``TransferController`` from the ``components/transfer/`` directory. It is shown here: ::
 
     import React from 'react';
     import { Row, Col } from 'antd';
@@ -37,7 +37,7 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
 
     export default Transfer;
 
-``TransferController`` is the controller function for token transactions: ::
+``TransferController`` is the controller function for token transactions, as shown here: ::
 
     import React, { useEffect, useState, useContext } from 'react';
     import { Typography, Card, Divider, message, Steps, Col, Row } from 'antd';
