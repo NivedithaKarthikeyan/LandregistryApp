@@ -90,20 +90,20 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
     
 	    // Transfer tokens from selected wallet account to receiver account
     	const confirmTokenTransfer = async () => {
-    		try {
-    			const accounts = await window.ethereum.enable(); 
-    			const response = await MicroTokenContract.methods.transfer(address, amount).send({from: accounts[0] });
+    	try {
+    		const accounts = await window.ethereum.enable(); 
+    		const response = await MicroTokenContract.methods.transfer(address, amount).send({from: accounts[0] });
     
-    			setTransactionHash(response.transactionHash); // Update the transaction hash state from the response
-    			setIsTransactionSuccessful(true); // Update transaction result state as successful.
-    			setCurrent(current + 1); // Update the transfer stage.
-    			message.success('Token transferred successfully');
-    		} catch (err) {
-    			console.log(err);
-    			message.error('Error occured while transferring tokens');
-    			setCurrent(current + 1); // Update the transfer statge.
-    			setIsTransactionSuccessful(false); // Update transaction result state as unsuccessful.
-    		}
+    		setTransactionHash(response.transactionHash); // Update the transaction hash state from the response
+    		setIsTransactionSuccessful(true); // Update transaction result state as successful.
+    		setCurrent(current + 1); // Update the transfer stage.
+    		message.success('Token transferred successfully');
+    	} catch (err) {
+    		console.log(err);
+    		message.error('Error occured while transferring tokens');
+    		setCurrent(current + 1); // Update the transfer statge.
+    		setIsTransactionSuccessful(false); // Update transaction result state as unsuccessful.
+    	}
     	};
     
     	useEffect(() => {
