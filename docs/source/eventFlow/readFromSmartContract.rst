@@ -51,6 +51,8 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
     const { Title } = Typography;
     const { Step } = Steps;
     
+::
+
     function TransferController() {
     	const [balance, setBalance] = useState('0'); // Token balance state
     	const [symbol, setSymbol] = useState(''); // ERC20 token symbol
@@ -151,7 +153,9 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
     			icon: <AuditOutlined />,
     		},
     	];
-    
+
+::
+
     	return (
     		<Card
     			title="Transfer Micro Tokens"
@@ -235,12 +239,6 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
     
     export default TransferController;
     
-
-
-
-
-
-
 In ``TransferController.js``, 
 it first imports the necessary dependencies and UI components.
 Then it defines the ``balance`` state  and assigns it the initial value of zero: ::
