@@ -102,13 +102,13 @@ Finally, it imports ``SmartContractContext`` defined in the :ref:`smartcontractc
     import { Card, Form, InputNumber, Input, Button, message } from 'antd';
     import SmartContractContext from '../../stores/smartContractContext';
 
-Then it access the ``BankLoan`` smart contract object from the ``SmartContractContext``. ::
+It accesses the ``BankLoan`` smart contract object from the ``SmartContractContext``. ::
 
     const { BankLoanContract } = useContext(SmartContractContext);
 
-In the larter part of the ``LoanForm`` component it returns a Ant Design Form component.
-In this form component it will submit the input field values in to the ``createLoanRequest`` function.
-``createLoanRequest`` function pass as the ``onFinish`` function of the Form. ::
+The ``LoanForm`` component returns a Ant Design Form component.
+Here, it submits input field values to the ``createLoanRequest`` function,
+which is passed to the ``onFinish`` function of the Form. ::
 
     <Form
         ...
