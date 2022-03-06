@@ -134,8 +134,8 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
     	];
 
 ::
- 
-    	return (
+
+        return (
     		<Card title="Transfer Micro Tokens" extra={<a href onClick={getBalance}>Refresh Balance</a>}>
     			<Title level={4}>Account balance: {balance} {symbol}</Title>
     			<Divider />
