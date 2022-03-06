@@ -82,30 +82,13 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
     		}
     	};
     
-    	const getSymbol = async () => {
-    		try {
-    			const response = await MicroTokenContract.methods.symbol().call();
-    			setSymbol(response);
-    		} catch (err) {
-    			message.error('Error occured while reading symbol');
-    		}
-    	};
-    
+        ...
+
     	const transferTokens = () => {
     		setCurrent(current + 1); // Increase the token transfering process stage.
     	};
     
-    	const prev = () => {
-    		setCurrent(current - 1); // Decrease the token transfering process stage.
-    	};
-    
-    	const backToHome = () => {
-    		// Set stages and successful states to default values.
-    		setIsTransactionSuccessful(false);
-    		setCurrent(0);
-    	};
-    
-    	// Transfer tokens from selected wallet account to receiver account
+	    // Transfer tokens from selected wallet account to receiver account
     	const confirmTokenTransfer = async () => {
     		try {
     			const accounts = await window.ethereum.enable(); // Get selected wallet account from the metamask plugin.
