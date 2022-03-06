@@ -22,7 +22,7 @@ function LoansTable() {
 	const [isBrokerTransferModalVisible, setIsBrokerTransferModalVisible] = useState(false);
 	const [isBorrowerTransferModalVisible, setIsBorrowerTransferModalVisible] = useState(false);
 	const [loanRecord, setLoanRecord] = useState({});
-	const [current, setCurrent] = useState(0);
+	const [tokenTransferStep, setTokenTransferStep] = useState(0);
 	const [payments, setPayments] = useState([]);
 	const [data, setData] = useState([]);
 
@@ -113,13 +113,13 @@ function LoansTable() {
 			await MicroTokenContract.methods.transfer(loanRecord.broker, loanRecord.brokerFee).send({
 				from: accounts[0] });
 			message.success('Token transferred successfully');
-			await setCurrent(1);
+			await setTokenTransferStep(1);
 			await confirmTokenTrasferToBroker(loanRecord.id);
-			await setCurrent(0);
+			await setTokenTransferStep(0);
 			await setIsBrokerTransferModalVisible(false);
 		} catch (err) {
 			console.log(err);
-			await setCurrent(0);
+			await setTokenTransferStep(0);
 			message.error('Error occured while transferring tokens');
 		}
 	};
@@ -142,13 +142,13 @@ function LoansTable() {
 			await MicroTokenContract.methods.transfer(loanRecord.borrower, loanRecord.amount).send({
 				from: accounts[0] });
 			message.success('Token transferred successfully');
-			await setCurrent(1);
+			await setTokenTransferStep(1);
 			await confirmTokenTrasferToBorrower(loanRecord.id);
-			await setCurrent(0);
+			await setTokenTransferStep(0);
 			await setIsBorrowerTransferModalVisible(false);
 		} catch (err) {
 			console.log(err);
-			await setCurrent(0);
+			await setTokenTransferStep(0);
 			message.error('Error occured while transferring tokens');
 		}
 	};
@@ -188,7 +188,9 @@ function LoansTable() {
 			icon: <CloseCircleOutlined style={{ color: 'red' }} />,
 			content: `Reject Loan ${loanId} ?`,
 			okText: 'Reject Loan',
-			okType: 'danger',
+			okButtonProps: {
+				type: 'danger'
+			},
 			onOk: () => rejectLoan(loanId),
 		});
 	};
@@ -313,9 +315,7 @@ function LoansTable() {
 			render: (record) => {
 				if (record.status === '0') {
 					return (
-						<span>
-							<a href onClick={() => signLoan(record.id)}>Sign Loan</a>
-						</span>
+						<Button type="primary" ghost onClick={() => signLoan(record.id)}> Sign Loan </Button>
 					);
 				}
 			},
@@ -331,32 +331,29 @@ function LoansTable() {
 				let actionBlock = '';
 				if (record.status === '1') {
 					actionBlock =
-						<span>
-							<a href onClick={() => confirmLoanApprove(record.id)}>Approve</a>
-							<Divider type="vertical" />
-							<a href onClick={() => confirmLoanReject(record.id)} style={{ color: 'red' }}>Reject</a>
-						</span>;
+						<Space>
+							{/* <a href onClick={() => confirmLoanApprove(record.id)}>Approve</a> */}
+							<Button type="primary" ghost onClick={() => confirmLoanApprove(record.id)}> Approve </Button>
+							<Button type="primary" danger ghost onClick={() => confirmLoanReject(record.id)}> Reject </Button>
+							{/* <Divider type="vertical" />
+							<a href onClick={() => confirmLoanReject(record.id)} style={{ color: 'red' }}>Reject</a> */}
+						</Space>;
 				} else if (record.status === '2') {
 					actionBlock =
-						<span>
-							<a href onClick={() => showBrokerTransferModal(record)}>
-								Transfer Tokens to Broker
-							</a>
-						</span>;
+						<Button type="primary" ghost onClick={() => showBrokerTransferModal(record)}> 
+							Transfer Tokens to Broker 
+						</Button>
 				} else if (record.status === '4') {
-					actionBlock =
-						<span>
-							<a href onClick={() => showBorrowerTransferModal(record)}>
-								Transfer Tokens to Borrower
-							</a>
-						</span>;
+					actionBlock = 
+						<Button type="primary" ghost onClick={() => showBorrowerTransferModal(record)}> 
+							Transfer Tokens to Borrower 
+						</Button>
 				} else if (record.status === '5') {
 					actionBlock =
-						<span>
-							<a href onClick={() => closeLoan(record.id)}>Close</a>
-							<Divider type="vertical" />
-							<a href onClick={() => markAsDefaulted(record.id)} style={{ color: 'red' }}>Defaulted</a>
-						</span>;
+						<Space>
+							<Button type="primary" ghost onClick={() => closeLoan(record.id)}> Close </Button>
+							<Button type="primary" danger ghost onClick={() => markAsDefaulted(record.id)}> Defaulted </Button>
+						</Space>;
 				}
 				return actionBlock;
 			},
@@ -453,7 +450,7 @@ function LoansTable() {
 				footer={null}
 			>
 				{
-					current === 0 &&
+					tokenTransferStep === 0 &&
 					<Form
 						labelCol={{
 							lg: 4,
@@ -487,7 +484,7 @@ function LoansTable() {
 					</Form>
 				}
 				{
-					current === 1 &&
+					tokenTransferStep === 1 &&
 					<span>Update the Loan</span>
 				}
 			</Modal>
@@ -499,7 +496,7 @@ function LoansTable() {
 				footer={null}
 			>
 				{
-					current === 0 &&
+					tokenTransferStep === 0 &&
 					<Form
 						labelCol={{
 							lg: 4,
@@ -533,7 +530,7 @@ function LoansTable() {
 					</Form>
 				}
 				{
-					current === 1 &&
+					tokenTransferStep === 1 &&
 					<span>Update the Loan</span>
 				}
 			</Modal>

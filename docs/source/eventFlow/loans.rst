@@ -691,46 +691,32 @@ If Loan is in ``1`` (``BORROWER_SIGNED``) state ``Action`` column enables ``Appr
   if (record.status === '1') {
     actionBlock =
       <span>
-        <a href onClick={() => showApproveModal(record.id)}>Approve</a>
+        <a href onClick={() => confirmLoanApprove(record.id)}>Approve</a>
         <Divider type="vertical" />
-        <a href onClick={() => showRejectModal(record.id)} style={{ color: 'red' }}>Reject</a>
+        <a href onClick={() => confirmLoanReject(record.id)} style={{ color: 'red' }}>Reject</a>
       </span>;
   }
 
-When ``Bank`` user clicks the ``Approve`` action it triggers the ``showApproveModal`` function and passes the 
+When ``Bank`` user clicks the ``Approve`` action it triggers the ``confirmLoanApprove`` function and passes the 
 Loan Id ``record.id`` value as a parameter. ::
 
-  const showApproveModal = (value) => {
-    setId(value);
-    setIsApproveModalVisible(true);
+  const confirmLoanApprove = (loanId) => {
+    confirm({
+      content: `Approve Loan ${loanId} ?`,
+      okText: 'Approve Loan',
+      onOk: () => approveLoan(loanId),
+    });
   };
 
-``showApproveModal`` function first sets the Loan Id as the ``id`` state.
-Then Chnages the ``isApproveModalVisible`` state to ``true``.
+This function displays a ``confirm`` Ant Design Modal and displays a confirmation message
+When user clicks the ``Approve Loan`` button of this modal it triggers the ``approveLoan`` function and passes the ``loanId``
+as a paramater. ::
 
-This may display the Ant Design Modal component defined in the ``return`` section. ::
-
-  <Modal title={`Approve Loan Request ${id}`} visible={isApproveModalVisible} onOk={handleApprove} onCancel={handleCancel}>
-    <p>Are you sure to approve loan?</p>
-  </Modal>
-
-This modal displays the Loan Id in its title using ``id`` state.
-It displays the confirmation messsage in the Modal body.
-When user clicks the ``OK`` button of this modal it triggers the ``handleApprove`` function. ::
-
-  const handleApprove = async () => {
-    await approveLoan();
-    setIsApproveModalVisible(false);
-  };
-
-In ``handleApprove`` function first it triggers the ``approveLoan`` function.
-Then it removes the current Modal for the UI by changing the ``isApproveModalVisible`` to false. ::
-
-  const approveLoan = async () => {
+  const approveLoan = async (loanId) => {
     try {
       const accounts = await window.ethereum.enable();
-      await BankLoanContract.methods.approveLoan(id).send({ from: accounts[0] });
-      message.success(`Loan ${id} approved`);
+      await BankLoanContract.methods.approveLoan(loanId).send({ from: accounts[0] });
+      message.success(`Loan ${loanId} approved`);
       loadData();
     } catch (err) {
       message.error('Error occured while approving the Loan');
@@ -748,46 +734,35 @@ Second action enabled for the loan state ``1`` (``BORROWER_SIGNED``) is ``Reject
   if (record.status === '1') {
     actionBlock =
       <span>
-        <a href onClick={() => showApproveModal(record.id)}>Approve</a>
+        <a href onClick={() => confirmLoanApprove(record.id)}>Approve</a>
         <Divider type="vertical" />
-        <a href onClick={() => showRejectModal(record.id)} style={{ color: 'red' }}>Reject</a>
+        <a href onClick={() => confirmLoanReject(record.id)} style={{ color: 'red' }}>Reject</a>
       </span>;
   }
 
-When ``Bank`` user clicks the ``Reject`` action it triggers the ``showRejectModal`` function and passes the 
+When ``Bank`` user clicks the ``Reject`` action it triggers the ``confirmLoanReject`` function and passes the 
 Loan Id ``record.id`` value as a parameter. ::
 
-  const showRejectModal = (value) => {
-    setId(value);
-    setIsRejectModalVisible(true);
+  const confirmLoanReject = (loanId) => {
+    confirm({
+      icon: <CloseCircleOutlined style={{ color: 'red' }} />,
+      content: `Reject Loan ${loanId} ?`,
+      okText: 'Reject Loan',
+      okType: 'danger',
+      onOk: () => rejectLoan(loanId),
+    });
   };
 
-``showRejectModal`` function first sets the Loan Id as the ``id`` state.
-Then Chnages the ``isRejectModalVisible`` state to ``true``.
+This function displays a ``confirm`` Ant Design Modal and displays a confirmation message.
+``okType: danger`` property helps to add submit button in red color in the confirm Modal.
+When user clicks the ``Reject Loan`` button of this modal it triggers the ``rejectLoan`` function and passes the ``loanId``
+as a paramater. ::
 
-This may display the Ant Design Modal component defined in the ``return`` section. ::
-
-  <Modal title={`Reject Loan Request ${id}`} visible={isRejectModalVisible} onOk={handleReject} onCancel={handleCancel}>
-    <p>Reject loan request?</p>
-  </Modal>
-
-This modal displays the Loan Id in its title using ``id`` state.
-It displays the confirmation messsage in the Modal body.
-When user clicks the ``OK`` button of this modal it triggers the ``handleReject`` function. ::
-
-  const handleReject = async () => {
-    await rejectLoan();
-    setIsRejectModalVisible(false);
-  };
-
-In ``handleReject`` function first it triggers the ``rejectLoan`` function.
-Then it removes the current Modal for the UI by changing the ``isRejectModalVisible`` to false. ::
-
-  const rejectLoan = async () => {
+  const rejectLoan = async (loanId) => {
     try {
       const accounts = await window.ethereum.enable();
-      await BankLoanContract.methods.rejectLoan(id).send({ from: accounts[0] });
-      message.success(`Loan ${id} rejected`);
+      await BankLoanContract.methods.rejectLoan(loanId).send({ from: accounts[0] });
+      message.success(`Loan ${loanId} rejected`);
       loadData();
     } catch (err) {
       message.error('Error occured while rejecting the Loan');
