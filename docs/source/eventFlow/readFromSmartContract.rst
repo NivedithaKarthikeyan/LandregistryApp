@@ -52,6 +52,7 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
     const { Step } = Steps;
     
 ::
+
     function TransferController() {
     	const [balance, setBalance] = useState('0'); 
     	const [symbol, setSymbol] = useState(''); 
@@ -90,18 +91,14 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
 	    // Transfer tokens from selected wallet account to receiver account
     	const confirmTokenTransfer = async () => {
     		try {
-    			const accounts = await window.ethereum.enable(); // Get selected wallet account from the metamask plugin.
-    			// Transfer tokens using Micro Token Smart Contract.
-    			// Parameters: address - receiver wallet address, amount - amount of tokens
-    			const response = await MicroTokenContract.methods.transfer(address, amount).send({
-    				from: accounts[0] });
+    			const accounts = await window.ethereum.enable(); 
+    			const response = await MicroTokenContract.methods.transfer(address, amount).send({from: accounts[0] });
     
     			setTransactionHash(response.transactionHash); // Update the transaction hash state from the response
     			setIsTransactionSuccessful(true); // Update transaction result state as successful.
     			setCurrent(current + 1); // Update the transfer stage.
     			message.success('Token transferred successfully');
     		} catch (err) {
-    			// If error occured while transferring tokens;
     			console.log(err);
     			message.error('Error occured while transferring tokens');
     			setCurrent(current + 1); // Update the transfer statge.
@@ -137,6 +134,7 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
     	];
 
 ::
+ 
     	return (
     		<Card title="Transfer Micro Tokens" extra={<a href onClick={getBalance}>Refresh Balance</a>}>
     			<Title level={4}>Account balance: {balance} {symbol}</Title>
