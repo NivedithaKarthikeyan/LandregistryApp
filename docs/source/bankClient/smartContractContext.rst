@@ -1,3 +1,5 @@
+.. _smartcontractcontext:
+
 Smart Contract Context
 ======================
 

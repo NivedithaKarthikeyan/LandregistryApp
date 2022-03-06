@@ -253,7 +253,7 @@ Then it defines the ``balance`` state  and assigns it the initial value of zero:
 
     const [balance, setBalance] = useState('0');
 
-We access the **MicroToken** smart contract object within *TransferController* using React Context as follows. ::
+We access the **MicroToken** smart contract object within *TransferController* using React Context defined in the :ref:`smartcontractcontext` section as follows. ::
 
     const { MicroTokenContract } = useContext(SmartContractContext);
 
