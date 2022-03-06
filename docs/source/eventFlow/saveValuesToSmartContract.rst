@@ -94,9 +94,9 @@ Let's look at the ``LoanForm`` component: ::
 
     export default LoanForm;
 
-In LoanForm it imports the React, useState and useContext first. 
+First, it imports React, useState and useContext. 
 Then imports the neccessary Ant Design components to build the Loan Form UI.
-Finally it imports the ``SmartContractContext``. ::
+Finally, it imports ``SmartContractContext`` defined in the :ref:`smartcontractcontext` section as follows: ::
 
     import React, { useState, useContext } from 'react';
     import { Card, Form, InputNumber, Input, Button, message } from 'antd';
