@@ -39,12 +39,6 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
 
 ``TransferController`` is the controller function for token transactions: ::
 
-
-
-
-
-
-
     import React, { useEffect, useState, useContext } from 'react';
     import { Typography, Card, Divider, message, Steps, Col, Row } from 'antd';
     import { FileTextOutlined, FileDoneOutlined, AuditOutlined } from '@ant-design/icons';
