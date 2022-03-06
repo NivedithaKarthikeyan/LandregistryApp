@@ -138,85 +138,28 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
     	];
 
 ::
-
     	return (
-    		<Card
-    			title="Transfer Micro Tokens"
-    			extra={<a href onClick={getBalance}>Refresh Balance</a>}
-    		>
-    			{/* This will show the balance state value in the web page */}
+    		<Card title="Transfer Micro Tokens" extra={<a href onClick={getBalance}>Refresh Balance</a>}>
     			<Title level={4}>Account balance: {balance} {symbol}</Title>
     			<Divider />
-    
-    			<Row>
-    				<Col lg={24} xl={18} xxl={16} style={{ marginBottom: 25 }}>
-    					{/* Steps will show in the line and update when current state value updated.
-    					For more details please refer Step component in AntDesign */}
-    					<Steps current={current}>
-    						{steps.map(item => (
-    							<Step key={item.title} title={item.title} icon={item.icon} />
-    						))}
-    					</Steps>
-    				</Col>
-    			</Row>
+    			<Row><Col lg={24} xl={18} xxl={16} style={{ marginBottom: 25 }}><Steps current={current}>{steps.map(item => (<Step key={item.title} title={item.title} icon={item.icon} /> ))} </Steps></Col></Row>
     			{
-    				// If user in the first stage of the token transfering process, web page will show the transfer form
     				current === 0 &&
-    				<Row>
-    					<Col lg={24} xl={18} xxl={16}>
-    						{/* This will load the TransferForm component in the web page */}
-    						<TransferForm
-    							setAddress={setAddress} // Pass setAddress method as setAddress property to the TrnsferForm Component.
-    							setAmount={setAmount} // Pass setAmount method as setAmount propert to the TransferForm Component.
-    						/>
-    					</Col>
-    				</Row>
+    				<Row><Col lg={24} xl={18} xxl={16}><TransferForm setAddress={setAddress} setAmount={setAmount} /></Col></Row>
     			}
     			{
-    				// If user submit the transfer details(receiver address and token amount) web page will ask for the confirmation.
     				current === 1 &&
-    				<Row>
-    					<Col lg={24} xl={18} xxl={16}>
-    						{/* This will load the transaction confirmation in the web page */}
-    						<TransactionConfirm
-    							address={address}
-    							amount={amount}
-    							transactionHash={transactionHash}
-    							confirmTokenTransfer={confirmTokenTransfer}
-    							prev={prev}
-    						/>
-    					</Col>
-    				</Row>
+    				<Row><Col lg={24} xl={18} xxl={16}><TransactionConfirm address={address} amount={amount} transactionHash={transactionHash} confirmTokenTransfer={confirmTokenTransfer} prev={prev} /></Col></Row>
     			}
     			{
-    				// when user confirm the details it will transfer the tokens and update the transaction results.
-    				// If transaction process in the results stage and transaction successful it will show the successful message on the web page.
     				current === 2 && isTransactionSuccessful &&
-    				<Row>
-    					<Col lg={24} xl={18} xxl={16}>
-    						{/* Show the transaction successful message with the transaction details and transactionHash value */}
-    						<TransactionSuccess
-    							amount={amount}
-    							address={address}
-    							transactionHash={transactionHash}
-    							backToHome={backToHome}
-    						/>
-    					</Col>
-    				</Row>
+    				<Row><Col lg={24} xl={18} xxl={16}><TransactionSuccess amount={amount} address={address} transactionHash={transactionHash} backToHome={backToHome} /></Col></Row>
     			}
     			{
-    				// If transaction process in the results stage and transaction failed it will show the transaction fail message on the web page.
     				current === 2 && !isTransactionSuccessful &&
-    				<Row>
-    					<Col lg={24} xl={18} xxl={16}>
-    						<TransactionFail
-    							backToHome={backToHome}
-    						/>
-    					</Col>
-    				</Row>
+    				<Row><Col lg={24} xl={18} xxl={16}><TransactionFail backToHome={backToHome} /></Col></Row>
     			}
     		</Card>
-    
     	);
     }
     
