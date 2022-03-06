@@ -2,7 +2,7 @@ Save Data to Smart Contract
 ===============================
 
 We discuss how to save data in the blockchain via a smart contract.
-As an example we discuss about how to save a loan request in the blockchain.
+As an example, we show how to save a loan request in the blockchain.
 
 .. image:: ../images/loan_request.png
 
