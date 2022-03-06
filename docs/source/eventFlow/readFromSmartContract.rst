@@ -274,21 +274,20 @@ smart contract. ::
 This uses the *async/await* functionality to fetch the account balance from smart contract. 
 First, the current in-use account in MetaMask is obtained via ``window.ethereum.enable()``.
 Then it calls the *balanceOf* function of *MicroToken* smart contract to obtain the balance of this account.
-``response`` is this account's balance and is passed into ``setBalance`` to update the state of the React app.
+``response`` is this account's balance and is passed into ``setBalance`` to update the state of the web app.
 This is the function we use to fetch data via ``view`` functions of smart contracts.
 It will return the account balance and we update the balance state in our application.
 
-::
+In React, we use the ``useEffect`` hook so that the current component is notified whenever external changes take place, such as when the web page loads. ::
 
     useEffect(() => {
 		getBalance(); // Load the wallet token balance when load the web page.
         ...
 	}, []);
 
-In React, we use the ``useEffect`` hook so that the current component is notified whenever external changes take place, such as when the web page loads.
 The ``useEffect`` hook is invoked when the ``TransferController`` component is rendered to the browser.
 The *useEffect* hook calls the *getBalance* method.
-It fetches the account balance when a user navigates to the *Transfer* page.
+Effectively, this means that the account balance is fetched from the smart contraxt whenever a user navigates to the *Transfer* page.
 
 In the ``return`` function of the ``TransferController``, we have the following line. ::
 
@@ -296,7 +295,7 @@ In the ``return`` function of the ``TransferController``, we have the following 
 
 It shows the account balance as shown in the above **Microfinance** screenshot.
 *Title* is a component from Ant design and ``{balance}`` is given the *balance* React state value.
-When it changes, React will automatically and visually update the necessary portion in the broswer as well.
+When it changes, React will automatically and visually update the necessary portion in the browser page as well.
 
 This is how we fetch data from smart contracts and render it in a browser using smart contract, the ``call()`` method, and React states.
 
