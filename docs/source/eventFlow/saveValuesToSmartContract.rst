@@ -33,9 +33,9 @@ The code of the ``apply-loan`` page is shown here: ::
 
     export default Loans;
 
-As shown, the ``Loans`` component loads the ``LoanForm`` component from ``/components/loan/LoanForm.js``.
+As shown, the ``Loans`` component loads the ``LoanForm`` component from ``/components/loan/LoanForm.js`` and ``PlansTable`` from ``/components/plan/PlansTable``.
 
-Important functions of the ``LoanForm`` component. ::
+Let's look at the ``LoanForm`` component: ::
 
     import React, { useState, useContext } from 'react';
     import { Card, Form, InputNumber, Input, Button, message } from 'antd';
@@ -167,3 +167,8 @@ If error occured while saving data in to the blockchain it may execute the catch
             message.error('Error creating loan request');
         }
     };
+
+
+
+
+
