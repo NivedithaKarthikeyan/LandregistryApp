@@ -448,6 +448,7 @@ function LoansTable() {
 				width={700}
 				onCancel={handleCancel}
 				footer={null}
+				onFinish={transferTokensToBroker}
 			>
 				{
 					tokenTransferStep === 0 &&
@@ -466,10 +467,10 @@ function LoansTable() {
 						size="default"
 						labelAlign="left"
 					>
-						<Form.Item label="Broker">
+						<Form.Item label="Broker" name="broker">
 							<span> { loanRecord.broker } </span>
 						</Form.Item>
-						<Form.Item label="Amount">
+						<Form.Item label="Amount" name="amount">
 							<span> { loanRecord.brokerFee } </span>
 						</Form.Item>
 						<Form.Item wrapperCol={{
@@ -478,14 +479,15 @@ function LoansTable() {
 							xxl: { span: 14, offset: 3 } }}
 						>
 							<Space direction="horizontal">
-								<Button type="primary" onClick={() => transferTokensToBroker()}>Confirm transfer</Button>
+								<Button onClick={() => handleCancel()}>Cancel</Button>
+								<Button type="primary" htmlType="submit">Transfer Tokens</Button>
 							</Space>
 						</Form.Item>
 					</Form>
 				}
 				{
 					tokenTransferStep === 1 &&
-					<span>Update the Loan</span>
+					<span>Updating the Loan State</span>
 				}
 			</Modal>
 			<Modal
@@ -493,6 +495,7 @@ function LoansTable() {
 				visible={isBorrowerTransferModalVisible}
 				width={700}
 				onCancel={handleCancel}
+				onFinish={transferTokensToBorrower}
 				footer={null}
 			>
 				{
@@ -524,14 +527,15 @@ function LoansTable() {
 							xxl: { span: 14, offset: 3 } }}
 						>
 							<Space direction="horizontal">
-								<Button type="primary" onClick={() => transferTokensToBorrower()}>Confirm transfer</Button>
+								<Button onClick={() => handleCancel()}>Cancel</Button>
+								<Button type="primary" htmlType="submit">Transfer Tokens</Button>
 							</Space>
 						</Form.Item>
 					</Form>
 				}
 				{
 					tokenTransferStep === 1 &&
-					<span>Update the Loan</span>
+					<span>Updating the Loan State</span>
 				}
 			</Modal>
 		</>
