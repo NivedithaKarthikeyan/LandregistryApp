@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Table, Tag, Card, Divider, message, Modal, Form, Space, Button } from 'antd';
+import { Table, Tag, Card, Divider, message, Modal, Form, Space, Button, Input } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { getApi } from '../../util/fetchApi';
 import UserContext from '../../stores/userContext';
@@ -332,11 +332,8 @@ function LoansTable() {
 				if (record.status === '1') {
 					actionBlock =
 						<Space>
-							{/* <a href onClick={() => confirmLoanApprove(record.id)}>Approve</a> */}
 							<Button type="primary" ghost onClick={() => confirmLoanApprove(record.id)}> Approve </Button>
 							<Button type="primary" danger ghost onClick={() => confirmLoanReject(record.id)}> Reject </Button>
-							{/* <Divider type="vertical" />
-							<a href onClick={() => confirmLoanReject(record.id)} style={{ color: 'red' }}>Reject</a> */}
 						</Space>;
 				} else if (record.status === '2') {
 					actionBlock =
@@ -448,15 +445,14 @@ function LoansTable() {
 				width={700}
 				onCancel={handleCancel}
 				footer={null}
-				onFinish={transferTokensToBroker}
 			>
 				{
 					tokenTransferStep === 0 &&
 					<Form
 						labelCol={{
-							lg: 4,
-							xl: 3,
-							xxl: 3,
+							lg: 6,
+							xl: 5,
+							xxl: 5,
 						}}
 						wrapperCol={{
 							lg: 20,
@@ -466,17 +462,21 @@ function LoansTable() {
 						layout="horizontal"
 						size="default"
 						labelAlign="left"
+						onFinish={transferTokensToBroker}
 					>
-						<Form.Item label="Broker" name="broker">
+						<Form.Item label="Broker Name" style={{ marginBottom: '0px' }} >
+							<span> { loanRecord.brokerName } </span>
+						</Form.Item>
+						<Form.Item label="Broker Address" style={{ marginBottom: '0px' }}>
 							<span> { loanRecord.broker } </span>
 						</Form.Item>
-						<Form.Item label="Amount" name="amount">
+						<Form.Item label="Amount">
 							<span> { loanRecord.brokerFee } </span>
 						</Form.Item>
 						<Form.Item wrapperCol={{
-							lg: { span: 14, offset: 4 },
-							xl: { span: 14, offset: 3 },
-							xxl: { span: 14, offset: 3 } }}
+							lg: { span: 14, offset: 6 },
+							xl: { span: 14, offset: 5 },
+							xxl: { span: 14, offset: 5 } }}
 						>
 							<Space direction="horizontal">
 								<Button onClick={() => handleCancel()}>Cancel</Button>
@@ -495,16 +495,15 @@ function LoansTable() {
 				visible={isBorrowerTransferModalVisible}
 				width={700}
 				onCancel={handleCancel}
-				onFinish={transferTokensToBorrower}
 				footer={null}
 			>
 				{
 					tokenTransferStep === 0 &&
 					<Form
 						labelCol={{
-							lg: 4,
-							xl: 3,
-							xxl: 3,
+							lg: 6,
+							xl: 5,
+							xxl: 5,
 						}}
 						wrapperCol={{
 							lg: 20,
@@ -514,17 +513,21 @@ function LoansTable() {
 						layout="horizontal"
 						size="default"
 						labelAlign="left"
+						onFinish={transferTokensToBorrower}
 					>
-						<Form.Item label="Borrower">
+						<Form.Item label="Borrower Name" style={{ marginBottom: '0px' }}>
+							<span> { loanRecord.borrowerName } </span>
+						</Form.Item>
+						<Form.Item label="Borrower Address" style={{ marginBottom: '0px' }}>
 							<span> { loanRecord.borrower } </span>
 						</Form.Item>
 						<Form.Item label="Amount">
 							<span> { loanRecord.amount } </span>
 						</Form.Item>
 						<Form.Item wrapperCol={{
-							lg: { span: 14, offset: 4 },
-							xl: { span: 14, offset: 3 },
-							xxl: { span: 14, offset: 3 } }}
+							lg: { span: 14, offset: 6 },
+							xl: { span: 14, offset: 5 },
+							xxl: { span: 14, offset: 5 } }}
 						>
 							<Space direction="horizontal">
 								<Button onClick={() => handleCancel()}>Cancel</Button>

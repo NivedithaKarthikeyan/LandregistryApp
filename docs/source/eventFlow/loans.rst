@@ -142,8 +142,11 @@ follows. ::
     }
   };
 
-Get Borroers Data
-~~~~~~~~~~~~~~~~~
+``UserIdentity`` smart contract's ``getAllBrokers`` method described in 
+:ref:`get all brokers target` section.
+
+Get Borrowers Data
+~~~~~~~~~~~~~~~~~~
 
 ``getBorrowers`` function will get the registered Borrowers details from the ``UserIdentity`` smart contract 
 using ``UserIdentityContract`` smart contract object and ``getAllBorrowers`` method of the `UserIdentity.sol`` smart contract.
@@ -156,6 +159,9 @@ This function will update the ``borrowers`` object by mapping the ``Borrowers`` 
       borrowers[response[i].walletAddress] = response[i].name;
     }
   };
+
+``UserIdentity`` smart contract's ``getAllBrokers`` method described in 
+:ref:`get all borrowers target` section.
 
 Get Loan Payments Data
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -227,6 +233,9 @@ It uses the spread operator ``...prev`` in the ``setData`` method below. ::
     }
   };
 
+``BankLoan`` smart contract's ``getLoans`` method described in 
+:ref:`get loans target` section.
+
 .. _initial loan data target:
 
 Load Initial Data
@@ -297,6 +306,9 @@ This event helps to update the ``Loans Table`` with newly created ``Loans``. ::
 
 To unsubscribe to this event we call the ``unsubscribe`` method in the ``return`` section.
 This return method will execute when ``LoansTable`` dismount from the UI.
+
+``BankLoan`` smart contract's ``loanRequest`` event described in 
+:ref:`loan request event target` section.
 
 Complete ``useEffect`` hook script. ::
 
@@ -642,8 +654,8 @@ using ``Update Loan Payment`` in the ``Transfer`` page. Those payment data will 
    
    ``loadData()`` method is used to load data from the smart contracts as mentioned in  :ref:`initial loan data target`
 
-Borrower Sign Loan Event Flows
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Borrower Sign Loan Event Flow
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If Loan is in ``0`` (``REQUESTED``) state, ``Action`` column displays ``Sing Loan`` action to the ``Borrower``. ::
 
@@ -655,9 +667,7 @@ If Loan is in ``0`` (``REQUESTED``) state, ``Action`` column displays ``Sing Loa
       render: (record) => {
         if (record.status === '0') {
           return (
-            <span>
-              <a href onClick={() => signLoan(record.id)}>Sign Loan</a>
-            </span>
+            <Button type="primary" ghost onClick={() => signLoan(record.id)}> Sign Loan </Button>
           );
         }
       },
@@ -683,21 +693,23 @@ In ``signLoan`` function it calls the ``signByBorrower`` smart contract method a
 If this transaction successful it display the success message and load data.
 If not it displays the error message.
 
-Bank Approve Loan Event Flows
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``BankLoan`` smart contract's ``signByBorrower`` method described in 
+:ref:`sign by borrower target` section.
+
+Bank Approve Loan Event Flow
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If Loan is in ``1`` (``BORROWER_SIGNED``) state ``Action`` column enables ``Approve`` and ``Reject`` actions to the ``Bank`` user. ::
 
   if (record.status === '1') {
     actionBlock =
-      <span>
-        <a href onClick={() => confirmLoanApprove(record.id)}>Approve</a>
-        <Divider type="vertical" />
-        <a href onClick={() => confirmLoanReject(record.id)} style={{ color: 'red' }}>Reject</a>
-      </span>;
+      <Space>
+        <Button type="primary" ghost onClick={() => confirmLoanApprove(record.id)}> Approve </Button>
+        <Button type="primary" danger ghost onClick={() => confirmLoanReject(record.id)}> Reject </Button>
+      </Space>;
   }
 
-When ``Bank`` user clicks the ``Approve`` action it triggers the ``confirmLoanApprove`` function and passes the 
+When ``Bank`` user clicks the ``Approve`` button it triggers the ``confirmLoanApprove`` function and passes the 
 Loan Id ``record.id`` value as a parameter. ::
 
   const confirmLoanApprove = (loanId) => {
@@ -726,21 +738,23 @@ as a paramater. ::
 In ``approveLoan`` function it calls the ``approveLoan`` method of the ``BankLoan`` smart contract 
 using selected wallet address in the ``MetaMask``.
 
-Bank Reject Loan Event Flows
+``BankLoan`` smart contract's ``approveLoan`` method described in 
+:ref:`approve loan target` section.
+
+Bank Reject Loan Event Flow
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Second action enabled for the loan state ``1`` (``BORROWER_SIGNED``) is ``Reject`` action for the ``Bank`` users. ::
 
   if (record.status === '1') {
     actionBlock =
-      <span>
-        <a href onClick={() => confirmLoanApprove(record.id)}>Approve</a>
-        <Divider type="vertical" />
-        <a href onClick={() => confirmLoanReject(record.id)} style={{ color: 'red' }}>Reject</a>
-      </span>;
+      <Space>
+        <Button type="primary" ghost onClick={() => confirmLoanApprove(record.id)}> Approve </Button>
+        <Button type="primary" danger ghost onClick={() => confirmLoanReject(record.id)}> Reject </Button>
+      </Space>;
   }
 
-When ``Bank`` user clicks the ``Reject`` action it triggers the ``confirmLoanReject`` function and passes the 
+When ``Bank`` user clicks the ``Reject`` button it triggers the ``confirmLoanReject`` function and passes the 
 Loan Id ``record.id`` value as a parameter. ::
 
   const confirmLoanReject = (loanId) => {
@@ -771,3 +785,468 @@ as a paramater. ::
 
 In ``rejectLoan`` function it calls the ``rejectLoan`` method of the ``BankLoan`` smart contract 
 using selected wallet address in the ``MetaMask``.
+
+``BankLoan`` smart contract's ``rejectLoan`` method described in 
+:ref:`reject loan target` section.
+
+Transfer Tokens to Broker Event Flow
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After ``Bank`` approves the loan its state is changed to ``2`` (``BANK_APPROVED``).
+When loan is in state ``2``, ``Action`` column enables ``Transfer Tokens to Broker`` 
+action to the ``Bank`` user. ::
+
+  else if (record.status === '2') {
+    actionBlock =
+      <Button type="primary" ghost onClick={() => showBrokerTransferModal(record)}> 
+        Transfer Tokens to Broker 
+      </Button>
+  }
+
+When ``Bank`` user clicks the ``Transfer Tokens to Broker`` button it triggers the ``showBrokerTransferModal`` function and passes the 
+Loan record (``record``) as a parameter. ::
+
+  const showBrokerTransferModal = (row) => {
+    setLoanRecord(row);
+    setIsBrokerTransferModalVisible(true);
+  };
+
+``showBrokerTransferModal`` function sets the Loan record row details as the ``loanRecord`` state and
+sets ``isBrokerTransferModalVisible`` state to ``true``.
+This displays the Modal defined in the return section of the ``LoansTable`` component. ::
+
+  <Modal
+    title={`Transfer Tokens to Broker - Loan Id ${loanRecord.id}`}
+    visible={isBrokerTransferModalVisible}
+    width={700}
+    onCancel={handleCancel}
+    footer={null}
+  >
+    ...
+  </Modal>
+
+.. figure:: ../images/transfer_to_broker.png
+
+This modal displays the details of ``loanRecord`` state. 
+It displays the ``Transfer Tokens to Broker`` and the Loan Id in the Modal title.
+Modal ``visibility`` is controlled by ``isBrokerTransferModalVisible`` state.
+
+Modal body part is rendered using ``tokenTransferStep`` as follows. ::
+
+  {
+    tokenTransferStep === 0 &&
+    <Form ... > 
+      ...
+    </Form>
+  }
+  {
+    tokenTransferStep === 1 &&
+    <span>Updating the Loan State</span>
+  }
+
+``tokenTransferStep`` state controls the current step of this Bank to Broker token transaction process.
+When modal pop-ups ``tokenTransferStep`` state has the value ``0`` and it displays the 
+Token Transfer details in the Modal body. When ``tokenTransferStep`` is ``1`` it displays the 
+``Updating the Loan State`` message.
+
+Token transaction details are displayed using ``Form`` component as follows. ::
+
+  <Form
+    ...
+    onFinish={transferTokensToBroker}
+  >
+    <Form.Item label="Broker Name" style={{ marginBottom: '0px' }} >
+      <span> { loanRecord.brokerName } </span>
+    </Form.Item>
+    <Form.Item label="Broker Address" style={{ marginBottom: '0px' }}>
+      <span> { loanRecord.broker } </span>
+    </Form.Item>
+    <Form.Item label="Amount">
+      <span> { loanRecord.brokerFee } </span>
+    </Form.Item>
+    <Form.Item wrapperCol={{
+      lg: { span: 14, offset: 6 },
+      xl: { span: 14, offset: 5 },
+      xxl: { span: 14, offset: 5 } }}
+    >
+      <Space direction="horizontal">
+        <Button onClick={() => handleCancel()}>Cancel</Button>
+        <Button type="primary" htmlType="submit">Transfer Tokens</Button>
+      </Space>
+    </Form.Item>
+  </Form>
+
+This ``Form`` component displays the ``Broker Name``, Broker Wallet Address and ``Token Amount`` using 
+``loanRecord`` state as shown in the above screenshot.
+When ``Bank`` user clicks the ``Transfer Tokens`` button it triggers the ``transferTokensToBroker`` function. ::
+
+Complete Modal component: ::
+
+  <Modal
+    title={`Transfer Tokens to Broker - Loan Id ${loanRecord.id}`}
+    visible={isBrokerTransferModalVisible}
+    width={700}
+    onCancel={handleCancel}
+    footer={null}
+  >
+    {
+      tokenTransferStep === 0 &&
+      <Form
+        labelCol={{
+          lg: 6,
+          xl: 5,
+          xxl: 5,
+        }}
+        wrapperCol={{
+          lg: 20,
+          xl: 20,
+          xxl: 20,
+        }}
+        layout="horizontal"
+        size="default"
+        labelAlign="left"
+        onFinish={transferTokensToBroker}
+      >
+        <Form.Item label="Broker Name" style={{ marginBottom: '0px' }} >
+          <span> { loanRecord.brokerName } </span>
+        </Form.Item>
+        <Form.Item label="Broker Address" style={{ marginBottom: '0px' }}>
+          <span> { loanRecord.broker } </span>
+        </Form.Item>
+        <Form.Item label="Amount">
+          <span> { loanRecord.brokerFee } </span>
+        </Form.Item>
+        <Form.Item wrapperCol={{
+          lg: { span: 14, offset: 6 },
+          xl: { span: 14, offset: 5 },
+          xxl: { span: 14, offset: 5 } }}
+        >
+          <Space direction="horizontal">
+            <Button onClick={() => handleCancel()}>Cancel</Button>
+            <Button type="primary" htmlType="submit">Transfer Tokens</Button>
+          </Space>
+        </Form.Item>
+      </Form>
+    }
+    {
+      tokenTransferStep === 1 &&
+      <span>Updating the Loan State</span>
+    }
+  </Modal>
+
+``transferTokensToBroker`` function: ::
+
+  const transferTokensToBroker = async () => {
+    try {
+      const accounts = await window.ethereum.enable();
+      await MicroTokenContract.methods.transfer(loanRecord.broker, loanRecord.brokerFee).send({
+        from: accounts[0] });
+      message.success('Token transferred successfully');
+      await setTokenTransferStep(1);
+      await confirmTokenTrasferToBroker(loanRecord.id);
+      await setTokenTransferStep(0);
+      await setIsBrokerTransferModalVisible(false);
+    } catch (err) {
+      console.log(err);
+      await setTokenTransferStep(0);
+      message.error('Error occured while transferring tokens');
+    }
+  };
+
+``transferTokensToBroker`` calls the ``transfer`` method of the ``MicroToken`` smart contract method using 
+``MicroTokenContract`` contract object.
+It passes the selected wallet account address as the ``from`` value in the ``send`` method.
+When token transaction successfully executed this function updates the ``tokenTransferStep`` to ``1``.
+It updates the current Modal body content.
+
+.. figure:: ../images/update_message_bank_to_broker.png
+
+Then ``transferTokensToBroker`` triggers the ``confirmTokenTrasferToBroker`` function and passes Loan Id; ``loanRecord.id`` as a parameter.
+By clicking ``Confirm`` in MetaMask pop-up message ``Bank`` user can update the Loan state in ``BankLoan`` smart contract.
+When user successfully updates the ``BankLoan`` smart contract it resets the ``tokenTransferStep`` and 
+sets ``isBrokerTransferModalVisible`` state to false. It removes the Modal from the UI.
+  
+``confirmTokenTrasferToBroker`` calls the ``confirmTokenTrasferToBroker`` method of the ``BankLoan`` smart contract and
+passes the ``loanId`` and `` MetaMask selected wallet account address. ::
+
+  const confirmTokenTrasferToBroker = async (loanId) => {
+    try {
+      const accounts = await window.ethereum.enable();
+      await BankLoanContract.methods.confirmTokenTrasferToBroker(loanId).send({ from: accounts[0] });
+      message.success(`Loan ${loanId} updated`);
+      loadData();
+    } catch (err) {
+      console.log(err);
+      message.error('Error occured while updating Loan');
+    }
+  };
+
+``BankLoan`` smart contract's ``confirmTokenTrasferToBorrower`` method described in 
+:ref:`confirm token transfer broker target` section.
+
+Transfer Tokens to Borrower Event Flow
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After ``Bank`` user transfer tokens to the ``Broker`` and updates the Loan state in 
+``BankLoan`` smart contract Loan state is changed to ``4`` (``PAID_TO_BROKER``).
+When loan is in state ``4``, ``Action`` column enables ``Transfer Tokens to Borrower`` 
+action to the ``Bank`` user. ::
+
+  else if (record.status === '4') {
+    actionBlock = 
+      <Button type="primary" ghost onClick={() => showBorrowerTransferModal(record)}> 
+        Transfer Tokens to Borrower 
+      </Button>
+  }
+
+When ``Bank`` user clicks the ``Transfer Tokens to Borrower`` button it triggers the ``showBorrowerTransferModal`` 
+function and passes the Loan record (``record``) as a parameter. ::
+
+  const showBorrowerTransferModal = (row) => {
+    setLoanRecord(row);
+    setIsBorrowerTransferModalVisible(true);
+  };
+
+``showBorrowerTransferModal`` function sets the Loan record row details as the ``loanRecord`` state and
+sets ``isBorrowerTransferModalVisible`` state to ``true``.
+This displays the Modal defined in the return section of the ``LoansTable`` component. ::
+
+  <Modal
+    title={`Transfer Tokens to Borrower - Loan Id ${loanRecord.id}`}
+    visible={isBorrowerTransferModalVisible}
+    width={700}
+    onCancel={handleCancel}
+    footer={null}
+  >
+    ...
+  </Modal>
+
+.. figure:: ../images/transfer_to_borrower.png
+
+This modal displays the details of ``loanRecord`` state. 
+It displays the ``Transfer Tokens to Borrower`` and the Loan Id in the Modal title.
+Modal ``visibility`` is controlled by ``isBrokerTransferModalVisible`` state.
+
+Modal body part is rendered using ``tokenTransferStep`` as follows. ::
+
+  {
+    tokenTransferStep === 0 &&
+    <Form ... > 
+      ...
+    </Form>
+  }
+  {
+    tokenTransferStep === 1 &&
+    <span>Updating the Loan State</span>
+  }
+
+``tokenTransferStep`` state controls the current step of this Bank to Borrower token transaction process.
+When modal pop-ups ``tokenTransferStep`` state has the value ``0`` and it displays the 
+Token Transfer details in the Modal body. When ``tokenTransferStep`` is ``1`` it displays the 
+``Updating the Loan State`` message.
+
+Token transaction details are displayed using ``Form`` component as follows. ::
+
+  <Form
+    ...
+    onFinish={transferTokensToBorrower}
+  >
+    <Form.Item label="Borrower Name" style={{ marginBottom: '0px' }}>
+      <span> { loanRecord.borrowerName } </span>
+    </Form.Item>
+    <Form.Item label="Borrower Address" style={{ marginBottom: '0px' }}>
+      <span> { loanRecord.borrower } </span>
+    </Form.Item>
+    <Form.Item label="Amount">
+      <span> { loanRecord.amount } </span>
+    </Form.Item>
+    <Form.Item wrapperCol={{
+      lg: { span: 14, offset: 6 },
+      xl: { span: 14, offset: 5 },
+      xxl: { span: 14, offset: 5 } }}
+    >
+      <Space direction="horizontal">
+        <Button onClick={() => handleCancel()}>Cancel</Button>
+        <Button type="primary" htmlType="submit">Transfer Tokens</Button>
+      </Space>
+    </Form.Item>
+  </Form>
+
+This ``Form`` component displays the ``Borrower Name``, ``Borrower Wallet Address`` and ``Token Amount`` using 
+``loanRecord`` state as shown in the above screenshot.
+When ``Bank`` user clicks the ``Transfer Tokens`` button it triggers the ``transferTokensToBorrower`` function. ::
+
+Complete Modal component: ::
+
+  <Modal
+    title={`Transfer Tokens to Borrower - Loan Id ${loanRecord.id}`}
+    visible={isBorrowerTransferModalVisible}
+    width={700}
+    onCancel={handleCancel}
+    footer={null}
+  >
+    {
+      tokenTransferStep === 0 &&
+      <Form
+        labelCol={{
+          lg: 6,
+          xl: 5,
+          xxl: 5,
+        }}
+        wrapperCol={{
+          lg: 20,
+          xl: 20,
+          xxl: 20,
+        }}
+        layout="horizontal"
+        size="default"
+        labelAlign="left"
+        onFinish={transferTokensToBorrower}
+      >
+        <Form.Item label="Borrower Name" style={{ marginBottom: '0px' }}>
+          <span> { loanRecord.borrowerName } </span>
+        </Form.Item>
+        <Form.Item label="Borrower Address" style={{ marginBottom: '0px' }}>
+          <span> { loanRecord.borrower } </span>
+        </Form.Item>
+        <Form.Item label="Amount">
+          <span> { loanRecord.amount } </span>
+        </Form.Item>
+        <Form.Item wrapperCol={{
+          lg: { span: 14, offset: 6 },
+          xl: { span: 14, offset: 5 },
+          xxl: { span: 14, offset: 5 } }}
+        >
+          <Space direction="horizontal">
+            <Button onClick={() => handleCancel()}>Cancel</Button>
+            <Button type="primary" htmlType="submit">Transfer Tokens</Button>
+          </Space>
+        </Form.Item>
+      </Form>
+    }
+    {
+      tokenTransferStep === 1 &&
+      <span>Updating the Loan State</span>
+    }
+  </Modal>
+
+``transferTokensToBorrower`` function: ::
+
+  const transferTokensToBorrower = async () => {
+    try {
+      const accounts = await window.ethereum.enable();
+      await MicroTokenContract.methods.transfer(loanRecord.borrower, loanRecord.amount).send({
+        from: accounts[0] });
+      message.success('Token transferred successfully');
+      await setTokenTransferStep(1);
+      await confirmTokenTrasferToBorrower(loanRecord.id);
+      await setTokenTransferStep(0);
+      await setIsBorrowerTransferModalVisible(false);
+    } catch (err) {
+      console.log(err);
+      await setTokenTransferStep(0);
+      message.error('Error occured while transferring tokens');
+    }
+  };
+
+``transferTokensToBorrower`` calls the ``transfer`` method of the ``MicroToken`` smart contract method using 
+``MicroTokenContract`` contract object.
+It passes the selected wallet account address as the ``from`` value in the ``send`` method.
+When token transaction successfully executed this function updates the ``tokenTransferStep`` to ``1``.
+It updates the current Modal body content.
+
+.. figure:: ../images/update_message_bank_to_borrower.png
+
+Then ``transferTokensToBorrower`` triggers the ``confirmTokenTrasferToBorrower`` function and passes Loan Id; ``loanRecord.id`` as a parameter.
+By clicking ``Confirm`` in MetaMask pop-up message ``Bank`` user can update the Loan state in ``BankLoan`` smart contract.
+When user successfully updates the ``BankLoan`` smart contract it resets the ``tokenTransferStep`` and 
+sets ``isBorrowerTransferModalVisible`` state to false. It removes the Modal from the UI.
+  
+``confirmTokenTrasferToBorrower`` calls the ``confirmTokenTrasferToBorrower`` method of the ``BankLoan`` smart contract and
+passes the ``loanId`` and `` MetaMask selected wallet account address. ::
+
+  const confirmTokenTrasferToBorrower = async (loanId) => {
+    try {
+      const accounts = await window.ethereum.enable();
+      await BankLoanContract.methods.confirmTokenTrasferToBorrower(loanId).send({ from: accounts[0] });
+      message.success(`Loan ${loanId} updated`);
+      loadData();
+    } catch (err) {
+      console.log(err);
+      message.error('Error occured while updating Loan');
+    }
+  };
+
+``BankLoan`` smart contract's ``confirmTokenTrasferToBorrower`` method is described in 
+:ref:`confirm token transfer borrower target` section.
+
+Close Loan Event Flow
+~~~~~~~~~~~~~~~~~~~~~
+
+If Loan is in ``5`` (``ONGOING``) state, ``Action`` column displays ``Close`` and ``Defaulted`` 
+actions to the ``Bank`` user. ::
+
+  else if (record.status === '5') {
+    actionBlock =
+      <Space>
+        <Button type="primary" ghost onClick={() => closeLoan(record.id)}> Close </Button>
+        <Button type="primary" danger ghost onClick={() => markAsDefaulted(record.id)}> Defaulted </Button>
+      </Space>;
+  }
+
+When ``Bank`` user clicks the ``Close`` action it triggers the ``closeLoan`` function and passes
+Loan Id ``record,id`` as a parameter. ::
+
+  const closeLoan = async (loanId) => {
+    try {
+      const accounts = await window.ethereum.enable();
+      await BankLoanContract.methods.closeLoan(loanId).send({ from: accounts[0] });
+      message.success(`Loan ${loanId} updated`);
+      loadData();
+    } catch (err) {
+      console.log(err);
+      message.error('Error occured while updating Loan');
+    }
+  };
+
+In ``closeLoan`` function, it calls the ``closeLoan`` smart contract method and passes the ``loanId``.
+If this transaction successful it display the success message and load data.
+If not, it displays the error message.
+
+``BankLoan`` smart contract's ``closeLoan`` method described in 
+:ref:`close loan target` section.
+
+Loan Mark as Default Event Flow
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Second action enabled for the loan state ``5`` (``ONGOING``) is ``Defaulted`` action for the ``Bank`` users. ::
+
+  else if (record.status === '5') {
+    actionBlock =
+      <Space>
+        <Button type="primary" ghost onClick={() => closeLoan(record.id)}> Close </Button>
+        <Button type="primary" danger ghost onClick={() => markAsDefaulted(record.id)}> Defaulted </Button>
+      </Space>;
+  }
+
+When ``Bank`` user clicks the ``Defaulted`` action it triggers the ``markAsDefaulted`` function and passes
+Loan Id ``record,id`` as a parameter. ::
+
+  const markAsDefaulted = async (loanId) => {
+		try {
+			const accounts = await window.ethereum.enable();
+			await BankLoanContract.methods.markAsDefaulted(loanId).send({ from: accounts[0] });
+			message.success(`Loan ${loanId} updated`);
+			loadData();
+		} catch (err) {
+			console.log(err);
+			message.error('Error occured while updating Loan');
+		}
+	};
+
+In ``markAsDefaulted`` function, it calls the ``markAsDefaulted`` smart contract method and passes the ``loanId``.
+If this transaction successful it display the success message and load data.
+If not, it displays the error message.
+
+``BankLoan`` smart contract's ``closeLoan`` method described in 
+:ref:`mark as defaulted target` section.

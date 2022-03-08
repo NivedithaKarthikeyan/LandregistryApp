@@ -270,6 +270,8 @@ Parameters:
 This function is used by other smart contracts to verify a Borrower account. 
 It returns ``true`` if the Borrower exists on the given address or ``false`` otherwise.
 
+.. _get all brokers target:
+
 getAllBrokers
 ^^^^^^^^^^^^^
 
@@ -279,6 +281,8 @@ Return all the Brokers as an array. ::
 
 Return: 
     * ``User []`` - List of Brokers as an array.
+
+.. _get all borrowers target:
 
 getAllBorrowers
 ^^^^^^^^^^^^^^^
@@ -367,6 +371,8 @@ Event
 
 This event is defined in the ``BankLoan`` smart contract.
 
+.. _loan request event target:
+
 loanRequest
 ^^^^^^^^^^^
 
@@ -429,12 +435,11 @@ The ``UserIdentity`` smart contract address object instance will be set as the `
         identitySC = UserIdentity(_identitySC);
     }
 
-
 Functions
 ~~~~~~~~~
 
-applyLoan(...)
-^^^^^^^^^^^^^^
+applyLoan
+^^^^^^^^^
 
 Create a Loan request. ::
 
@@ -452,8 +457,11 @@ Parameters:
 Modifiers:
     * ``isBroker`` - Check whether function caller is registered as a Broker.
 
-signByBorrower(...)
-^^^^^^^^^^^^^^^^^^^
+
+.. _sign by borrower target:
+
+signByBorrower
+^^^^^^^^^^^^^^
 
 Borrower signs Loan requested by Broker for him/herself: ::
 
@@ -468,8 +476,10 @@ Modifiers:
     * ``isValidLoan(_loanId)`` - Check Loan's validity.
     * ``isLoanIn(_loanId, LoanState.REQUESTED)`` - Check whether Loan is in REQUESTED state.
 
-approveLoan(...)
-^^^^^^^^^^^^^^^^
+.. _approve loan target:
+
+approveLoan
+^^^^^^^^^^^
 
 Change the ``bankApprove`` value to ``True`` and changes the Loan state to ``BANK_APPROVED`` state. ::
     
@@ -484,8 +494,10 @@ Modifiers:
     * ``isValidLoan(_loanId)`` - Check Loan's validity.
     * ``isLoanIn(_loanId, LoanState.BORROWER_SIGNED)`` - Check whether Loan is in BORROWER_SIGNED state.
 
-rejectLoan(...)
-^^^^^^^^^^^^^^^
+.. _reject loan target:
+
+rejectLoan
+^^^^^^^^^^
 
 Change the ``bankApprove`` value to ``False`` and changes the Loan state to ``BANK_REJECTED`` state. ::
 
@@ -500,8 +512,10 @@ Modifiers:
     * ``isValidLoan(_loanId)`` - Check Loan's validity.
     * ``isLoanIn(_loanId, LoanState.BORROWER_SIGNED)`` - Check whether Loan is in BORROWER_SIGNED state.
 
-confirmTokenTrasferToBroker(...)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _confirm token transfer broker target:
+
+confirmTokenTrasferToBroker
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Change the Loan state to PAID_TO_BROKER. ::
 
@@ -516,8 +530,10 @@ Modifiers:
     * ``isValidLoan(_loanId)`` - Check Loan's validity.
     * ``isLoanIn(_loanId, LoanState.PAID_TO_INSURANCE)`` - Check whether Loan is in PAID_TO_INSURANCE state.
 
-confirmTokenTrasferToBorrower(...)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _confirm token transfer borrower target:
+
+confirmTokenTrasferToBorrower
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Change the Loan state to ONGOING. ::
 
@@ -532,8 +548,10 @@ Modifiers:
     * ``isValidLoan(_loanId)`` - Check Loan's validity
     * ``isLoanIn(_loanId, LoanState.PAID_TO_BROKER)`` - Check whether Loan is in PAID_TO_BROKER state.
 
-closeLoan(...)
-^^^^^^^^^^^^^^ 
+.. _close loan target:
+
+closeLoan
+^^^^^^^^^
 
 Change the Loan state to CLOSE. ::
 
@@ -548,8 +566,11 @@ Modifiers:
     * ``isValidLoan(_loanId)`` - Check Loan's validity.
     * ``isLoanIn(_loanId, LoanState.ONGOING)`` - Check whether Loan is in ONGOING state.
 
-markAsDefaulted(...)
-^^^^^^^^^^^^^^^^^^^^
+
+.. _mark as defaulted target:
+
+markAsDefaulted
+^^^^^^^^^^^^^^^
 
 Change the Loan state to DEFAULT. ::
 
@@ -577,6 +598,7 @@ Parameters:
 Return:
     * ``Loan`` - Return Loan registered as ``_loanId``.
 
+.. _get loans target:
 
 getLoans()
 ^^^^^^^^^^^^^
