@@ -166,7 +166,6 @@ User - This struct holds user attributes. ::
         address walletAddress;
         string name;
         Role role;
-        bool isBankApproved;
     }
 
 * ``id`` - System assigned id for the user. This is an incremental number.
@@ -174,7 +173,6 @@ User - This struct holds user attributes. ::
 * ``walletAddress`` - User wallet account address (from Ganache or other blockchain).
 * ``name`` - User name.
 * ``role`` - User role (BROKER, BORROWER).
-* ``isBankApproved`` - Whether Bank ratifies the user.
 
 Modifiers
 ~~~~~~~~~
@@ -192,7 +190,7 @@ Attributes
 * ``brokersCount`` - Total number of brokers in the system. 
 * ``borrowersCount`` - Total number of borrowers in the system.
     
-* ``borrowers`` - List of Borrowers in the system (address-to-Borrower mapping).
+* ``borrowers`` - List of Borrowers in the system (address-to-User mapping).
 * ``brokers`` - List of Brokers in the system (address-to-User mapping).
     
 * ``brokersAddresses`` - List of Broker addresses (dynamic array).
@@ -207,7 +205,6 @@ The constructor designates the contract deployer (``msg.sender``) as the admin. 
     {
         admin = msg.sender;
     }
-
 
 Functions
 ~~~~~~~~~
@@ -341,8 +338,7 @@ struct
 
 1. Loan - This structure holds Loan attributes. ::
 
-    struct Loan
-    {
+    struct Loan{
         uint id;
         uint amount;
         uint months;
@@ -351,6 +347,7 @@ struct
         LoanState state;
         address broker;
         address borrower;
+        uint brokerFee;
         bool bankApprove;
         bool isBorrowerSigned;
     }
@@ -362,7 +359,8 @@ struct
 * ``planId`` - Loan plan Id.
 * ``state`` - Current state of the loan.
 * ``broker`` - Address of the Broker who applied the Loan.
-* ``borrower`` - Address of the Borrower of the Loan.
+* ``borrower`` - Borrower address of the loan.
+* ``brokerFee`` - Broker fee for the Loan.
 * ``bankApprove`` - Status of the Bank approval for the Loan.
 * ``isBorrowerSigned`` - Borrower Signed status.
 
@@ -381,14 +379,15 @@ This event is emitted when a Broker creates a loan request. ::
     event loanRequest(
         uint id,
         uint amount,
-        uint months, 
+        uint months,
         uint interest,
-        uint planId, 
-        LoanState state, 
-        address broker, 
+        string planId,
+        LoanState state,
+        address broker,
         address borrower,
-        bool bankApprove, 
-        bool isBorrowerSigned,
+        uint brokerFee,
+        bool bankApprove,
+        bool isBorrowerSigned
     );
 
 Parameters:
@@ -400,6 +399,7 @@ Parameters:
     * ``state`` - Current state of the loan.
     * ``broker`` - Broker of the loan.
     * ``borrower`` - Borrower address of the loan.
+    * ``brokerFee`` - Broker fee for the Loan.
     * ``bankApprove`` - Bank approval status.
     * ``isBorrowerSigned`` - Borrower signed status.
 
@@ -411,6 +411,7 @@ The following modifiers are used in the ``BankLoan.sol`` functions.
 
 * ``isAdmin()`` - Check whether function caller is the owner of the smart contract.
 * ``isBroker()`` - Check whether function caller is registered as a Broker in the system.
+* ``isBorrower(address _address)`` - Check whether given ``_address`` is registered as a Borrower in the system.
 * ``isLoanBorrower(uint _loanId)`` - Check whether function caller is the Borrower of a given Loan.
 * ``isValidLoan(uint _loanId)`` - Check whether Loan exist in the system.
 * ``isLoanIn(uint _loanId, LoanState _state)`` - Check whether given Loan is in specific Loan State.

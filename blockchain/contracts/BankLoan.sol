@@ -16,8 +16,7 @@ contract BankLoan{
         CLOSE
     }
     
-    struct Loan
-    {
+    struct Loan{
         uint id;
         uint amount;
         uint months;
