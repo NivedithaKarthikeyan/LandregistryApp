@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Table, Tag, Card, Divider, message, Modal, Form, Space, Button, Input } from 'antd';
+import { Table, Tag, Card, message, Modal, Form, Space, Button } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { getApi } from '../../util/fetchApi';
 import UserContext from '../../stores/userContext';
 import SmartContractContext from '../../stores/smartContractContext';
+
 
 function LoansTable() {
 	// Following properties will captured from userContext and smartContractContext.
@@ -29,19 +30,6 @@ function LoansTable() {
 	const brokers = {};
 	const borrowers = {};
 
-	const getPayments = async () => {
-		try {
-			const response = await getApi({
-				url: 'loan-payments',
-			});
-			const paymentsResult = await response;
-			setPayments(paymentsResult);
-		} catch (err) {
-			console.log(err);
-			message.error('Error occured while loading Loan Payments');
-		}
-	};
-
 	const getBrokers = async () => {
 		const response = await UserIdentityContract.methods.getAllBrokers().call();
 		for (let i = 0; i < response.length; i++) {
@@ -53,6 +41,19 @@ function LoansTable() {
 		const response = await UserIdentityContract.methods.getAllBorrowers().call();
 		for (let i = 0; i < response.length; i++) {
 			borrowers[response[i].walletAddress] = response[i].name;
+		}
+	};
+
+	const getPayments = async () => {
+		try {
+			const response = await getApi({
+				url: 'loan-payments',
+			});
+			const paymentsResult = await response;
+			setPayments(paymentsResult);
+		} catch (err) {
+			console.log(err);
+			message.error('Error occured while loading Loan Payments');
 		}
 	};
 
@@ -250,46 +251,37 @@ function LoansTable() {
 		{
 			title: 'ID',
 			dataIndex: 'id',
-			key: 'id',
 		},
 		{
 			title: 'Borrower Name',
 			dataIndex: 'borrowerName',
-			key: 'borrowerName',
 		},
 		{
 			title: 'Broker Name',
 			dataIndex: 'brokerName',
-			key: 'brokerName',
 		},
 		{
 			title: 'Amount',
 			dataIndex: 'amount',
-			key: 'amount',
 		},
 		{
 			title: 'Period',
 			dataIndex: 'period',
-			key: 'period',
 		},
 		{
 			title: 'Interest %',
-			key: 'interest',
 			dataIndex: 'interest',
 		},
 		{
 			title: 'Broker Fee',
-			key: 'brokerFee',
 			dataIndex: 'brokerFee',
 		},
 		{
 			title: 'Plan ID',
-			key: 'planId',
 			dataIndex: 'planId',
 		},
 		{
 			title: 'Status',
-			key: 'status',
 			dataIndex: 'status',
 			render: tag => {
 				let color = 'geekblue';
@@ -311,7 +303,6 @@ function LoansTable() {
 		columns.push({
 			title: 'Action',
 			dataIndex: '',
-			key: 'x',
 			render: (record) => {
 				if (record.status === '0') {
 					return (
@@ -326,7 +317,6 @@ function LoansTable() {
 		columns.push({
 			title: 'Action',
 			dataIndex: '',
-			key: 'x',
 			render: (record) => {
 				let actionBlock = '';
 				if (record.status === '1') {
@@ -389,9 +379,9 @@ function LoansTable() {
 		const expandedPayments = payments.filter(item => item.loanId == record.id);
 
 		const expandedPaymentColumns = [
-			{ title: 'Payment ID', dataIndex: '_id', key: 'id' },
-			{ title: 'Amount', dataIndex: 'amount', key: 'amount' },
-			{ title: 'Transaction Hash', dataIndex: 'transactionHash', key: 'transactionHash' },
+			{ title: 'Payment ID', dataIndex: '_id' },
+			{ title: 'Amount', dataIndex: 'amount' },
+			{ title: 'Transaction Hash', dataIndex: 'transactionHash'},
 		];
 
 		return (

@@ -67,7 +67,8 @@ Since ``LoansTable`` common for all users it contains many functions and conditi
 First, ``LoansTable`` component imports dependencies. ::
 
   import React, { useState, useContext, useEffect } from 'react';
-  import { Table, Tag, Card, Divider, message, Modal, Form, Space, Button } from 'antd';
+  import { Table, Tag, Card, message, Modal, Form, Space, Button } from 'antd';
+  import { CloseCircleOutlined } from '@ant-design/icons';
   import { getApi } from '../../util/fetchApi';
   import UserContext from '../../stores/userContext';
   import SmartContractContext from '../../stores/smartContractContext';
@@ -98,25 +99,19 @@ Integer values returning from ``BankLoan.sol`` states are equal to the ``states`
 
 ``LoansTable`` has following states. ::
 
-  const [isApproveModalVisible, setIsApproveModalVisible] = useState(false); // Loan approve confirmation modal visibility state.
-  const [isRejectModalVisible, setIsRejectModalVisible] = useState(false); // Loan remove modal visibility state.
   const [isBrokerTransferModalVisible, setIsBrokerTransferModalVisible] = useState(false);
   const [isBorrowerTransferModalVisible, setIsBorrowerTransferModalVisible] = useState(false);
-  const [id, setId] = useState(0);
   const [loanRecord, setLoanRecord] = useState({});
-  const [current, setCurrent] = useState(0);
+  const [tokenTransferStep, setTokenTransferStep] = useState(0);
   const [payments, setPayments] = useState([]);
   const [data, setData] = useState([]);
 
-* ``isApproveModalVisible`` - Loan Approval Modal visibility state.
-* ``isRejectModalVisible`` - Loan Reject Modal visibility state.
 * ``isBrokerTransferModalVisible`` - Visibility state of the Modal which is transfering tokens from ``Bank`` to ``Broker``.
 * ``isBorrowerTransferModalVisible`` - Visibility state of the Modal which is transfering loan token amount from ``Bank`` to ``Broker``.
-* ``id`` - Loan id state.
 * ``loanRecord`` - Active Loan state.
-* ``current`` - Current stage state of transfering tokens and update loan process.
-* ``payments`` - Loan Payments state.
-* ``data`` - Loan data.
+* ``tokenTransferStep`` - Current step state of transfering tokens and update loan process.
+* ``payments`` - Loan Payments data state.
+* ``data`` - Loan data state.
 
 Following 2 objects will store the registered ``Brokers`` and ``Borrowers`` details.
 We use plain objects to keep a map of users wallet addresses and their names.
