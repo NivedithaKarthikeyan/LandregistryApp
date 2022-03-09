@@ -38,62 +38,66 @@ As shown, the ``Loans`` component loads the ``LoanForm`` component from ``/compo
 
 Let's look at the ``LoanForm`` component: ::
 
-    import React, { useState, useContext } from 'react';
-    import { Card, Form, InputNumber, Input, Button, message } from 'antd';
-    import SmartContractContext from '../../stores/smartContractContext';
+  import React, { useContext } from 'react';
+import { Card, Form, InputNumber, Input, Button, message } from 'antd';
+import SmartContractContext from '../../stores/smartContractContext';
 
-    function LoanForm() {
-        ...
-        const { BankLoanContract } = useContext(SmartContractContext);
-        ...
-        const createLoanRequest = async (values) => {
-            try {
-                const accounts = await window.ethereum.enable();
+  function LoanForm() {
+    const { BankLoanContract } = useContext(SmartContractContext); 
 
-                await BankLoan.methods.applyLoan(
-                    values.amount,
-                    values.period,
-                    values.interest,
-                    values.planId,
-                    values.borrower,
-                ).send({ from: accounts[0] });
-                message.success('New loan requested successfully');
-            } catch (err) {
-                message.error('Error creating loan request');
-            }
-        };
+    const createLoanRequest = async (values) => {
+      try {
+        const accounts = await window.ethereum.enable();
 
-        return (
+        await BankLoanContract.methods.applyLoan(
+          values.amount,
+          values.period,
+          values.interest,
+          values.planId,
+          values.borrower,
+          values.brokerFee,
+        ).send({ from: accounts[0] }); 
+        message.success('New loan requested successfully');
+      } catch (err) {
+        console.log(err);
+        message.error('Error creating loan request');
+      }
+    };
 
-            <Card title="Loan Request">
-                <Form
-                    ...
-                    onFinish={createLoanRequest}
-                >
-                    <Form.Item label="Amount" name="amount" rules={[{ required: true, message: 'Please enter amount!' }]}>
-                        <InputNumber ... />
-                    </Form.Item>
-                    <Form.Item label="Period" name="period" rules={[{ required: true, message: 'Please enter period!' }]}>
-                        <InputNumber ... />
-                    </Form.Item>
-                    <Form.Item label="Interest" name="interest" rules={[{ required: true, message: 'Please enter interest!' }]}>
-                        <InputNumber ... />
-                    </Form.Item>
-                    <Form.Item label="Plan ID" name="planId" rules={[{ required: true, message: 'Please enter plan id!' }]}>
-                        <Input ... />
-                    </Form.Item>
-                    <Form.Item label="Borrower" name="borrower" rules={[{ required: true, message: 'Please enter borrower!' }]}>
-                        <Input ... />
-                    </Form.Item>
-                    <Form.Item ... >
-                        <Button type="primary" htmlType="submit">Request loan</Button>
-                    </Form.Item>
-                </Form>
-            </Card>
-        );
-    }
+    return (
+      <Card title="Loan Request Form">
+        <Form
+          ....
+          onFinish={createLoanRequest}
+        >
+          <Form.Item label="Amount" name="amount" rules={[{ required: true, message: 'Please enter amount!' }]}>
+            <InputNumber .... />
+          </Form.Item>
+          <Form.Item label="Period" name="period" rules={[{ required: true, message: 'Please enter period!' }]}>
+            <InputNumber .... />
+          </Form.Item>
+          <Form.Item label="Interest" name="interest" rules={[{ required: true, message: 'Please enter interest!' }]}>
+            <InputNumber .... />
+          </Form.Item>
+          <Form.Item label="Plan ID" name="planId" rules={[{ required: true, message: 'Please enter plan id!' }]}>
+            <Input .... />
+          </Form.Item>
+          <Form.Item label="Borrower" name="borrower" rules={[{ required: true, message: 'Please enter borrower!' }]}>
+            <Input .... />
+          </Form.Item>
+          <Form.Item label="Broker Fee" name="brokerFee" rules={[{ required: true, message: 'Please enter Broker Fee!' }]}>
+            <InputNumber .... />
+          </Form.Item>
+          <Form.Item .... >
+            <Button type="primary" htmlType="submit">Request Loan</Button>
+          </Form.Item>
+        </Form>
+      </Card>
+    );
+  }
 
-    export default LoanForm;
+  export default LoanForm;
+
 
 First, it imports React, useState and useContext. 
 Then imports the neccessary Ant Design components to build the Loan Form UI.
@@ -121,24 +125,27 @@ When submit the form it will passe the form field values as a object to the ``cr
 In ``createLoanRequest`` function we refer this object as ``values`` and we can access the input values
 by its name. ::
 
-    <Form.Item label="Amount" name="amount" rules={[{ required: true, message: 'Please enter amount!' }]}>
-        <InputNumber ... />
-    </Form.Item>
-    <Form.Item label="Period" name="period" rules={[{ required: true, message: 'Please enter period!' }]}>
-        <InputNumber ... />
-    </Form.Item>
-    <Form.Item label="Interest" name="interest" rules={[{ required: true, message: 'Please enter interest!' }]}>
-        <InputNumber ... />
-    </Form.Item>
-    <Form.Item label="Plan ID" name="planId" rules={[{ required: true, message: 'Please enter plan id!' }]}>
-        <Input ... />
-    </Form.Item>
-    <Form.Item label="Borrower" name="borrower" rules={[{ required: true, message: 'Please enter borrower!' }]}>
-        <Input ... />
-    </Form.Item>
-    <Form.Item ... >
-        <Button type="primary" htmlType="submit">Request loan</Button>
-    </Form.Item>
+  <Form.Item label="Amount" name="amount" rules={[{ required: true, message: 'Please enter amount!' }]}>
+    <InputNumber .... />
+  </Form.Item>
+  <Form.Item label="Period" name="period" rules={[{ required: true, message: 'Please enter period!' }]}>
+    <InputNumber .... />
+  </Form.Item>
+  <Form.Item label="Interest" name="interest" rules={[{ required: true, message: 'Please enter interest!' }]}>
+    <InputNumber .... />
+  </Form.Item>
+  <Form.Item label="Plan ID" name="planId" rules={[{ required: true, message: 'Please enter plan id!' }]}>
+    <Input .... />
+  </Form.Item>
+  <Form.Item label="Borrower" name="borrower" rules={[{ required: true, message: 'Please enter borrower!' }]}>
+    <Input .... />
+  </Form.Item>
+  <Form.Item label="Broker Fee" name="brokerFee" rules={[{ required: true, message: 'Please enter Broker Fee!' }]}>
+    <InputNumber .... />
+  </Form.Item>
+  <Form.Item .... >
+    <Button type="primary" htmlType="submit">Request Loan</Button>
+  </Form.Item>
 
 
 When user click the submit button it will pass input values to the ``createLoanRequest`` function.

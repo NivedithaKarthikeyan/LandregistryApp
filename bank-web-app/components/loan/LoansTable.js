@@ -5,7 +5,6 @@ import { getApi } from '../../util/fetchApi';
 import UserContext from '../../stores/userContext';
 import SmartContractContext from '../../stores/smartContractContext';
 
-
 function LoansTable() {
 	// Following properties will captured from userContext and smartContractContext.
 	// user - selected user role form the top right corner of the bank web app.
@@ -190,7 +189,7 @@ function LoansTable() {
 			content: `Reject Loan ${loanId} ?`,
 			okText: 'Reject Loan',
 			okButtonProps: {
-				type: 'danger'
+				type: 'danger',
 			},
 			onOk: () => rejectLoan(loanId),
 		});
@@ -327,14 +326,14 @@ function LoansTable() {
 						</Space>;
 				} else if (record.status === '2') {
 					actionBlock =
-						<Button type="primary" ghost onClick={() => showBrokerTransferModal(record)}> 
-							Transfer Tokens to Broker 
-						</Button>
+						<Button type="primary" ghost onClick={() => showBrokerTransferModal(record)}>
+							Transfer Tokens to Broker
+						</Button>;
 				} else if (record.status === '4') {
-					actionBlock = 
-						<Button type="primary" ghost onClick={() => showBorrowerTransferModal(record)}> 
-							Transfer Tokens to Borrower 
-						</Button>
+					actionBlock =
+						<Button type="primary" ghost onClick={() => showBorrowerTransferModal(record)}>
+							Transfer Tokens to Borrower
+						</Button>;
 				} else if (record.status === '5') {
 					actionBlock =
 						<Space>
@@ -381,7 +380,7 @@ function LoansTable() {
 		const expandedPaymentColumns = [
 			{ title: 'Payment ID', dataIndex: '_id' },
 			{ title: 'Amount', dataIndex: 'amount' },
-			{ title: 'Transaction Hash', dataIndex: 'transactionHash'},
+			{ title: 'Transaction Hash', dataIndex: 'transactionHash' },
 		];
 
 		return (
@@ -454,7 +453,7 @@ function LoansTable() {
 						labelAlign="left"
 						onFinish={transferTokensToBroker}
 					>
-						<Form.Item label="Broker Name" style={{ marginBottom: '0px' }} >
+						<Form.Item label="Broker Name" style={{ marginBottom: '0px' }}>
 							<span> { loanRecord.brokerName } </span>
 						</Form.Item>
 						<Form.Item label="Broker Address" style={{ marginBottom: '0px' }}>
