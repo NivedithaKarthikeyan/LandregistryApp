@@ -10,7 +10,7 @@ We're gonna to see how to read account balance from the MicroToken smart contrac
     :width: 130%
 
 As shown in the screenshot above, the ``Transfer`` item in the left menu is common to all users (Bank, Broker, Borrower). 
-It directs the user to ``/common/transfer``.
+It updates the browser address as ``localhost:3005/common/transfer``.
 In Next.js, this means directing to the ``pages/common/transfer.js`` file.
 
 ``transfer.js`` loads the ``TransferController`` from the ``components/transfer/`` directory. It is shown here: ::

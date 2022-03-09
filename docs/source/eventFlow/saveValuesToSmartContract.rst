@@ -6,8 +6,9 @@ As an example, we show how to save a loan request in the blockchain.
 
 .. image:: ../images/loan_request.png
 
-As shown in the screenshot above, the **Apply Loan** menu subitem is chosen under the **Loan** menu item.  This means the Broker is requesting a new Loan.
-**Apply Loan** directs the user to the ``/broker/apply-loans`` page.
+As shown in the screenshot above, the ``Apply Loan`` menu item is chosen under the **Loan** menu item.
+This means the Broker is requesting a new Loan.
+When ``Broker`` clicks the ``Apply Loan`` menu item,  browser route is updated to ``http://localhost:3005/broker/apply-loans``.
 That is, React component for the ``apply-loan`` page reside in the ``/pages/broker/apply-loan`` javascript file.
 The code of the ``apply-loan`` page is shown here: ::
 
