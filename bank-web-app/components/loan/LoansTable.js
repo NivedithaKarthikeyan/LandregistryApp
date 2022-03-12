@@ -418,7 +418,7 @@ function LoansTable() {
 
 	return (
 		<>
-			<Card title="Current Loans">
+			<Card title="Loans">
 				<Table
 					pagination="true"
 					columns={columns}

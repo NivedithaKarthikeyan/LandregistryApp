@@ -50,39 +50,39 @@ function CreatePlanForm({ togglePlan, setTogglePlan }) {
 				onFinish={addPlan} // addPlan function will executed when user submit the form.
 			>
 				{/* field values captured using name property when user submit the form */}
-				<Form.Item label="Min amount" name="minAmount" rules={[{ required: true, message: 'Please enter minimum amount!' }]}>
+				<Form.Item label="Min amount" name="minAmount" rules={[{ required: true, message: 'Please enter minimum loan amount!' }]}>
 					<InputNumber
 						min="0"
 						style={{ width: '100%' }}
-						placeholder="Enter amount"
+						placeholder="Enter minimum loan amount"
 					/>
 				</Form.Item>
-				<Form.Item label="Max amount" name="maxAmount" rules={[{ required: true, message: 'Please enter max amount!' }]}>
+				<Form.Item label="Max amount" name="maxAmount" rules={[{ required: true, message: 'Please enter maximum loan amount!' }]}>
 					<InputNumber
 						min="0"
 						style={{ width: '100%' }}
-						placeholder="Enter amount"
+						placeholder="Enter maximum loan amount"
 					/>
 				</Form.Item>
-				<Form.Item label="Min months" name="minMonths" rules={[{ required: true, message: 'Please enter min months!' }]}>
+				<Form.Item label="Min months" name="minMonths" rules={[{ required: true, message: 'Please enter minimum loan period!' }]}>
 					<InputNumber
 						min="0"
 						style={{ width: '100%' }}
-						placeholder="Enter deal period"
+						placeholder="Enter minimum loan period(months)"
 					/>
 				</Form.Item>
-				<Form.Item label="Max months" name="maxMonths" rules={[{ required: true, message: 'Please enter max months!' }]}>
+				<Form.Item label="Max months" name="maxMonths" rules={[{ required: true, message: 'Please enter maximum loan period!' }]}>
 					<InputNumber
 						min="0"
 						style={{ width: '100%' }}
-						placeholder="Enter deal period"
+						placeholder="Enter maximum loan period(months)"
 					/>
 				</Form.Item>
 				<Form.Item label="Interest" name="interest" rules={[{ required: true, message: 'Please enter interest!' }]}>
 					<InputNumber
 						min="0"
 						style={{ width: '100%' }}
-						placeholder="Enter interes rate"
+						placeholder="Enter interest rate"
 					/>
 				</Form.Item>
 				<Form.Item wrapperCol={{

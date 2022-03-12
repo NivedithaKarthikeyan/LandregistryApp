@@ -41,7 +41,7 @@ function LoanForm() {
 				labelCol={{
 					lg: 3,
 					xl: 2,
-					xxl: 2,
+					xxl: 3,
 				}}
 				wrapperCol={{
 					lg: 14,
@@ -58,10 +58,10 @@ function LoanForm() {
 					<InputNumber
 						min="0"
 						style={{ width: '100%' }}
-						placeholder="Enter amount"
+						placeholder="Enter loan amount"
 					/>
 				</Form.Item>
-				<Form.Item label="Period" name="period" rules={[{ required: true, message: 'Please enter period!' }]}>
+				<Form.Item label="Period" name="period" rules={[{ required: true, message: 'Please enter loan period!' }]}>
 					<InputNumber
 						min="0"
 						style={{ width: '100%' }}
@@ -80,24 +80,24 @@ function LoanForm() {
 						placeholder="Enter plan id"
 					/>
 				</Form.Item>
-				<Form.Item label="Borrower" name="borrower" rules={[{ required: true, message: 'Please enter borrower!' }]}>
+				<Form.Item label="Borrower Address" name="borrower" rules={[{ required: true, message: 'Please enter Borrower\' wallet address!' }]}>
 					<Input
 						min="0"
 						style={{ width: '100%' }}
-						placeholder="Enter plan id"
+						placeholder="Enter Borrower's address"
 					/>
 				</Form.Item>
 				<Form.Item label="Broker Fee" name="brokerFee" rules={[{ required: true, message: 'Please enter Broker Fee!' }]}>
 					<InputNumber
 						min="0"
 						style={{ width: '100%' }}
-						placeholder="Enter broker fee"
+						placeholder="Enter Broker fee"
 					/>
 				</Form.Item>
 				<Form.Item wrapperCol={{
 					lg: { span: 14, offset: 3 },
 					xl: { span: 14, offset: 2 },
-					xxl: { span: 14, offset: 2 } }}
+					xxl: { span: 14, offset: 3 } }}
 				>
 					{/* Form submit button */}
 					<Button type="primary" htmlType="submit">Request Loan</Button>

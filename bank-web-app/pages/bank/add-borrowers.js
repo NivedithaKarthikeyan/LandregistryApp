@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'antd';
-import CreateBorrowerForm from '../../components/userManagement/CreateBorrowerForm';
+import CreateBorrowerForm from '../../components/userManagement/BorrowerRegistrationForm';
 
 // React coponent to render Broker creation form.
 function AddBorrower() {

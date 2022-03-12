@@ -26,7 +26,7 @@ function CreateBorrowerForm() {
 
 	return (
 
-		<Card title="Borrower Application">
+		<Card title="Borrower Registration Form">
 			<Form
 				form={form}
 				labelCol={{
@@ -54,13 +54,13 @@ function CreateBorrowerForm() {
 				<Form.Item label="Borrower Name" name="name" rules={[{ required: true, message: 'Please input Borrower\'s name!' }]}>
 					<Input
 						style={{ width: '100%' }}
-						placeholder="Enter borrower's name"
+						placeholder="Enter Borrower's name"
 					/>
 				</Form.Item>
 				<Form.Item label="Wallet Address" name="address" rules={[{ required: true, message: 'Please input Borrower\'s address!' }]}>
 					<Input
 						style={{ width: '100%' }}
-						placeholder="Enter borrower's wallet address"
+						placeholder="Enter Borrower's wallet address"
 					/>
 				</Form.Item>
 				<Form.Item wrapperCol={{

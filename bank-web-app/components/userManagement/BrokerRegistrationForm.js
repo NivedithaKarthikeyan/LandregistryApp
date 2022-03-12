@@ -33,7 +33,6 @@ function BrokerRegistrationForm() {
 	};
 
 	return (
-
 		<Card title="Broker Registration Form">
 			<Form
 				labelCol={{
@@ -62,13 +61,13 @@ function BrokerRegistrationForm() {
 				<Form.Item label="Broker Name" name="name" rules={[{ required: true, message: 'Please enter name!' }]}>
 					<Input
 						style={{ width: '100%' }}
-						placeholder="Enter broker's name"
+						placeholder="Enter Broker's name"
 					/>
 				</Form.Item>
-				<Form.Item label="Wallet Address" name="address" rules={[{ required: true, message: 'Please enter wallet address!' }]}>
+				<Form.Item label="Wallet Address" name="address" rules={[{ required: true, message: 'Please enter Broker\'s wallet address!' }]}>
 					<Input
 						style={{ width: '100%' }}
-						placeholder="Enter borrower's wallet address"
+						placeholder="Enter Broker's wallet address"
 						addonAfter={<AimOutlined onClick={(e) => setWalletAddress(e)} />}
 					/>
 				</Form.Item>

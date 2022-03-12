@@ -81,11 +81,9 @@ function BorrowersTable() {
 	}, []); // useEffect will execute it renders the Borrower table component in to the DOM.
 
 	return (
-		<>
-			<Card title="Borrowers">
-				<Table pagination="true" columns={columns} dataSource={data} />
-			</Card>
-		</>
+		<Card title="Borrowers">
+			<Table pagination="true" columns={columns} dataSource={data} />
+		</Card>
 	);
 }
 

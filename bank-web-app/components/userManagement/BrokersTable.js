@@ -71,11 +71,9 @@ function BrokersTable() {
 	}, []); // useEffect will execute only when component render in to the DOM.
 
 	return (
-		<>
-			<Card title="Brokers">
-				<Table pagination="true" columns={columns} dataSource={data} />
-			</Card>
-		</>
+		<Card title="Brokers">
+			<Table pagination="true" columns={columns} dataSource={data} />
+		</Card>
 	);
 }
 
