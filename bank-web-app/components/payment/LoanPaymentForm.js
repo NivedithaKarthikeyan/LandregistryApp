@@ -39,16 +39,8 @@ function LoanPaymentForm() {
 	return (
 		<Card title="Loan Payment Update Form">
 			<Form
-				labelCol={{
-					lg: 5,
-					xl: 4,
-					xxl: 3,
-				}}
-				wrapperCol={{
-					lg: 16,
-					xl: 14,
-					xxl: 10,
-				}}
+				labelCol={{ lg: 5, xl: 4, xxl: 3 }}
+				wrapperCol={{ lg: 16, xl: 14, xxl: 10 }}
 				layout="horizontal"
 				size="default"
 				labelAlign="left"
@@ -72,7 +64,7 @@ function LoanPaymentForm() {
 				<Form.Item label="Transaction hash" name="transactionHash" rules={[{ required: true, message: 'Please enter transaction hash!' }]}>
 					<Input
 						style={{ width: '100%' }}
-						placeholder="Enter transaction has"
+						placeholder="Enter transaction hash"
 					/>
 				</Form.Item>
 				<Form.Item wrapperCol={{

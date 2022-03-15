@@ -34,16 +34,8 @@ function CreatePlanForm({ togglePlan, setTogglePlan }) {
 	return (
 		<Card title="Create Loan Plan" style={{ margin: '0px' }}>
 			<Form
-				labelCol={{
-					lg: 4,
-					xl: 3,
-					xxl: 2,
-				}}
-				wrapperCol={{
-					lg: 14,
-					xl: 12,
-					xxl: 10,
-				}}
+				labelCol={{ lg: 4, xl: 3, xxl: 2 }}
+				wrapperCol={{ lg: 14, xl: 12, xxl: 10 }}
 				layout="horizontal"
 				size="default"
 				labelAlign="left"

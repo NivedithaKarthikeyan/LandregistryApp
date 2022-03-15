@@ -35,16 +35,8 @@ function BrokerRegistrationForm() {
 	return (
 		<Card title="Broker Registration Form">
 			<Form
-				labelCol={{
-					lg: 4,
-					xl: 3,
-					xxl: 2,
-				}}
-				wrapperCol={{
-					lg: 16,
-					xl: 14,
-					xxl: 10,
-				}}
+				labelCol={{ lg: 4, xl: 3, xxl: 2 }}
+				wrapperCol={{ lg: 16, xl: 14, xxl: 10 }}
 				layout="horizontal"
 				size="default"
 				labelAlign="left"

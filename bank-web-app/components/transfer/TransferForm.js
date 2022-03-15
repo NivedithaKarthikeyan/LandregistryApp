@@ -13,16 +13,8 @@ function TransferForm({ setAddress, setAmount }) {
 
 	return (
 		<Form
-			labelCol={{
-				lg: 3,
-				xl: 2,
-				xxl: 2,
-			}}
-			wrapperCol={{
-				lg: 14,
-				xl: 12,
-				xxl: 10,
-			}}
+			labelCol={{ lg: 3, xl: 2, xxl: 2 }}
+			wrapperCol={{ lg: 14, xl: 12, xxl: 10 }}
 			layout="horizontal"
 			size="default"
 			labelAlign="left"
