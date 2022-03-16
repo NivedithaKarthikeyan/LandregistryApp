@@ -5,16 +5,14 @@ import TokenInfo from '../../components/info/TokenInfo';
 
 function Transfer() {
 	return (
-		<>
-			<Row gutter={[16, 16]}>
-				<Col span={24}>
-					<TransferController />
-				</Col>
-				<Col span={24}>
-					<TokenInfo />
-				</Col>
-			</Row>
-		</>
+		<Row gutter={[16, 16]}>
+			<Col span={24}>
+				<TransferController />
+			</Col>
+			<Col span={24}>
+				<TokenInfo />
+			</Col>
+		</Row>
 	);
 }
 

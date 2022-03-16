@@ -10,7 +10,7 @@ function TransactionFail({ backToHome }) {
 			title="Transaction failed!"
 			extra={[
 				<Button type="primary" key="home" onClick={(e) => backToHome(e)}>
-					Go back
+					Go Back
 				</Button>,
 			]}
 		/>

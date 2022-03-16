@@ -77,6 +77,8 @@ Welcome to Microfinance dApp Documentation
    eventFlow/createLoanPlan
    eventFlow/plansTable
    eventFlow/loans
+   eventFlow/transferTokens
+   eventFlow/loanPayment
 
 .. toctree::
    :maxdepth: 2

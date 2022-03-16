@@ -6,16 +6,14 @@ import LoanPaymentForm from '../../components/payment/LoanPaymentForm';
 // React functional component display to display transfer forma and loan payment form
 function Transfer() {
 	return (
-		<>
-			<Row gutter={[16, 16]}>
-				<Col span={24}>
-					<TransferController />
-				</Col>
-				<Col span={24}>
-					<LoanPaymentForm />
-				</Col>
-			</Row>
-		</>
+		<Row gutter={[16, 16]}>
+			<Col span={24}>
+				<TransferController />
+			</Col>
+			<Col span={24}>
+				<LoanPaymentForm />
+			</Col>
+		</Row>
 	);
 }
 

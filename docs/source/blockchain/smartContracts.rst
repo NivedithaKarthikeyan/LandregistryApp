@@ -74,6 +74,8 @@ Return the ``__totalSupply`` of Tokens.  It is a public function: ::
         _totalSupply = __totalSupply;
     }
 
+.. _balance of target:
+
 balanceOf
 ^^^^^^^^^
 

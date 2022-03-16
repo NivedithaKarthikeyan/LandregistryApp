@@ -40,7 +40,7 @@ function TransferForm({ setAddress, setAmount }) {
 				xxl: { span: 14, offset: 2 } }}
 			>
 				{/* Form submit button */}
-				<Button type="primary" htmlType="submit">Transfer tokens</Button>
+				<Button type="primary" htmlType="submit">Transfer Tokens</Button>
 			</Form.Item>
 		</Form>
 

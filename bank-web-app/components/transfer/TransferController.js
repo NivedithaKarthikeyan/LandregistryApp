@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Typography, Card, Divider, message, Steps, Col, Row } from 'antd';
+import { Typography, Card, Divider, message, Steps, Col, Row, Button } from 'antd';
 import { FileTextOutlined, FileDoneOutlined, AuditOutlined } from '@ant-design/icons';
 import TransferForm from './TransferForm';
-import TransactionSuccess from './TransactionSuccess';
 import TransactionConfirm from './TransactionConfirm';
+import TransactionSuccess from './TransactionSuccess';
 import TransactionFail from './TransactionFail';
 import SmartContractContext from '../../stores/smartContractContext';
 
@@ -17,6 +17,7 @@ function TransferController() {
 	const [amount, setAmount] = useState(''); // Transferring token amount state
 	const [transactionHash, setTransactionHash] = useState(''); // Blockchain transaction state
 	const [isTransactionSuccessful, setIsTransactionSuccessful] = useState(false); // Transaction successfull state
+
 	const { MicroTokenContract } = useContext(SmartContractContext); // Get the Micro Token Contract object from smartContractContext defined in the 'stores/smartContractContext.js'
 
 	// Stages of token transferring process
@@ -48,18 +49,25 @@ function TransferController() {
 		}
 	};
 
-	const transferTokens = () => {
+	const loadConfirmPage = () => {
 		setCurrent(current + 1); // Increase the token transfering process stage.
+	};
+
+	const setInitialStates = () => {
+		setAddress('');
+		setAmount('');
+		setIsTransactionSuccessful(false);
+		setTransactionHash('');
+		setCurrent(0);
 	};
 
 	const prev = () => {
 		setCurrent(current - 1); // Decrease the token transfering process stage.
+		setInitialStates();
 	};
 
 	const backToHome = () => {
-		// Set stages and successful states to default values.
-		setIsTransactionSuccessful(false);
-		setCurrent(0);
+		setInitialStates();
 	};
 
 	// Transfer tokens from selected wallet account to receiver account
@@ -74,6 +82,7 @@ function TransferController() {
 			setTransactionHash(response.transactionHash); // Update the transaction hash state from the response
 			setIsTransactionSuccessful(true); // Update transaction result state as successful.
 			setCurrent(current + 1); // Update the transfer stage.
+			getBalance();
 			message.success('Token transferred successfully');
 		} catch (err) {
 			// If error occured while transferring tokens;
@@ -91,22 +100,22 @@ function TransferController() {
 
 	useEffect(() => {
 		if (amount !== '') {
-			transferTokens(); // If amount state value is not empty transferTokens function will execute.
+			loadConfirmPage(); // If amount state value is not empty transferTokens function will execute.
 		}
 	}, [amount]); // This useEffect function will execute when amount state value change.
 
 	// Three steps of token transferring process
 	const steps = [
 		{
-			title: 'Transfer details',
+			title: 'Transfer Details',
 			icon: <FileTextOutlined />,
 		},
 		{
-			title: 'Transfer confirm',
+			title: 'Transfer Confirm',
 			icon: <FileDoneOutlined />,
 		},
 		{
-			title: 'Transfer results',
+			title: 'Transfer Results',
 			icon: <AuditOutlined />,
 		},
 	];
@@ -114,7 +123,7 @@ function TransferController() {
 	return (
 		<Card
 			title="Microfinance Token Transfer Form"
-			extra={<a href onClick={getBalance}>Refresh Balance</a>}
+			extra={<Button type="primary" ghost onClick={getBalance}>Refresh Balance</Button>}
 		>
 			{/* This will show the balance state value in the web page */}
 			<Title level={4}>Account balance: {balance} {symbol}</Title>
@@ -153,7 +162,6 @@ function TransferController() {
 						<TransactionConfirm
 							address={address}
 							amount={amount}
-							transactionHash={transactionHash}
 							confirmTokenTransfer={confirmTokenTransfer}
 							prev={prev}
 						/>

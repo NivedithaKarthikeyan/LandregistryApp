@@ -18,15 +18,10 @@ function LoanPaymentForm() {
 				transactionHash: values.transactionHash,
 			};
 
-			// Prepare the http request options.
-			const requestOptions = {
-				body: JSON.stringify(body),
-			};
-
 			// Call the loan-payments post method to save the Loan payment information.
 			await postApi({
 				url: 'loan-payments', // URL for the api call. This will call "<Bank Server URL>/loan-payments" api.
-				options: requestOptions,
+				params: body,
 			});
 
 			message.success('Loan Payment added successfully');
