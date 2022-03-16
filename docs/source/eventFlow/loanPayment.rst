@@ -57,6 +57,9 @@ in the success message when token transaction success.
 
 ``Borrower`` copies the transactionHash and submits it to the Bank using ``Loan Payment Update Form``
 
+Loan Payment Form Component
+---------------------------
+
 As shown above ``Transfer`` component, it displays the ``LoanPaymentForm`` from ``bank-web-app/components/payment/LoanPaymentForm.js``
 In ``LoanPaymentForm.js`` first it imports the dependencies. ::
 
