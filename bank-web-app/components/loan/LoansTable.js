@@ -418,7 +418,7 @@ function LoansTable() {
 
 	return (
 		<>
-			<Card title="Loans">
+			<Card title="Loans" extra={<Button type="primary" ghost onClick={loadData}>Refresh</Button>}>
 				<Table
 					pagination="true"
 					columns={columns}

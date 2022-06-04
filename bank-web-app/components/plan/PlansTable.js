@@ -210,12 +210,12 @@ function PlansTable({ togglePlan }) {
 		<>
 			<Card
 				title="Loan Plans"
-				extra={<a href onClick={() => fetchPlans()}>Refresh</a>}
+				extra={<Button type="primary" ghost onClick={fetchPlans}>Refresh</Button>}
 			>
 				{/* Ant design table component. */}
 				<Table columns={columns} dataSource={data} />
 			</Card>
-			
+
 			{/* Loan Plan edit modal */}
 			<Modal
 				title="Edit Loan Plan"

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Table, Card, message } from 'antd';
+import { Table, Card, message, Button } from 'antd';
 import SmartContractContext from '../../stores/smartContractContext';
 
 // React functional component to display brokers details.
@@ -71,7 +71,7 @@ function BrokersTable() {
 	}, []); // useEffect will execute only when component render in to the DOM.
 
 	return (
-		<Card title="Brokers">
+		<Card title="Brokers" extra={<Button type="primary" ghost onClick={getBrokers}>Refresh</Button>}>
 			<Table pagination="true" columns={columns} dataSource={data} />
 		</Card>
 	);

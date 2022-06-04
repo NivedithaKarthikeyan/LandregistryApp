@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Table, Card, message } from 'antd';
-import { array } from 'prop-types';
+import { Table, Card, message, Button } from 'antd';
 import SmartContractContext from '../../stores/smartContractContext';
 
 // React functional component to display borrowers details.
@@ -75,13 +74,17 @@ function BorrowersTable() {
 		},
 	];
 
+	const loadData = async () => {
+		await getBrokers();
+		await getBorrowers();
+	};
+
 	useEffect(() => {
-		getBrokers();
-		getBorrowers();
+		loadData();
 	}, []); // useEffect will execute it renders the Borrower table component in to the DOM.
 
 	return (
-		<Card title="Borrowers">
+		<Card title="Borrowers" extra={<Button type="primary" ghost onClick={loadData}>Refresh</Button>}>
 			<Table pagination="true" columns={columns} dataSource={data} />
 		</Card>
 	);
