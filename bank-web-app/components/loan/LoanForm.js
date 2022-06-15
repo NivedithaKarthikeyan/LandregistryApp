@@ -9,8 +9,8 @@ function LoanForm() {
 	// Values parameter contains the field values submitted through the form.
 	const createLoanRequest = async (values) => {
 		try {
-			const accounts = await window.ethereum.enable(); // Get the selected account from the metamask plugin.
-
+			const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); // Get the selected account from the metamask plugin.
+			console.log(accounts);
 			// Call applyLoan method of the Bank Loan Contract.
 			// Following parameters can be captured using their name property on the form item.
 			// Parameters:

@@ -12,7 +12,7 @@ function CreateBorrowerForm() {
 	// values parameter contains the submitted form field values and captured using their names later.
 	const createBorrower = async (values) => {
 		try {
-			const accounts = await window.ethereum.enable(); // Get the selected account from the metamask plugin.
+			const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); // Get the selected account from the metamask plugin.
 			// Call the addBorrower method of the User Identity contract.
 			// SocialSecurityID, wallter address, user name will pass as parameters to the functions.
 			// Smart contract function will call using selected account from the metamask.

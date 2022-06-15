@@ -120,7 +120,7 @@ Get MetaMask Selected Account balance
 
   const getBalance = async () => {
     try {
-      const accounts = await window.ethereum.enable();
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
       setBalance(response);
     } catch (err) {
@@ -329,7 +329,7 @@ Complete ``TransferController`` component: ::
 
     const getBalance = async () => {
       try {
-        const accounts = await window.ethereum.enable();
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
 
         setBalance(response);
@@ -371,7 +371,7 @@ Complete ``TransferController`` component: ::
 
     const confirmTokenTransfer = async () => {
       try {
-        const accounts = await window.ethereum.enable();
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const response = await MicroTokenContract.methods.transfer(address, amount).send({
           from: accounts[0] });
         setTransactionHash(response.transactionHash);
@@ -677,7 +677,7 @@ rceiver wallet. ::
 
   const confirmTokenTransfer = async () => {
     try {
-      const accounts = await window.ethereum.enable();
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const response = await MicroTokenContract.methods.transfer(address, amount).send({
         from: accounts[0] });
       setTransactionHash(response.transactionHash);

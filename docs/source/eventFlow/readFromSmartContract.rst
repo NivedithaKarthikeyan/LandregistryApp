@@ -71,7 +71,7 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
     	// Read the user token balance from the Micro Token Contract
     	const getBalance = async () => {
     		try {
-    			const accounts = await window.ethereum.enable(); // Get selected wallet account from the metamask plugin.
+    			const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); // Get selected wallet account from the metamask plugin.
     			// Read token balance from the Micro Token Smart Contract for the selected wallet address.
     			const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
     
@@ -91,7 +91,7 @@ In Next.js, this means directing to the ``pages/common/transfer.js`` file.
 	    // Transfer tokens from selected wallet account to receiver account
     	const confirmTokenTransfer = async () => {
     	try {
-    		const accounts = await window.ethereum.enable(); 
+    		const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); 
     		const response = await MicroTokenContract.methods.transfer(address, amount).send({from: accounts[0] });
     
     		setTransactionHash(response.transactionHash); // Update the transaction hash state from the response
@@ -184,7 +184,7 @@ smart contract. ::
 
     const getBalance = async () => {
         try {
-	       const accounts = await window.ethereum.enable();
+	       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 	       const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
 	       setBalance(response);
 	 } catch (err) {

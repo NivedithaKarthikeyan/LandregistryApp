@@ -29,7 +29,7 @@ function TransferController() {
 	// Read the user token balance from the Micro Token Contract
 	const getBalance = async () => {
 		try {
-			const accounts = await window.ethereum.enable(); // Get selected wallet account from the metamask plugin.
+			const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); // Get selected wallet account from the metamask plugin.
 			// Read token balance from the Micro Token Smart Contract for the selected wallet address.
 			const response = await MicroTokenContract.methods.balanceOf(accounts[0]).call();
 
@@ -73,7 +73,7 @@ function TransferController() {
 	// Transfer tokens from selected wallet account to receiver account
 	const confirmTokenTransfer = async () => {
 		try {
-			const accounts = await window.ethereum.enable(); // Get selected wallet account from the metamask plugin.
+			const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); // Get selected wallet account from the metamask plugin.
 			// Transfer tokens using Micro Token Smart Contract.
 			// Parameters: address - receiver wallet address, amount - amount of tokens
 			const response = await MicroTokenContract.methods.transfer(address, amount).send({

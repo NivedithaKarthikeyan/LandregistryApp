@@ -13,7 +13,8 @@ function BrokerRegistrationForm() {
 	// Parameter - values = field values submitted from form.
 	const createBroker = async (values) => {
 		try {
-			const accounts = await window.ethereum.enable(); // Get the account seleceted in the metamask plugin.
+			const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); // Get the account seleceted in the metamask plugin.
+			console.log(accounts);
 			// Call addBroker method in the User Identity smart contract using form field values captured using their name property.
 			// Method will call using selected account from the metamask.
 			await UserIdentityContract.methods.addBroker(values.socialId, values.address, values.name).send({ from: accounts[0] });
@@ -26,7 +27,7 @@ function BrokerRegistrationForm() {
 
 	// Capture the selected account from the metamask and update the address form field value.
 	const setWalletAddress = async () => {
-		const accounts = await window.ethereum.enable();
+		const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 		form.setFieldsValue({
 			address: accounts[0],
 		});

@@ -632,7 +632,7 @@ using ``Update Loan Payment`` in the ``Transfer`` page. Those payment data will 
    Following event flows refer to the actions defined in the ``Action`` column.
    status integer values refer to the ENUM values returened from the ``BankLoan`` smart contract.
    
-   ``await window.ethereum.enable();`` line in the functions describe in the following sections 
+   ``await window.ethereum.request({ method: 'eth_requestAccounts' });`` line in the functions describe in the following sections 
    returns the selected account address from the ``MetaMask``. 
    
    This selected account address is returned as an array and it contains only the selected account address. 
@@ -674,7 +674,7 @@ Loan Id ``record,id`` as a parameter. ::
 
   const signLoan = async (loanId) => {
     try {
-      const accounts = await window.ethereum.enable();
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       await BankLoanContract.methods.signByBorrower(loanId).send({ from: accounts[0] });
       message.success(`Loan ${loanId} signed`);
       loadData();
@@ -721,7 +721,7 @@ as a paramater. ::
 
   const approveLoan = async (loanId) => {
     try {
-      const accounts = await window.ethereum.enable();
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       await BankLoanContract.methods.approveLoan(loanId).send({ from: accounts[0] });
       message.success(`Loan ${loanId} approved`);
       loadData();
@@ -769,7 +769,7 @@ as a paramater. ::
 
   const rejectLoan = async (loanId) => {
     try {
-      const accounts = await window.ethereum.enable();
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       await BankLoanContract.methods.rejectLoan(loanId).send({ from: accounts[0] });
       message.success(`Loan ${loanId} rejected`);
       loadData();
@@ -933,7 +933,7 @@ Complete Modal component: ::
 
   const transferTokensToBroker = async () => {
     try {
-      const accounts = await window.ethereum.enable();
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       await MicroTokenContract.methods.transfer(loanRecord.broker, loanRecord.brokerFee).send({
         from: accounts[0] });
       message.success('Token transferred successfully');
@@ -966,7 +966,7 @@ passes the ``loanId`` and `` MetaMask selected wallet account address. ::
 
   const confirmTokenTrasferToBroker = async (loanId) => {
     try {
-      const accounts = await window.ethereum.enable();
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       await BankLoanContract.methods.confirmTokenTrasferToBroker(loanId).send({ from: accounts[0] });
       message.success(`Loan ${loanId} updated`);
       loadData();
@@ -1129,7 +1129,7 @@ Complete Modal component: ::
 
   const transferTokensToBorrower = async () => {
     try {
-      const accounts = await window.ethereum.enable();
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       await MicroTokenContract.methods.transfer(loanRecord.borrower, loanRecord.amount).send({
         from: accounts[0] });
       message.success('Token transferred successfully');
@@ -1162,7 +1162,7 @@ passes the ``loanId`` and `` MetaMask selected wallet account address. ::
 
   const confirmTokenTrasferToBorrower = async (loanId) => {
     try {
-      const accounts = await window.ethereum.enable();
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       await BankLoanContract.methods.confirmTokenTrasferToBorrower(loanId).send({ from: accounts[0] });
       message.success(`Loan ${loanId} updated`);
       loadData();
@@ -1194,7 +1194,7 @@ Loan Id ``record,id`` as a parameter. ::
 
   const closeLoan = async (loanId) => {
     try {
-      const accounts = await window.ethereum.enable();
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       await BankLoanContract.methods.closeLoan(loanId).send({ from: accounts[0] });
       message.success(`Loan ${loanId} updated`);
       loadData();
@@ -1229,7 +1229,7 @@ Loan Id ``record,id`` as a parameter. ::
 
   const markAsDefaulted = async (loanId) => {
 		try {
-			const accounts = await window.ethereum.enable();
+			const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 			await BankLoanContract.methods.markAsDefaulted(loanId).send({ from: accounts[0] });
 			message.success(`Loan ${loanId} updated`);
 			loadData();

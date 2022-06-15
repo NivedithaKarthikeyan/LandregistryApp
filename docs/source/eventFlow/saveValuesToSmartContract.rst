@@ -47,7 +47,7 @@ import SmartContractContext from '../../stores/smartContractContext';
 
     const createLoanRequest = async (values) => {
       try {
-        const accounts = await window.ethereum.enable();
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
         await BankLoanContract.methods.applyLoan(
           values.amount,
@@ -161,7 +161,7 @@ If error occured while saving data in to the blockchain it may execute the catch
 
     const createLoanRequest = async (values) => {
         try {
-            const accounts = await window.ethereum.enable();
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
             await BankLoan.methods.applyLoan(
                 values.amount,

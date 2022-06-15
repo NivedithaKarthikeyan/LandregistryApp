@@ -148,7 +148,7 @@ Then it defines the ``createLoanRequest`` function we discuss before to submit t
 
 	const createLoanRequest = async (values) => {
 		try {
-			const accounts = await window.ethereum.enable();
+			const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
 			await BankLoanContract.methods.applyLoan(
 				values.amount,
@@ -168,7 +168,7 @@ Then it defines the ``createLoanRequest`` function we discuss before to submit t
 ``createLoanRequest`` is an asynchronous function. 
 It has the ``values`` parameter which contains the form fields values when user submits the form.
 
-``const accounts = await window.ethereum.enable();`` helps to get the selected account from the MetaMask browser plugin.
+``const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });`` helps to get the selected account from the MetaMask browser plugin.
 This function will return selected account as an array.
 
 Then it will call the ``applyLoan`` method in the ``BankLoan`` smart contract using ``BankLoanContract`` smart contract context object.
