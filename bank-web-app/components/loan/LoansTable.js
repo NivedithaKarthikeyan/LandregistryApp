@@ -59,7 +59,7 @@ function LoansTable() {
 	const getLoans = async () => {
 		try {
 			const response = await BankLoanContract.methods.getLoans().call();
-
+			console.log(response);
 			setData([]);
 
 			for (let i = 0; i < response.length; i++) {

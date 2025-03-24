@@ -19,7 +19,7 @@ const getApi = async ({ url, options, params } = mandatory(), cb = f => f) => {
 		const opts = merge(defaultOptions, options);
 
 		let uri = API_URL + url;
-
+		
 		if (params && Object.keys(params).length > 0) {
 			if (opts && opts.method === 'GET') {
 				uri += '?' + new URLSearchParams(params);

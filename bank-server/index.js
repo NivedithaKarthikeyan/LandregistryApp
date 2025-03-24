@@ -48,13 +48,11 @@ app.get('/', (req, res) => {  // app.get is called when user enters localhost:<P
 
 //Connect to DB
 const url = 'mongodb://127.0.0.1:27017/bank-db-level1'
-mongoose.connect(
-    url,
-    { useNewUrlParser: true },
-    () => {
-        console.log('connected to Bank DB')
-    })
-
+mongoose.connect(url,
+    { useNewUrlParser: true ,useUnifiedTopology: true});
+mongoose.connection.on('connected', () => {
+        console.log('Mongoose connected to ' + url);
+    });
 
 //LISTENING
 app.listen(9091)
